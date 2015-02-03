@@ -1,0 +1,75 @@
+# -*- mode: gitignore; -*-
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# Org-mode
+.org-id-locations
+*_archive
+
+# flymake-mode
+*_flymake.*
+
+# eshell files
+/eshell/history
+/eshell/lastdir
+
+# elpa packages
+/elpa/
+
+# reftex files
+*.rel
+
+# AUCTeX auto folder
+/auto/
+
+# cask packages
+.cask/
+
+auto-save-list/
+elpa/
+ac-comphist.dat
+eproject.lst
+.smex-items
+\#*
+.places
+.cache
+eshell/history
+.emacs.desktop
+.emacs.desktop.lock
+eshell/alias
+eshell/lastdir
+/url/cookies
+my-org/
+org-files/
+semanticdb/
+edts/
+.recentf
+.recentf~
+projectile.cache
+projectile-bookmarks.eld
+tramp
+elnode/
+var/
+crown/
+*.stackdump
+bookmarks
+/.my-keybindings.el.swp
+.DS_Store
+tmp/
+/history
+.python-environments/
+server/
+*~
+*.elc
+*.pyc
+/*.zip
+*.db
+python-*-docs-html
+
+/games/
