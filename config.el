@@ -9,7 +9,8 @@
 (setq-default
  ;; List of additional paths where to look for configuration layers.
  ;; Paths must have a trailing slash (ie. `~/.mycontribs/')
- dotspacemacs-configuration-layer-path '( "~/.emacs.d/private/")
+ dotspacemacs-configuration-layer-path (list my/private-layer)
+
  ;; list of configuration layers to load.
  dotspacemacs-configuration-layers '(;;osx
                                      git
