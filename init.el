@@ -5,8 +5,9 @@
 (defconst emacs-dir
   (file-name-directory (or load-file-name (buffer-file-name))))
 
-;; Define spacemacs private layer path (Note the backslash at end.)
-(defconst my/private-layer (concat emacs-dir "private/"))
+;; Define spacemacs private layer path (Note the `backslash' at end.)
+(defconst my/private-layer
+  (concat emacs-dir "private/"))
 
 ;; Bind init.el to spacemacs, so we can make a entry point to
 ;; test spacemacs without change original emacs config.
@@ -22,7 +23,7 @@
   ;;
   (setq user-emacs-directory (file-name-directory spacemacs-init))
 
-  ;; load my config
+  ;; load my config instead of make spacemacs load ~/.spacemacs
   (load (concat emacs-dir "config.el"))
 
   ;; load spacemacs
