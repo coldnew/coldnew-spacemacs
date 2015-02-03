@@ -1,0 +1,3 @@
+[submodule "spacemacs"]
+	path = spacemacs
+	url = git@github.com:syl20bnr/spacemacs.git
