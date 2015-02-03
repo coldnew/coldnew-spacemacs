@@ -23,6 +23,7 @@
     ascii
     rainbow-mode
     linum-off
+    flx-ido
     )
   "List of all packages to install and/or initialize. Built-in packages
 which require an initialization must be listed explicitly in the list.")
@@ -79,3 +80,13 @@ which require an initialization must be listed explicitly in the list.")
                      '(eshell-mode shell-mode term-mode erc-mode compilation-mode
                                    woman-mode w3m-mode calendar-mode org-mode
                                    ))))
+
+;;; flx-ido
+(defun coldnew-editor/init-flx-ido ()
+  (use-package flx-ido
+               :defer t
+               :init (flx-ido-mode 1)
+               :config (progn
+                         (setq ido-enable-flx-matching t)
+                         ;; disable ido faces to see flx highlights.
+                         (setq ido-use-faces nil))))
