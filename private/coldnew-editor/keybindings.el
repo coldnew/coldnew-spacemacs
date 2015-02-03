@@ -56,6 +56,7 @@
 
 ;;; minibuffer
 (my/set-key minibuffer-local-map
+            "C-l" 'backward-delete-char
             "M-l" 'backward-kill-word
             "M-p" 'previous-history-element
             "M-n" 'next-history-element
@@ -65,4 +66,10 @@
             "M-h" 'coldnew/minibuffer-switch-homedir
             "M-w" 'coldnew/minibuffer-switch-workspace
             "M-r" 'coldnew/minibuffer-switch-rootdir
+            )
+
+
+;;; ido
+(my/set-key ido-file-completion-map
+            "M-l" 'ido-delete-backward-word-updir
             )
