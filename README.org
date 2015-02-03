@@ -1,0 +1,30 @@
+
+
+* coldnew's spacemacs config
+
+This is my [[https://github.com/syl20bnr/spacemacs][spacemacs]] config most of them is based on [[https://github.com/coldnew/coldnew-emacs][coldnew-emacs]] but
+use english instead.
+
+Feal free to use it :).
+
+** Install or testing this config
+
+- First use git to download whole repo
+
+  #+BEGIN_SRC sh
+    git clone https://github.com/coldnew/coldnew-spacemacs.git
+  #+END_SRC
+
+- Then use git submodule to download the spacemacs
+
+  #+BEGIN_SRC sh
+    git submodule init
+    git submodule update
+  #+END_SRC
+
+- If you not put this repo on =~/.emacs.d=, you need to use following
+  command to start emacs
+
+  #+BEGIN_SRC sh
+    emacs -q -l ~/coldnew-spacemacs/init.el
+  #+END_SRC
