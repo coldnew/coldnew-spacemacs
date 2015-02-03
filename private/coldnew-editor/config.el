@@ -36,3 +36,13 @@
      (setq epa-file-select-keys 0)
      ;; Cache passphrase for symmetric encryption.
      (setq epa-file-cache-passphrase-for-symmetric-encryption t)))
+
+;; ido
+(eval-after-load 'ido
+  '(progn
+     (setq ido-ignore-files
+           (list
+            ido-ignore-files
+            ".o" ".bin" ".elc" ".exe" ".obj" ".map" ".a" ".so" ".ln" ".mod"
+            "Icon\n" "\\.DS_Store" "\\`__pycache__/"))
+     ))
