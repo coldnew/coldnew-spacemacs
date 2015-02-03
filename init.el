@@ -26,6 +26,8 @@
   ;; load my config instead of make spacemacs load ~/.spacemacs
   (load (concat emacs-dir "config.el"))
 
+  (load (concat emacs-dir "funcs.el"))
+
   ;; load spacemacs
   (load spacemacs-init))
 
