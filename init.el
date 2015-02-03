@@ -10,11 +10,16 @@
 
 ;; Bind init.el to spacemacs, so we can make a entry point to
 ;; test spacemacs without change original emacs config.
-(let ((spacemacs-init
-       (concat (file-name-directory
-                (or load-file-name (buffer-file-name))) "spacemacs/init.el")))
+(let* ((emacs-dir
+        (file-name-directory (or load-file-name (buffer-file-name))))
+       (spacemacs-init
+        (concat emacs-dir "spacemacs/init.el")))
+
   ;; change user-emacs-directory
   (setq user-emacs-directory (file-name-directory spacemacs-init))
+
+  ;; load my config
+  (load (concat emacs-dir "config.el"))
 
   ;; load spacemacs
   (load spacemacs-init))
