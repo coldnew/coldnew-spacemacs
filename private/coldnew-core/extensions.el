@@ -1,4 +1,4 @@
-;;; extensions.el --- coldnew-editor Layer extensions File for Spacemacs
+;;; extensions.el --- coldnew-core Layer extensions File for Spacemacs
 ;;
 ;; Copyright (c) 2012-2014 Sylvain Benner
 ;; Copyright (c) 2014-2015 Sylvain Benner & Contributors
@@ -10,21 +10,21 @@
 ;;
 ;;; License: GPLv3
 
-(defvar coldnew-editor-pre-extensions
+(defvar coldnew-core-pre-extensions
   '(
-    ;; pre extension coldnew-editors go here
+    ;; pre extension coldnew-cores go here
     )
   "List of all extensions to load before the packages.")
 
-(defvar coldnew-editor-post-extensions
+(defvar coldnew-core-post-extensions
   '(
-    ;; post extension coldnew-editors go here
+    ;; post extension coldnew-cores go here
     )
   "List of all extensions to load after the packages.")
 
-;; For each extension, define a function coldnew-editor/init-<extension-coldnew-editor>
+;; For each extension, define a function coldnew-core/init-<extension-coldnew-core>
 ;;
-;; (defun coldnew-editor/init-my-extension ()
+;; (defun coldnew-core/init-my-extension ()
 ;;   "Initialize my extension"
 ;;   )
 ;;

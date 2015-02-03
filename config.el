@@ -14,7 +14,7 @@
  ;; list of configuration layers to load.
  dotspacemacs-configuration-layers '(;;osx
                                      git
-                                     coldnew-editor
+                                     coldnew-core
                                      coldnew-eshell
                                      )
  ;; A list of packages and/or extensions that will not be install and loaded.

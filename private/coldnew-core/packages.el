@@ -1,20 +1,19 @@
-;;; coldnew-editor.el --- coldnew-editor Layer packages File for Spacemacs
+;;; packages.el --- coldnew-core Layer packages File for Spacemacs
 ;;
 ;; Copyright (c) 2012-2014 Sylvain Benner
 ;; Copyright (c) 2014-2015 Sylvain Benner & Contributors
 ;; Copyright (c) 2015 Yen-Chin, Lee
 ;;
 ;; Author: Yen-Chin, Lee <coldnew.tw@gmail.com>
-;; URL: https://github.com/coldnew/coldnew-emacs
+;; URL: https://github.com/coldnew/coldnew-spacemacs
 ;;
 ;; This file is not part of GNU Emacs.
 ;;
 ;;; License: GPLv3
 
-
-(defvar coldnew-editor-packages
+(defvar coldnew-core-packages
   '(
-    ;; package coldnew-editors go here
+    ;; package coldnew-cores go here
     evil
     evil-leader
     hungry-delete
@@ -28,7 +27,7 @@
   "List of all packages to install and/or initialize. Built-in packages
 which require an initialization must be listed explicitly in the list.")
 
-(defvar coldnew-editor-excluded-packages '()
+(defvar coldnew-core-excluded-packages '()
   "List of packages to exclude.")
 
 ;;; ascii
@@ -90,3 +89,14 @@ which require an initialization must be listed explicitly in the list.")
                          (setq ido-enable-flx-matching t)
                          ;; disable ido faces to see flx highlights.
                          (setq ido-use-faces nil))))
+
+
+;; For each package, define a function coldnew-core/init-<package-coldnew-core>
+;;
+;; (defun coldnew-core/init-my-package ()
+;;   "Initialize my package"
+;;   )
+;;
+;; Often the body of an initialize function uses `use-package'
+;; For more info on `use-package', see readme:
+;; https://github.com/jwiegley/use-package

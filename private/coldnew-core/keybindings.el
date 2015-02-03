@@ -1,11 +1,11 @@
-;;; coldnew-editor.el --- coldnew-editor Layer packages File for Spacemacs
+;;; keybindings.el --- coldnew-core Layer keybindings File for Spacemacs
 ;;
 ;; Copyright (c) 2012-2014 Sylvain Benner
 ;; Copyright (c) 2014-2015 Sylvain Benner & Contributors
 ;; Copyright (c) 2015 Yen-Chin, Lee
 ;;
 ;; Author: Yen-Chin, Lee <coldnew.tw@gmail.com>
-;; URL: https://github.com/coldnew/coldnew-emacs
+;; URL: https://github.com/coldnew/coldnew-spacemacs
 ;;
 ;; This file is not part of GNU Emacs.
 ;;
