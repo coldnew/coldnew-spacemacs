@@ -32,7 +32,7 @@ which require an initialization must be listed explicitly in the list.")
   "List of packages to exclude.")
 
 ;;; ascii
-(defun coldnew-editor/init-ascii ()
+(defun coldnew-core/init-ascii ()
   "Initialize ascii"
   (use-package ascii :defer t :init
                (progn
@@ -45,12 +45,12 @@ which require an initialization must be listed explicitly in the list.")
                  (defalias 'ascii 'ascii-toggle))))
 
 ;;; rainbow-mode
-(defun coldnew-editor/init-rainbow-mode ()
+(defun coldnew-core/init-rainbow-mode ()
   "Initialize ascii"
   (use-package rainbow-mode :defer t))
 
 ;;; hungry-delete
-(defun coldnew-editor/init-hungry-delete ()
+(defun coldnew-core/init-hungry-delete ()
   "Initialize hungry-delete"
   (use-package hungry-delete
                :defer t
@@ -61,7 +61,7 @@ which require an initialization must be listed explicitly in the list.")
                  (setq-default hungry-delete-chars-to-skip " \t\f\v"))))
 
 ;;; pangu-spacing
-(defun coldnew-editor/init-pangu-spacing ()
+(defun coldnew-core/init-pangu-spacing ()
   (use-package pangu-spacing
                :defer t
                :init (global-pangu-spacing-mode 1)
@@ -73,7 +73,7 @@ which require an initialization must be listed explicitly in the list.")
                  )))
 
 ;;; linum-off
-(defun coldnew-editor/init-linum-off ()
+(defun coldnew-core/init-linum-off ()
   (use-package linum-off
                :init
                (setq linum-disabled-mode-list
@@ -82,7 +82,7 @@ which require an initialization must be listed explicitly in the list.")
                                    ))))
 
 ;;; flx-ido
-(defun coldnew-editor/init-flx-ido ()
+(defun coldnew-core/init-flx-ido ()
   (use-package flx-ido
                :defer t
                :init (flx-ido-mode 1)
@@ -91,6 +91,9 @@ which require an initialization must be listed explicitly in the list.")
                          ;; disable ido faces to see flx highlights.
                          (setq ido-use-faces nil))))
 
+;;; f
+(defun coldnew-core/init-f ()
+  (use-package f :defer t))
 
 ;; For each package, define a function coldnew-core/init-<package-coldnew-core>
 ;;
