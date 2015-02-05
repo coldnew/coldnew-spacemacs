@@ -29,12 +29,12 @@ Some extra packages need to install in system manually.
 
 - Mac OSX
 
-       brew install the_silver_searcher
-       brew install fasd
-       brew install mu --with-emacs --HEAD
+        brew install the_silver_searcher
+        brew install fasd
+        brew install mu --with-emacs --HEAD
 
 - Gentoo Linux
 
-      emerge the_silver_searcher
-      emerge fasd
-      USE="emacs" emerge net-mail/mu
+        emerge the_silver_searcher
+        emerge fasd
+        USE="emacs" emerge net-mail/mu
