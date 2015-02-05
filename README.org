@@ -2,10 +2,6 @@
 
 * coldnew's spacemacs config
 
-#+HTML: <a href="https://travis-ci.org/coldnew/coldnew-spacemacs"><img src="https://travis-ci.org/coldnew/coldnew-spacemacs.svg?branch=master"></a>
-
-https://travis-ci.org/coldnew/coldnew-spacemacs.svg?branch=master
-
 #+ATTRL_TML: alt="Build Status"
 [[https://travis-ci.org/coldnew/coldnew-spacemacs.svg?branch%3Dmaster][https://travis-ci.org/coldnew/coldnew-spacemacs.svg?branch=master]]
 
