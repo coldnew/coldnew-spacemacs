@@ -22,3 +22,19 @@ Feal free to use it :).
     command to start emacs
 
         emacs -q -l ~/coldnew-spacemacs/init.el
+
+## Packages need to install to system
+
+Some extra packages need to install in system manually.
+
+- Mac OSX
+
+       brew install the_silver_searcher
+       brew install fasd
+       brew install mu --with-emacs --HEAD
+
+- Gentoo Linux
+
+      emerge the_silver_searcher
+      emerge fasd
+      USE="emacs" emerge net-mail/mu
