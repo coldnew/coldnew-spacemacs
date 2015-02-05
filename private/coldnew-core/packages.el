@@ -24,6 +24,7 @@
     linum-off
     flx-ido
     f
+    cpputils-cmake
     )
   "List of all packages to install and/or initialize. Built-in packages
 which require an initialization must be listed explicitly in the list.")
@@ -94,6 +95,22 @@ which require an initialization must be listed explicitly in the list.")
 ;;; f
 (defun coldnew-core/init-f ()
   (use-package f :defer t))
+
+;;; cpputils-cmake
+(defun coldnew-core/init-cpputils-cmake ()
+  (use-package cpputils-cmake
+               :defer t
+               :config
+               (progn
+                 ;; Add support for C/C++ but skip system headers
+                 (add-hook 'c-mode-common-hook
+                           (lambda ()
+                             (when (derived-mode-p 'c-mode 'c++-mode)
+                               (if (not ((string-match "^/usr/local/include/.*" buffer-file-name)
+                                         (string-match "^/usr/src/linux/include/.*" buffer-file-name))))
+                               (cppcm-reload-all))
+                             ))
+                 )))
 
 ;; For each package, define a function coldnew-core/init-<package-coldnew-core>
 ;;
