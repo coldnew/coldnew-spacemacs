@@ -4,6 +4,11 @@
 
 #+HTML: <a href="https://travis-ci.org/coldnew/coldnew-spacemacs"><img src="https://travis-ci.org/coldnew/coldnew-spacemacs.svg?branch=master"></a>
 
+https://travis-ci.org/coldnew/coldnew-spacemacs.svg?branch=master
+
+#+ATTRL_TML: alt="Build Status"
+[[{{{https://travis-ci.org/coldnew/coldnew-spacemacs.svg?branch=master}}}]]
+
 This is my [[https://github.com/syl20bnr/spacemacs][spacemacs]] config most of them is based on [[https://github.com/coldnew/coldnew-emacs][coldnew-emacs]] but
 use English instead.
 
