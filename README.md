@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/coldnew/coldnew-spacemacs.svg?branch=master)](https://travis-ci.org/coldnew/coldnew-spacemacs)
 
-This is my [spacemacs](https://github.com/syl20bnr/spacemacs) config most of them is based on [coldnew-emacs](https://github.com/coldnew/coldnew-emacs) but
+This is my [spacemacs](https://github.com/syl20bnr/spacemacs) config, most of them is based on [coldnew-emacs](https://github.com/coldnew/coldnew-emacs) but
 use English instead.
 
 Feal free to use it :).
