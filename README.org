@@ -2,6 +2,8 @@
 
 * coldnew's spacemacs config
 
+[[https://travis-ci.org/coldnew/coldnew-spacemacs.svg?branch%3Dmaster][https://travis-ci.org/coldnew/coldnew-spacemacs]]
+
 This is my [[https://github.com/syl20bnr/spacemacs][spacemacs]] config most of them is based on [[https://github.com/coldnew/coldnew-emacs][coldnew-emacs]] but
 use English instead.
 
