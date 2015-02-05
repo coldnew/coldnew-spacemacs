@@ -25,7 +25,8 @@ Feal free to use it :).
 
 ## Packages need to install to system
 
-Some extra packages need to install in system manually.
+Some extra packages need to install in system manually. These packages
+are *optional* but can make my spacemacs work more nicely.
 
 - Mac OSX
 
@@ -35,6 +36,6 @@ Some extra packages need to install in system manually.
 
 - Gentoo Linux
 
-        emerge the_silver_searcher
-        emerge fasd
+        emerge sys-apps/the_silver_searcher
+        emerge app-shells/fasd
         USE="emacs" emerge net-mail/mu
