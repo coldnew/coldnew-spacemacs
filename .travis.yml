@@ -1,7 +1,6 @@
 language: generic
 env:
   - EMACS=emacs-snapshot
-  - CI_HOME=`pwd`/$REPO
 
 branches:
   only:
