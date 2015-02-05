@@ -23,7 +23,7 @@ Feal free to use it :).
 
         emacs -q -l ~/coldnew-spacemacs/init.el
 
-## Packages need to install to system
+## Packages need to install in system (Optional)
 
 Some extra packages need to install in system manually. These packages
 are *optional* but can make my spacemacs work more nicely.
