@@ -34,6 +34,9 @@
 
   (load (concat emacs-dir "funcs.el"))
 
+  ;; TODO: loop through private layer, add it to spacemacs, if has
+  ;; same name, also add a wrapper to make spacemacs load in contrib
+
   ;; load spacemacs
   (load spacemacs-init))
 
