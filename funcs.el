@@ -25,7 +25,8 @@
 
 (defadvice configuration-layer/declare-all-layers (after declare-layers activate)
   (mapc (lambda (layer) (push layer configuration-layer-layers))
-        (configuration-layer//declare-layers '(coldnew-core git))))
+        ;; FIXME: layers here should all be my private layer
+        (configuration-layer//declare-layers '(coldnew-core git coldnew-eshell))))
 
 (defun private/configuration-layer//discover-layers ()
   (let* ((private-dir (expand-file-name (concat emacs-dir "private")))

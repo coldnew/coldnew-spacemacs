@@ -11,10 +11,14 @@
  ;; Paths must have a trailing slash (ie. `~/.mycontribs/')
  dotspacemacs-configuration-layer-path (list (file-name-as-directory my/private-layer))
 
+ ;; FIXME: I should load all my personal layer in private dir
+;; dotspacemacs-configuration-layer-path '()
+
  ;; list of configuration layers to load.
  dotspacemacs-configuration-layers '(;;osx
                                      fasd
-                                     coldnew-eshell
+                                     git
+;;                                     coldnew-eshell
                                      )
  ;; A list of packages and/or extensions that will not be install and loaded.
  dotspacemacs-excluded-packages '()
