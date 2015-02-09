@@ -21,7 +21,21 @@
           )
       )))
 
+(defun create-private-layer (name)
+  "spacemacs wrapper for create coldnew's spacemacs private layer."
+  (interactive "sConfiguration layer name: ")
+  (let ((prefix "private/"))
+    (flet ((configuration-layer//get-private-layer-dir
+            (name)
+            (concat (file-name-as-directory my/private-layer)
+                    (replace-regexp-in-string prefix "" name) "/")))
 
+      (configuration-layer/create-layer (concat prefix name)))
+    ;; create empty config.el
+    (write-region
+     (format "(when (fboundp 'load-contrib-if-exist) (load-contrib-if-exist \"%s\"))" name)
+     nil (concat (file-name-as-directory my/private-layer) name "/config.el")
+     )))
 
 (defadvice configuration-layer/declare-all-layers (after declare-layers activate)
   (mapc (lambda (layer) (push layer configuration-layer-layers))
@@ -33,12 +47,12 @@
          (layers (directory-files private-dir nil "^\\([^.]\\|\\.[^.]\\|\\.\\..\\)"))
          (result (make-hash-table :size 128)))
 
-;;    (puthash 'aa (expand-file-name user-emacs-directory) result)
+    ;;    (puthash 'aa (expand-file-name user-emacs-directory) result)
     (mapc (lambda (dir)
             (puthash 'x dir result))
           layers)
-  result
-  ))
+    result
+    ))
 
 ;;(insert (format "\n%s" (private/configuration-layer//discover-layers)))
 
