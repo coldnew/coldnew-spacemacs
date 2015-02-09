@@ -25,6 +25,7 @@
     flx-ido
     f
     cpputils-cmake
+    sx
     )
   "List of all packages to install and/or initialize. Built-in packages
 which require an initialization must be listed explicitly in the list.")
@@ -111,6 +112,9 @@ which require an initialization must be listed explicitly in the list.")
                                (cppcm-reload-all))
                              ))
                  )))
+
+(defun coldnew-core/init-sx ()
+  (use-package sx :defer sx))
 
 ;; For each package, define a function coldnew-core/init-<package-coldnew-core>
 ;;
