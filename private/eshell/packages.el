@@ -1,4 +1,4 @@
-;;; packages.el --- coldnew-eshell Layer packages File for Spacemacs
+;;; packages.el --- eshell Layer packages File for Spacemacs
 ;;
 ;; Copyright (c) 2012-2014 Sylvain Benner
 ;; Copyright (c) 2014-2015 Sylvain Benner & Contributors
@@ -10,9 +10,9 @@
 ;;
 ;;; License: GPLv3
 
-(defvar coldnew-eshell-packages
+(defvar eshell-packages
   '(
-    ;; package coldnew-eshells go here
+    ;; package eshells go here
     eshell
     eshell-autojump
     multi-eshell
@@ -20,11 +20,11 @@
   "List of all packages to install and/or initialize. Built-in packages
 which require an initialization must be listed explicitly in the list.")
 
-(defvar coldnew-eshell-excluded-packages '()
+(defvar eshell-excluded-packages '()
   "List of packages to exclude.")
 
 ;;; multi-eshell
-(defun coldnew-eshell/init-multi-eshell ()
+(defun eshell/init-multi-eshell ()
   "Initialize my package"
   (use-package multi-eshell
                :init
@@ -32,9 +32,9 @@ which require an initialization must be listed explicitly in the list.")
                  (setq multi-eshell-shell-function '(eshell))
                  (setq multi-eshell-name "*eshell*"))))
 
-;; For each package, define a function coldnew-eshell/init-<package-coldnew-eshell>
+;; For each package, define a function eshell/init-<package-eshell>
 ;;
-;; (defun coldnew-eshell/init-my-package ()
+;; (defun eshell/init-my-package ()
 ;;   "Initialize my package"
 ;;   )
 ;;

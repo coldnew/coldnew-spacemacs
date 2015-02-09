@@ -21,10 +21,11 @@
           )
       )))
 
-(defadvice configuration-layer/declare-all-layers (after declare-layers activate)
-  (mapc (lambda (layer) (push layer configuration-layer-layers))
-        ;; FIXME: layers here should all be my private layer
-        (configuration-layer//declare-layers '(coldnew-core git coldnew-eshell))))
+;; (defadvice configuration-layer/declare-all-layers (after declare-layers activate)
+;;   (mapc (lambda (layer) (push layer configuration-layer-layers))
+;;         ;; FIXME: layers here should all be my private layer
+;;         (configuration-layer//declare-layers '(coldnew-core git coldnew-eshell))
+;;         ))
 
 ;; (defun create-private-layer (name)
 ;;   "spacemacs wrapper for create coldnew's spacemacs private layer."

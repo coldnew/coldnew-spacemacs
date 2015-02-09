@@ -1,4 +1,4 @@
-;;; extensions.el --- coldnew-eshell Layer extensions File for Spacemacs
+;;; extensions.el --- eshell Layer extensions File for Spacemacs
 ;;
 ;; Copyright (c) 2012-2014 Sylvain Benner
 ;; Copyright (c) 2014-2015 Sylvain Benner & Contributors
@@ -10,21 +10,21 @@
 ;;
 ;;; License: GPLv3
 
-(defvar coldnew-eshell-pre-extensions
+(defvar eshell-pre-extensions
   '(
-    ;; pre extension coldnew-eshells go here
+    ;; pre extension eshells go here
     )
   "List of all extensions to load before the packages.")
 
-(defvar coldnew-eshell-post-extensions
+(defvar eshell-post-extensions
   '(
-    ;; post extension coldnew-eshells go here
+    ;; post extension eshells go here
     )
   "List of all extensions to load after the packages.")
 
-;; For each extension, define a function coldnew-eshell/init-<extension-coldnew-eshell>
+;; For each extension, define a function eshell/init-<extension-eshell>
 ;;
-;; (defun coldnew-eshell/init-my-extension ()
+;; (defun eshell/init-my-extension ()
 ;;   "Initialize my extension"
 ;;   )
 ;;
