@@ -47,6 +47,7 @@
             "C-x C-l" 'recenter
             "M-l" 'backward-delete-word
             "M-d" 'forward-delete-word
+            "C-k" 'kill-line
             )
 
 ;;; ex
