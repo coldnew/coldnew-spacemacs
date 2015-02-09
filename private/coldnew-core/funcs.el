@@ -31,6 +31,22 @@
   (interactive)
   (insert "\ufeff"))
 
+(defun create-private-layer (name)
+  "spacemacs wrapper for create coldnew's spacemacs private layer."
+  (require 'noflet)
+  (interactive "sConfiguration layer name: ")
+  (let ((prefix "private/"))
+    (noflet ((configuration-layer//get-private-layer-dir
+              (name)
+              (concat (file-name-as-directory my/private-layer)
+                      (replace-regexp-in-string prefix "" name) "/")))
+
+            (configuration-layer/create-layer (concat prefix name)))
+    ;; create empty config.el
+    (write-region
+     (format "(when (fboundp 'load-contrib-if-exist) (load-contrib-if-exist \"%s\"))" name)
+     nil (concat (file-name-as-directory my/private-layer) name "/config.el"))))
+
 ;;;; Commands (private)
 
 (defun coldnew/minibuffer-clear ()

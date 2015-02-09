@@ -26,6 +26,7 @@
     f
     cpputils-cmake
     sx
+    noflet
     )
   "List of all packages to install and/or initialize. Built-in packages
 which require an initialization must be listed explicitly in the list.")
@@ -114,7 +115,10 @@ which require an initialization must be listed explicitly in the list.")
                  )))
 
 (defun coldnew-core/init-sx ()
-  (use-package sx :defer sx))
+  (use-package sx :defer t))
+
+(defun coldnew-core/init-noflet ()
+  (use-package noflet :defer t))
 
 ;; For each package, define a function coldnew-core/init-<package-coldnew-core>
 ;;

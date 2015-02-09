@@ -21,26 +21,26 @@
           )
       )))
 
-(defun create-private-layer (name)
-  "spacemacs wrapper for create coldnew's spacemacs private layer."
-  (interactive "sConfiguration layer name: ")
-  (let ((prefix "private/"))
-    (flet ((configuration-layer//get-private-layer-dir
-            (name)
-            (concat (file-name-as-directory my/private-layer)
-                    (replace-regexp-in-string prefix "" name) "/")))
-
-      (configuration-layer/create-layer (concat prefix name)))
-    ;; create empty config.el
-    (write-region
-     (format "(when (fboundp 'load-contrib-if-exist) (load-contrib-if-exist \"%s\"))" name)
-     nil (concat (file-name-as-directory my/private-layer) name "/config.el")
-     )))
-
 (defadvice configuration-layer/declare-all-layers (after declare-layers activate)
   (mapc (lambda (layer) (push layer configuration-layer-layers))
         ;; FIXME: layers here should all be my private layer
         (configuration-layer//declare-layers '(coldnew-core git coldnew-eshell))))
+
+;; (defun create-private-layer (name)
+;;   "spacemacs wrapper for create coldnew's spacemacs private layer."
+;;   (interactive "sConfiguration layer name: ")
+;;   (let ((prefix "private/"))
+;;     (flet ((configuration-layer//get-private-layer-dir
+;;             (name)
+;;             (concat (file-name-as-directory my/private-layer)
+;;                     (replace-regexp-in-string prefix "" name) "/")))
+
+;;       (configuration-layer/create-layer (concat prefix name)))
+;;     ;; create empty config.el
+;;     (write-region
+;;      (format "(when (fboundp 'load-contrib-if-exist) (load-contrib-if-exist \"%s\"))" name)
+;;      nil (concat (file-name-as-directory my/private-layer) name "/config.el")
+;;      )))
 
 (defun private/configuration-layer//discover-layers ()
   (let* ((private-dir (expand-file-name (concat emacs-dir "private")))
