@@ -16,6 +16,8 @@ top of [[https://github.com/syl20bnr/spacemacs][spacemacs]] and [[https://github
 
 Feal free to use it :).
 
+*Hint*: before fork and hack my emacs config, take a look at [[file:init.el]]
+
 ** Install or testing this config
 
 - First use git to download whole repo
@@ -149,7 +151,8 @@ or elpa or spacemacs, you can skip following code.
   ;; if path does not exist, create directory.
   (let* ((lisp-dir '("local-lisp/" "theme/")))
     (dolist (lisp-path lisp-dir)
-      (if (not (file-exists-p lisp-path)) (make-directory (concat emacs-dir lisp-path) t))
+      (when (not (file-exists-p lisp-path))
+        (make-directory (concat emacs-dir lisp-path) t))
       (let* ((load-dir (concat emacs-dir lisp-path))
              (default-directory load-dir))
         (setq load-path
