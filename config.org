@@ -50,6 +50,7 @@ are =optional= but can make my spacemacs work more nicely.
     brew install the_silver_searcher
     brew install fasd
     brew install mu --with-emacs --HEAD
+    brew install doxymacs
   #+END_SRC
 
 
@@ -59,6 +60,7 @@ are =optional= but can make my spacemacs work more nicely.
     emerge sys-apps/the_silver_searcher
     emerge app-shells/fasd
     USE="emacs" emerge net-mail/mu
+    emerge  app-emacs/doxymacs
   #+END_SRC
 
 * Package Management with Cask and Pallet
