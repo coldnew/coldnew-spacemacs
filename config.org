@@ -1,3 +1,14 @@
+#+TITLE: coldnew's emacs
+#+AUTHOR: Yen-Chin, Lee <coldnew>
+#+email: coldnew.tw at gmail.com
+#+STARTUP: overview indent align
+#+BABEL: :cache yes
+#+OPTIONS: ^:nil
+
+* About
+
+This is my emacs, which is a totally rewrite version based on
+spacemacs and coldnew-emacs.
 
 * Load Path
 
@@ -16,4 +27,15 @@
                   (copy-sequence (normal-top-level-add-to-load-path '(".")))
                   (normal-top-level-add-subdirs-to-load-path)))
                load-path)))))
+#+END_SRC
+* Languages or Encodings
+
+Since current Emacs default run on UTF-8, it's no need to setup the
+encoding.
+
+For language, though Traditional Chinese is my mothertone, I still
+prefer use =en_US= to display time info.
+
+#+BEGIN_SRC emacs-lisp
+  (setq system-time-locale "en_US" )
 #+END_SRC
