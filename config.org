@@ -10,12 +10,68 @@
 This is my emacs, which is a totally rewrite version based on
 spacemacs and coldnew-emacs.
 
+* Package Management with Cask and Pallet
+
+[[https://github.com/rdallasgray/pallet][Pallet]] is a wonderful little tool built on [[https://github.com/cask/cask][Cask]], a dependency management tool
+for Emacs packages. Pallet adds automatic updating of the =Caskfile= when
+packages are installed and deleted.
+
+** Installing Cask
+
+Just run this command in your terminal of choice:
+
+#+NAME: Cask Installation
+#+BEGIN_SRC sh :tangle no
+  $ curl -fsSkL https://raw.github.com/cask/cask/master/go | python
+#+END_SRC
+
+then add =~/.cask/bin= to your =PATH= so that you can use =cask=.
+
+** Creating a Caskfile
+
+For now, we just need a minimal =Cask= to get Pallet set up. Mine looks
+like this:
+
+#+NAME: Cask
+#+BEGIN_SRC emacs-lisp :tangle no
+  (source gnu)
+  (source melpa)
+
+  (depends-on "pallet")
+  (depends-on "req-package")
+  (depends-on "f")
+  (depends-on "evil")
+#+END_SRC
+
+Then run the following command in your =.emacs.d= directory to set up Pallet:
+
+#+NAME: Cask Initialization
+#+BEGIN_SRC sh :tangle no
+  cask install
+#+END_SRC
+
+** Initialize Cask
+
+Finally, we add the following lines to our init file:
+
+#+BEGIN_SRC emacs-lisp
+  (require 'cask "~/.cask/cask.el")
+  (cask-initialize)
+#+END_SRC
+
+** Initialize Pallet
+
+#+BEGIN_SRC emacs-lisp
+  (require 'pallet)
+  (pallet-init)
+#+END_SRC
+
 * Load Path
 
 #+BEGIN_SRC emacs-lisp
   ;; Add directories to emacs's `load-path' recursively.
   ;; if path does not exist, create directory.
-  (let* ((lisp-dir '("elpa/" "theme/")))
+  (let* ((lisp-dir '("local-lisp/" "theme/")))
     (dolist (lisp-path lisp-dir)
       (if (not (file-exists-p lisp-path)) (make-directory (concat emacs-dir lisp-path) t))
       (let* ((load-dir (concat emacs-dir lisp-path))
@@ -27,6 +83,31 @@ spacemacs and coldnew-emacs.
                   (copy-sequence (normal-top-level-add-to-load-path '(".")))
                   (normal-top-level-add-subdirs-to-load-path)))
                load-path)))))
+#+END_SRC
+
+* Spacemacs
+
+#+BEGIN_SRC emacs-lisp
+  (defconst spacemacs-dir
+    (directory-file-name (concat emacs-dir "spacemacs"))
+    "Where the spacemacs locate in emacs-dir.")
+
+  (defadvice configuration-layer/delete-orphan-packages (around null-func activate)
+    "Overwrite the spacemacs's `configuration-layer/delete-orphan-packages'
+  to make it not remove any orphan packages.")
+
+  ;; Bind init.el to spacemacs, so we can make a entry point to
+  ;; test spacemacs without change original emacs config.
+  ;; We also use config.el replace spacemacs's .spacemacs file.
+  (let* ((spacemacs-init
+          (concat (file-name-as-directory spacemacs-dir) "init.el"))
+         (user-emacs-directory (file-name-directory spacemacs-init)))
+
+    ;; load my config instead of make spacemacs load ~/.spacemacs
+    (load (concat emacs-dir "spacemacs.el"))
+
+    ;; Initial spacemacs, our emacs run on top of it
+    (load spacemacs-init))
 #+END_SRC
 * Languages or Encodings
 

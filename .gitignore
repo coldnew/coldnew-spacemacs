@@ -75,3 +75,4 @@ python-*-docs-html
 /games/
 
 config.el*
+.cask/
