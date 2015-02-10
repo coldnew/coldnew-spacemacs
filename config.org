@@ -27,7 +27,11 @@ Feal free to use it :).
   : git submodule init
   : git submodule update
 
-- If you not put this repo on =~/.emacs.d=, you need to use following
+- Befor trying starting emacs, you need to bootstrap with [[https://github.com/cask/cask][Cask]]
+
+  : cask install
+
+- If you don not put this repo on =~/.emacs.d=, you need to use following
   command to start emacs
 
   : emacs -q -l ~/coldnew-spacemacs/init.el
@@ -53,7 +57,6 @@ are =optional= but can make my spacemacs work more nicely.
     emerge app-shells/fasd
     USE="emacs" emerge net-mail/mu
   #+END_SRC
-
 
 * Package Management with Cask and Pallet
 
