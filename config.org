@@ -161,6 +161,15 @@ or elpa or spacemacs, you can skip following code.
 
 * Spacemacs
 
+[[https://github.com/syl20bnr/spacemacs][Spacemacs]] is an emacs starterkit focus on Evil, which emulate vim
+keymap on Emacs.
+
+I make my emacs on top of spacemacs since I also use vim keymap.
+
+In my config file, the original =~/.spacemacs= file has move to
+=spacemacs.el= under emacs-dir folder, I also advice spacemacs funtion
+to let it not delete the orphan packages not installed by spacemacs.
+
 #+BEGIN_SRC emacs-lisp
   ;; Make spacemacs not remove my orphan packages.
   (defadvice configuration-layer/delete-orphan-packages (around null-func activate)
