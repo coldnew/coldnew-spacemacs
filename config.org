@@ -233,27 +233,29 @@ prefer use =en_US= to display time info.
 #+BEGIN_SRC emacs-lisp
   (setq system-time-locale "en_US" )
 #+END_SRC
-* Editor's Core
+* Packages
 
-** Packages
+** ascii
 
-*** ascii
+[[http://www.emacswiki.org/emacs/AsciiMode][Ascii]] provides a way to display ASCII code on a window, that is,
+display in another window an ASCII table highlighting the current
+character code.
 
 #+BEGIN_SRC emacs-lisp
-(require 'req-package)
-  (req-package
-   ascii
-   :init
-   (progn
-     ;; ascii-toggle
-     (defun ascii-toggle ()
-       "Toggle ascii-mode."
-       (interactive)
-       (if (not (ascii-off)) (ascii-on)))
+  (req-package ascii
+    :init
+    (progn
+      ;; ascii-toggle
+      (defun ascii-toggle ()
+        "Toggle ascii-mode."
+        (interactive)
+        (if (not (ascii-off)) (ascii-on)))
 
-     ;; alias ascii to ascii-toggle
-     (defalias 'ascii 'ascii-toggle)))
+      ;; alias ascii to ascii-toggle
+      (defalias 'ascii 'ascii-toggle)))
 #+END_SRC
+
+** SX
 
 * End of configuration
 
