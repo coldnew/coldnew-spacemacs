@@ -73,3 +73,5 @@ server/
 python-*-docs-html
 
 /games/
+
+config.el*
