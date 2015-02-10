@@ -109,9 +109,19 @@ Finally, we add the following lines to our init file:
 
 ** Initialize Pallet
 
+Since we already install pallet via cask, we just need to use
+following code to initialize pallet.
+
 #+BEGIN_SRC emacs-lisp
   (require 'pallet)
   (pallet-mode t)
+#+END_SRC
+
+I always make [[https://github.com/rdallasgray/pallet][Pallet]] re-generate the =Cask= file when emacs startup,
+so use =pallet-init= command here.
+
+#+BEGIN_SRC emacs-lisp
+  (pallet-init)
 #+END_SRC
 
 * Load Path
@@ -154,18 +164,17 @@ or elpa or spacemacs, you can skip following code.
 * Spacemacs
 
 #+BEGIN_SRC emacs-lisp
-  (defconst spacemacs-dir
-    (directory-file-name (concat emacs-dir "spacemacs"))
-    "Where the spacemacs locate in emacs-dir.")
-
+  ;; Make spacemacs not remove my orphan packages.
   (defadvice configuration-layer/delete-orphan-packages (around null-func activate)
     "Overwrite the spacemacs's `configuration-layer/delete-orphan-packages'
   to make it not remove any orphan packages.")
 
-  ;; Bind init.el to spacemacs, so we can make a entry point to
-  ;; test spacemacs without change original emacs config.
-  ;; We also use config.el replace spacemacs's .spacemacs file.
-  (let* ((spacemacs-init
+  ;; Make a fake entry point for spacemacs, also modify the
+  ;; `user-emacs-directory' temporary to mislead spacemacs real emacs
+  ;; directory.
+  (let* ((spacemacs-dir
+          (directory-file-name (concat emacs-dir "spacemacs")))
+         (spacemacs-init
           (concat (file-name-as-directory spacemacs-dir) "init.el"))
          (user-emacs-directory (file-name-directory spacemacs-init)))
 
@@ -175,6 +184,7 @@ or elpa or spacemacs, you can skip following code.
     ;; Initial spacemacs, our emacs run on top of it
     (load spacemacs-init))
 #+END_SRC
+
 * Languages or Encodings
 
 Since current Emacs default run on UTF-8, it's no need to setup the
