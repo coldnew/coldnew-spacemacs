@@ -121,13 +121,6 @@ following code to initialize pallet.
   (pallet-mode t)
 #+END_SRC
 
-I always make [[https://github.com/rdallasgray/pallet][Pallet]] re-generate the =Cask= file when emacs startup,
-so use =pallet-init= command here.
-
-#+BEGIN_SRC emacs-lisp
-  (pallet-init)
-#+END_SRC
-
 * Dependency Management with req-package
 
 [[https://github.com/edvorg/req-package][req-package]] is a wrapper on top of [[https://github.com/jwiegley/use-package][use-package]], a package dependency
