@@ -162,7 +162,7 @@ or elpa or spacemacs, you can skip following code.
 
 * Spacemacs
 
-[[https://github.com/syl20bnr/spacemacs][Spacemacs]] is an emacs starterkit focus on Evil, which emulate vim
+[[https://github.com/syl20bnr/spacemacs][Spacemacs]] is an emacs starterkit focus on [[https://gitorious.org/evil/pages/Home][Evil]], which emulate vim
 keymap on Emacs.
 
 I make my emacs on top of spacemacs since I also use vim keymap.
