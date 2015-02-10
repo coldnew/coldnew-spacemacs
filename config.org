@@ -108,7 +108,7 @@ Finally, we add the following lines to our init file:
 
 #+BEGIN_SRC emacs-lisp
   (require 'pallet)
-  (pallet-init)
+  (pallet-mode t)
 #+END_SRC
 
 * Load Path
