@@ -128,7 +128,6 @@ so use =pallet-init= command here.
   (pallet-init)
 #+END_SRC
 
-
 * Dependency Management with req-package
 
 [[https://github.com/edvorg/req-package][req-package]] is a wrapper on top of [[https://github.com/jwiegley/use-package][use-package]], a package dependency
@@ -223,7 +222,7 @@ to let it not delete the orphan packages not installed by spacemacs.
     (load spacemacs-init))
 #+END_SRC
 
-* Languages or Encodings
+* Languages and Encodings
 
 Since current Emacs default run on UTF-8, it's no need to setup the
 encoding.

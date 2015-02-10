@@ -6,6 +6,7 @@
 (depends-on "ag")
 (depends-on "aggressive-indent")
 (depends-on "anzu")
+(depends-on "ascii")
 (depends-on "async")
 (depends-on "auto-complete")
 (depends-on "auto-complete-clang")
