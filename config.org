@@ -63,9 +63,9 @@ are =optional= but can make my spacemacs work more nicely.
 
 * Package Management with Cask and Pallet
 
-[[https://github.com/rdallasgray/pallet][Pallet]] is a wonderful little tool built on [[https://github.com/cask/cask][Cask]], a dependency management tool
-for Emacs packages. Pallet adds automatic updating of the =Caskfile= when
-packages are installed and deleted.
+[[https://github.com/rdallasgray/pallet][Pallet]] is a wonderful little tool built on [[https://github.com/cask/cask][Cask]], a dependency
+management tool for Emacs packages. Pallet adds automatic updating of
+the =Caskfile= when packages are installed and deleted.
 
 ** Installing Cask
 
@@ -80,8 +80,8 @@ then add =~/.cask/bin= to your =PATH= so that you can use =cask=.
 
 ** Creating a Caskfile
 
-For now, we just need a minimal =Cask= to get Pallet set up. Mine looks
-like this:
+For now, we just need a minimal =Cask= to get Pallet set up. Mine
+looks like this:
 
 #+NAME: Cask
 #+BEGIN_SRC emacs-lisp :tangle no
@@ -94,7 +94,8 @@ like this:
   (depends-on "evil")
 #+END_SRC
 
-Then run the following command in your =.emacs.d= directory to set up Pallet:
+Then run the following command in your =.emacs.d= directory to set up
+[[https://github.com/rdallasgray/pallet][Pallet]].
 
 #+NAME: Cask Initialization
 #+BEGIN_SRC sh :tangle no
@@ -126,6 +127,35 @@ so use =pallet-init= command here.
 #+BEGIN_SRC emacs-lisp
   (pallet-init)
 #+END_SRC
+
+
+* Dependency Management with req-package
+
+[[https://github.com/edvorg/req-package][req-package]] is a wrapper on top of [[https://github.com/jwiegley/use-package][use-package]], a package dependency
+management tool. The documentation for =use-package= is immensely
+helpful for figuring out how to describe package dependencies and
+settings. =req-package= adds the =:require= keyword which allows us to
+define dependencies between related packages.
+
+** Initialize req-package
+
+With the preceding process complete, we just need to add the following
+line to our init file to begin using =req-package=:
+
+#+BEGIN_SRC emacs-lisp
+  (require 'req-package)
+#+END_SRC
+
+** Start loading packages in right order
+
+To start loading packages in right order, we need to added following
+in the last of emacs config.
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  (req-package-finish)
+#+END_SRC
+
+You can take a look at [[*End%20of%20configuration][End of configuration]] section.
 
 * Load Path
 
@@ -203,4 +233,34 @@ prefer use =en_US= to display time info.
 
 #+BEGIN_SRC emacs-lisp
   (setq system-time-locale "en_US" )
+#+END_SRC
+* Editor's Core
+
+** Packages
+
+*** ascii
+
+#+BEGIN_SRC emacs-lisp
+(require 'req-package)
+  (req-package
+   ascii
+   :init
+   (progn
+     ;; ascii-toggle
+     (defun ascii-toggle ()
+       "Toggle ascii-mode."
+       (interactive)
+       (if (not (ascii-off)) (ascii-on)))
+
+     ;; alias ascii to ascii-toggle
+     (defalias 'ascii 'ascii-toggle)))
+#+END_SRC
+
+* End of configuration
+
+At long last we need only call the following function to send
+=req-package= on its merry way.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package-finish)
 #+END_SRC
