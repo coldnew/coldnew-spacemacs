@@ -256,6 +256,23 @@ character code.
   (req-package iedit)
 #+END_SRC
 
+** pangu-spacing
+
+[[https://github.com/coldnew/pangu-spacing][pangu-spcing]] is an minor-mode to auto add =space= between Chinese and
+English characters. Note that these white-space characters are not
+really added to the contents, it just like to do so.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package pangu-spacing
+    :init
+    (progn
+      ;; Always insert `real' space in org-mode.
+      (add-hook 'org-mode-hook
+                '(lambda ()
+                   (set (make-local-variable 'pangu-spacing-real-insert-separtor) t)))
+      ))
+#+END_SRC
+
 ** sx
 
 [[https://github.com/vermiculus/sx.el/][SX]] is a full featured Stack Exchange mode for GNU Emacs 24+. Using the
