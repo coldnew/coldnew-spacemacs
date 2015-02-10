@@ -9,19 +9,13 @@
 (setq-default
  ;; List of additional paths where to look for configuration layers.
  ;; Paths must have a trailing slash (ie. `~/.mycontribs/')
- dotspacemacs-configuration-layer-path (list (file-name-as-directory my/private-layer))
+ dotspacemacs-configuration-layer-path '()
 
  ;; FIXME: I should load all my personal layer in private dir
 ;; dotspacemacs-configuration-layer-path '()
 
  ;; list of configuration layers to load.
- dotspacemacs-configuration-layers '(;;osx
-;;                                     coldnew-core
-;;                                     fasd
-;;                                     git
-;;                                     smex
-;;                                     eshell
-                                     )
+ dotspacemacs-configuration-layers '()
  ;; A list of packages and/or extensions that will not be install and loaded.
  dotspacemacs-excluded-packages '()
  )

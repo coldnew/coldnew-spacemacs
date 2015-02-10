@@ -1,9 +1,19 @@
+
+* Load Path
+
 #+BEGIN_SRC emacs-lisp
-  (use-package fasd
-    :ensure t)
-  (use-package eshell-autojump
-    :ensure t)
-
-
-
+  ;; Add directories to emacs's `load-path' recursively.
+  ;; if path does not exist, create directory.
+  (let* ((lisp-dir '("elpa/" "theme/")))
+    (dolist (lisp-path lisp-dir)
+      (if (not (file-exists-p lisp-path)) (make-directory (concat emacs-dir lisp-path) t))
+      (let* ((load-dir (concat emacs-dir lisp-path))
+             (default-directory load-dir))
+        (setq load-path
+              (append
+               (let ((load-path (copy-sequence load-path)))
+                 (append
+                  (copy-sequence (normal-top-level-add-to-load-path '(".")))
+                  (normal-top-level-add-subdirs-to-load-path)))
+               load-path)))))
 #+END_SRC
