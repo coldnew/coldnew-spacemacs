@@ -2,7 +2,6 @@ language: generic
 
 env:
   - EMACS=emacs-snapshot
-  - EMACS=emacs24
 
 branches:
   only:
@@ -17,13 +16,6 @@ before_install:
         sudo apt-get -qq update &&
         sudo apt-get -qq -f install &&
         sudo apt-get -qqy install emacs-snapshot;
-   fi
-
-  - if [ "$EMACS" == 'emacs24' ]; then
-       sudo add-apt-repository -y ppa:cassou/emacs &&
-       sudo apt-get -qq update &&
-       sudo apt-get -qq -f install &&
-       sudo apt-get -qq install emacs24 emacs24-el;
    fi
 
   # Install and bootstrap cask
