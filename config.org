@@ -1,4 +1,4 @@
-#+TITLE: coldnew's emacs
+#+TITLE: coldnew's spacemacs config
 #+AUTHOR: Yen-Chin, Lee <coldnew>
 #+email: coldnew.tw at gmail.com
 #+STARTUP: overview indent align
@@ -7,8 +7,49 @@
 
 * About
 
-This is my emacs, which is a totally rewrite version based on
-spacemacs and coldnew-emacs.
+This is my emacs config, which is a totally rewrite version based on
+top of [[https://github.com/syl20bnr/spacemacs][spacemacs]] and [[https://github.com/coldnew/coldnew-emacs][coldnew-emacs]] but use English instead.
+
+Feal free to use it :).
+
+** Install or testing this config
+
+- First use git to download whole repo
+
+  : git clone https://github.com/coldnew/coldnew-spacemacs.git
+
+- Then use git submodule to download the spacemacs
+
+  : git submodule init
+  : git submodule update
+
+- If you not put this repo on =~/.emacs.d=, you need to use following
+  command to start emacs
+
+  : emacs -q -l ~/coldnew-spacemacs/init.el
+
+** Packages need to install in system (Optional)
+
+Some extra packages need to install in system manually. These packages
+are =optional= but can make my spacemacs work more nicely.
+
+- Mac OSX
+
+  #+BEGIN_SRC sh
+    brew install the_silver_searcher
+    brew install fasd
+    brew install mu --with-emacs --HEAD
+  #+END_SRC
+
+
+- Gentoo Linux
+
+  #+BEGIN_SRC sh
+    emerge sys-apps/the_silver_searcher
+    emerge app-shells/fasd
+    USE="emacs" emerge net-mail/mu
+  #+END_SRC
+
 
 * Package Management with Cask and Pallet
 
