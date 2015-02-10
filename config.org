@@ -133,12 +133,7 @@ look for Elisp files.
 
 Though I use =Cask= as package management in my emacs, some local
 packages like my own theme or others can't fetch by elpa need to add
-to load-path, this will help emacs find them and can use following
-command to load them.
-
-#+BEGIN_SRC emacs-lisp :tangle no
-  (require 'xxx)
-#+END_SRC
+to load-path, this will help emacs find them.
 
 Following are my method to add directories to load-path ~recursively~,
 this function also create directory to prevent directory not exist.
