@@ -28,6 +28,9 @@
 (setq mac-command-modifier 'meta)
 
 ;; Normal
+(my/set-key evil-normal-state-map
+            "C-x C-f" 'lusty-file-explorer
+            )
 
 ;; Insert
 (my/set-key evil-insert-state-map
@@ -48,6 +51,7 @@
             "M-l" 'backward-delete-word
             "M-d" 'forward-delete-word
             "C-k" 'kill-line
+            "C-x C-f" 'lusty-file-explorer
             )
 
 ;;; ex
@@ -55,7 +59,7 @@
                "ag" 'helm-ag-this-file
                )
 
-;;; minibuffer
+;;; minibuffer or lusty-explorer
 (my/set-key minibuffer-local-map
             "C-l" 'backward-delete-char
             "M-l" 'backward-kill-word
@@ -68,7 +72,6 @@
             "M-w" 'coldnew/minibuffer-switch-workspace
             "M-r" 'coldnew/minibuffer-switch-rootdir
             )
-
 
 ;;; ido
 (my/set-key ido-file-completion-map

@@ -1,0 +1,9 @@
+#+BEGIN_SRC emacs-lisp
+  (use-package fasd
+    :ensure t)
+  (use-package eshell-autojump
+    :ensure t)
+
+
+
+#+END_SRC

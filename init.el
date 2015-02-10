@@ -15,6 +15,12 @@
   (concat emacs-dir "private")
   "my spacemacs private-layer path, in most case it is `~/.emacs.d/private'")
 
+(add-to-list 'load-path "~/.spacemacs.d/elpa")
+
+(defadvice configuration-layer/delete-orphan-packages (around null-func activate)
+  "Overwrite the spacemacs's `configuration-layer/delete-orphan-packages'
+to make it not remove any orphan packages.")
+
 ;; Bind init.el to spacemacs, so we can make a entry point to
 ;; test spacemacs without change original emacs config.
 ;; We also use config.el replace spacemacs's .spacemacs file.
@@ -30,14 +36,15 @@
   (setq user-emacs-directory (file-name-directory spacemacs-init))
 
   ;; load my config instead of make spacemacs load ~/.spacemacs
-  (load (concat emacs-dir "config.el"))
+  (load (concat emacs-dir "spacemacs.el"))
+  (load (concat emacs-dir "coldnew-theme"))
 
-  (load (concat emacs-dir "funcs.el"))
+  (load spacemacs-init)
 
-  ;; TODO: loop through private layer, add it to spacemacs, if has
-  ;; same name, also add a wrapper to make spacemacs load in contrib
-
-  ;; load spacemacs
-  (load spacemacs-init))
+  ;; Load up org-mode and org-babel
+  (require 'org)
+  (setq org-confirm-babel-evaluate nil)
+  ;; Load config.org from emacs-dir
+  (org-babel-load-file (expand-file-name "config.org" emacs-dir)))
 
 ;;; init.el ends here.

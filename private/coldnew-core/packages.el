@@ -27,6 +27,7 @@
     cpputils-cmake
     sx
     noflet
+    lusty-explorer
     )
   "List of all packages to install and/or initialize. Built-in packages
 which require an initialization must be listed explicitly in the list.")
@@ -114,11 +115,25 @@ which require an initialization must be listed explicitly in the list.")
                              ))
                  )))
 
+;; sx
 (defun coldnew-core/init-sx ()
   (use-package sx :defer t))
 
+;; noflet
 (defun coldnew-core/init-noflet ()
   (use-package noflet :defer t))
+
+;;; lusty-explorer
+(defun coldnew-core/init-lusty-explorer ()
+  (use-package lusty-explorer
+               :defer t
+               :config
+               (progn
+                 (add-hook 'lusty-setup-hook
+                           '(lambda ()
+                              (define-key lusty-mode-map (kbd "RET") 'lusty-select-current-name)))
+                 )))
+
 
 ;; For each package, define a function coldnew-core/init-<package-coldnew-core>
 ;;

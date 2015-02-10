@@ -16,11 +16,11 @@
 
  ;; list of configuration layers to load.
  dotspacemacs-configuration-layers '(;;osx
-                                     coldnew-core
-                                     fasd
-                                     git
-                                     smex
-                                     eshell
+;;                                     coldnew-core
+;;                                     fasd
+;;                                     git
+;;                                     smex
+;;                                     eshell
                                      )
  ;; A list of packages and/or extensions that will not be install and loaded.
  dotspacemacs-excluded-packages '()
