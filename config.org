@@ -1,4 +1,4 @@
-#+TITLE: coldnew's spacemacs config
+#+TITLE: coldnew's emacs config
 #+AUTHOR: Yen-Chin, Lee <coldnew>
 #+email: coldnew.tw at gmail.com
 #+STARTUP: overview indent align
@@ -11,7 +11,8 @@
 * About
 
 This is my emacs config, which is a totally rewrite version based on
-top of [[https://github.com/syl20bnr/spacemacs][spacemacs]] and [[https://github.com/coldnew/coldnew-emacs][coldnew-emacs]] but use English instead.
+top of [[https://github.com/syl20bnr/spacemacs][spacemacs]] and [[https://github.com/coldnew/coldnew-emacs][coldnew-emacs]] with [[http://en.wikipedia.org/wiki/Literate_programming][literate programming]] in
+[[http://orgmode.org/][org-mode]] ,but use English to write this article instead.
 
 Feal free to use it :).
 
