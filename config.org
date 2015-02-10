@@ -5,6 +5,9 @@
 #+BABEL: :cache yes
 #+OPTIONS: ^:nil
 
+#+ATTRL_TML: alt="Build Status"
+[[https://travis-ci.org/coldnew/coldnew-spacemacs][https://travis-ci.org/coldnew/coldnew-spacemacs.svg?branch=master]]
+
 * About
 
 This is my emacs config, which is a totally rewrite version based on
