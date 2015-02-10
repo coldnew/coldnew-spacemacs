@@ -255,6 +255,14 @@ character code.
       (defalias 'ascii 'ascii-toggle)))
 #+END_SRC
 
+** iedit
+
+[[https://github.com/victorhge/iedit][iedit]] let you edit multiple regions in the same way simultaneously.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package iedit)
+#+END_SRC
+
 ** sx
 
 [[https://github.com/vermiculus/sx.el/][SX]] is a full featured Stack Exchange mode for GNU Emacs 24+. Using the
@@ -262,8 +270,7 @@ official API, it provides a versatile experience for the Stack
 Exchange network within Emacs itself.
 
 #+BEGIN_SRC emacs-lisp
-  (req-package sx
-    :require sx-load)
+  (req-package sx :require sx-load)
 #+END_SRC
 
 * End of configuration
