@@ -138,7 +138,7 @@ command to load them.
   (require 'xxx)
 #+END_SRC
 
-Following are my method to ~recursive~ add directories to load-path,
+Following are my method to add directories to load-path ~recursively~,
 this function also create directory to prevent directory not exist.
 
 If you don't has any local elisp and all packages is mantain by cask
