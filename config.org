@@ -344,6 +344,22 @@ I use =linum-off= to disable some mode.
                           ))))
 #+END_SRC
 
+** Colorfy every delimters
+
+[[https://github.com/Fanael/rainbow-delimiters][rainbow-delimiters]] is a "rainbow parentheses"-like mode which
+highlights delimiters such as parentheses, brackets or braces
+according to their depth. Each successive level is highlighted in a
+different color. This makes it easy to spot matching delimiters,
+orient yourself in the code, and tell which statements are at a given
+depth.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package rainbow-delimiters
+    :config
+    (progn
+      (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)))
+#+END_SRC
+
 
 * End of configuration
 
