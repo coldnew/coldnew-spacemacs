@@ -313,6 +313,38 @@ Exchange network within Emacs itself.
   (req-package sx :require sx-load)
 #+END_SRC
 
+* Editors
+
+Why emacs config has an editor section, doesn't means emacs is not an
+editor ? Yes, Emacs is an OS :)
+
+I put some editor/IDE relative functions and packages here.
+
+** Line Numbers
+
+In most case, I'll make line numers display by linum.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package linum
+    :init (global-linum-mode 1))
+#+END_SRC
+
+Disable line number in some mode, for example, since =org-mode= can
+has many lines, it's not recommand to enable linum-mode.
+
+I use =linum-off= to disable some mode.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package linum-off
+    :config
+    (progn
+      (setq linum-disabled-mode-list
+            '(eshell-mode shell-mode term-mode erc-mode compilation-mode
+                          woman-mode w3m-mode calendar-mode org-mode
+                          ))))
+#+END_SRC
+
+
 * End of configuration
 
 At long last we need only call the following function to send
