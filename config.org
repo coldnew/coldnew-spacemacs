@@ -322,11 +322,10 @@ I put some editor/IDE relative functions and packages here.
 
 ** Line Numbers
 
-In most case, I'll make line numers display by linum.
+In most case, I'll make line numers display globally by =linum=.
 
 #+BEGIN_SRC emacs-lisp
-  (req-package linum
-    :init (global-linum-mode 1))
+  (req-package linum :init (global-linum-mode 1))
 #+END_SRC
 
 Disable line number in some mode, for example, since =org-mode= can
@@ -359,7 +358,6 @@ depth.
     (progn
       (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)))
 #+END_SRC
-
 
 * End of configuration
 
