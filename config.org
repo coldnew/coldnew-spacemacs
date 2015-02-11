@@ -11,9 +11,9 @@
 
 * About
 
-This is my emacs config, which is a totally rewrite version based on
-top of [[https://github.com/syl20bnr/spacemacs][spacemacs]] and [[https://github.com/coldnew/coldnew-emacs][coldnew-emacs]] with [[http://en.wikipedia.org/wiki/Literate_programming][literate programming]] in
-[[http://orgmode.org/][org-mode]] ,but use English to write this config instead.
+This is my another emacs config, which is a totally rewrite version
+based on top of [[https://github.com/syl20bnr/spacemacs][spacemacs]] and [[https://github.com/coldnew/coldnew-emacs][coldnew-emacs]] with [[http://en.wikipedia.org/wiki/Literate_programming][literate programming]]
+in [[http://orgmode.org/][org-mode]] ,but use English to write this config instead.
 
 Feal free to use it :).
 
