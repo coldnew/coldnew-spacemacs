@@ -73,7 +73,6 @@ the =Caskfile= when packages are installed and deleted.
 
 Just run this command in your terminal of choice:
 
-#+NAME: Cask Installation
 #+BEGIN_SRC sh :tangle no
   $ curl -fsSkL https://raw.github.com/cask/cask/master/go | python
 #+END_SRC
@@ -85,7 +84,6 @@ then add =~/.cask/bin= to your =PATH= so that you can use =cask=.
 For now, we just need a minimal =Cask= to get Pallet set up. Mine
 looks like this:
 
-#+NAME: Cask
 #+BEGIN_SRC emacs-lisp :tangle no
   (source gnu)
   (source melpa)
@@ -99,7 +97,6 @@ looks like this:
 Then run the following command in your =.emacs.d= directory to set up
 [[https://github.com/rdallasgray/pallet][Pallet]].
 
-#+NAME: Cask Initialization
 #+BEGIN_SRC sh :tangle no
   cask install
 #+END_SRC
