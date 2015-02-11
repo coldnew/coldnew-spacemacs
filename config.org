@@ -293,6 +293,19 @@ through a common interface.
       ))
 #+END_SRC
 
+** nyan-mode
+
+[[https://github.com/TeMPOraL/nyan-mode][nyan-mode]] is a goofy way to display one's location in a file.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package nyan-mode
+           :init
+           (progn
+;;             (nyan-mode)
+             (setq nyan-wavy-trail t))
+           :config (nyan-start-animation))
+#+END_SRC
+
 ** sx
 
 [[https://github.com/vermiculus/sx.el/][SX]] is a full featured Stack Exchange mode for GNU Emacs 24+. Using the
