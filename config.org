@@ -331,9 +331,9 @@ unload previous theme before loading a new one.
       (before theme-dont-propagate activate)
     (mapc #'disable-theme custom-enabled-themes))
 
-  (req-package moe-theme
-    :require moe-theme-switcher
-    )
+  (req-package coldnew-moe-theme
+    :require moe-theme
+    :init (coldnew-moe-theme-night))
 #+END_SRC
 
 * Editors
