@@ -381,6 +381,18 @@ depth.
     (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 #+END_SRC
 
+* Programming Languages
+
+** Emacs Lisp
+
+#+BEGIN_SRC emacs-lisp
+  (req-package lisp-mode
+    :init
+    (add-hook 'emacs-lisp-mode-hook
+              (lambda ()
+                (setq mode-name " ξ "))))
+#+END_SRC
+
 * End of configuration
 
 At long last we need only call the following function to send
