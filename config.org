@@ -344,7 +344,7 @@ I use =linum-off= to disable some mode.
                           ))))
 #+END_SRC
 
-** Colorfy every delimters
+** Colorfy delimters
 
 [[https://github.com/Fanael/rainbow-delimiters][rainbow-delimiters]] is a "rainbow parentheses"-like mode which
 highlights delimiters such as parentheses, brackets or braces
@@ -356,8 +356,28 @@ depth.
 #+BEGIN_SRC emacs-lisp
   (req-package rainbow-delimiters
     :config
-    (progn
-      (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)))
+    (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+#+END_SRC
+
+* Theme
+
+I always use dark theme for coding, [[https://github.com/kuanyui/moe-theme.el][moe-theme]] is a good start point,
+it's bright and has good default faces for most modes. It also has
+dark and light versions, which is convenient.
+
+Before use emacs's =load-theme= function, I advise it to it fully
+unload previous theme before loading a new one.
+
+#+BEGIN_SRC emacs-lisp
+  ;; Make `load-theme' fully unload previous theme before loading a new
+  ;; one.
+  (defadvice load-theme
+      (before theme-dont-propagate activate)
+    (mapc #'disable-theme custom-enabled-themes))
+
+  (req-package moe-theme
+    :require moe-theme-switcher
+    )
 #+END_SRC
 
 * End of configuration
