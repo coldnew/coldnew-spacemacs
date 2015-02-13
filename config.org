@@ -226,6 +226,7 @@ prefer use =en_US= to display time info.
 #+BEGIN_SRC emacs-lisp
   (setq system-time-locale "en_US" )
 #+END_SRC
+
 * Packages
 
 ** ascii
@@ -314,6 +315,27 @@ Exchange network within Emacs itself.
   (req-package sx :require sx-load)
 #+END_SRC
 
+* Theme
+
+I always use dark theme for coding, [[https://github.com/kuanyui/moe-theme.el][moe-theme]] is a good start point,
+it's bright and has good default faces for most modes. It also has
+dark and light versions, which is convenient.
+
+Before use emacs's =load-theme= function, I advise it to it fully
+unload previous theme before loading a new one.
+
+#+BEGIN_SRC emacs-lisp
+  ;; Make `load-theme' fully unload previous theme before loading a new
+  ;; one.
+  (defadvice load-theme
+      (before theme-dont-propagate activate)
+    (mapc #'disable-theme custom-enabled-themes))
+
+  (req-package moe-theme
+    :require moe-theme-switcher
+    )
+#+END_SRC
+
 * Editors
 
 Why emacs config has an editor section, doesn't means emacs is not an
@@ -357,27 +379,6 @@ depth.
   (req-package rainbow-delimiters
     :config
     (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
-#+END_SRC
-
-* Theme
-
-I always use dark theme for coding, [[https://github.com/kuanyui/moe-theme.el][moe-theme]] is a good start point,
-it's bright and has good default faces for most modes. It also has
-dark and light versions, which is convenient.
-
-Before use emacs's =load-theme= function, I advise it to it fully
-unload previous theme before loading a new one.
-
-#+BEGIN_SRC emacs-lisp
-  ;; Make `load-theme' fully unload previous theme before loading a new
-  ;; one.
-  (defadvice load-theme
-      (before theme-dont-propagate activate)
-    (mapc #'disable-theme custom-enabled-themes))
-
-  (req-package moe-theme
-    :require moe-theme-switcher
-    )
 #+END_SRC
 
 * End of configuration
