@@ -412,6 +412,32 @@ depth.
 
 #+END_SRC
 
+* Terminal Emulator
+
+** Eshell
+
+eshell is not really a system shell, it's written in pure lisp. What I
+like is it fully integrated with emacs.
+
+*** Packages
+
+**** multi-eshell
+
+#+BEGIN_SRC emacs-lisp
+  (req-package multi-eshell
+    :require eshell
+    :config
+    (progn
+      (setq multi-eshell-shell-function '(eshell))
+      (setq multi-eshell-name "*eshell*")))
+#+END_SRC
+
+**** eshell-autojump
+
+#+BEGIN_SRC emacs-lisp
+  (req-package eshell-autojump :require eshell)
+#+END_SRC
+
 * Programming Languages
 
 ** Emacs Lisp
