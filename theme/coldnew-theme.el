@@ -3,7 +3,7 @@
 ;;; Commentary:
 ;;
 
-(defconst coldnew-moe-theme-colors
+(defconst coldnew-theme-colors
   '((night . (
               (background . "#0b0b0b")
               (foreground . "#dcdcdc")
@@ -25,8 +25,7 @@
 
 (defun coldnew-theme--build-colors-alist (mode)
   (mapcar (lambda (x) (list (symbol-name (car x)) (cdr x)))
-          (cdr (assoc mode coldnew-moe-theme-colors))
-          ))
+          (cdr (assoc mode coldnew-theme-colors))))
 
 (defmacro coldnew-theme--with-colors (mode &rest body)
   "`let' bind all colors defined in `ample-zen-colors-alist' around BODY.
@@ -38,20 +37,11 @@ Also bind `class' to ((class color) (min-colors 89))."
                    (coldnew-theme--build-colors-alist 'night)))
      ,@body))
 
-
 (defmacro coldnew-theme--face-specs ()
   (quote
    `(
+
      (default ((,class (:foreground ,foreground :background ,background))))
-     (bold ((,class (:weight bold))))
-     (bold-italic ((,class (:slant italic :weight bold))))
-     (underline ((,class (:underline t))))
-     (italic ((,class (:slant italic))))
-     (shadow ((,class (:foreground ,comment))))
-     (success ((,class (:foreground ,green))))
-     (error ((,class (:foreground ,red))))
-     (warning ((,class (:foreground ,orange))))
-     (outline-4 ((,class (:slant normal :foreground ,comment))))
 
      )))
 
@@ -82,12 +72,10 @@ Also bind `class' to ((class color) (min-colors 89))."
 (defun coldnew-theme--load-theme (mode)
   (if (fboundp 'load-theme)
       (let ((name (coldnew-theme--theme-name mode)))
-        (if (boundp 'custom-enabled-themes)
-            (custom-set-variables `(custom-enabled-themes '(,name)))
           (if (> emacs-major-version 23)
               (load-theme name t)
-            (load-theme name))))
-    ;; not support emacs 23 or below
+            (load-theme name)))
+    ;; not support for older emace.
     (error "emacs should support load-theme to make coldnew-theme work.")))
 
 ;;;###autoload
@@ -99,7 +87,6 @@ Also bind `class' to ((class color) (min-colors 89))."
 (defun coldnew-theme-night ()
   (interactive)
   (coldnew-theme--load-theme 'night))
-
 
 ;; ;;;###autoload
 ;; (defun coldnew-moe-theme-night ()
@@ -140,4 +127,4 @@ Also bind `class' to ((class color) (min-colors 89))."
 ;; byte-compile-warnings: (not cl-functions)
 ;; End:
 
-;;; coldnew-moe-theme.el ends here
+;;; coldnew-theme.el ends here
