@@ -326,6 +326,10 @@ I always use dark theme for coding, [[https://github.com/kuanyui/moe-theme.el][m
 it's bright and has good default faces for most modes. It also has
 dark and light versions, which is convenient.
 
+However, I always want to customize everything on my own, so I rebuild
+another emacs theme called =coldnew-theme-night= and
+=coldnew-theme-day= which are based on [[https://github.com/kuanyui/moe-theme.el][moe-theme]] .
+
 Before use emacs's =load-theme= function, I advise it to it fully
 unload previous theme before loading a new one.
 
@@ -336,10 +340,9 @@ unload previous theme before loading a new one.
       (before theme-dont-propagate activate)
     (mapc #'disable-theme custom-enabled-themes))
 
-  (req-package coldnew-theme
-    :init (coldnew-theme-night))
+  ;; use coldnew-theme-night by default
+  (req-package coldnew-theme :init (coldnew-theme-night))
 #+END_SRC
-
 
 * Editors
 
