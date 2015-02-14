@@ -434,16 +434,28 @@ depth.
 
 ** Normal State
 
-** Insert State
-
 #+TBLNAME: global-evil-normal
-| Key      | Command            | description                 |
-|----------+--------------------+-----------------------------|
-| C-n      | evil-next-line     | next-line                   |
-| C-p      | evil-previous-line | previous-line               |
+| Key | Command            | description                          |
+|-----+--------------------+--------------------------------------|
+| M-[ | winner-undo        | switch back to earlier window layout |
+| M-] | winner-redo        | restore resent window layout         |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
-    <<gen-keys-evil(state="insert", keys=global-evil-normal)>>
+    <<gen-keys-evil(state="normal", keys=global-evil-normal)>>
+#+END_SRC
+
+** Insert State
+
+#+TBLNAME: global-evil-insert
+| Key | Command            | description                          |
+|-----+--------------------+--------------------------------------|
+| C-n | evil-next-line     | next-line                            |
+| C-p | evil-previous-line | previous-line                        |
+| M-[ | winner-undo        | switch back to earlier window layout |
+| M-] | winner-redo        | restore resent window layout         |
+
+#+BEGIN_SRC emacs-lisp :noweb yes :results silent
+    <<gen-keys-evil(state="insert", keys=global-evil-insert)>>
 #+END_SRC
 
 * End of configuration
