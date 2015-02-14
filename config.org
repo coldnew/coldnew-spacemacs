@@ -381,6 +381,28 @@ depth.
     (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 #+END_SRC
 
+** Vim Emulation
+
+#+BEGIN_SRC emacs-lisp
+  (req-package evil
+    :init (evil-mode t)
+    :config
+    (progn
+      ;; Bind all emacs-state key to insert state
+      (setcdr evil-insert-state-map nil)
+      (define-key evil-insert-state-map
+        (read-kbd-macro evil-toggle-key) 'evil-emacs-state)
+
+      ;; Make sure `ESC' in insert-state will call `evil-normal-state'
+      (define-key evil-insert-state-map [escape] 'evil-normal-state)
+
+      ;; Make all emacs-state buffer become to insert-state
+      (dolist (m evil-emacs-state-modes)
+        (add-to-list 'evil-insert-state-modes m))
+      ))
+
+#+END_SRC
+
 * Programming Languages
 
 ** Emacs Lisp
@@ -391,6 +413,37 @@ depth.
     (add-hook 'emacs-lisp-mode-hook
               (lambda ()
                 (setq mode-name " ξ "))))
+#+END_SRC
+
+* Keybinding
+
+** Use org-mode to generate keymap
+
+#+NAME: gen-keys-evil
+#+BEGIN_SRC emacs-lisp :results output :tangle no :exports none :colnames nil
+  (mapcar (lambda (l)
+            (let* ((key (nth 0 l))
+                   (def (format "define-key evil-%s-state-map (kbd \"%s\")" state key))
+                   (command (nth 1 l)))
+              (princ (format "(%s '%s)\n" def command))))
+          ;; remove all `hline' tag first line in list
+          (cdr (remove 'hline keys)))
+#+END_SRC
+
+** Spacemacs Map
+
+** Normal State
+
+** Insert State
+
+#+TBLNAME: global-evil-normal
+| Key      | Command            | description                 |
+|----------+--------------------+-----------------------------|
+| C-n      | evil-next-line     | next-line                   |
+| C-p      | evil-previous-line | previous-line               |
+
+#+BEGIN_SRC emacs-lisp :noweb yes :results silent
+    <<gen-keys-evil(state="insert", keys=global-evil-normal)>>
 #+END_SRC
 
 * End of configuration
