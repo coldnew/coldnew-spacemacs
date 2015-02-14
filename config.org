@@ -92,7 +92,6 @@ looks like this:
   (depends-on "req-package")
   (depends-on "f")
   (depends-on "evil")
-  (depends-on "moe-theme")
 #+END_SRC
 
 Then run the following command in your =.emacs.d= directory to set up
