@@ -5,26 +5,26 @@
 
 (defconst coldnew-theme-colors
   '((night . (
-              (background . "#0b0b0b")
-              (foreground . "#dcdcdc")
-              (cursor . "#C2C2C2")
-              (current-line . "#2a2a2a")
-              (selection . "#444444")
-              (highlight . "#CAE682")
-              (comment . "#5d9ae4")
-              (red    . "#E52210")
-              (orange . "#e65c00")
-              (yellow . "#f0c674")
-              (green  . "#95e454")
-              (aqua   . "#5d9ae4")
-              (blue   . "#4d85ff")
-              (purple . "#AD7fA8")
+              (background  "#0b0b0b")
+              (foreground  "#dcdcdc")
+              (cursor  "#C2C2C2")
+              (current-line  "#2a2a2a")
+              (selection  "#444444")
+              (highlight  "#CAE682")
+              (comment  "#5d9ae4")
+              (red     "#E52210")
+              (orange  "#e65c00")
+              (yellow  "#f0c674")
+              (green   "#95e454")
+              (aqua    "#5d9ae4")
+              (blue    "#4d85ff")
+              (purple  "#AD7fA8")
 
               ))
     ))
 
 (defun coldnew-theme--build-colors-alist (mode)
-  (mapcar (lambda (x) (list (symbol-name (car x)) (cdr x)))
+  (mapcar (lambda (x) (list (symbol-name (car x)) (cadr x)))
           (cdr (assoc mode coldnew-theme-colors))))
 
 (defmacro coldnew-theme--with-colors (mode &rest body)
@@ -88,38 +88,11 @@ Also bind `class' to ((class color) (min-colors 89))."
   (interactive)
   (coldnew-theme--load-theme 'night))
 
+;; TODO:
 ;; ;;;###autoload
-;; (defun coldnew-moe-theme-night ()
+;; (defun coldnew-theme-day ()
 ;;   (interactive)
-
-;;   ;; Load original moe-theme
-;;   (if (not (null moe-theme-revert-theme))
-;;       (load-theme 'moe-dark t))
-
-;;   ;; Background and forground
-;;   (set-background-color "#202020")
-;;   (set-foreground-color "#c6c6c6")
-
-;;   ;; mode-line
-;;   (set-face-attribute 'mode-line nil
-;;                       :box '(:line-width 2 :color "#B184CB"))
-
-;;   (set-face-attribute 'mode-line-inactive nil
-;;                       :box '(:line-width 2 :color "#565968"))
-
-;;   (set-face-attribute 'mode-line-highlight nil :box
-;;                       nil :weight 'bold)
-
-
-;;   ;; set my own mode-line format
-;;   (coldnew-moe-set-modeline-format)
-;;   )
-
-;; (defun coldnew-moe-set-modeline-format ()
-
-;;   ;;  (eval-after-load 'powerline
-;;   ;;    (powerline-coldnew-moe-theme))
-;;   )
+;;   (coldnew-theme--load-theme 'day))
 
 (provide 'coldnew-theme)
 
