@@ -433,6 +433,8 @@ like is it fully integrated with emacs.
 
 **** eshell-autojump
 
+[[http://www.emacswiki.org/emacs/EshellAutojump][Eshell Autojump]] is an
+
 #+BEGIN_SRC emacs-lisp
   (req-package eshell-autojump :require eshell)
 #+END_SRC
