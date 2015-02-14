@@ -191,7 +191,9 @@ I make my emacs on top of spacemacs since I also use vim keymap.
 
 In my config file, the original =~/.spacemacs= file has move to
 =spacemacs.el= under emacs-dir folder, I also advice spacemacs funtion
-to let it not delete the orphan packages not installed by spacemacs.
+to prevent orphan packages deleted by spacemacs.
+
+After all spacemacs init done, switch back to =*scratch*= buffer.
 
 #+BEGIN_SRC emacs-lisp
   ;; Make spacemacs not remove my orphan packages.
@@ -213,6 +215,9 @@ to let it not delete the orphan packages not installed by spacemacs.
 
     ;; Initial spacemacs, our emacs run on top of it
     (load spacemacs-init))
+
+  ;; After spacemacs loading finished, switch back to `*scratch*' buffer
+  (switch-to-buffer "*scratch*")
 #+END_SRC
 
 * Languages and Encodings
