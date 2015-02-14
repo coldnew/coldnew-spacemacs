@@ -328,7 +328,8 @@ dark and light versions, which is convenient.
 
 However, I always want to customize everything on my own, so I rebuild
 another emacs theme called =coldnew-theme-night= and
-=coldnew-theme-day= which are based on [[https://github.com/kuanyui/moe-theme.el][moe-theme]] .
+=coldnew-theme-day= which are based on [[https://github.com/kuanyui/moe-theme.el][moe-theme]], you can find them at
+[[file:theme/coldnew-theme.el]].
 
 Before use emacs's =load-theme= function, I advise it to it fully
 unload previous theme before loading a new one.
