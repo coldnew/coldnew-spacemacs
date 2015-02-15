@@ -459,6 +459,17 @@ depth.
       (setq epa-file-cache-passphrase-for-symmetric-encryption t)))
 #+END_SRC
 
+** Create *scratch* automatically
+
+#+BEGIN_SRC emacs-lisp
+  ;; Create *scratch* automatically
+  (run-with-idle-timer 1 t
+                       '(lambda ()
+                          (unless (get-buffer "*scratch*")
+                            (with-current-buffer (get-buffer-create "*scratch*")
+                              (lisp-interaction-mode)))))
+#+END_SRC
+
 * Terminal Emulator
 
 ** Eshell
