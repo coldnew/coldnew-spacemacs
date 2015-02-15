@@ -571,11 +571,11 @@ which add a =j= command to let you jump to folder you has been access.
 
 ** Use org-mode to generate keymap
 
-#+NAME: gen-keys-evil
+#+NAME: define-keys
 #+BEGIN_SRC emacs-lisp :results output :tangle no :exports none :colnames nil
   (mapcar (lambda (l)
             (let* ((key (nth 0 l))
-                   (def (format "define-key evil-%s-state-map (kbd \"%s\")" state key))
+                   (def (format "define-key %s (kbd \"%s\")" map key))
                    (command (nth 1 l)))
               (princ (format "(%s '%s)\n" def command))))
           ;; remove all `hline' tag first line in list
@@ -593,7 +593,7 @@ which add a =j= command to let you jump to folder you has been access.
 | M-] | winner-redo        | restore resent window layout         |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
-    <<gen-keys-evil(state="normal", keys=global-evil-normal)>>
+    <<define-keys(map="evil-normal-state-map", keys=global-evil-normal)>>
 #+END_SRC
 
 ** Insert State
@@ -609,7 +609,7 @@ which add a =j= command to let you jump to folder you has been access.
 | C-o | evil-execute-in-normal-state | Temporary switch to Normal sate      |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
-    <<gen-keys-evil(state="insert", keys=global-evil-insert)>>
+    <<define-keys(map="evil-insert-state-map", keys=global-evil-insert)>>
 #+END_SRC
 
 * End of configuration
