@@ -8,8 +8,7 @@ test: clean
 clean:
 	$(RM) config.el
 	$(RM) *.elc
-	$(RM) local-lisp/*.elc
-	$(RM) theme/*.elc
+	find spacemacs -name *.elc -exec $(RM) -rf {} \;
 
 compile:
 	${CASK} exec ${EMACS} -Q -batch -l init.el \
