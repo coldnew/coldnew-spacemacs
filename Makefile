@@ -8,6 +8,8 @@ test: clean
 clean:
 	$(RM) config.el
 	$(RM) *.elc
+	$(RM) local-lisp/*.elc
+	$(RM) theme/*.elc
 
 compile:
 	${CASK} exec ${EMACS} -Q -batch -l init.el \
