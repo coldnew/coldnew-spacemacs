@@ -329,6 +329,15 @@ causes deletion to delete all whitespace in the direction you are deleting.
     :init (global-hungry-delete-mode))
 #+END_SRC
 
+** rainbow-mode
+
+[[https://julien.danjou.info/projects/emacs-packages][rainbow-mode]] s a minor mode for Emacs which displays strings
+representing colors with the color they represent as background.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package rainbow-mode)
+#+END_SRC
+
 * Fonts
 
 #+BEGIN_SRC emacs-lisp
