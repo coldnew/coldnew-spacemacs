@@ -433,6 +433,14 @@ depth.
     (add-hook 'prog-mode-hook 'highlight-numbers-mode))
 #+END_SRC
 
+** Blocking syntax highlight
+
+FIXME: buggy, can't really use
+#+BEGIN_SRC emacs-lisp :tangle no
+  (req-package rainbow-blocks
+    :init (global-rainbow-blocks-mode t))
+#+END_SRC
+
 ** Vim Emulation
 
 #+BEGIN_SRC emacs-lisp
