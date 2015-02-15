@@ -319,6 +319,16 @@ Exchange network within Emacs itself.
   (req-package sx :require sx-load)
 #+END_SRC
 
+** hungry-delete
+
+[[https://github.com/nflath/hungry-delete][hungry-delete]] borrows hungry deletion from =cc-mode=, which will
+causes deletion to delete all whitespace in the direction you are deleting.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package hungry-delete
+    :init (global-hungry-delete-mode))
+#+END_SRC
+
 * Fonts
 
 #+BEGIN_SRC emacs-lisp
