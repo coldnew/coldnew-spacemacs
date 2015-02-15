@@ -47,13 +47,12 @@
             ))
     ))
 
-
 (defun coldnew-theme--build-colors-alist (mode)
   (mapcar (lambda (x) (list (symbol-name (car x)) (cadr x)))
           (cdr (assoc (cadr `,mode) coldnew-theme-colors))))
 
 (defmacro coldnew-theme--with-colors (mode &rest body)
-  "`let' bind all colors defined in `ample-zen-colors-alist' around BODY.
+  "`let' bind all colors defined in `coldnew-theme-colors' around BODY.
 Also bind `class' to ((class color) (min-colors 89))."
   (declare (indent 0))
   `(let ((class '((class color) (min-colors 89)))
