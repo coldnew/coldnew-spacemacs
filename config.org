@@ -409,6 +409,8 @@ depth.
 
 #+BEGIN_SRC emacs-lisp
   (req-package evil
+    :require (undo-tree)
+    :ensure evil
     :init (evil-mode t)
     :config
     (progn
