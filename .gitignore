@@ -77,3 +77,4 @@ python-*-docs-html
 config.el*
 .cask/
 .sx/
+request/
