@@ -338,6 +338,14 @@ representing colors with the color they represent as background.
   (req-package rainbow-mode)
 #+END_SRC
 
+** doxymacs
+
+#+BEGIN_SRC emacs-lisp
+  (req-package doxymacs
+    :config
+    (add-hook 'prog-mode-hook '(lambda () (doxymacs-mode))))
+#+END_SRC
+
 * Fonts
 
 #+BEGIN_SRC emacs-lisp
