@@ -417,6 +417,19 @@ depth.
 
 #+END_SRC
 
+** En/Decrypt files by [[http://emacswiki.org/emacs/EasyPG][EasyPG]]
+
+#+BEGIN_SRC emacs-lisp
+  (req-package epa-file
+    :init (epa-file-enable)
+    :config
+    (progn
+      ;; Control whether or not to pop up the key selection dialog.
+      (setq epa-file-select-keys 0)
+      ;; Cache passphrase for symmetric encryption.
+      (setq epa-file-cache-passphrase-for-symmetric-encryption t)))
+#+END_SRC
+
 * Terminal Emulator
 
 ** Eshell
