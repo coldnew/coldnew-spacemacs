@@ -88,10 +88,12 @@ looks like this:
   (source gnu)
   (source melpa)
 
+  (depends-on "evil")
+  (depends-on "f")
+  (depends-on "s")
+  (depends-on "dash")
   (depends-on "pallet")
   (depends-on "req-package")
-  (depends-on "f")
-  (depends-on "evil")
 #+END_SRC
 
 Then run the following command in your =.emacs.d= directory to set up
@@ -180,7 +182,6 @@ or elpa or spacemacs, you can skip following code.
                   (normal-top-level-add-subdirs-to-load-path)))
                load-path)))))
 #+END_SRC
-
 * Spacemacs
 
 [[https://github.com/syl20bnr/spacemacs][Spacemacs]] is an emacs starterkit focus on [[https://gitorious.org/evil/pages/Home][Evil]], which emulate vim
@@ -443,7 +444,6 @@ depth.
       (dolist (m evil-emacs-state-modes)
         (add-to-list 'evil-insert-state-modes m))
       ))
-
 #+END_SRC
 
 ** En/Decrypt files by [[http://emacswiki.org/emacs/EasyPG][EasyPG]]
