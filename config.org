@@ -473,13 +473,15 @@ which add a =j= command to let you jump to folder you has been access.
 
 #+BEGIN_SRC emacs-lisp
   (req-package org
-    :ensure org-plus-contrib
     :require (org-crypt org-mac-link org-magit)
     :mode ("\\.org\\'" . org-mode)
     :config
     (progn
-      ;; fontify source code
-      (setq org-src-fontify-natively t)
+      (add-hook 'org-mode-hook
+                '(lambda ()
+                   ;; fontify source code
+                   (setq org-src-fontify-natively t)
+                   ))
       ))
 #+END_SRC
 
