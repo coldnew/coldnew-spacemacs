@@ -470,6 +470,13 @@ depth.
                               (lisp-interaction-mode)))))
 #+END_SRC
 
+** Project management with projectile
+
+#+BEGIN_SRC emacs-lisp
+  (req-package projectile
+    :interpreter ("projectile" . projectil-mode))
+#+END_SRC
+
 * Terminal Emulator
 
 ** Eshell
