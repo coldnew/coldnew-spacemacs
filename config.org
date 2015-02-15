@@ -424,9 +424,7 @@ depth.
 eshell is not really a system shell, it's written in pure lisp. What I
 like is it fully integrated with emacs.
 
-*** Packages
-
-**** multi-eshell
+*** Support for multi-eshell instance
 
 #+BEGIN_SRC emacs-lisp
   (req-package multi-eshell
@@ -437,9 +435,10 @@ like is it fully integrated with emacs.
       (setq multi-eshell-name "*eshell*")))
 #+END_SRC
 
-**** eshell-autojump
+*** Add autojump command
 
-[[http://www.emacswiki.org/emacs/EshellAutojump][Eshell Autojump]] is an
+[[http://www.emacswiki.org/emacs/EshellAutojump][Eshell Autojump]] is an [[https://github.com/joelthelion/autojump][autojump]] like command written in pure elisp,
+which add a =j= command to let you jump to folder you has been access.
 
 #+BEGIN_SRC emacs-lisp
   (req-package eshell-autojump :require eshell)
