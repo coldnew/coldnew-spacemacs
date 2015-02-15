@@ -234,6 +234,14 @@ prefer use =en_US= to display time info.
 
 * Packages
 
+** 4clojure
+
+[[https://github.com/losingkeys/4clojure.el][4clojure.el]] let you open and evaluate [[http://www.4clojure.com/][4clojure]] questions.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package 4clojure)
+#+END_SRC
+
 ** ascii
 
 [[http://www.emacswiki.org/emacs/AsciiMode][Ascii]] provides a way to display ASCII code on a window, that is,
