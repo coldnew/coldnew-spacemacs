@@ -567,6 +567,19 @@ which add a =j= command to let you jump to folder you has been access.
       ))
 #+END_SRC
 
+** SSH Config
+
+#+BEGIN_SRC emacs-lisp
+  (req-package ssh-config-mode
+    :init
+    (progn
+      (add-to-list 'auto-mode-alist '(".ssh/config\\'"       . ssh-config-mode))
+      (add-to-list 'auto-mode-alist '("sshd?_config\\'"      . ssh-config-mode))
+      (add-to-list 'auto-mode-alist '("known_hosts\\'"       . ssh-known-hosts-mode))
+      (add-to-list 'auto-mode-alist '("authorized_keys2?\\'" . ssh-authorized-keys-mode))
+      (add-hook 'ssh-config-mode-hook 'turn-on-font-lock)))
+#+END_SRC
+
 * Keybinding
 
 ** Use org-mode to generate keymap
