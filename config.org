@@ -663,7 +663,7 @@ which add a =j= command to let you jump to folder you has been access.
 
 #+BEGIN_SRC emacs-lisp
   (req-package qml-mode
-    :init (add-to-list 'auto-mode-alist '("\\.qml$" . qml-mode))
+    :init (add-to-list 'auto-mode-alist '("\\.qml$" . qml-mode)))
 #+END_SRC
 
 ** SCSS
@@ -681,14 +681,14 @@ which add a =j= command to let you jump to folder you has been access.
 
 #+BEGIN_SRC emacs-lisp
   (req-package css-mode
-    :init (add-to-list 'auto-mode-alist '("\\.css$" . css-mode))
+    :init (add-to-list 'auto-mode-alist '("\\.css$" . css-mode)))
 #+END_SRC
 
 ** Less
 
 #+BEGIN_SRC emacs-lisp
   (req-package less-css-mode
-    :init (add-to-list 'auto-mode-alist '("\\.less$" . less-css-mode))
+    :init (add-to-list 'auto-mode-alist '("\\.less$" . less-css-mode)))
 #+END_SRC
 
 * Keybinding
