@@ -616,6 +616,31 @@ which add a =j= command to let you jump to folder you has been access.
       (add-hook 'cmake-mode-hook 'cmake-font-lock-activate)))
 #+END_SRC
 
+** C/C++
+
+#+BEGIN_SRC emacs-lisp
+  (req-package c-eldoc
+    :config
+    (progn
+      (add-hook 'c-mode-common-hook
+                '(lambda ()
+                   (setq c-eldoc-includes "`pkg-config gtk+-3.0 --cflags --libs` -I./ -I../")
+                   (c-turn-on-eldoc-mode)))))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (req-package cwarn
+    :init (add-hook 'c-mode-common-hook '(lambda () (cwarn-mode 1))))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (req-package cpputils-cmake
+    :config
+    (progn
+      (add-hook 'c-mode-common-hook
+                (lambda () (when (derived-mode-p 'c-mode 'c++-mode) (cppcm-reload-all))))))
+#+END_SRC
+
 * Keybinding
 
 ** Use org-mode to generate keymap
@@ -636,10 +661,10 @@ which add a =j= command to let you jump to folder you has been access.
 ** Normal State
 
 #+TBLNAME: global-evil-normal
-| Key | Command            | description                          |
-|-----+--------------------+--------------------------------------|
-| M-[ | winner-undo        | switch back to earlier window layout |
-| M-] | winner-redo        | restore resent window layout         |
+| Key | Command     | description                          |
+|-----+-------------+--------------------------------------|
+| M-[ | winner-undo | switch back to earlier window layout |
+| M-] | winner-redo | restore resent window layout         |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
     <<define-keys(map="evil-normal-state-map", keys=global-evil-normal)>>
