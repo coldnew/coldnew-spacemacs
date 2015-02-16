@@ -641,6 +641,14 @@ which add a =j= command to let you jump to folder you has been access.
                 (lambda () (when (derived-mode-p 'c-mode 'c++-mode) (cppcm-reload-all))))))
 #+END_SRC
 
+** Graphviz
+
+#+BEGIN_SRC emacs-lisp
+  (req-package graphviz-dot-mode
+    :init (defalias 'dot-mode 'graphviz-dot-mode))
+#+END_SRC
+
+
 * Keybinding
 
 ** Use org-mode to generate keymap
