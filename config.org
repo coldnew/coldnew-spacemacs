@@ -666,6 +666,30 @@ which add a =j= command to let you jump to folder you has been access.
     :init (add-to-list 'auto-mode-alist '("\\.qml$" . qml-mode))
 #+END_SRC
 
+** SCSS
+
+#+BEGIN_SRC emacs-lisp
+  (req-package scss-mode
+    :init (add-to-list 'auto-mode-alist '("\\.scss$" . scss-mode))
+    :config
+    (progn
+      ;; dont' build scss to css after save file
+      (setq scss-compile-at-save nil)))
+#+END_SRC
+
+** CSS
+
+#+BEGIN_SRC emacs-lisp
+  (req-package css-mode
+    :init (add-to-list 'auto-mode-alist '("\\.css$" . css-mode))
+#+END_SRC
+
+** Less
+
+#+BEGIN_SRC emacs-lisp
+  (req-package less-css-mode
+    :init (add-to-list 'auto-mode-alist '("\\.less$" . less-css-mode))
+#+END_SRC
 
 * Keybinding
 
