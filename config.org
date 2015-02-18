@@ -709,10 +709,11 @@ generate keybing via table, just use following functions:
 ** Normal State
 
 #+TBLNAME: global-evil-normal
-| Key | Command     | description                          |
-|-----+-------------+--------------------------------------|
-| M-[ | winner-undo | switch back to earlier window layout |
-| M-] | winner-redo | restore resent window layout         |
+| Key     | Command        | description                          |
+|---------+----------------+--------------------------------------|
+| M-[     | winner-undo    | switch back to earlier window layout |
+| M-]     | winner-redo    | restore resent window layout         |
+| C-x C-q | read-only-mode | toggle read-only-mode                |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
     <<define-keys(map="evil-normal-state-map", keys=global-evil-normal)>>
@@ -721,14 +722,18 @@ generate keybing via table, just use following functions:
 ** Insert State
 
 #+TBLNAME: global-evil-insert
-| Key | Command                      | description                          |
-|-----+------------------------------+--------------------------------------|
-| C-n | evil-next-line               | next-line                            |
-| C-p | evil-previous-line           | previous-line                        |
-| C-; | iedit-mode                   | Quicklly modify all same words       |
-| M-[ | winner-undo                  | switch back to earlier window layout |
-| M-] | winner-redo                  | restore resent window layout         |
-| C-o | evil-execute-in-normal-state | Temporary switch to Normal sate      |
+| Key      | Command                      | description                          |
+|----------+------------------------------+--------------------------------------|
+| C-n      | evil-next-line               | next-line                            |
+| C-p      | evil-previous-line           | previous-line                        |
+| C-;      | iedit-mode                   | Quicklly modify all same words       |
+| M-[      | winner-undo                  | switch back to earlier window layout |
+| M-]      | winner-redo                  | restore resent window layout         |
+| C-o      | evil-execute-in-normal-state | Temporary switch to Normal sate      |
+| C-d      | hungry-delete-forward        | forward delete with hungry-mode      |
+| C-l      | hungry-delete-backward       | backward delete with hungru-mode     |
+| <delete> | hungry-delete-backward       | backward delete with hungru-mode     |
+| C-x C-q  | read-only-mode               | toggle read-only-mode                |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
     <<define-keys(map="evil-insert-state-map", keys=global-evil-insert)>>
