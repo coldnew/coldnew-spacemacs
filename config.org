@@ -355,12 +355,6 @@ representing colors with the color they represent as background.
     (add-hook 'prog-mode-hook '(lambda () (doxymacs-mode))))
 #+END_SRC
 
-* Fonts
-
-#+BEGIN_SRC emacs-lisp
-  (require 'coldnew-fonts-setup)
-#+END_SRC
-
 * Theme
 
 I always use dark theme for coding, [[https://github.com/kuanyui/moe-theme.el][moe-theme]] is a good start point,
