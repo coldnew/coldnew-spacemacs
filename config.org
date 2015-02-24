@@ -746,12 +746,13 @@ generate keybing via table, just use following functions:
 ** Normal State
 
 #+TBLNAME: global-evil-normal
-| Key     | Command            | description                          |
-|---------+--------------------+--------------------------------------|
-| M-[     | winner-undo        | switch back to earlier window layout |
-| M-]     | winner-redo        | restore resent window layout         |
-| C-x C-q | read-only-mode     | toggle read-only-mode                |
-| C-x C-s | save-buffer-always | Always save buffer even not modified |
+| Key     | Command             | description                          |
+|---------+---------------------+--------------------------------------|
+| M-[     | winner-undo         | switch back to earlier window layout |
+| M-]     | winner-redo         | restore resent window layout         |
+| C-x C-q | read-only-mode      | toggle read-only-mode                |
+| C-x C-s | save-buffer-always  | Always save buffer even not modified |
+| C-x C-f | lusty-file-explorer | Use lusty-file-explorer to find-file |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
     <<define-keys(map="evil-normal-state-map", keys=global-evil-normal)>>
@@ -775,6 +776,7 @@ generate keybing via table, just use following functions:
 | C-x C-s  | save-buffer-always           | Always save buffer even not modified |
 | M-<SPC>  | insert-U200B-char            | Insert <U200B> character             |
 | s-<SPC>  | insert-U200B-char            | Insert <U200B> character             |
+| C-x C-f  | lusty-file-explorer          | Use lusty-file-explorer to find-file |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
     <<define-keys(map="evil-insert-state-map", keys=global-evil-insert)>>
