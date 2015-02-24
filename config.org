@@ -342,6 +342,25 @@ representing colors with the color they represent as background.
     (add-hook 'prog-mode-hook '(lambda () (doxymacs-mode))))
 #+END_SRC
 
+* Interactive Commands
+
+In emacs, we can use =M-x= to execute interactive commands, I
+implement some of them to make my emacs more easy to use.
+
+** Buffers
+
+*** Kill all buffers except *scratch* buffer
+
+Sometimes I just want to kill all buffers.
+
+#+BEGIN_SRC emacs-lisp
+  (defun nuke-all-buffers ()
+    "Kill all buffers, leaving *scratch* only."
+    (interactive)
+    (mapcar (lambda (x) (kill-buffer x)) (buffer-list))
+    (delete-other-windows))
+#+END_SRC
+
 * Theme
 
 I always use dark theme for coding, [[https://github.com/kuanyui/moe-theme.el][moe-theme]] is a good start point,
