@@ -643,9 +643,13 @@ Also bind `class' to ((class color) (min-colors 89))."
             (powerline-render rhs))))
 
 ;; Setup my mode-line
+
 (setq powerline-default-separator 'arrow)
+
 (setq mode-line-format
       '("%e" (:eval (coldnew/mode-line-prepare))))
+
+(defun spacemacs/mode-line-prepare () (coldnew/mode-line-prepare))
 
 ;;;###autoload
 (when (boundp 'custom-theme-load-path)
