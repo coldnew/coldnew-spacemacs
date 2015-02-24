@@ -376,6 +376,22 @@ not modified.
     (save-buffer))
 #+END_SRC
 
+** Edit (Insert/Remove)
+
+*** Insert U200B char
+
+=<U200B>= character is a =zero width space character= which is nice to
+use under org-mode.
+
+For more info, please see: [[https://lists.gnu.org/archive/html/emacs-orgmode/2012-09/msg00155.html][suggestion for org-emphasis-regexp-components: *U*nited *N*ations]]
+
+#+BEGIN_SRC emacs-lisp
+  (defun insert-U200B-char ()
+    "Insert <U200B> char, this character is nice use in org-mode."
+    (interactive)
+    (insert "\ufeff"))
+#+END_SRC
+
 * Theme
 
 I always use dark theme for coding, [[https://github.com/kuanyui/moe-theme.el][moe-theme]] is a good start point,
