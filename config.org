@@ -950,6 +950,18 @@ c/c++/objc-mode on .h file.
     :init (defalias 'dot-mode 'graphviz-dot-mode))
 #+END_SRC
 
+** Clojure/Clojurescript
+
+#+BEGIN_SRC emacs-lisp
+  (req-package clojure-mode
+    :mode "\\.clj$")
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (req-package clojurescript-mode
+    :mode "\\.cljs$")
+#+END_SRC
+
 ** GLSL
 
 #+BEGIN_SRC emacs-lisp
