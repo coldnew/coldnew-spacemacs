@@ -839,6 +839,12 @@ persists across sessions.
       (add-hook 'cmake-mode-hook 'cmake-font-lock-activate)))
 #+END_SRC
 
+** Rust
+
+#+BEGIN_SRC emacs-lisp
+  (req-package rust-mode)
+#+END_SRC
+
 ** C/C++
 
 #+BEGIN_SRC emacs-lisp
