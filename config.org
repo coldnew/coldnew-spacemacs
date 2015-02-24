@@ -435,7 +435,9 @@ unload previous theme before loading a new one.
     (mapc #'disable-theme custom-enabled-themes))
 
   ;; use coldnew-theme-night by default
-  (req-package coldnew-theme :init (coldnew-theme-night))
+  (req-package coldnew-theme
+    :require (powerline powerline-evil)
+    :init (coldnew-theme-night))
 #+END_SRC
 
 * Editors
