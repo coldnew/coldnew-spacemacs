@@ -38,4 +38,5 @@ install:
   - '"$EMACS" --version'
 
 script:
+  - make clean
   - make test

@@ -9,6 +9,7 @@ clean:
 	$(RM) config.el
 	$(RM) *.elc
 	$(RM) */*.elc
+	find . -name *.elc -exec rm {} \;
 
 compile:
 	${CASK} exec ${EMACS} -Q -batch -l init.el \
