@@ -880,9 +880,11 @@ persists across sessions.
   (req-package highlight-cl
     :config
     (progn
-      (dolist (h '(emacs-lisp-mode-hook lisp-interaction-mode-hook))
-        (add-hook h
-                  '(lambda() (highlight-cl-add-font-lock-keywords))))))
+
+      (dolist (x '(emacs-lisp lisp-interaction))
+        (add-hook
+         (intern (concat (symbol-name x) "-mode-hook"))
+         'highlight-cl-add-font-lock-keywords))))
 #+END_SRC
 
 ** Org
@@ -1170,6 +1172,8 @@ generate keybing via table, just use following functions:
 | s-<SPC>  | insert-U200B-char            | Insert <U200B> character             |
 | C-x C-f  | lusty-file-explorer          | Use lusty-file-explorer to find-file |
 | C-x C-n  | company-complete             | Complete with company-mode           |
+| M-l      | backward-delete-word         | Backward delete word                 |
+| C-l      | backward-delete-char         | Backward delete char                 |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
     <<define-keys(map="evil-insert-state-map", keys=global-evil-insert)>>
