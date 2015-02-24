@@ -440,6 +440,45 @@ unload previous theme before loading a new one.
     :init (coldnew-theme-night))
 #+END_SRC
 
+* Minibuffers
+
+#+BEGIN_SRC emacs-lisp
+  (req-package minibuffer
+    :config
+    (progn
+
+      (defun coldnew/minibuffer-switch-dir (path)
+        "Clear mimibuffer and insert dir path"
+        (kill-line 0) (insert path))
+
+      (defun minibuffer-keyboard-quit ()
+        "Abort recursive edit.
+  In Delete Selection mode, if the mark is active, just deactivate it;
+  then it takes a second \\[keyboard-quit] to abort the minibuffer."
+        (interactive)
+        (if (and delete-selection-mode transient-mark-mode mark-active)
+            (setq deactivate-mark t)
+          (when (get-buffer "*Completions*") (delete-windows-on "*Completions*"))
+          (abort-recursive-edit)))
+
+      ;;      (define-key minibuffer-local-map (kbd "M-l") 'backward-kill-word)
+      (define-key minibuffer-local-map (kbd "M-p") 'previous-history-element)
+      (define-key minibuffer-local-map (kbd "M-n") 'next-history-element)
+      (define-key minibuffer-local-map (kbd "C-g") 'minibuffer-keyboard-quit)
+
+      ;; switch to tmp dir
+      (define-key minibuffer-local-map (kbd "M-t") '(lambda()
+                                                      (interactive)
+                                                      (let ((dir (if (eq system-type 'darwin)
+                                                                     "~/ramdisk/" "/tmp/")))
+                                                        (coldnew/minibuffer-switch-dir dir))))
+      ;; switch to home dir
+      (define-key minibuffer-local-map (kbd "M-h") '(lambda()
+                                                      (interactive)
+                                                      (coldnew/minibuffer-switch-dir "~/")))
+      ))
+#+END_SRC
+
 * Editors
 
 Why emacs config has an editor section, doesn't means emacs is not an
@@ -560,6 +599,7 @@ FIXME: buggy, can't really use
   (req-package projectile
     :interpreter ("projectile" . projectil-mode))
 #+END_SRC
+
 
 ** Completion with Company mode
 
@@ -803,7 +843,7 @@ persists across sessions.
 
 *** Highlight defined symbols
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
   (req-package hl-defined
     :config
     (add-hook 'emacs-lisp-mode-hook 'hdefd-highlight-mode)
