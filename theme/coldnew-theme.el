@@ -9,6 +9,26 @@
 (require 'powerline)
 (require 'powerline-evil)
 
+(defface mode-line-read-only-face
+  '((t (:foreground "#C82829" :bold t)))
+  "face for mode-name-string in modeline."
+  :group 'mode-line)
+
+(defface mode-line-modified-face
+  '((t (:inherit 'font-lock-function-name-face :bolt t)))
+  "face for mode-name-string in modeline."
+  :group'mode-lin)
+
+(defface mode-line-mode-name-face
+  '((t (:inherit font-lock-keyword-face)))
+  "face for mode-name-string in modeline."
+  :group 'mode-line)
+
+(defface font-lock-escape-char-face
+  '((((class color)) (:foreground "seagreen2")))
+  "highlight c escapes char like vim"
+  :group 'font-lock-faces)
+
 (defconst coldnew-theme-colors
   '((night . ((background "#0b0b0b")
               (foreground "#dcdcdc")
