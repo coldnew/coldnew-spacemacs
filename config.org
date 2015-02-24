@@ -660,7 +660,6 @@ TODO: take from https://github.com/edvorg/emacs-configs/blob/master/init.d/init-
     :config (setq helm-github-stars-username (getenv "USER")))
 #+END_SRC
 
-
 * Terminal Emulator
 
 ** Eshell
@@ -821,6 +820,35 @@ persists across sessions.
 ** C/C++
 
 #+BEGIN_SRC emacs-lisp
+  (req-package cc-mode
+    :mode
+    (("\\.h\\'" . c-mode)
+     ("\\.c\\'" . c-mode)
+     ("\\.hpp\\'" . c++-mode)
+     ("\\.cpp\\'" . c++-mode))
+    :config
+    (progn
+      ;; use regexp to check if it's C++ header
+      (add-to-list 'magic-mode-alist
+                   `(,(lambda ()
+                        (and (string= (file-name-extension (or (buffer-file-name) "")) "h")
+                             (or (re-search-forward "#include <\\w+>"
+                                                    magic-mode-regexp-match-limit t)
+                                 (re-search-forward "\\W\\(class\\|template\\namespace\\)\\W"
+                                                    magic-mode-regexp-match-limit t)
+                                 (re-search-forward "std::"
+                                                    magic-mode-regexp-match-limit t))))
+                     . c++-mode))
+      ))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (req-package clang-format
+    :commands clang-format-region)
+#+END_SRC
+
+
+#+BEGIN_SRC emacs-lisp
   (req-package c-eldoc
     :config
     (progn
@@ -841,6 +869,25 @@ persists across sessions.
     (progn
       (add-hook 'c-mode-common-hook
                 (lambda () (when (derived-mode-p 'c-mode 'c++-mode) (cppcm-reload-all))))))
+#+END_SRC
+
+*** Use dummy-h-mode to help detect header's major mode
+
+[[https://github.com/yascentur/dummy-h-mode-el][dummy-h-mode]] is an major-mode to help switch major mode to
+c/c++/objc-mode on .h file.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package dummy-h-mode
+    :require cc-mode
+    :mode "\\.h$"
+    :config
+    (progn
+      (add-hook 'dummy-h-mode-hook
+                (lambda ()
+                  (setq dummy-h-mode-default-major-mode 'c-mode)))
+      (add-hook 'dummy-h-mode-hook
+                (lambda ()
+                  (setq dummy-h-mode-search-limit 60000)))))
 #+END_SRC
 
 ** Graphviz
