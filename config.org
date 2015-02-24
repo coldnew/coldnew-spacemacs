@@ -383,6 +383,20 @@ not modified.
     (save-buffer))
 #+END_SRC
 
+*** Abort minibuffer recursive edit
+
+#+BEGIN_SRC emacs-lisp
+  (defun minibuffer-keyboard-quit ()
+    "Abort recursive edit.
+  In Delete Selection mode, if the mark is active, just deactivate it;
+  then it takes a second \\[keyboard-quit] to abort the minibuffer."
+    (interactive)
+    (if (and delete-selection-mode transient-mark-mode mark-active)
+        (setq deactivate-mark t)
+      (when (get-buffer "*Completions*") (delete-windows-on "*Completions*"))
+      (abort-recursive-edit)))
+#+END_SRC
+
 ** Edit (Insert/Remove)
 
 *** Insert U200B char
@@ -397,6 +411,26 @@ For more info, please see: [[https://lists.gnu.org/archive/html/emacs-orgmode/20
     "Insert <U200B> char, this character is nice use in org-mode."
     (interactive)
     (insert "\ufeff"))
+#+END_SRC
+
+*** Delete word
+
+#+BEGIN_SRC emacs-lisp
+  (defun delete-word (arg)
+    "Delete characters forward until encountering the end of a word.
+  With argument, do this that many times."
+    (interactive "p")
+    (delete-region (point) (progn (forward-word arg) (point))))
+#+END_SRC
+
+*** Backward delete word
+
+#+BEGIN_SRC emacs-lisp
+  (defun backward-delete-word (arg)
+    "Delete characters backward until encountering the end of a word.
+  With argument, do this that many times."
+    (interactive "p")
+    (delete-word (- arg)))
 #+END_SRC
 
 ** Debug
@@ -451,17 +485,7 @@ unload previous theme before loading a new one.
         "Clear mimibuffer and insert dir path"
         (kill-line 0) (insert path))
 
-      (defun minibuffer-keyboard-quit ()
-        "Abort recursive edit.
-  In Delete Selection mode, if the mark is active, just deactivate it;
-  then it takes a second \\[keyboard-quit] to abort the minibuffer."
-        (interactive)
-        (if (and delete-selection-mode transient-mark-mode mark-active)
-            (setq deactivate-mark t)
-          (when (get-buffer "*Completions*") (delete-windows-on "*Completions*"))
-          (abort-recursive-edit)))
-
-      ;;      (define-key minibuffer-local-map (kbd "M-l") 'backward-kill-word)
+      (define-key minibuffer-local-map (kbd "M-l") 'backward-kill-word)
       (define-key minibuffer-local-map (kbd "M-p") 'previous-history-element)
       (define-key minibuffer-local-map (kbd "M-n") 'next-history-element)
       (define-key minibuffer-local-map (kbd "C-g") 'minibuffer-keyboard-quit)
@@ -599,7 +623,6 @@ FIXME: buggy, can't really use
   (req-package projectile
     :interpreter ("projectile" . projectil-mode))
 #+END_SRC
-
 
 ** Completion with Company mode
 
