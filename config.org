@@ -301,8 +301,10 @@ through a common interface.
       (eval-after-load "helm-mode"
         '(progn
            (add-to-list 'helm-completing-read-handlers-alist '(lusty-file-explorer . nil))
-           (add-to-list 'helm-completing-read-handlers-alist '(lusty-buffer-explorer . nil))))
-      ))
+           (add-to-list 'helm-completing-read-handlers-alist '(lusty-buffer-explorer . nil)))))
+    :config
+    (progn
+      (bind-key "RET" 'lusty-select-current-name lusty-mode-map)))
 #+END_SRC
 
 ** sx
