@@ -351,7 +351,8 @@ implement some of them to make my emacs more easy to use.
 
 *** Kill all buffers except *scratch* buffer
 
-Sometimes I just want to kill all buffers.
+Sometimes I just want to kill all buffers, this command will kill all
+of them and make =*scratch*= buffer alone.
 
 #+BEGIN_SRC emacs-lisp
   (defun nuke-all-buffers ()
@@ -359,6 +360,20 @@ Sometimes I just want to kill all buffers.
     (interactive)
     (mapcar (lambda (x) (kill-buffer x)) (buffer-list))
     (delete-other-windows))
+#+END_SRC
+
+*** Make emacs can always save buffers (even if file is not modified)
+
+The default command *save-buffer* will not really save file when it
+untouched, use this command can let me force save file even if file is
+not modified.
+
+#+BEGIN_SRC emacs-lisp
+  (defun save-buffer-always ()
+    "Save the buffer even if it is not modified."
+    (interactive)
+    (set-buffer-modified-p t)
+    (save-buffer))
 #+END_SRC
 
 * Theme
@@ -715,11 +730,12 @@ generate keybing via table, just use following functions:
 ** Normal State
 
 #+TBLNAME: global-evil-normal
-| Key     | Command        | description                          |
-|---------+----------------+--------------------------------------|
-| M-[     | winner-undo    | switch back to earlier window layout |
-| M-]     | winner-redo    | restore resent window layout         |
-| C-x C-q | read-only-mode | toggle read-only-mode                |
+| Key     | Command            | description                          |
+|---------+--------------------+--------------------------------------|
+| M-[     | winner-undo        | switch back to earlier window layout |
+| M-]     | winner-redo        | restore resent window layout         |
+| C-x C-q | read-only-mode     | toggle read-only-mode                |
+| C-x C-s | save-buffer-always | Always save buffer even not modified |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
     <<define-keys(map="evil-normal-state-map", keys=global-evil-normal)>>
@@ -740,6 +756,7 @@ generate keybing via table, just use following functions:
 | C-l      | hungry-delete-backward       | backward delete with hungru-mode     |
 | <delete> | hungry-delete-backward       | backward delete with hungru-mode     |
 | C-x C-q  | read-only-mode               | toggle read-only-mode                |
+| C-x C-s  | save-buffer-always           | Always save buffer even not modified |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
     <<define-keys(map="evil-insert-state-map", keys=global-evil-insert)>>
