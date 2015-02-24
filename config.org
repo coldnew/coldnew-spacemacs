@@ -628,6 +628,28 @@ which add a =j= command to let you jump to folder you has been access.
 
 * Programming Languages
 
+** Android
+
+#+BEGIN_SRC emacs-lisp
+  (req-package android-mode
+    :disabled t
+    :config (setq android-mode-sdk-dir (getenv "ANDROID_SDK")))
+#+END_SRC
+
+** Bash
+
+#+BEGIN_SRC emacs-lisp
+  (req-package flymake-shell
+    :require (flymake shell)
+    :config (add-hook 'sh-set-shell-hook 'flymake-shell-load))
+#+END_SRC
+
+** Batch
+
+#+BEGIN_SRC emacs-lisp
+  (req-package batch-mode :mode "\\.bat\\'")
+#+END_SRC
+
 ** Emacs Lisp
 
 #+BEGIN_SRC emacs-lisp
@@ -664,6 +686,15 @@ persists across sessions.
 
 #+BEGIN_SRC emacs-lisp
   (req-package litable :init (litable-mode))
+#+END_SRC
+
+*** Highlight defined symbols
+
+#+BEGIN_SRC emacs-lisp
+  (req-package hl-defined
+    :config
+    (add-hook 'emacs-lisp-mode-hook 'hdefd-highlight-mode)
+    (add-hook 'lisp-interaction-mode-hook 'hdefd-highlight-mode))
 #+END_SRC
 
 ** Org
@@ -737,15 +768,53 @@ persists across sessions.
     :init (defalias 'dot-mode 'graphviz-dot-mode))
 #+END_SRC
 
+** GLSL
+
+#+BEGIN_SRC emacs-lisp
+  (req-package glsl-mode
+    :mode (("\\.vs\\'" . glsl-mode)
+           ("\\.fs\\'" . glsl-mode)
+           ("\\.gs\\'" . glsl-mode))
+    :config (setq glsl-other-file-alist '(("\\.fs$" (".vs"))
+                                          ("\\.vs$" (".fs")))))
+#+END_SRC
+
 ** javascript
 
 #+BEGIN_SRC emacs-lisp
   (req-package js2-mode
-    :init
-    (progn
-      (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-      (setq js2-highlight-level 3)
-      ))
+    :init (setq js2-highlight-level 3)
+    :mode "\\.js$")
+#+END_SRC
+
+** Json
+
+#+BEGIN_SRC emacs-lisp
+  (req-package json-reformat :commands json-reformat-region)
+
+  (req-package flymake-json :require flymake)
+
+  (req-package json-mode
+    :require flymake-json
+    :mode ("\\.json$" . json-mode)
+    :init (add-hook 'json-mode-hook (lambda () (flymake-json-load))))
+#+END_SRC
+
+** Markdown
+
+#+BEGIN_SRC emacs-lisp
+  (req-package markdown-mode
+    :mode "\\.\\(md\\|markdown\\)\\'")
+#+END_SRC
+
+** Ruby
+
+#+BEGIN_SRC emacs-lisp
+  (req-package ruby-mode
+    :mode (("Rakefile\\'" . ruby-mode)
+           ("rb\\'" . ruby-mode)))
+
+  (req-package rake)
 #+END_SRC
 
 ** QML
