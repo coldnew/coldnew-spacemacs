@@ -307,7 +307,9 @@ through a common interface.
            (add-to-list 'helm-completing-read-handlers-alist '(lusty-buffer-explorer . nil)))))
     :config
     (progn
-      (bind-key "RET" 'lusty-select-current-name lusty-mode-map)))
+      (add-hook 'lusty-setup-hook
+                '(lambda ()
+                   (define-key lusty-mode-map (kbd "RET") 'lusty-select-current-name)))))
 #+END_SRC
 
 ** sx
@@ -520,6 +522,10 @@ FIXME: buggy, can't really use
       (dolist (m evil-emacs-state-modes)
         (add-to-list 'evil-insert-state-modes m))
       ))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (req-package evil-terminal-cursor-changer)
 #+END_SRC
 
 ** En/Decrypt files by [[http://emacswiki.org/emacs/EasyPG][EasyPG]]
