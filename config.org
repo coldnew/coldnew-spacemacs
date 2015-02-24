@@ -845,6 +845,17 @@ persists across sessions.
   (req-package rust-mode)
 #+END_SRC
 
+** Go
+
+#+BEGIN_SRC emacs-lisp
+  (req-package go-mode
+    :mode "\\.go$"
+    :config
+    (progn
+      ;; Use gofmt to format code before save
+      (add-hook 'before-save-hook 'gofmt-before-save)))
+#+END_SRC
+
 ** C/C++
 
 #+BEGIN_SRC emacs-lisp
