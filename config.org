@@ -773,6 +773,8 @@ generate keybing via table, just use following functions:
 | <delete> | hungry-delete-backward       | backward delete with hungru-mode     |
 | C-x C-q  | read-only-mode               | toggle read-only-mode                |
 | C-x C-s  | save-buffer-always           | Always save buffer even not modified |
+| M-<SPC>  | insert-U200B-char            | Insert <U200B> character             |
+| s-<SPC>  | insert-U200B-char            | Insert <U200B> character             |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
     <<define-keys(map="evil-insert-state-map", keys=global-evil-insert)>>
