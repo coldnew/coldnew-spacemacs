@@ -3,6 +3,9 @@
 ;;; Commentary:
 ;;
 
+;; 256-color charts
+;; http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
+
 (defconst coldnew-theme-colors
   '((night . ((yellow-1 "#fce94f") (yellow-2 "#ffd700") (yellow-3 "#c4a000") (yellow-4 "#875f00")
               (orange-1 "#ffaf5f") (orange-2 "#ff8700") (orange-3 "#ff5d17") (orange-4 "#d75f00") (orange-5 "#af5f00")
@@ -12,8 +15,8 @@
               (cyan-1 "#87ffff") (cyan-2 "#87d7af") (cyan-3 "#00d7af") (cyan-4 "#00ac8a") (cyan-5 "#5faf87") (cyan-6 "#005f5f") (cyan-7 "#005f87")
               (purple-1 "#d18aff") (purple-2 "#af5fff") (purple-3 "#9a08ff") (purple-4 "#6c0099")
               (red-1 "#ef2929")  (red-2 "#dd0000")  (red-3 "#a40000") (red-4 "#5f0000")
-              (white-1 "#c6c6c6") (white-2 "#c6c6c6") (white-3 "#b2b2b2") (black-1 "#a8a8a8") (black-2 "#8a8a8a")
-              (black-2-5 "#6c6c6c") (black-3 "#4e4e4e") (black-4 "#3a3a3a") (black-5 "#303030") (black-6 "#000000")
+              (white-1 "#c6c6c6") (white-2 "#c6c6c6") (white-3 "#b2b2b2")
+              (black-1 "#a8a8a8") (black-2 "#8a8a8a") (black-2-5 "#6c6c6c") (black-3 "#4e4e4e") (black-4 "#3a3a3a") (black-5 "#303030") (black-6 "#000000")
               (LIGHT_BG "#fdfde7") (white-0 "#ffffff")
               (green-02 "#5fd700") (green-01 "#d7ff00") (green-0 "#d7ff5f") (green-00 "#d7ff87")
               (blue-01 "#c3c9f8") (blue-0 "#afd7ff") (blue-00 "#d7d7ff")
@@ -23,6 +26,22 @@
               (magenta-0 "#ffafd7") (magenta-00 "#ffd7ff")
               (orange-0 "#ffaf87") (orange-00 "#ffd787") (orange-000 "#ffd7af")
               (linum-dark "#87875f") (linum-light "#d7d7af")
+
+              ;;My old theme config
+              (background "#202020")
+              (foreground "#dadada")
+              (cursor "#C2C2C2")
+              (current-line "#2a2a2a")
+              (selection "#444444")
+              (highlight "#CAE682")
+              (comment "#5d9ae4")
+              (red    "#E52210")
+              (orange "#e65c00")
+              (yellow "#f0c674")
+              (green  "#95e454")
+              (aqua   "#5d9ae4")
+              (blue   "#4d85ff")
+              (purple "#AD7fA8")
               ))
     (day . (
             (yellow-1 "#fce94f") (yellow-2 "#ffd700") (yellow-3 "#c4a000") (yellow-4 "#875f00")
@@ -33,8 +52,8 @@
             (cyan-1 "#87ffff") (cyan-2 "#5fd7af") (cyan-3 "#00d7af") (cyan-4 "#00ac8a") (cyan-5 "#5faf87") (cyan-6 "#005f5f") (cyan-7 "#005f87") (cyan-8 "#00af87")
             (purple-1 "#d18aff") (purple-2 "#9a08ff") (purple-3 "#6c0099") (purple-4 "#6c0099")
             (red-1 "#ef2929")  (red-2 "#cc0000")  (red-3 "#a40000") (red-4 "#5f0000")
-            (white-1 "#eeeeee") (white-2 "#dadada") (white-3 "#c6c6c6") (white-4 "#b2b2b2") (black-1 "#9e9e9e")
-            (black-2 "#8a8a8a") (black-3 "#767676") (black-4 "#626262") (black-5 "#5f5f5f") (black-6 "#3a3a3a") (black-2-5 "#6c6c6c")
+            (white-1 "#eeeeee") (white-2 "#dadada") (white-3 "#c6c6c6") (white-4 "#b2b2b2")
+            (black-1 "#9e9e9e") (black-2 "#8a8a8a") (black-3 "#767676") (black-4 "#626262") (black-5 "#5f5f5f") (black-6 "#3a3a3a") (black-2-5 "#6c6c6c")
             (LIGHT_BG "#fdfde7") (white-0 "#ffffff")
             (green-02 "#5fd700") (green-01 "#d7ff00") (green-0 "#d7ff5f") (green-00 "#d7ff87")
             (blue-01 "#c3c9f8") (blue-0 "#afd7ff") (blue-00 "#d7d7ff") (blue-000 "#d4e5ff")
@@ -44,6 +63,22 @@
             (magenta-0 "#ffafd7") (magenta-00 "#ffd7ff")
             (orange-0 "#ffaf87") (orange-00 "#ffd787") (orange-000 "#ffd7af")
             (linum-dark "#87875f") (linum-light "#d7d7af")
+
+            ;;My old theme config
+            (background "#ffffff")
+            (foreground "#1c1c1c")
+            (cursor . "#0B0B0E")
+            (current-line . "#efefef")
+            (selection . "#d6d6d6")
+            (highlight . "#CAE682")
+            (comment . "#8e908c")
+            (red . "#c82829")
+            (orange . "#f5871f")
+            (yellow . "#eab700")
+            (green . "#829c00")
+            (aqua . "#3e999f")
+            (blue . "#4271ae")
+            (purple . "#8959a8")
             ))
     ))
 
@@ -66,11 +101,11 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(
      ;; Ensure sufficient contrast on low-color terminals.
      (default ((((class color) (min-colors 4096))
-                (:foreground ,white-1 :background ,black-5))
+                (:foreground ,foreground :background ,background))
                (((class color) (min-colors 256))
-                (:foreground ,white-1 :background ,black-5))
+                (:foreground ,foreground :background ,background))
                (,class
-                (:foreground ,white-1 :background ,black-5))))
+                (:foreground ,foreground :background ,background))))
      (cursor ((,class (:background ,white-1))))
 
      ;; Highlighting faces
@@ -815,16 +850,14 @@ Also bind `class' to ((class color) (min-colors 89))."
        (put ',name 'theme-immediate t)
        (message (format "%s : %s" (symbol-name ',name) ,doc))
        (coldnew-theme--with-colors
-         ',mode
-         (apply 'custom-theme-set-faces ',name
-                (coldnew-theme--face-specs))
-         (custom-theme-set-variables
-          ',name
-          ;;          `(fci-rule-color ,current-line)
-          ;;`(ansi-color-names-vector (vector ,foreground ,red ,green ,yellow ,blue ,purple ,aqua ,background))
-          ;; '(ansi-color-faces-vector [default bold shadow italic underline bold bold-italic bold])
-          )
-         )
+        ',mode
+        (apply 'custom-theme-set-faces ',name
+               (coldnew-theme--face-specs))
+        (custom-theme-set-variables
+         ',name
+         ;;          `(fci-rule-color ,current-line)
+         `(ansi-color-names-vector (vector ,foreground ,red ,green ,yellow ,blue ,purple ,aqua ,background))
+         '(ansi-color-faces-vector [default bold shadow italic underline bold bold-italic bold])))
        (provide-theme ',name))))
 
 (defun coldnew-theme--load-theme (mode)
