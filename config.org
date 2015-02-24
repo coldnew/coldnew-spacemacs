@@ -543,7 +543,7 @@ FIXME: buggy, can't really use
 retrieve and display completion candidates.
 
 #+BEGIN_SRC emacs-lisp
-  (req-package company-mode
+  (req-package company
     :require (company-c-headers company-quickhelp)
     :config
     (progn
