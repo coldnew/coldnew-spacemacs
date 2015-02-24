@@ -234,6 +234,9 @@ prefer use =en_US= to display time info.
 
 * Packages
 
+Most of emacs packages do not need many configs or just provide
+commands/functions to use, I put them here.
+
 ** 4clojure
 
 [[https://github.com/losingkeys/4clojure.el][4clojure.el]] let you open and evaluate [[http://www.4clojure.com/][4clojure]] questions.
