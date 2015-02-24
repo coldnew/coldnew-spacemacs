@@ -788,6 +788,18 @@ persists across sessions.
     (add-hook 'lisp-interaction-mode-hook 'hdefd-highlight-mode))
 #+END_SRC
 
+*** Highlight functions or macros belone to cl.el
+
+#+BEGIN_SRC emacs-lisp
+
+  (req-package highlight-cl
+    :config
+    (progn
+      (dolist (h '(emacs-lisp-mode-hook lisp-interaction-mode-hook))
+        (add-hook h
+                  '(lambda() (highlight-cl-add-font-lock-keywords))))))
+#+END_SRC
+
 ** Org
 
 #+BEGIN_SRC emacs-lisp
