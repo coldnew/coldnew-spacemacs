@@ -536,6 +536,31 @@ FIXME: buggy, can't really use
     :interpreter ("projectile" . projectil-mode))
 #+END_SRC
 
+** Completion with Company mode
+
+[[http://company-mode.github.io/][Company]] is a text completion framework for Emacs. The name stands for
+"complete anything". It uses pluggable back-ends and front-ends to
+retrieve and display completion candidates.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package company-mode
+    :require (company-c-headers company-quickhelp)
+    :config
+    (progn
+      ;; company-c-headers
+      (add-to-list 'company-backends 'company-c-headers)
+      ;; Enable quickhelp doc window
+      (company-quickhelp-mode 1)
+
+      ;; Keybinding
+      (bind-key "C-g" 'company-abort company-active-map)
+      (bind-key "C-n" 'company-select-next company-active-map)
+      (bind-key "C-p" 'company-select-nextprevious company-active-map)
+      (bind-key "TAB" 'company-complete-selection company-active-map)
+      (bind-key "<tab>" 'company-complete-selection company-active-map)
+      ))
+#+END_SRC
+
 * Terminal Emulator
 
 ** Eshell
@@ -779,6 +804,7 @@ generate keybing via table, just use following functions:
 | M-<SPC>  | insert-U200B-char            | Insert <U200B> character             |
 | s-<SPC>  | insert-U200B-char            | Insert <U200B> character             |
 | C-x C-f  | lusty-file-explorer          | Use lusty-file-explorer to find-file |
+| C-x C-n  | company-complete             | Complete with company-mode           |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
     <<define-keys(map="evil-insert-state-map", keys=global-evil-insert)>>
