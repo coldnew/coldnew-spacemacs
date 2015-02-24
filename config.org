@@ -564,6 +564,21 @@ retrieve and display completion candidates.
       ))
 #+END_SRC
 
+** Helm
+
+#+BEGIN_SRC emacs-lisp
+  (req-package helm
+    :require helm-config
+    :init (helm-mode 1)
+    :config
+    (progn
+
+      (bind-key "TAB" 'helm-execute-persistent-action helm-map)
+      (bind-key "<tab>" 'helm-execute-persistent-action helm-map)
+      ))
+#+END_SRC
+
+
 * Terminal Emulator
 
 ** Eshell
@@ -636,6 +651,19 @@ which add a =j= command to let you jump to folder you has been access.
                    '(progn
                       (eldoc-add-command 'paredit-backward-delete
                                          'paredit-close-round))))))
+#+END_SRC
+
+*** On-the-fly evaluation/substitution of emacs lisp code
+
+[[https://github.com/Fuco1/litable][litable]] keeps a list of pure functions as a safeguard for unwanted
+evaluations. A function must first be accepted into this list (using
+M-x litable-accept-as-pure) before it can be evaluated on-the-fly. You
+should take care of what function you accept as pure to avoid any
+unfortunate accidents. Also, note that the pure functions list
+persists across sessions.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package litable :init (litable-mode))
 #+END_SRC
 
 ** Org
