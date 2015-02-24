@@ -660,6 +660,16 @@ TODO: take from https://github.com/edvorg/emacs-configs/blob/master/init.d/init-
     :config (setq helm-github-stars-username (getenv "USER")))
 #+END_SRC
 
+* GDB
+
+#+BEGIN_SRC emacs-lisp
+  (req-package gdb-mi
+    :require cc-mode
+    :config
+    (progn (setq gdb-many-windows t)
+           (setq gdb-show-main t)))
+#+END_SRC
+
 * Terminal Emulator
 
 ** Eshell
