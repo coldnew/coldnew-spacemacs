@@ -623,6 +623,24 @@ FIXME: buggy, can't really use
     :init (global-rainbow-blocks-mode t))
 #+END_SRC
 
+** Takes care of trailing whitespaces (removal, highlighting)
+
+https://github.com/glasserc/ethan-wspace
+
+#+BEGIN_SRC emacs-lisp
+  (req-package ethan-wspace
+    :config
+    (progn
+      ;; Enable ethan-wspace globally
+      (global-ethan-wspace-mode 1)
+
+      ;; Prevent etha-wspace touch my TAB on makefile mode
+      (add-hook 'makefile-mode-hook
+                '(lambda()
+                   (setq ethan-wspace-errors (remove 'tabs ethan-wspace-errors))))
+      ))
+#+END_SRC
+
 ** Vim Emulation
 
 #+BEGIN_SRC emacs-lisp
