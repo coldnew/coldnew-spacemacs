@@ -957,6 +957,8 @@ persists across sessions.
                 '(lambda ()
                    ;; fontify source code
                    (setq org-src-fontify-natively t)
+                   ;; Use current window when switch to source block
+                   (setq org-src-window-setup 'current-window)
                    ))
       ))
 #+END_SRC
