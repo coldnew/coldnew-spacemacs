@@ -1122,13 +1122,12 @@ c/c++/objc-mode on .h file.
 org-mode  is really nice for literature programmering, I can use it to
 generate keybing via table, just use following functions:
 
-
 #+NAME: define-keys
 #+BEGIN_SRC emacs-lisp :results output :tangle no :exports none :colnames nil
   (princ "(add-hook 'after-load-functions \n '(lambda (x) \n")
   (mapcar (lambda (l)
             (let* ((key (nth 0 l))
-                   (def (format "define-key %s (kbd \"%s\")" keymap key))
+                   (def (format "define-key %s (kbd \"%s\")" map key))
                    (command (nth 1 l)))
               (princ (format "(%s '%s)\n" def command))))
           ;; remove all `hline' tag first line in list
