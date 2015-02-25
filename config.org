@@ -605,7 +605,7 @@ depth.
     (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 #+END_SRC
 
-** Hoghlight numbers
+** Highlight numbers
 
 [[https://github.com/Fanael/highlight-numbers][highlight-numbers]]
 
