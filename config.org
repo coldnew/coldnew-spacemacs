@@ -962,6 +962,20 @@ persists across sessions.
       ))
 #+END_SRC
 
+*** Extend org-mode's easy templates
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load 'org
+    '(progn
+      (add-to-list 'org-structure-template-alist
+                   '("E" "#+BEGIN_SRC emacs-lisp\n?\n#+END_SRC"))
+      (add-to-list 'org-structure-template-alist
+                   '("S" "#+BEGIN_SRC sh\n?\n#+END_SRC"))
+      (add-to-list 'org-structure-template-alist
+                   '("p" "#+BEGIN_SRC plantuml :file uml.png \n?\n#+END_SRC"))
+      ))
+#+END_SRC
+
 ** SSH Config
 
 #+BEGIN_SRC emacs-lisp
@@ -1248,3 +1262,4 @@ At long last we need only call the following function to send
 #+BEGIN_SRC emacs-lisp
   (req-package-finish)
 #+END_SRC
+
