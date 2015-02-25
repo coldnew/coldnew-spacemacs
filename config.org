@@ -975,6 +975,28 @@ persists across sessions.
       ))
 #+END_SRC
 
+*** Extend babel support languages
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load 'org
+    '(progn
+       (org-babel-do-load-languages
+        'org-babel-load-languages
+        '((emacs-lisp . t)
+          (C . t)
+          (ditaa . t)
+          (dot . t)
+          (js . t)
+          (latex . t)
+          (perl . t)
+          (python . t)
+          (ruby . t)
+          (sh . t)
+          (plantuml . t)
+          (clojure .t)
+          ))))
+#+END_SRC
+
 ** SSH Config
 
 #+BEGIN_SRC emacs-lisp
