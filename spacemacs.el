@@ -99,7 +99,6 @@
 (defun dotspacemacs/config ()
   "This is were you can ultimately override default Spacemacs configuration.
 This function is called at the very end of Spacemacs initialization."
-  (setq powerline-default-separator 'arrow)
   )
 
 ;; Custom variables
