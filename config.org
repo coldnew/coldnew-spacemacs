@@ -199,7 +199,7 @@ After all spacemacs init done, switch back to =*scratch*= buffer.
   ;; Make spacemacs not remove my orphan packages.
   (defadvice configuration-layer/delete-orphan-packages (around null-func activate)
     "Overwrite the spacemacs's `configuration-layer/delete-orphan-packages'
-  to make it not remove any orphan packages.")
+    to make it not remove any orphan packages.")
 
   ;; Make a fake entry point for spacemacs, also modify the
   ;; `user-emacs-directory' temporary to mislead spacemacs real emacs
@@ -215,6 +215,9 @@ After all spacemacs init done, switch back to =*scratch*= buffer.
 
     ;; Initial spacemacs, our emacs run on top of it
     (load spacemacs-init))
+
+  ;; Disable global highlight by default (which is set by spacemacs.)
+  (global-hl-line-mode -1)
 
   ;; After spacemacs loading finished, switch back to `*scratch*' buffer
   (switch-to-buffer "*scratch*")
@@ -1238,7 +1241,6 @@ generate keybing via table, just use following functions:
 | s-<RET>  | insert-empty-line                                | Insert empty line after current line |
 | M-s      | helm-occur                                       | Find in this file                    |
 | C-x M-1  | deft-or-close                                    | Use deft open my note                |
-| C-x C-l  | spacemacs/toggle-highlight-current-line-globally | Toggle highlight current line        |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
   <<define-keys(map="evil-insert-state-map", keys=global-evil-insert)>>
