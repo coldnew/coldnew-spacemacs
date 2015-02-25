@@ -1216,7 +1216,9 @@ generate keybing via table, just use following functions:
 
 #+NAME: define-keys
 #+BEGIN_SRC emacs-lisp :results output :tangle no :exports none :colnames nil
-  (princ "(add-hook 'after-load-functions \n '(lambda (x) \n")
+  (defvar dotemacs-init-done nil)
+
+  (when (not dotemacs-init-done) (princ "(add-hook 'after-load-functions \n '(lambda (x) \n"))
   (mapcar (lambda (l)
             (let* ((key (nth 0 l))
                    (command (nth 1 l))
@@ -1226,7 +1228,7 @@ generate keybing via table, just use following functions:
                   (princ (format "(%s '%s)\n" def command)))))
           ;; remove all `hline' tag first line in list
           (cdr (remove 'hline keys)))
-  (princ "))")
+  (when (not dotemacs-init-done) (princ "))"))
 #+END_SRC
 
 ** Spacemacs Map
@@ -1271,6 +1273,7 @@ generate keybing via table, just use following functions:
 | s-<RET>  | insert-empty-line            | Insert empty line after current line |
 | M-s      | helm-occur                   | Find in this file                    |
 | C-x M-1  | deft-or-close                | Use deft open my note                |
+| C-x M-2  | multi-eshell                 | Show eshell window                   |
 | M-s      | helm-occur                   | Search in current buffer             |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
@@ -1284,4 +1287,9 @@ At long last we need only call the following function to send
 
 #+BEGIN_SRC emacs-lisp
   (req-package-finish)
+#+END_SRC
+
+Also setup =dotemacs-init-done= variable, this will help me to use =C-c C-c= to evalute keybinding config without restart emacs.
+#+BEGIN_SRC emacs-lisp
+  (setq dotemacs-init-done t)
 #+END_SRC
