@@ -1082,7 +1082,7 @@ c/c++/objc-mode on .h file.
 
 #+BEGIN_SRC emacs-lisp
   (req-package clojure-mode
-    :mode "\\.clj$")
+    :mode "\\.\\(clj\\|boot\\)\\'")
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
