@@ -876,7 +876,6 @@ persists across sessions.
 *** Highlight functions or macros belone to cl.el
 
 #+BEGIN_SRC emacs-lisp
-
   (req-package highlight-cl
     :config
     (progn
@@ -1126,13 +1125,15 @@ generate keybing via table, just use following functions:
 
 #+NAME: define-keys
 #+BEGIN_SRC emacs-lisp :results output :tangle no :exports none :colnames nil
+  (princ "(add-hook 'after-load-functions \n '(lambda (x) \n")
   (mapcar (lambda (l)
             (let* ((key (nth 0 l))
-                   (def (format "define-key %s (kbd \"%s\")" map key))
+                   (def (format "define-key %s (kbd \"%s\")" keymap key))
                    (command (nth 1 l)))
               (princ (format "(%s '%s)\n" def command))))
           ;; remove all `hline' tag first line in list
           (cdr (remove 'hline keys)))
+  (princ "))")
 #+END_SRC
 
 ** Spacemacs Map
@@ -1173,7 +1174,6 @@ generate keybing via table, just use following functions:
 | C-x C-f  | lusty-file-explorer          | Use lusty-file-explorer to find-file |
 | C-x C-n  | company-complete             | Complete with company-mode           |
 | M-l      | backward-delete-word         | Backward delete word                 |
-| C-l      | backward-delete-char         | Backward delete char                 |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
     <<define-keys(map="evil-insert-state-map", keys=global-evil-insert)>>
