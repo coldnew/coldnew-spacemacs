@@ -754,6 +754,8 @@ TODO: take from https://github.com/edvorg/emacs-configs/blob/master/init.d/init-
   (req-package helm-github-stars
     :require helm
     :config (setq helm-github-stars-username (getenv "USER")))
+
+(req-package helm-ag :require helm)
 #+END_SRC
 
 * GDB
