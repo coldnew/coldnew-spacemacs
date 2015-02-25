@@ -539,14 +539,13 @@ unload previous theme before loading a new one.
 
       ;; Make cursor in minibufer use bar shape
       (add-hook 'minibuffer-setup-hook '(lambda () (setq cursor-type 'bar)))
-      (defun coldnew/minibuffer-switch-dir (path)
-        "Clear mimibuffer and insert dir path"
-        (kill-line 0) (insert path))
 
       (define-key minibuffer-local-map (kbd "M-l") 'backward-kill-word)
       (define-key minibuffer-local-map (kbd "M-p") 'previous-history-element)
       (define-key minibuffer-local-map (kbd "M-n") 'next-history-element)
       (define-key minibuffer-local-map (kbd "C-g") 'minibuffer-keyboard-quit)
+
+      (defun coldnew/minibuffer-switch-dir (path) (kill-line 0) (insert path))
 
       ;; switch to tmp dir
       (define-key minibuffer-local-map (kbd "M-t") '(lambda()
@@ -1262,4 +1261,3 @@ At long last we need only call the following function to send
 #+BEGIN_SRC emacs-lisp
   (req-package-finish)
 #+END_SRC
-
