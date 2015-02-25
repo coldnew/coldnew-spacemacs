@@ -1218,7 +1218,7 @@ generate keybing via table, just use following functions:
 #+BEGIN_SRC emacs-lisp :results output :tangle no :exports none :colnames nil
   (defvar dotemacs-init-done nil)
 
-  (when (not dotemacs-init-done) (princ "(add-hook 'after-load-functions \n '(lambda (x) \n"))
+  (when (not dotemacs-init-done) (princ "(add-hook 'after-load-functions \n '(lambda (x)\n"))
   (mapcar (lambda (l)
             (let* ((key (nth 0 l))
                    (command (nth 1 l))
