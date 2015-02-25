@@ -615,6 +615,25 @@ depth.
     (add-hook 'prog-mode-hook 'highlight-numbers-mode))
 #+END_SRC
 
+** Highlight escape charset
+
+https://github.com/dgutov/highlight-escape-sequences
+
+#+BEGIN_SRC emacs-lisp
+  (req-package highlight-escape-sequences
+    :config
+    (progn
+      ;; Make face the same as builtin face
+      (put 'font-lock-regexp-grouping-backslash 'face-alias 'font-lock-builtin-face)
+
+      ;; Add extra modes
+      (add-to-list 'hes-simple-modes 'c-mode)
+      (add-to-list 'hes-simple-modes 'c++-mode)
+
+      ;; Enable globally
+      (hes-mode 1)))
+#+END_SRC
+
 ** Blocking syntax highlight
 
 FIXME: buggy, can't really use
