@@ -413,6 +413,17 @@ For more info, please see: [[https://lists.gnu.org/archive/html/emacs-orgmode/20
     (insert "\ufeff"))
 #+END_SRC
 
+*** Insert empty line after current line
+
+#+BEGIN_SRC emacs-lisp
+  (defun insert-empty-line ()
+    "Insert an empty line after current line and position cursor on newline."
+    (interactive)
+    (move-end-of-line nil)
+    (open-line 1)
+    (next-line 1))
+#+END_SRC
+
 *** Delete word
 
 #+BEGIN_SRC emacs-lisp
@@ -1173,6 +1184,7 @@ generate keybing via table, just use following functions:
 | C-x C-f  | lusty-file-explorer          | Use lusty-file-explorer to find-file |
 | C-x C-n  | company-complete             | Complete with company-mode           |
 | M-l      | backward-delete-word         | Backward delete word                 |
+| s-<RET>  | insert-empty-line            | Insert empty line after current line |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
     <<define-keys(map="evil-insert-state-map", keys=global-evil-insert)>>
