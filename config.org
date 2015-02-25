@@ -289,8 +289,7 @@ really added to the contents, it just like to do so.
       ;; Always insert `real' space in org-mode.
       (add-hook 'org-mode-hook
                 '(lambda ()
-                   (set (make-local-variable 'pangu-spacing-real-insert-separtor) t)))
-      ))
+                   (set (make-local-variable 'pangu-spacing-real-insert-separtor) t)))))
 #+END_SRC
 
 ** lusty-explorer
@@ -538,6 +537,8 @@ unload previous theme before loading a new one.
     :config
     (progn
 
+      ;; Make cursor in minibufer use bar shape
+      (add-hook 'minibuffer-setup-hook '(lambda () (setq cursor-type 'bar)))
       (defun coldnew/minibuffer-switch-dir (path)
         "Clear mimibuffer and insert dir path"
         (kill-line 0) (insert path))
@@ -559,14 +560,6 @@ unload previous theme before loading a new one.
                                                       (coldnew/minibuffer-switch-dir "~/")))
       ))
 #+END_SRC
-
-** Make cursor in minibufer use bar shape
-
-#+begin_src emacs-lisp
-  (req-package minibuffer
-    :config
-    (add-hook 'minibuffer-setup-hook '(lambda () (setq cursor-type 'bar))))
-#+end_src
 
 * Editors
 
@@ -1220,27 +1213,28 @@ generate keybing via table, just use following functions:
 ** Insert State
 
 #+TBLNAME: global-evil-insert
-| Key      | Command                                          | description                          |
-|----------+--------------------------------------------------+--------------------------------------|
-| C-n      | evil-next-line                                   | next-line                            |
-| C-p      | evil-previous-line                               | previous-line                        |
-| C-;      | iedit-mode                                       | Quicklly modify all same words       |
-| M-[      | winner-undo                                      | switch back to earlier window layout |
-| M-]      | winner-redo                                      | restore resent window layout         |
-| C-o      | evil-execute-in-normal-state                     | Temporary switch to Normal sate      |
-| C-d      | hungry-delete-forward                            | forward delete with hungry-mode      |
-| C-l      | hungry-delete-backward                           | backward delete with hungru-mode     |
-| <delete> | hungry-delete-backward                           | backward delete with hungru-mode     |
-| C-x C-q  | read-only-mode                                   | toggle read-only-mode                |
-| C-x C-s  | save-buffer-always                               | Always save buffer even not modified |
-| M-<SPC>  | insert-U200B-char                                | Insert <U200B> character             |
-| s-<SPC>  | insert-U200B-char                                | Insert <U200B> character             |
-| C-x C-f  | lusty-file-explorer                              | Use lusty-file-explorer to find-file |
-| C-x C-n  | company-complete                                 | Complete with company-mode           |
-| M-l      | backward-delete-word                             | Backward delete word                 |
-| s-<RET>  | insert-empty-line                                | Insert empty line after current line |
-| M-s      | helm-occur                                       | Find in this file                    |
-| C-x M-1  | deft-or-close                                    | Use deft open my note                |
+| Key      | Command                      | description                          |
+|----------+------------------------------+--------------------------------------|
+| C-n      | evil-next-line               | next-line                            |
+| C-p      | evil-previous-line           | previous-line                        |
+| C-;      | iedit-mode                   | Quicklly modify all same words       |
+| M-[      | winner-undo                  | switch back to earlier window layout |
+| M-]      | winner-redo                  | restore resent window layout         |
+| C-o      | evil-execute-in-normal-state | Temporary switch to Normal sate      |
+| C-d      | hungry-delete-forward        | forward delete with hungry-mode      |
+| C-l      | hungry-delete-backward       | backward delete with hungru-mode     |
+| <delete> | hungry-delete-backward       | backward delete with hungru-mode     |
+| C-x C-q  | read-only-mode               | toggle read-only-mode                |
+| C-x C-s  | save-buffer-always           | Always save buffer even not modified |
+| M-<SPC>  | insert-U200B-char            | Insert <U200B> character             |
+| s-<SPC>  | insert-U200B-char            | Insert <U200B> character             |
+| C-x C-f  | lusty-file-explorer          | Use lusty-file-explorer to find-file |
+| C-x C-n  | company-complete             | Complete with company-mode           |
+| M-l      | backward-delete-word         | Backward delete word                 |
+| s-<RET>  | insert-empty-line            | Insert empty line after current line |
+| M-s      | helm-occur                   | Find in this file                    |
+| C-x M-1  | deft-or-close                | Use deft open my note                |
+| M-s      | helm-occur                   | Search in current buffer             |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
   <<define-keys(map="evil-insert-state-map", keys=global-evil-insert)>>
