@@ -349,6 +349,49 @@ representing colors with the color they represent as background.
     (add-hook 'prog-mode-hook '(lambda () (doxymacs-mode))))
 #+END_SRC
 
+** deft
+
+[[http://jblevins.org/projects/deft/][deft]]
+
+#+BEGIN_SRC emacs-lisp
+  (req-package deft
+    :config
+    (progn
+      ;; default extension set to .org
+      (setq deft-extension "org")
+
+      ;; setup an minor-mode to quickly kill all deft buffers
+      (define-minor-mode deft-note-mode "Deft notes" nil " Deft-Notes" nil)
+      (setq deft-text-mode 'deft-note-mode)
+
+      ;; My notes set to ~/Copy/org
+      (setq deft-directory "~/Copy/org/")
+
+      ;; Use filename as title
+      (setq deft-use-filename-as-title t)
+
+      ;; Do not make deft automatically save file
+      (setq deft-auto-save-interval 0)
+
+      ;; Quickly kill deft buffers
+      (defun kill-all-deft-notes ()
+        (interactive)
+        (save-excursion
+          (let ((count 0))
+            (dolist (buffer (buffer-list))
+              (set-buffer buffer)
+              (when (not (eq nil deft-note-mode))
+                (setq count (1+ count))
+                (kill-buffer buffer))))))
+
+      ;; Enable/Disable defts
+      (defun deft-or-close ()
+        (interactive)
+        (if (or (eq major-mode 'deft-mode) (not (eq nil deft-note-mode)))
+            (progn (kill-all-deft-notes) (kill-buffer "*Deft*"))
+          (deft)))))
+#+END_SRC
+
 * Interactive Commands
 
 In emacs, we can use =M-x= to execute interactive commands, I
@@ -1162,6 +1205,7 @@ generate keybing via table, just use following functions:
 | C-x C-q | read-only-mode      | toggle read-only-mode                |
 | C-x C-s | save-buffer-always  | Always save buffer even not modified |
 | C-x C-f | lusty-file-explorer | Use lusty-file-explorer to find-file |
+| C-x M-1 | deft-or-close       | Use deft open my note                |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
     <<define-keys(map="evil-normal-state-map", keys=global-evil-normal)>>
@@ -1190,7 +1234,7 @@ generate keybing via table, just use following functions:
 | M-l      | backward-delete-word         | Backward delete word                 |
 | s-<RET>  | insert-empty-line            | Insert empty line after current line |
 | M-s      | helm-occur                   | Find in this file                    |
-
+| C-x M-1  | deft-or-close                | Use deft open my note                |
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
     <<define-keys(map="evil-insert-state-map", keys=global-evil-insert)>>
 #+END_SRC
