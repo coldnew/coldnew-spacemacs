@@ -557,6 +557,14 @@ unload previous theme before loading a new one.
       ))
 #+END_SRC
 
+** Make cursor in minibufer use bar shape
+
+#+begin_src emacs-lisp
+  (req-package minibuffer
+    :config
+    (add-hook 'minibuffer-setup-hook '(lambda () (setq cursor-type 'bar))))
+#+end_src
+
 * Editors
 
 Why emacs config has an editor section, doesn't means emacs is not an
