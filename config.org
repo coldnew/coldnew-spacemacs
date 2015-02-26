@@ -1335,6 +1335,26 @@ c/c++/objc-mode on .h file.
     :init (add-to-list 'auto-mode-alist '("\\.qml$" . qml-mode)))
 #+END_SRC
 
+** XML
+
+#+BEGIN_SRC emacs-lisp
+  (req-package nxml-mode
+    :mode (("\\.pom$" . nxml-mode))
+    :config
+    (progn
+      ;; Any file start with xml will be treat as nxml-mode
+      (add-to-list 'magic-mode-alist '("<\\?xml" . nxml-mode))
+
+      ;; Use nxml-mode instead of sgml, xml or html mode.
+      (mapc
+       (lambda (pair)
+         (if (or (eq (cdr pair) 'xml-mode)
+                 (eq (cdr pair) 'sgml-mode))
+             (setcdr pair 'nxml-mode)))
+       auto-mode-alist)
+      ))
+#+END_SRC
+
 ** SCSS
 
 #+BEGIN_SRC emacs-lisp
