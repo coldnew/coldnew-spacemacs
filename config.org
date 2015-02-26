@@ -1253,7 +1253,17 @@ c/c++/objc-mode on .h file.
 #+BEGIN_SRC emacs-lisp
   (req-package ruby-mode
     :mode (("Rakefile\\'" . ruby-mode)
-           ("rb\\'" . ruby-mode)))
+           ("\\.rake$" . ruby-mode)
+           ("\\.gemspec$" . ruby-mode)
+           ("\\.rb$'" . ruby-mode)
+           ("\\.ru$" . ruby-mode)
+           ("Gemfile$" . ruby-mode)
+           ("Guardfile$" . ruby-mode))
+    :config
+    (progn
+      ;; We never want to edit Rubinius bytecode
+      (add-to-list 'completion-ignored-extensions ".rbc")
+      ))
 
   (req-package rake)
 #+END_SRC
