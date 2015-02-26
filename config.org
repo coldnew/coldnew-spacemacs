@@ -616,6 +616,21 @@ I use =linum-off= to disable some mode.
                           ))))
 #+END_SRC
 
+** Keeping files in sync
+
+By default, Emacs will not update the contents of open buffers when a
+file changes on disk. This is inconvenient when switching branches in
+Git - as you’d risk editing stale buffers.
+
+This problem can be solved
+
+#+BEGIN_SRC emacs-lisp
+  (global-auto-revert-mode 1)
+  (setq global-auto-revert-non-file-buffers t)
+  (setq auto-revert-verbose nil)
+  (setq revert-without-query '(".*")) ;; disable revert query
+#+END_SRC
+
 ** Colorfy delimters
 
 [[https://github.com/Fanael/rainbow-delimiters][rainbow-delimiters]] is a "rainbow parentheses"-like mode which
