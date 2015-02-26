@@ -208,6 +208,7 @@ file, I move this file to =~/.emacs.d/spacemacs.el=.
 
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'dotspacemacs-configuration-layers 'git)
+  (add-to-list 'dotspacemacs-configuration-layers 'clojure)
 #+END_SRC
 
 ** Overwrite spacemacs function to let it not remove my packages
