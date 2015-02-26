@@ -499,6 +499,19 @@ not modified.
       (untabify (point-min) (point-max))))
 #+END_SRC
 
+*** Replace the preceding sexp with its value
+
+#+BEGIN_SRC emacs-lisp
+  (defun eval-and-replace ()
+    "Replace the preceding sexp with its value."
+    (interactive)
+    (backward-kill-sexp)
+    (condition-case nil
+        (prin1 (eval (read (current-kill 0)))
+               (current-buffer))
+      (error (message "Invalid expression")
+             (insert (current-kill 0)))))
+#+END_SRC
 
 ** Edit (Insert/Remove)
 
