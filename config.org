@@ -650,6 +650,11 @@ https://github.com/glasserc/ethan-wspace
   (req-package ethan-wspace
     :config
     (progn
+
+      ;; Turn off `mode-require-final-newline' since ethan-wspace
+      ;; supersedes `require-final-newline'.
+      (setq mode-require-final-newline nil)
+
       ;; Enable ethan-wspace globally
       (global-ethan-wspace-mode 1)
 
