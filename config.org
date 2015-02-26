@@ -468,6 +468,38 @@ not modified.
       (abort-recursive-edit)))
 #+END_SRC
 
+*** Make buffer untabify
+
+#+BEGIN_SRC emacs-lisp
+  (defun untabify-buffer ()
+    (interactive)
+    (save-excursion
+      (untabify (point-min) (point-max))))
+#+END_SRC
+
+*** Indent whole buffer
+
+#+BEGIN_SRC emacs-lisp
+  (defun indent-whole-buffer ()
+    "Indent whole buffer."
+    (interactive)
+    (save-excursion
+      (indent-region (point-min) (point-max))))
+#+END_SRC
+
+*** Remove buffers trailing whitespace and untabify
+
+#+BEGIN_SRC emacs-lisp
+  (defun cleanup-buffer ()
+    "Perform a bunch of operations on the whitespace content of a buffer."
+    (interactive)
+    (save-excursion
+      (delete-trailing-whitespace)
+      (indent-region (point-min) (point-max))
+      (untabify (point-min) (point-max))))
+#+END_SRC
+
+
 ** Edit (Insert/Remove)
 
 *** Insert U200B char
