@@ -12,7 +12,7 @@
  dotspacemacs-configuration-layer-path '()
 
  ;; list of configuration layers to load.
- dotspacemacs-configuration-layers '(git)
+ dotspacemacs-configuration-layers '()
  ;; A list of packages and/or extensions that will not be install and loaded.
  dotspacemacs-excluded-packages '()
  )

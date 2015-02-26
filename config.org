@@ -195,12 +195,33 @@ to prevent orphan packages deleted by spacemacs.
 
 After all spacemacs init done, switch back to =*scratch*= buffer.
 
+** Load basic spacemacs configuration file
+
+The original spacemacs will load =~/.spacemacs= as user configuration
+file, I move this file to =~/.emacs.d/spacemacs.el=.
+
+#+BEGIN_SRC emacs-lisp
+  (load (concat emacs-dir "spacemacs.el"))
+#+END_SRC
+
+** Setup spacemacs configuration layers
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'dotspacemacs-configuration-layers 'git)
+#+END_SRC
+
+** Overwrite spacemacs function to let it not remove my packages
+
 #+BEGIN_SRC emacs-lisp
   ;; Make spacemacs not remove my orphan packages.
   (defadvice configuration-layer/delete-orphan-packages (around null-func activate)
     "Overwrite the spacemacs's `configuration-layer/delete-orphan-packages'
     to make it not remove any orphan packages.")
+#+END_SRC
 
+** Load spacemacs
+
+#+BEGIN_SRC emacs-lisp
   ;; Make a fake entry point for spacemacs, also modify the
   ;; `user-emacs-directory' temporary to mislead spacemacs real emacs
   ;; directory.
@@ -209,9 +230,6 @@ After all spacemacs init done, switch back to =*scratch*= buffer.
          (spacemacs-init
           (concat (file-name-as-directory spacemacs-dir) "init.el"))
          (user-emacs-directory (file-name-directory spacemacs-init)))
-
-    ;; load my config instead of make spacemacs load ~/.spacemacs
-    (load (concat emacs-dir "spacemacs.el"))
 
     ;; Initial spacemacs, our emacs run on top of it
     (load spacemacs-init))
@@ -1246,7 +1264,8 @@ c/c++/objc-mode on .h file.
 
 #+BEGIN_SRC emacs-lisp
   (req-package less-css-mode
-    :init (add-to-list 'auto-mode-alist '("\\.less$" . less-css-mode)))
+    :init (add-to-list 'auto-mode-alist '("\\.less$" . less-css-mode))
+    :mode "\\.less$")
 #+END_SRC
 
 * Keybinding
