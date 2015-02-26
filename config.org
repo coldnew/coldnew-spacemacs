@@ -1367,6 +1367,36 @@ c/c++/objc-mode on .h file.
     :mode "\\.yml$")
 #+END_SRC
 
+* Version Control
+
+** Git
+
+*** Add suport for git configuration files
+
+#+BEGIN_SRC emacs-lisp
+  (req-package git-commit-mode
+    :mode (("/COMMIT_EDITMSG\\'" . git-commit-mode)
+           ("/NOTES_EDITMSG\\'" . git-commit-mode)
+           ("/MERGE_MSG\\'" . git-commit-mode)
+           ("/TAG_EDITMSG\\'" . git-commit-mode)
+           ("/PULLREQ_EDITMSG\\'" . git-commit-mode)))
+
+  (req-package git-rebase-mode
+    :mode ("/git-rebase-todo\\'" . git-rebase-mode))
+
+  (req-package gitconfig-mode
+    :mode (("/\\.?git/?config\\'" . gitconfig-mode)
+           ("/\\.gitmodules\\'" . gitconfig-mode))
+    :config
+    (add-hook 'gitconfig-mode-hook 'flyspell-mode))
+
+  (req-package gitignore-mode
+    :mode (("/\\.gitignore\\'" . gitignore-mode)
+           ("/\\.git/info/exclude\\'" . gitignore-mode)
+           ("/git/ignore\\'" . gitignore-mode)))
+#+END_SRC
+
+
 * Keybinding
 
 ** Generate keymap from org-mode table
