@@ -1338,7 +1338,7 @@ c/c++/objc-mode on .h file.
 
 #+BEGIN_SRC emacs-lisp
   (req-package scss-mode
-    :init (add-to-list 'auto-mode-alist '("\\.scss$" . scss-mode))
+    :mode "\\.scss\\'"
     :config
     (progn
       ;; dont' build scss to css after save file
@@ -1348,8 +1348,7 @@ c/c++/objc-mode on .h file.
 ** CSS
 
 #+BEGIN_SRC emacs-lisp
-  (req-package css-mode
-    :init (add-to-list 'auto-mode-alist '("\\.css$" . css-mode)))
+  (req-package css-mode :mode "\\.css\\'")
 #+END_SRC
 
 ** Less
@@ -1395,7 +1394,6 @@ c/c++/objc-mode on .h file.
            ("/\\.git/info/exclude\\'" . gitignore-mode)
            ("/git/ignore\\'" . gitignore-mode)))
 #+END_SRC
-
 
 * Keybinding
 
@@ -1480,7 +1478,8 @@ At long last we need only call the following function to send
   (req-package-finish)
 #+END_SRC
 
-Also setup =dotemacs-init-done= variable, this will help me to use =C-c C-c= to evalute keybinding config without restart emacs.
+Also setup =dotemacs-init-done= variable, this will help me to use
+=C-c C-c= to evalute keybinding config without restart emacs.
 #+BEGIN_SRC emacs-lisp
   (setq dotemacs-init-done t)
 #+END_SRC
