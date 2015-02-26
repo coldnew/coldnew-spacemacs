@@ -1435,6 +1435,7 @@ generate keybing via table, just use following functions:
 | C-x M-1  | deft-or-close                | Use deft open my note                |
 | C-x M-2  | multi-eshell                 | Show eshell window                   |
 | M-s      | helm-occur                   | Search in current buffer             |
+| C-x C-o  | ff-find-other-file           | Find header/source in C/C++ file     |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
   <<define-keys(map="evil-insert-state-map", keys=global-evil-insert)>>
