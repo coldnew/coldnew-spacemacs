@@ -206,8 +206,21 @@ file, I move this file to =~/.emacs.d/spacemacs.el=.
 
 ** Setup spacemacs configuration layers
 
+spacemacs has many configuration layers, which can take as a
+predefined keybinding/syntax highlight mode.
+
+*** git
+
 #+BEGIN_SRC emacs-lisp
-  (add-to-list 'dotspacemacs-configuration-layers 'git)
+  (add-to-list 'dotspacemacs-configuration-layers
+               '(git :variables
+                     git-gutter-use-fringe t
+                     ))
+#+END_SRC
+
+*** clojure
+
+#+BEGIN_SRC emacs-lisp
   (add-to-list 'dotspacemacs-configuration-layers 'clojure)
 #+END_SRC
 
