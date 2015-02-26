@@ -286,6 +286,14 @@ character code.
       (defalias 'ascii 'ascii-toggle)))
 #+END_SRC
 
+** ascii-art-to-unicode
+
+Convert simple ASCII art drawings (and org-tables) to beautiful Unicode.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package ascii-art-to-unicode)
+#+END_SRC
+
 ** iedit
 
 [[https://github.com/victorhge/iedit][iedit]] let you edit multiple regions in the same way simultaneously.
