@@ -211,6 +211,8 @@ predefined keybinding/syntax highlight mode.
 
 *** git
 
+You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/git][here]]
+
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'dotspacemacs-configuration-layers
                '(git :variables
@@ -219,6 +221,8 @@ predefined keybinding/syntax highlight mode.
 #+END_SRC
 
 *** clojure
+
+You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lang/clojure][here]]
 
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'dotspacemacs-configuration-layers 'clojure)
