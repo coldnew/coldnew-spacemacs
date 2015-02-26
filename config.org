@@ -1268,6 +1268,13 @@ c/c++/objc-mode on .h file.
     :mode "\\.less$")
 #+END_SRC
 
+** YAML
+
+#+BEGIN_SRC emacs-lisp
+  (req-package yaml-mode
+    :mode "\\.yml$")
+#+END_SRC
+
 * Keybinding
 
 ** Generate keymap from org-mode table
