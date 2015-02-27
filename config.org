@@ -1477,6 +1477,14 @@ c/c++/objc-mode on .h file.
            ("\\.dtsi$" . dts-mode)))
 #+END_SRC
 
+** Swift
+
+#+BEGIN_SRC emacs-lisp
+  (req-package swift-mode
+    :require flycheck
+    :init (add-to-list 'flycheck-checkers 'swift))
+#+END_SRC
+
 * Version Control
 
 ** Git
