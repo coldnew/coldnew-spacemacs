@@ -1528,6 +1528,29 @@ c/c++/objc-mode on .h file.
     :init (add-to-list 'flycheck-checkers 'swift))
 #+END_SRC
 
+* Web Development
+
+** Use zencoding-mode to
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  (req-package emmet-mode
+    :config
+    (progn
+      ;; Following mode support emmet-mode
+      (add-hook 'html-mode-hook 'emmet-mode)
+      (add-hook 'nxml-mode-hook 'emmet-mode)
+      (add-hook 'css-mode-hook  'emmet-mode)
+
+      ;; Move cursor between quotes after expand
+      (add-hook 'emmt-mode-hook
+                '(lambda()
+                   (setq emmet-move-cursor-between-quotes t)))
+
+      (define-key emmt-mode-keymap (kbd "TAB") 'emmt-expand-yas)
+      (define-key emmt-mode-keymap (kbd "<tab>") 'emmt-expand-yas)
+      ))
+#+END_SRC
+
 * Version Control
 
 ** Git
