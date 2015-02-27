@@ -1530,7 +1530,10 @@ c/c++/objc-mode on .h file.
 
 * Web Development
 
-** Use zencoding-mode to
+** Use emmet-mode to add Zen Coding support
+
+[[https://github.com/smihica/emmet-mode][emmet-mode]] is a fork of [[https://github.com/rooney/zencoding][zencoding-mode]] which add minor mode providing
+support for Zen Coding by producing HTML from CSS-like selectors.
 
 #+BEGIN_SRC emacs-lisp :tangle no
   (req-package emmet-mode
@@ -1546,9 +1549,9 @@ c/c++/objc-mode on .h file.
                 '(lambda()
                    (setq emmet-move-cursor-between-quotes t)))
 
+      ;; Make tab can also expand emmt instead of use yasnippet directly
       (define-key emmt-mode-keymap (kbd "TAB") 'emmt-expand-yas)
-      (define-key emmt-mode-keymap (kbd "<tab>") 'emmt-expand-yas)
-      ))
+      (define-key emmt-mode-keymap (kbd "<tab>") 'emmt-expand-yas)))
 #+END_SRC
 
 * Version Control
