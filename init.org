@@ -17,8 +17,6 @@ in [[http://orgmode.org/][org-mode]] ,but use English to write this config inste
 
 Feal free to use it :).
 
-*Hint*: before fork and hack my emacs config, take a look at [[file:init.el]]
-
 ** Install or testing this config
 
 - First use git to download whole repo
@@ -33,6 +31,10 @@ Feal free to use it :).
 - Befor trying starting emacs, you need to bootstrap with [[https://github.com/cask/cask][Cask]]
 
   : cask install
+
+- Then use =make= command to generate init.el file
+
+  : make init.el
 
 - If you don not put this repo on =~/.emacs.d=, you need to use following
   command to start emacs
@@ -62,6 +64,30 @@ are =optional= but can make my spacemacs work more nicely.
     USE="emacs" emerge net-mail/mu
     emerge  app-emacs/doxymacs
   #+END_SRC
+
+* The early setup
+
+There's some setups I need to put to the beging of emacs config. These
+setup is derived from my original's init.el file.
+
+** load prefer newer
+
+#+BEGIN_SRC emacs-lisp
+  ;; since emacs 24.4, new option `load-prefer-newer' has been
+  ;; introduce, which make me never accidentally using outdated compiled files.
+  (setq load-prefer-newer t)
+#+END_SRC
+
+** Change the user-emacs-directory
+
+#+BEGIN_SRC emacs-lisp
+  ;; We set `user-emacs-directory' here so we can use command-line
+  ;; switch different emacs configuration like following:
+  ;;
+  ;;    emacs -q -l ~/coldnew-spacemacs/init.el
+  (setq user-emacs-directory
+        (file-name-directory (or load-file-name (buffer-file-name))))
+#+END_SRC
 
 * Package Management with Cask and Pallet
 
@@ -171,8 +197,8 @@ or elpa or spacemacs, you can skip following code.
   (let* ((lisp-dir '("local-lisp/" "theme/")))
     (dolist (lisp-path lisp-dir)
       (when (not (file-exists-p lisp-path))
-        (make-directory (concat emacs-dir lisp-path) t))
-      (let* ((load-dir (concat emacs-dir lisp-path))
+        (make-directory (concat user-emacs-directory lisp-path) t))
+      (let* ((load-dir (concat user-emacs-directory lisp-path))
              (default-directory load-dir))
         (setq load-path
               (append
@@ -190,7 +216,7 @@ keymap on Emacs.
 I make my emacs on top of spacemacs since I also use vim keymap.
 
 In my config file, the original =~/.spacemacs= file has move to
-=spacemacs.el= under emacs-dir folder, I also advice spacemacs funtion
+=spacemacs.el= under user-emacs-directory folder, I also advice spacemacs funtion
 to prevent orphan packages deleted by spacemacs.
 
 After all spacemacs init done, switch back to =*scratch*= buffer.
@@ -201,7 +227,7 @@ The original spacemacs will load =~/.spacemacs= as user configuration
 file, I move this file to =~/.emacs.d/spacemacs.el=.
 
 #+BEGIN_SRC emacs-lisp
-  (load (concat emacs-dir "spacemacs.el"))
+  (load (concat user-emacs-directory "spacemacs.el"))
 #+END_SRC
 
 ** Setup spacemacs configuration layers
@@ -292,7 +318,7 @@ You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lan
   ;; `user-emacs-directory' temporary to mislead spacemacs real emacs
   ;; directory.
   (let* ((spacemacs-dir
-          (directory-file-name (concat emacs-dir "spacemacs")))
+          (directory-file-name (concat user-emacs-directory "spacemacs")))
          (spacemacs-init
           (concat (file-name-as-directory spacemacs-dir) "init.el"))
          (user-emacs-directory (file-name-directory spacemacs-init)))
@@ -526,6 +552,28 @@ representing colors with the color they represent as background.
         (if (or (eq major-mode 'deft-mode) (not (eq nil deft-note-mode)))
             (progn (kill-all-deft-notes) (kill-buffer "*Deft*"))
           (deft)))))
+#+END_SRC
+
+** emacs-async
+
+#+BEGIN_SRC emacs-lisp
+  (req-package emacs-async
+    :config
+    (progn
+      ;; If I'm edit my init.org, async generate init.el when save.
+      (defun tangle-init ()
+        "If the current buffer is 'init.org' the code-blocks are tangled."
+        (when (equal (buffer-file-name)
+                     (expand-file-name (concat user-emacs-directory "init.org")))
+          (async-start
+           `(lambda ()
+              ,(async-inject-variables "user-emacs-directory")
+              (require 'ob-tangle)
+              (setq org-confirm-babel-evaluate nil)
+              (org-babel-load-file (concat user-emacs-directory "init.org")))
+           'ignore)))
+      (add-hook 'after-save-hook 'tangle-init)
+      ))
 #+END_SRC
 
 * Interactive Commands
@@ -1221,7 +1269,10 @@ persists across sessions.
       ;; fontify source code
       (setq org-src-fontify-natively t)
       ;; Use current window when switch to source block
-      (setq org-src-window-setup 'current-window)))
+      (setq org-src-window-setup 'current-window)
+      ;; Disable prompting to evaluate babel blocks
+      (setq org-confirm-babel-evaluate nil)
+      ))
 #+END_SRC
 
 *** Extend org-mode's easy templates
@@ -1256,7 +1307,7 @@ persists across sessions.
           (ruby . t)
           (sh . t)
           (plantuml . t)
-          (clojure .t)
+          (clojure . t)
           ))))
 #+END_SRC
 
@@ -1444,15 +1495,6 @@ c/c++/objc-mode on .h file.
       ))
 
   (req-package rake)
-#+END_SRC
-
-** Matlab
-
-=Matlab-mode= works pretty good out of the box, but we can do without the splash screen.
-
-#+BEGIN_SRC emacs-lisp
-  (req-package 'matlab
-    :init (add-to-list 'matlab-shell-command-switches "-nosplash"))
 #+END_SRC
 
 ** QML

@@ -1,1 +1,1 @@
-config.org
+init.org
