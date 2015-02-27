@@ -719,11 +719,11 @@ For more info, please see: [[https://lists.gnu.org/archive/html/emacs-orgmode/20
 *** Set mark or expand region
 
 #+BEGIN_SRC emacs-lisp
-  (defun set-mark/expand-region ()
-    "toggle between cua-set-mark or cua-rectangle-mark"
+  (defun set-mark-command/expand-region ()
+    "toggle between set-mark-command or cua-rectangle-mark"
     (interactive)
     (if (not mark-active)
-        (call-interactively 'cua-set-mark)
+       (call-interactively 'set-mark-command)
       (call-interactively 'er/expand-region)))
 #+END_SRC
 
@@ -1727,7 +1727,7 @@ generate keybing via table, just use following functions:
 | M-s      | helm-occur                   | Search in current buffer             |
 | s-<RET>  | insert-empty-line            | Insert empty line after current line |
 | s-<SPC>  | insert-U200B-char            | Insert <U200B> character             |
-| C-v      | set-mark/expand-region       |                                      |
+| C-v      | set-mark-command/expand-region       |                                      |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
   <<define-keys(map="evil-insert-state-map", keys=global-evil-insert)>>
