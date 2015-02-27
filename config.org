@@ -313,6 +313,15 @@ You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lan
 Most setup I want to use is done by [[https://github.com/syl20bnr/spacemacs][spacemacs]], but I still keep some
 basic setup here, some are not set or just keep for backward compability.
 
+** Startup emacs server
+
+#+BEGIN_SRC emacs-lisp
+  ;; Only start server mode if I'm not root
+  (unless (string-equal "root" (getenv "USER"))
+    (require 'server)
+    (unless (server-running-p) (server-start)))
+#+END_SRC
+
 ** Under Mac OSX use Command key as ALT
 
 Under Mac OSX, I always bind =Caps lock= as Control key, and make the
@@ -323,6 +332,22 @@ The =Option= key will be setup as =Super=.
 #+BEGIN_SRC emacs-lisp
    (setq mac-option-modifier 'super)
    (setq mac-command-modifier 'meta)
+#+END_SRC
+
+** Don't ask me when close emacs with process is running
+
+#+BEGIN_SRC emacs-lisp
+  (defadvice save-buffers-kill-emacs (around no-query-kill-emacs activate)
+    "Prevent annoying \"Active processes exist\" query when you quit Emacs."
+    (flet ((process-list ())) ad-do-it))
+#+END_SRC
+
+** Don't ask me when kill process buffer
+
+#+BEGIN_SRC emacs-lisp
+  (setq kill-buffer-query-functions
+        (remq 'process-kill-buffer-query-function
+              kill-buffer-query-functions))
 #+END_SRC
 
 * Languages and Encodings
