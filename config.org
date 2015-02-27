@@ -329,8 +329,8 @@ Under Mac OSX, I always bind =Caps lock= as Control key, and make the
 The =Option= key will be setup as =Super=.
 
 #+BEGIN_SRC emacs-lisp
-   (setq mac-option-modifier 'super)
-   (setq mac-command-modifier 'meta)
+  (setq mac-option-modifier 'super)
+  (setq mac-command-modifier 'meta)
 #+END_SRC
 
 ** Don't ask me when close emacs with process is running
@@ -1227,8 +1227,7 @@ persists across sessions.
                    (setq org-src-fontify-natively t)
                    ;; Use current window when switch to source block
                    (setq org-src-window-setup 'current-window)
-                   ))
-      ))
+                   ))))
 #+END_SRC
 
 *** Extend org-mode's easy templates
