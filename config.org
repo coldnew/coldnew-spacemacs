@@ -1089,7 +1089,7 @@ which add a =j= command to let you jump to folder you has been access.
 #+BEGIN_SRC emacs-lisp
   (req-package android-mode
     :disabled t
-    :config (setq android-mode-sdk-dir (getenv "ANDROID_SDK")))
+    :config (setq android-mode-sdk-dir (getenv "ANDROID_HOME")))
 #+END_SRC
 
 ** Bash
@@ -1477,6 +1477,14 @@ c/c++/objc-mode on .h file.
 #+BEGIN_SRC emacs-lisp
   (req-package yaml-mode
     :mode "\\.yml$")
+#+END_SRC
+
+** Device Tree
+
+#+BEGIN_SRC emacs-lisp
+  (req-package dts-mode
+    :mode (("\\.dts$" . dts-mode)
+           ("\\.dtsi$" . dts-mode)))
 #+END_SRC
 
 * Version Control
