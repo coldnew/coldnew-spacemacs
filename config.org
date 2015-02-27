@@ -1190,13 +1190,10 @@ persists across sessions.
 
 #+BEGIN_SRC emacs-lisp
   (req-package highlight-cl
-    :config
-    (progn
-
-      (dolist (x '(emacs-lisp lisp-interaction))
-        (add-hook
-         (intern (concat (symbol-name x) "-mode-hook"))
-         'highlight-cl-add-font-lock-keywords))))
+    :init
+    (add-hook 'emacs-lisp-mode-hook
+              '(lambda ()
+                 (highlight-cl-add-font-lock-keywords))))
 #+END_SRC
 
 *** Remove *.elc when save
