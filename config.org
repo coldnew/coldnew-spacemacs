@@ -843,13 +843,23 @@ retrieve and display completion candidates.
 
 #+BEGIN_SRC emacs-lisp
   (req-package company
-    :require (company-c-headers company-quickhelp)
-    :config
-    (progn
-      ;; company-c-headers
-      (add-to-list 'company-backends 'company-c-headers)
-      ;; Enable quickhelp doc window
-      (company-quickhelp-mode 1)))
+    :init (global-company-mode 1))
+#+END_SRC
+
+*** Completion C/C++ headers
+
+#+BEGIN_SRC emacs-lisp
+  (req-package company-c-headers
+    :require company
+    :init (add-to-list 'company-backends 'company-c-headers))
+#+END_SRC
+
+*** Add quickhelp in company-mode
+
+#+BEGIN_SRC emacs-lisp
+  (req-package company-quickhelp
+    :require company
+    :init(company-quickhelp-mode 1))
 #+END_SRC
 
 *** Key Bindings
