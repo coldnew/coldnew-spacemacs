@@ -78,3 +78,4 @@ config.el*
 .cask/
 .sx/
 request/
+.litable-lists.el
