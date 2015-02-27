@@ -211,7 +211,7 @@ predefined keybinding/syntax highlight mode.
 
 *** git
 
-You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/git][here]]
+You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/git][here]].
 
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'dotspacemacs-configuration-layers
@@ -220,9 +220,17 @@ You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/git
                      ))
 #+END_SRC
 
+*** company-mode
+
+You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/company-mode][here]].
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'dotspacemacs-configuration-layers 'company-mode)
+#+END_SRC
+
 *** clojure
 
-You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lang/clojure][here]]
+You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lang/clojure][here]].
 
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'dotspacemacs-configuration-layers 'clojure)
@@ -841,15 +849,23 @@ retrieve and display completion candidates.
       ;; company-c-headers
       (add-to-list 'company-backends 'company-c-headers)
       ;; Enable quickhelp doc window
-      (company-quickhelp-mode 1)
+      (company-quickhelp-mode 1)))
+#+END_SRC
 
-      ;; Keybinding
-      (bind-key "C-g" 'company-abort company-active-map)
-      (bind-key "C-n" 'company-select-next company-active-map)
-      (bind-key "C-p" 'company-select-nextprevious company-active-map)
-      (bind-key "TAB" 'company-complete-selection company-active-map)
-      (bind-key "<tab>" 'company-complete-selection company-active-map)
-      ))
+*** Key Bindings
+
+#+TBLNAME: company-active-keys
+| Key   | Command                    | description                          |
+|-------+----------------------------+--------------------------------------|
+| C-g   | company-abort              | abort company completion             |
+| C-n   | company-select-next        | select next completion               |
+| C-p   | company-select-previous    | select previous completion           |
+| TAB   | company-complete-selection | Use TAB to select current completion |
+| <tab> | company-complete-selection | Use TAB to select current completion |
+
+#+BEGIN_SRC emacs-lisp :noweb yes
+  (add-hook 'company-mode-hook '(lambda()
+            <<define-keys(map="company-active-map", keys=company-active-keys)>> ))
 #+END_SRC
 
 ** Helm
