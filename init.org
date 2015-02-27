@@ -1411,16 +1411,6 @@ persists across sessions.
 
 
 #+BEGIN_SRC emacs-lisp
-  (req-package c-eldoc
-    :config
-    (progn
-      (add-hook 'c-mode-common-hook
-                '(lambda ()
-                   (setq c-eldoc-includes "`pkg-config gtk+-3.0 --cflags --libs` -I./ -I../")
-                   (c-turn-on-eldoc-mode)))))
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
   (req-package cwarn
     :init (add-hook 'c-mode-common-hook '(lambda () (cwarn-mode 1))))
 #+END_SRC
@@ -1431,6 +1421,18 @@ persists across sessions.
     (progn
       (add-hook 'c-mode-common-hook
                 (lambda () (when (derived-mode-p 'c-mode 'c++-mode) (cppcm-reload-all))))))
+#+END_SRC
+
+*** Add eldoc support for C/C++
+
+#+BEGIN_SRC emacs-lisp
+  (req-package c-eldoc
+    :config
+    (progn
+      (add-hook 'c-mode-common-hook
+                '(lambda ()
+                   (setq c-eldoc-includes "`pkg-config gtk+-3.0 --cflags --libs` -I./ -I../")
+                   (c-turn-on-eldoc-mode)))))
 #+END_SRC
 
 *** Use dummy-h-mode to help detect header's major mode
