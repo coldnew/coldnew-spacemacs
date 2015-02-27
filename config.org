@@ -244,14 +244,6 @@ You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lan
   (add-to-list 'dotspacemacs-configuration-layers 'clojure)
 #+END_SRC
 
-*** go
-
-You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lang/go][here]]
-
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'dotspacemacs-configuration-layers 'go)
-#+END_SRC
-
 *** html
 
 You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lang/html][here]]
@@ -283,7 +275,6 @@ You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lan
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'dotspacemacs-configuration-layers 'php)
 #+END_SRC
-
 
 ** Overwrite spacemacs function to let it not remove my packages
 
