@@ -557,23 +557,23 @@ representing colors with the color they represent as background.
 ** emacs-async
 
 #+BEGIN_SRC emacs-lisp
-  (req-package emacs-async
-    :config
-    (progn
-      ;; If I'm edit my init.org, async generate init.el when save.
-      (defun tangle-init ()
-        "If the current buffer is 'init.org' the code-blocks are tangled."
-        (when (equal (buffer-file-name)
-                     (expand-file-name (concat user-emacs-directory "init.org")))
-          (async-start
-           `(lambda ()
-              ,(async-inject-variables "user-emacs-directory")
-              (require 'ob-tangle)
-              (setq org-confirm-babel-evaluate nil)
-              (org-babel-load-file (concat user-emacs-directory "init.org")))
-           'ignore)))
-      (add-hook 'after-save-hook 'tangle-init)
-      ))
+  (req-package async
+        :config
+        (progn
+          ;; If I'm edit my init.org, async generate init.el when save.
+          (defun tangle-init ()
+            "If the current buffer is 'init.org' the code-blocks are tangled."
+                    (when (equal (buffer-file-name)
+                         (expand-file-name (concat user-emacs-directory "init.org")))
+              (async-start
+               `(lambda ()
+                  ,(async-inject-variables "user-emacs-directory")
+                  (require 'ob-tangle)
+                  (setq org-confirm-babel-evaluate nil)
+                  (org-babel-load-file (concat user-emacs-directory "init.org")))
+               'ignore)))
+          (add-hook 'after-save-hook 'tangle-init)
+          ))
 #+END_SRC
 
 * Interactive Commands
@@ -767,7 +767,7 @@ unload previous theme before loading a new one.
       ;; Make cursor in minibufer use bar shape
       (add-hook 'minibuffer-setup-hook '(lambda () (setq cursor-type 'bar)))
 
-      (define-key minibuffer-local-map (kbd "M-l") 'backward-kill-word)
+      (define-key minibuffer-local-map (kbd "C-w") 'backward-kill-word)
       (define-key minibuffer-local-map (kbd "M-p") 'previous-history-element)
       (define-key minibuffer-local-map (kbd "M-n") 'next-history-element)
       (define-key minibuffer-local-map (kbd "C-g") 'minibuffer-keyboard-quit)
@@ -1263,16 +1263,17 @@ persists across sessions.
 #+BEGIN_SRC emacs-lisp
   (req-package org
     :require (org-crypt org-mac-link org-magit)
-    :mode ("\\.org\\'" . org-mode)
-    :config
-    (progn
-      ;; fontify source code
-      (setq org-src-fontify-natively t)
-      ;; Use current window when switch to source block
-      (setq org-src-window-setup 'current-window)
-      ;; Disable prompting to evaluate babel blocks
-      (setq org-confirm-babel-evaluate nil)
-      ))
+    :mode (("\\.org\\'" . org-mode)
+           ("\\.org_archive\\'" . org-mode))
+  :config
+  (progn
+    ;; fontify source code
+    (setq org-src-fontify-natively t)
+    ;; Use current window when switch to source block
+    (setq org-src-window-setup 'current-window)
+    ;; Disable prompting to evaluate babel blocks
+    (setq org-confirm-babel-evaluate nil)
+    ))
 #+END_SRC
 
 *** Extend org-mode's easy templates
@@ -1309,6 +1310,22 @@ persists across sessions.
           (plantuml . t)
           (clojure . t)
           ))))
+#+END_SRC
+
+*** Key Bindings
+
+#+TBLNAME: org-mode-keys
+| Key   | Command         | description |
+|-------+-----------------+-------------|
+| C-c b | org-metaleft    |             |
+| C-c f | org-metaright   |             |
+| C-c p | org-metaup      |             |
+| C-c n | org-metadown    |             |
+| C-c i | org-insert-link |             |
+
+#+BEGIN_SRC emacs-lisp :noweb yes
+  (add-hook 'org-mode-hook '(lambda()
+            <<define-keys(map="org-mode-map", keys=org-mode-keys)>> ))
 #+END_SRC
 
 ** SSH Config
@@ -1689,7 +1706,7 @@ generate keybing via table, just use following functions:
 | s-<SPC>  | insert-U200B-char            | Insert <U200B> character             |
 | C-x C-f  | lusty-file-explorer          | Use lusty-file-explorer to find-file |
 | C-x C-n  | company-complete             | Complete with company-mode           |
-| M-l      | backward-delete-word         | Backward delete word                 |
+| C-w      | backward-kill-word           | Backward delete word                 |
 | s-<RET>  | insert-empty-line            | Insert empty line after current line |
 | M-s      | helm-occur                   | Find in this file                    |
 | C-x M-1  | deft-or-close                | Use deft open my note                |
