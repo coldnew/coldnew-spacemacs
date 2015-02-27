@@ -1452,6 +1452,50 @@ c/c++/objc-mode on .h file.
                   (setq dummy-h-mode-search-limit 60000)))))
 #+END_SRC
 
+*** C language coding style
+
+**** Use Linux coding style by default
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'c-mode-hook '(lambda () (c-set-style "linux")))
+#+END_SRC
+
+*** C++ language coding style
+
+**** Use my C++ coding style
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'c++-mode-hook
+            '(lambda ()
+
+               ;; Use stroustrup style
+               (c-set-style "stroustrup")
+
+               ;; Setting indentation lvel
+               (setq c-basic-offset 4)
+
+               ;; Make TAB equivilent to 4 spaces
+               (setq tab-width 4)
+
+               ;; Use spaces to indent instead of tabs.
+               (setq indent-tabs-mode nil)
+
+               ;; Indent the continuation by 2
+               (setq c-continued-statement-offset 2)
+
+               ;; Brackets should be at same indentation level as the statements they open
+               ;; for example:
+               ;;                 if (0)        becomes        if (0)
+               ;;                     {                        {
+               ;;                        ;                         ;
+               ;;                     }                        }
+               (c-set-offset 'substatement-open '0)
+
+               ;; make open-braces after a case
+               (c-set-offset 'case-label '+)
+               ))
+#+END_SRC
+
 ** Graphviz
 
 #+BEGIN_SRC emacs-lisp
@@ -1700,34 +1744,34 @@ generate keybing via table, just use following functions:
 ** Insert State
 
 #+TBLNAME: global-evil-insert
-| Key      | Command                      | description                          |
-|----------+------------------------------+--------------------------------------|
-| <delete> | hungry-delete-backward       | backward delete with hungru-mode     |
-| C-;      | iedit-mode                   | Quicklly modify all same words       |
-| C-d      | hungry-delete-forward        | forward delete with hungry-mode      |
-| C-l      | hungry-delete-backward       | backward delete with hungru-mode     |
-| C-n      | evil-next-line               | next-line                            |
-| C-o      | evil-execute-in-normal-state | Temporary switch to Normal sate      |
-| C-p      | evil-previous-line           | previous-line                        |
-| C-w      | backward-kill-word           | Backward delete word                 |
-| C-x C-f  | lusty-file-explorer          | Use lusty-file-explorer to find-file |
-| C-x C-n  | company-complete             | Complete with company-mode           |
-| C-x C-o  | ff-find-other-file           | Find header/source in C/C++ file     |
-| C-x C-q  | read-only-mode               | toggle read-only-mode                |
-| C-x C-s  | save-buffer-always           | Always save buffer even not modified |
-| C-x M-1  | deft-or-close                | Use deft open my note                |
-| C-x M-2  | multi-eshell                 | Show eshell window                   |
-| C-x vl   | magit-log                    |                                      |
-| C-x vp   | magit-push                   |                                      |
-| C-x vs   | magit-status                 |                                      |
-| M-<SPC>  | insert-U200B-char            | Insert <U200B> character             |
-| M-[      | winner-undo                  | switch back to earlier window layout |
-| M-]      | winner-redo                  | restore resent window layout         |
-| M-s      | helm-occur                   | Find in this file                    |
-| M-s      | helm-occur                   | Search in current buffer             |
-| s-<RET>  | insert-empty-line            | Insert empty line after current line |
-| s-<SPC>  | insert-U200B-char            | Insert <U200B> character             |
-| C-v      | set-mark-command/expand-region       |                                      |
+| Key      | Command                        | description                          |
+|----------+--------------------------------+--------------------------------------|
+| <delete> | hungry-delete-backward         | backward delete with hungru-mode     |
+| C-;      | iedit-mode                     | Quicklly modify all same words       |
+| C-d      | hungry-delete-forward          | forward delete with hungry-mode      |
+| C-l      | hungry-delete-backward         | backward delete with hungru-mode     |
+| C-n      | evil-next-line                 | next-line                            |
+| C-o      | evil-execute-in-normal-state   | Temporary switch to Normal sate      |
+| C-p      | evil-previous-line             | previous-line                        |
+| C-w      | backward-kill-word             | Backward delete word                 |
+| C-x C-f  | lusty-file-explorer            | Use lusty-file-explorer to find-file |
+| C-x C-n  | company-complete               | Complete with company-mode           |
+| C-x C-o  | ff-find-other-file             | Find header/source in C/C++ file     |
+| C-x C-q  | read-only-mode                 | toggle read-only-mode                |
+| C-x C-s  | save-buffer-always             | Always save buffer even not modified |
+| C-x M-1  | deft-or-close                  | Use deft open my note                |
+| C-x M-2  | multi-eshell                   | Show eshell window                   |
+| C-x vl   | magit-log                      |                                      |
+| C-x vp   | magit-push                     |                                      |
+| C-x vs   | magit-status                   |                                      |
+| M-<SPC>  | insert-U200B-char              | Insert <U200B> character             |
+| M-[      | winner-undo                    | switch back to earlier window layout |
+| M-]      | winner-redo                    | restore resent window layout         |
+| M-s      | helm-occur                     | Find in this file                    |
+| M-s      | helm-occur                     | Search in current buffer             |
+| s-<RET>  | insert-empty-line              | Insert empty line after current line |
+| s-<SPC>  | insert-U200B-char              | Insert <U200B> character             |
+| C-v      | set-mark-command/expand-region |                                      |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
   <<define-keys(map="evil-insert-state-map", keys=global-evil-insert)>>
