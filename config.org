@@ -1221,13 +1221,10 @@ persists across sessions.
     :mode ("\\.org\\'" . org-mode)
     :config
     (progn
-      (add-hook 'org-mode-hook
-                '(lambda ()
-                   ;; fontify source code
-                   (setq org-src-fontify-natively t)
-                   ;; Use current window when switch to source block
-                   (setq org-src-window-setup 'current-window)
-                   ))))
+      ;; fontify source code
+      (setq org-src-fontify-natively t)
+      ;; Use current window when switch to source block
+      (setq org-src-window-setup 'current-window)))
 #+END_SRC
 
 *** Extend org-mode's easy templates
