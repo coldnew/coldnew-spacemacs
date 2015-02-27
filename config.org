@@ -859,7 +859,7 @@ retrieve and display completion candidates.
 #+BEGIN_SRC emacs-lisp
   (req-package company-quickhelp
     :require company
-    :init(company-quickhelp-mode 1))
+    :init (company-quickhelp-mode 1))
 #+END_SRC
 
 *** Key Bindings
