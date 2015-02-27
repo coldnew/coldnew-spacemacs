@@ -307,6 +307,24 @@ You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lan
   (switch-to-buffer "*scratch*")
 #+END_SRC
 
+
+* Basic setup
+
+Most setup I want to use is done by [[https://github.com/syl20bnr/spacemacs][spacemacs]], but I still keep some
+basic setup here, some are not set or just keep for backward compability.
+
+** Under Mac OSX use Command key as ALT
+
+Under Mac OSX, I always bind =Caps lock= as Control key, and make the
+=Command= key as =ALT= key like I done in Linux.
+
+The =Option= key will be setup as =Super=.
+
+#+BEGIN_SRC emacs-lisp
+   (setq mac-option-modifier 'super)
+   (setq mac-command-modifier 'meta)
+#+END_SRC
+
 * Languages and Encodings
 
 Since current Emacs default run on UTF-8, it's no need to setup the
