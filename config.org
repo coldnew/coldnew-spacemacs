@@ -1446,6 +1446,15 @@ c/c++/objc-mode on .h file.
   (req-package rake)
 #+END_SRC
 
+** Matlab
+
+=Matlab-mode= works pretty good out of the box, but we can do without the splash screen.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package 'matlab
+    :init (add-to-list 'matlab-shell-command-switches "-nosplash"))
+#+END_SRC
+
 ** QML
 
 #+BEGIN_SRC emacs-lisp
