@@ -1715,8 +1715,8 @@ generate keybing via table, just use following functions:
 | C-x C-o  | ff-find-other-file           | Find header/source in C/C++ file     |
 | C-x vl   | magit-log                    |                                      |
 | C-x vs   | magit-status                 |                                      |
-| C-x vp   | magit-push                   |                                      | 
-  
+| C-x vp   | magit-push                   |                                      |
+
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
   <<define-keys(map="evil-insert-state-map", keys=global-evil-insert)>>
 #+END_SRC
