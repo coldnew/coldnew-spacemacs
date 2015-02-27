@@ -307,7 +307,6 @@ You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lan
   (switch-to-buffer "*scratch*")
 #+END_SRC
 
-
 * Basic setup
 
 Most setup I want to use is done by [[https://github.com/syl20bnr/spacemacs][spacemacs]], but I still keep some
@@ -845,7 +844,6 @@ https://github.com/glasserc/ethan-wspace
   (req-package ethan-wspace
     :config
     (progn
-
       ;; Turn off `mode-require-final-newline' since ethan-wspace
       ;; supersedes `require-final-newline'.
       (setq mode-require-final-newline nil)
@@ -857,7 +855,9 @@ https://github.com/glasserc/ethan-wspace
       (add-hook 'makefile-mode-hook
                 '(lambda()
                    (setq ethan-wspace-errors (remove 'tabs ethan-wspace-errors))))
-      ))
+
+      ;; Ignore no trailing newline error
+      (setq-default ethan-wspace-errors (remove 'no-nl-eof ethan-wspace-errors))))
 #+END_SRC
 
 ** Vim Emulation
