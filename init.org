@@ -1094,8 +1094,10 @@ called =major-mode-expand= which will let you use easy-template like
 function in any major-mode.
 
 #+BEGIN_SRC emacs-lisp
-  (defadvice yas-expand (around major-mode-expand activate)
-    "Try to complete a structure template before point like org-mode does.
+  (eval-after-load 'yasnippet
+    '(progn
+       (defadvice yas-expand (around major-mode-expand activate)
+         "Try to complete a structure template before point like org-mode does.
     This looks for strings like \"<e\" on an otherwise empty line and
     expands them.
     Before use this function, you must setup `major-mode-name'-expand-alist variable.
@@ -1104,19 +1106,20 @@ function in any major-mode.
     in yasnippet, you muse setup the emacs-lisp-mode-expand-alist variable.
 
      (setq emacs-lisp-expand-alist '((\"r\" . \"require\")))"
-    (let* ((l (buffer-substring (point-at-bol) (point)))
-           (expand-symbol (intern (concat (symbol-name major-mode) "-expand-alist")))
-           (expand-alist (if (boundp expand-symbol) (symbol-value expand-symbol) nil))
-           a)
-      (when (and (looking-at "[ \t]*$")
-                 (string-match "^[ \t]*<\\([a-zA-Z]+\\)$" l)
-                 (setq a (assoc (match-string 1 l) expand-alist)))
-        (backward-delete-char (1+ (length (car-safe a))))
-        (if (symbolp (cdr-safe a))
-            (funcall (cdr-safe a))
-          (insert (cdr-safe a)))
-        t)
-      ad-do-it))
+         (let* ((l (buffer-substring (point-at-bol) (point)))
+                (expand-symbol (intern (concat (symbol-name major-mode) "-expand-alist")))
+                (expand-alist (if (boundp expand-symbol) (symbol-value expand-symbol) nil))
+                a)
+           (when (and (looking-at "[ \t]*$")
+                      (string-match "^[ \t]*<\\([a-zA-Z]+\\)$" l)
+                      (setq a (assoc (match-string 1 l) expand-alist)))
+             (backward-delete-char (1+ (length (car-safe a))))
+             (if (symbolp (cdr-safe a))
+                 (funcall (cdr-safe a))
+               (insert (cdr-safe a)))
+             t)
+           ad-do-it))
+       ))
 #+END_SRC
 
 Take emacs-lisp-mode as example, if I want to use =<r= and press =TAB=
@@ -1829,6 +1832,18 @@ support for Zen Coding by producing HTML from CSS-like selectors.
     :mode (("/\\.gitignore\\'" . gitignore-mode)
            ("/\\.git/info/exclude\\'" . gitignore-mode)
            ("/git/ignore\\'" . gitignore-mode)))
+#+END_SRC
+
+*** Major mode expand
+
+#+BEGIN_SRC emacs-lisp
+  (setq git-commit-mode-expand-alist
+        '(("s" . git-commit-signoff)
+          ("a" . git-commit-ack)
+          ("t" . git-commit-test)
+          ("R" . git-commit-review)
+          ("c" . git-commit-cc)
+          ("r" . git-commit-reported)))
 #+END_SRC
 
 *** Key Bindings
