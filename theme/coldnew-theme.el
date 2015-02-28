@@ -470,6 +470,7 @@ Also bind `class' to ((class color) (min-colors 89))."
      (gnus-header-content ((,class (:inherit message-header-other))))
      (gnus-header-subject ((,class (:inherit message-header-subject))))
      (gnus-header-from ((,class (:inherit message-header-other-face :weight bold :foreground ,orange))))
+
      (gnus-header-name ((,class (:inherit message-header-name))))
      (gnus-button ((,class (:inherit link :foreground nil))))
      (gnus-signature ((,class (:inherit font-lock-comment-face))))
@@ -534,6 +535,9 @@ Also bind `class' to ((class color) (min-colors 89))."
      (woman-unknown ((t (:foreground ,red :weight bold))))
      (woman-addition ((t (:foreground ,aqua))))
      (woman-bold ((t (:inherit bold :foreground ,blue))))
+
+     ;; smartparens-mode
+     (sp-pair-overlay-face ((t (:forground ,foreground :background ,current-line))))
 
      (custom-variable-tag ((,class (:foreground ,blue))))
      (custom-group-tag ((,class (:foreground ,blue))))
