@@ -554,7 +554,7 @@ representing colors with the color they represent as background.
           (deft)))))
 #+END_SRC
 
-** emacs-async
+** async
 
 #+BEGIN_SRC emacs-lisp
   (req-package async
