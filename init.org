@@ -1037,7 +1037,8 @@ retrieve and display completion candidates.
 
 #+BEGIN_SRC emacs-lisp
   (req-package company
-    :init (global-company-mode 1))
+    :init (global-company-mode 1)
+    :config (setq company-idle-delay nil))
 #+END_SRC
 
 *** Completion C/C++ headers
