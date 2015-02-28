@@ -38,5 +38,7 @@ install:
   - '"$EMACS" --version'
 
 script:
+  - rm -rf .cask
+  - find . -name *.elc -exec rm -rf {} \;
   - make clean
   - make bootstrap
