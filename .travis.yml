@@ -39,4 +39,4 @@ install:
 
 script:
   - make clean
-  - make test
+  - make bootstrap
