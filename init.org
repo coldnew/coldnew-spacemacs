@@ -805,6 +805,13 @@ editor ? Yes, Emacs is an OS :)
 
 I put some editor/IDE relative functions and packages here.
 
+** Setup tab width
+
+#+BEGIN_SRC emacs-lisp
+  (setq tab-width 8)
+  (setq indent-tabs-mode nil)
+#+END_SRC
+
 ** Line Numbers
 
 In most case, I'll make line numers display globally by =linum=.
