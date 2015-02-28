@@ -742,18 +742,18 @@ For more info, please see: [[https://lists.gnu.org/archive/html/emacs-orgmode/20
   (defun indent-region-or-buffer-and-cleanup ()
     "Indents a region if selected, otherwise the whole buffer."
     (interactive)
-    (save-excursion
-      (if (region-active-p)
+    (cl-flet ((format-fn (BEG END)
+                         (delete-trailing-whitespace BEG END)
+                         (indent-region BEG END)
+                         (untabify BEG END)))
+      (save-excursion
+        (if (region-active-p)
+            (progn
+              (format-fn (region-beginning) (region-end))
+              (message "Indented selected region and clear whitespace and untabify."))
           (progn
-            (delete-trailing-whitespace (region-beginning) (region-end))
-            (indent-region (region-beginning) (region-end))
-            (untabify (region-beginning) (region-end))
-            (message "Indented selected region and clear whitespace and untabify."))
-        (progn
-            (delete-trailing-whitespace (region-beginning) (region-end))
-            (indent-region (region-beginning) (region-end))
-            (untabify (region-beginning) (region-end))
-          (message "Indented whole buffer and clear whitespace and untabify.")))))
+            (format-fn (point-min) (point-max))
+            (message "Indented whole buffer and clear whitespace and untabify."))))))
 #+END_SRC
 
 ** Debug
