@@ -900,7 +900,10 @@ depth.
 #+BEGIN_SRC emacs-lisp
   (req-package highlight-numbers
     :init
-    (add-hook 'prog-mode-hook 'highlight-numbers-mode))
+    ;; json-mode has it's own highlight numbers method
+    (add-hook 'prog-mode-hook '(lambda()
+                                 (if (not (derived-mode-p 'json-mode))
+                                     (highlight-numbers-mode)))))
 #+END_SRC
 
 ** Highlight escape charset
