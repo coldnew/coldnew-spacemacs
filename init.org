@@ -558,22 +558,22 @@ representing colors with the color they represent as background.
 
 #+BEGIN_SRC emacs-lisp
   (req-package async
-        :config
-        (progn
-          ;; If I'm edit my init.org, async generate init.el when save.
-          (defun tangle-init ()
-            "If the current buffer is 'init.org' the code-blocks are tangled."
-                    (when (equal (buffer-file-name)
-                         (expand-file-name (concat user-emacs-directory "init.org")))
-              (async-start
-               `(lambda ()
-                  ,(async-inject-variables "user-emacs-directory")
-                  (require 'ob-tangle)
-                  (setq org-confirm-babel-evaluate nil)
-                  (org-babel-load-file (concat user-emacs-directory "init.org")))
-               'ignore)))
-          (add-hook 'after-save-hook 'tangle-init)
-          ))
+    :config
+    (progn
+      ;; If I'm edit my init.org, async generate init.el when save.
+      (defun tangle-init ()
+        "If the current buffer is 'init.org' the code-blocks are tangled."
+        (when (equal (buffer-file-name)
+                     (expand-file-name (concat user-emacs-directory "init.org")))
+          (async-start
+           `(lambda ()
+              ,(async-inject-variables "user-emacs-directory")
+              (require 'ob-tangle)
+              (setq org-confirm-babel-evaluate nil)
+              (org-babel-load-file (concat user-emacs-directory "init.org")))
+           'ignore)))
+      (add-hook 'after-save-hook 'tangle-init)
+      ))
 #+END_SRC
 
 ** password-generator
@@ -1930,7 +1930,7 @@ generate keybing via table, just use following functions:
 | M-s      | helm-occur                          | Search in current buffer             |
 | s-<RET>  | insert-empty-line                   | Insert empty line after current line |
 | s-<SPC>  | insert-U200B-char                   | Insert <U200B> character             |
-| C-v      | rectangle-mark-mode/expand-region |                                      |
+| C-v      | rectangle-mark-mode/expand-region   |                                      |
 | C-x C-i  | indent-region-or-buffer-and-cleanup | Intent region/buffer and clean up    |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
