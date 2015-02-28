@@ -49,20 +49,20 @@ are =optional= but can make my spacemacs work more nicely.
 - Mac OSX
 
   #+BEGIN_SRC sh
-    brew install the_silver_searcher
-    brew install fasd
-    brew install mu --with-emacs --HEAD
-    brew install doxymacs
+    brew install the_silver_searcher \
+         fasd \
+         mu --with-emacs --HEAD \
+         doxymacs
   #+END_SRC
 
 
 - Gentoo Linux
 
   #+BEGIN_SRC sh
-    emerge sys-apps/the_silver_searcher
-    emerge app-shells/fasd
-    USE="emacs" emerge net-mail/mu
-    emerge  app-emacs/doxymacs
+    USE="emacs" emerge sys-apps/the_silver_searcher \
+       app-shells/fasd \
+       net-mail/mu \
+       app-emacs/doxymacs
   #+END_SRC
 
 * The early setup
