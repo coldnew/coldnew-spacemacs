@@ -1411,13 +1411,6 @@ persists across sessions.
 
 
 
-#+BEGIN_SRC emacs-lisp
-  (req-package cpputils-cmake
-    :config
-    (progn
-      (add-hook 'c-mode-common-hook
-                (lambda () (when (derived-mode-p 'c-mode 'c++-mode) (cppcm-reload-all))))))
-#+END_SRC
 
 *** Highlight a few dangerous types in C/C++
 
@@ -1463,6 +1456,19 @@ c/c++/objc-mode on .h file.
       (add-hook 'dummy-h-mode-hook
                 (lambda ()
                   (setq dummy-h-mode-search-limit 60000)))))
+#+END_SRC
+
+*** Syntax check and code-completion with CMake project
+
+[[https://github.com/redguardtoo/cpputils-cmake][cpputils-cmake]] is a nice tool for cmake project.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package cpputils-cmake
+    :require flycheck
+    :config
+    (progn
+      (add-hook 'c-mode-common-hook
+                (lambda () (when (derived-mode-p 'c-mode 'c++-mode) (cppcm-reload-all))))))
 #+END_SRC
 
 *** C language coding style
