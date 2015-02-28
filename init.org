@@ -576,6 +576,15 @@ representing colors with the color they represent as background.
           ))
 #+END_SRC
 
+** password-generator
+
+[[https://github.com/zargener/emacs-password-genarator][password-generator]] provides simple functions to create passwords and
+insert them inside buffer immediately.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package password-generator)
+#+END_SRC
+
 * Interactive Commands
 
 In emacs, we can use =M-x= to execute interactive commands, I
