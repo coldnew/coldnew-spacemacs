@@ -1386,7 +1386,7 @@ persists across sessions.
 | C-c n | org-metadown    |             |
 | C-c i | org-insert-link |             |
 
-#+BEGIN_SRC emacs-lisp :noweb yes
+#+BEGIN_SRC emacs-lisp :noweb yes :results silent
   (add-hook 'org-mode-hook '(lambda()
             <<define-keys(map="org-mode-map", keys=org-mode-keys)>> ))
 #+END_SRC
@@ -1768,6 +1768,18 @@ support for Zen Coding by producing HTML from CSS-like selectors.
     :mode (("/\\.gitignore\\'" . gitignore-mode)
            ("/\\.git/info/exclude\\'" . gitignore-mode)
            ("/git/ignore\\'" . gitignore-mode)))
+#+END_SRC
+
+*** Key Bindings
+
+#+TBLNAME: magit-mode-keys
+| Key | Command                | description            |
+|-----+------------------------+------------------------|
+| C-g | magit-mode-quit-window | Exit magit mode window |
+
+#+BEGIN_SRC emacs-lisp :noweb yes :results silent
+  (add-hook 'magit-mode-hook '(lambda()
+            <<define-keys(map="magit-mode-map", keys=magit-mode-keys)>> ))
 #+END_SRC
 
 * Keybinding
