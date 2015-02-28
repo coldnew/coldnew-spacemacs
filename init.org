@@ -1072,6 +1072,67 @@ retrieve and display completion candidates.
             <<define-keys(map="company-active-map", keys=company-active-keys)>> ))
 #+END_SRC
 
+** Snippet handle by yasnippet
+
+#+BEGIN_SRC emacs-lisp
+  (req-package yasnippet
+    :init (yas-global-mode 1)
+    :mode ("emacs.+/snippets/" . snippet-mode)
+    :config
+    (progn
+      (setq yas/prompt-functions '(yas-dropdown-prompt
+                                   yas-completing-prompt
+                                   yas-ido-prompt))
+
+      (setq yas/snippet-dirs (concat user-emacs-directory "snippets"))))
+#+END_SRC
+
+*** Implement org-mode's easy-template like function
+
+I really like org-mode's =easy-template= function, so I implement one
+called =major-mode-expand= which will let you use easy-template like
+function in any major-mode.
+
+#+BEGIN_SRC emacs-lisp
+  (defadvice yas-expand (around major-mode-expand activate)
+    "Try to complete a structure template before point like org-mode does.
+    This looks for strings like \"<e\" on an otherwise empty line and
+    expands them.
+    Before use this function, you must setup `major-mode-name'-expand-alist variable.
+
+    Take emacs-lisp-mode as example, if you wand to use <r to expand your snippet `require'
+    in yasnippet, you muse setup the emacs-lisp-mode-expand-alist variable.
+
+     (setq emacs-lisp-expand-alist '((\"r\" . \"require\")))"
+    (let* ((l (buffer-substring (point-at-bol) (point)))
+           (expand-symbol (intern (concat (symbol-name major-mode) "-expand-alist")))
+           (expand-alist (if (boundp expand-symbol) (symbol-value expand-symbol) nil))
+           a)
+      (when (and (looking-at "[ \t]*$")
+                 (string-match "^[ \t]*<\\([a-zA-Z]+\\)$" l)
+                 (setq a (assoc (match-string 1 l) expand-alist)))
+        (backward-delete-char (1+ (length (car-safe a))))
+        (if (symbolp (cdr-safe a))
+            (funcall (cdr-safe a))
+          (insert (cdr-safe a)))
+        t)
+      ad-do-it))
+#+END_SRC
+
+Take emacs-lisp-mode as example, if I want to use =<r= and press =TAB=
+then yasnippet will expand the command, just add following code:
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  (setq emacs-lisp-mode-expand-alist '(("r" . "require")))
+#+END_SRC
+
+For c-mode, just do the same but change the relative
+*major-mode-expand-alist* like following
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  (setq c-mode-expand-alist '(("i" . "include")))
+#+END_SRC
+
 ** Helm
 
 #+BEGIN_SRC emacs-lisp
@@ -1778,8 +1839,8 @@ support for Zen Coding by producing HTML from CSS-like selectors.
 | C-g | magit-mode-quit-window | Exit magit mode window |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
-  (add-hook 'magit-mode-hook '(lambda()
-            <<define-keys(map="magit-mode-map", keys=magit-mode-keys)>> ))
+    (add-hook 'magit-mode-hook '(lambda()
+              <<define-keys(map="magit-mode-map", keys=magit-mode-keys)>> ))
 #+END_SRC
 
 * Keybinding
