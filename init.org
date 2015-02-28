@@ -903,6 +903,23 @@ https://github.com/dgutov/highlight-escape-sequences
       (hes-mode 1)))
 #+END_SRC
 
+** Highlight FIXME, TODO
+
+#+begin_src emacs-lisp
+  (defun font-lock-comment-annotations ()
+    "Highlight a bunch of well known comment annotations.
+  This functions should be added to the hooks of major modes for programming."
+    (font-lock-add-keywords
+     nil
+     '(("\\<\\(FIX\\(ME\\)?\\|BUG\\|HACK\\):" 1 font-lock-warning-face t)
+       ("\\<\\(NOTE\\):" 1 'org-level-2 t)
+       ("\\<\\(TODO\\):" 1 'org-todo t)
+       ("\\<\\(DONE\\):" 1 'org-done t))
+     ))
+
+  (add-hook 'prog-mode-hook 'font-lock-comment-annotations)
+#+end_src
+
 ** Blocking syntax highlight
 
 FIXME: buggy, can't really use
