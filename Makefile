@@ -25,8 +25,6 @@ init.el:
 compile: init.el
 	${CASK} exec ${EMACS} -Q -batch \
 		--eval '(setq byte-compile-error-on-warn nil)' \
-		--eval '(byte-compile-file "init.el")'
-#		--eval '(byte-recompile-directory "spacemacs" 0)'
-#	        --eval '(byte-recompile-directory (expand-file-name (getenv "PWD")) 0)'
+		--eval '(byte-recompile-directory (expand-file-name (getenv "PWD")) 0)'
 
 .PHONY: all init.el test unit compile
