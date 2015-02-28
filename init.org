@@ -1410,10 +1410,6 @@ persists across sessions.
 #+END_SRC
 
 
-#+BEGIN_SRC emacs-lisp
-  (req-package cwarn
-    :init (add-hook 'c-mode-common-hook '(lambda () (cwarn-mode 1))))
-#+END_SRC
 
 #+BEGIN_SRC emacs-lisp
   (req-package cpputils-cmake
@@ -1421,6 +1417,21 @@ persists across sessions.
     (progn
       (add-hook 'c-mode-common-hook
                 (lambda () (when (derived-mode-p 'c-mode 'c++-mode) (cppcm-reload-all))))))
+#+END_SRC
+
+*** Highlight a few dangerous types in C/C++
+
+[[http://www.emacswiki.org/emacs/CWarnMode][cwarn-mode]] is a minor mode that ca highlight a few dangerous types in C/C++.
+
+By default it highlights:
+
+- Semicolons right after conditions and loops (e.g. ~if (x == y);~)
+- Assignments in tests (e.g. ~if (x = y) {~)
+- Functions with reference parameters (e.g. ~void funct(string &p) {~)
+
+#+BEGIN_SRC emacs-lisp
+  (req-package cwarn
+    :init (add-hook 'c-mode-common-hook '(lambda () (cwarn-mode 1))))
 #+END_SRC
 
 *** Add eldoc support for C/C++
