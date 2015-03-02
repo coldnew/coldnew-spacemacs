@@ -955,6 +955,12 @@ https://github.com/dgutov/highlight-escape-sequences
   (add-hook 'prog-mode-hook 'font-lock-comment-annotations)
 #+end_src
 
+** Highlight indentation
+
+#+BEGIN_SRC emacs-lisp
+  (req-package highlight-indentation)
+#+END_SRC
+
 ** Blocking syntax highlight
 
 FIXME: buggy, can't really use
