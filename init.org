@@ -755,6 +755,19 @@ For more info, please see: [[https://lists.gnu.org/archive/html/emacs-orgmode/20
             (message "Indented whole buffer and clear whitespace and untabify."))))))
 #+END_SRC
 
+** File Handle
+
+*** Reopen file as root
+
+#+BEGIN_SRC emacs-lisp
+  (defun file-reopen-as-root ()
+    (interactive)
+    (when buffer-file-name
+      (find-alternate-file
+       (concat "/sudo:root@localhost:"
+               buffer-file-name))))
+#+END_SRC
+
 ** Debug
 
 *** Eval emacs buffer until error
