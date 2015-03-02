@@ -10,3 +10,4 @@
 
 ;;;pallet-ignore
 (depends-on "bitbake" :git "https://github.com/canatella/bitbake-el.git")
+(depends-on "mmm-mode")
