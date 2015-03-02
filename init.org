@@ -602,6 +602,19 @@ insert them inside buffer immediately.
   (req-package password-generator)
 #+END_SRC
 
+** skeletor
+
+[[https://github.com/chrisbarrett/skeletor.el][Skeletor]] provides project templates for Emacs. It also automates the
+mundane parts of setting up a new project like version control,
+licenses and tooling.
+
+Skeletor comes with a number of predefined templates and allows you to
+easily create your own.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package skeletor)
+#+END_SRC
+
 * Interactive Commands
 
 In emacs, we can use =M-x= to execute interactive commands, I
