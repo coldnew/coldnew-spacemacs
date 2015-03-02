@@ -1834,6 +1834,7 @@ stdint.h
 
 #+BEGIN_SRC emacs-lisp
   (req-package bitbake
+    :mode "\\.bbclass$"
     :config
     (progn
       ;; For .inc file if locate under meta-*/ dir, make it use bitbake-mode
