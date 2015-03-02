@@ -1793,7 +1793,15 @@ c/c++/objc-mode on .h file.
 #+BEGIN_SRC emacs-lisp
   (req-package swift-mode
     :require flycheck
+    :mode (("\\.dts$" . dts-mode)
+           "\\.dtsi$" . dts-mode)
     :init (add-to-list 'flycheck-checkers 'swift))
+#+END_SRC
+
+** BitBake
+
+#+BEGIN_SRC emacs-lisp
+  (req-package bitbake)
 #+END_SRC
 
 * Web Development
