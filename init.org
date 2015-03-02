@@ -1860,6 +1860,17 @@ stdint.h
   (req-package css-mode :mode "\\.css\\'")
 #+END_SRC
 
+*** Add support for eldoc
+
+#+BEGIN_SRC emacs-lisp
+  (req-package css-eldoc
+    :config
+    (progn
+      (add-hook 'css-mode-hook 'turn-on-css-eldoc)
+      (add-hook 'scss-mode-hook 'turn-on-css-eldoc)
+      (add-hook 'less-css-mode-hook 'turn-on-css-eldoc)))
+#+END_SRC
+
 ** Less
 
 #+BEGIN_SRC emacs-lisp
