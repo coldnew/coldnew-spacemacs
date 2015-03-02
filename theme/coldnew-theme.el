@@ -173,11 +173,12 @@ Also bind `class' to ((class color) (min-colors 89))."
      (isearch-fail ((,class (:background ,background :inherit font-lock-warning-face :inverse-video t))))
 
      ;; IDO
-     (ido-subdir ((,class (:foreground ,comment))))
-     (ido-first-match ((,class (:foreground ,orange :weight bold))))
-     (ido-only-match ((,class (:foreground ,red :weight bold))))
-     (ido-indicator ((,class (:foreground ,red :background ,background))))
+     (ido-first-match ((,class (:foreground ,yellow :weight bold))))
+     (ido-only-match ((,class (:foreground ,orange :weight bold))))
      (ido-virtual ((,class (:foreground ,comment))))
+     (ido-incomplete-regexp ((,class (:foreground ,red :bold t))))
+     (ido-subdir ((,class (:foreground ,aqua :bold t))))
+     (ido-virtual ((,class (:foreground ,purple))))
 
      ;; which-function
      (which-func ((,class (:foreground ,blue :background nil :weight bold))))
