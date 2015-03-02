@@ -1325,7 +1325,7 @@ TODO: take from https://github.com/edvorg/emacs-configs/blob/master/init.d/init-
     :config (setq helm-github-stars-username (getenv "USER")))
 #+END_SRC
 
-*** Add silver_searcher support
+*** Add silver searcher support
 
 #+BEGIN_SRC emacs-lisp
   (req-package helm-ag
