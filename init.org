@@ -1511,9 +1511,7 @@ persists across sessions.
 #+BEGIN_SRC emacs-lisp
   (req-package cmake-font-lock
     :require (cmake-mode)
-    :config
-    (progn
-      (add-hook 'cmake-mode-hook 'cmake-font-lock-activate)))
+    :init (add-hook 'cmake-mode-hook 'cmake-font-lock-activate))
 #+END_SRC
 
 ** Rust
