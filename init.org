@@ -1945,6 +1945,17 @@ support for Zen Coding by producing HTML from CSS-like selectors.
               <<define-keys(fn="define-key", map="magit-mode-map", keys=magit-mode-keys)>> ))
 #+END_SRC
 
+* Finalize package install
+
+At long last we need only call the following function to send
+=req-package= on its merry way.
+
+Put this before setting keybindings make my keybindings work as global one.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package-finish)
+#+END_SRC
+
 * Keybinding
 
 ** Generate keymap from org-mode table
@@ -1954,9 +1965,6 @@ generate keybing via table, just use following functions:
 
 #+NAME: define-keys
 #+BEGIN_SRC emacs-lisp :results output :tangle no :exports none :colnames nil
-  (defvar dotemacs-init-done nil)
-
-  (when (not dotemacs-init-done) (princ "(add-hook 'after-load-functions \n '(lambda (x)\n"))
   (require 's)
   (mapcar (lambda (l)
             (let* ((key (nth 0 l))
@@ -1971,7 +1979,6 @@ generate keybing via table, just use following functions:
                                  command)))))
           ;; remove all `hline' tag first line in list
           (cdr (remove 'hline keys)))
-  (when (not dotemacs-init-done) (princ "))"))
 #+END_SRC
 
 ** Spacemacs Map
@@ -2044,15 +2051,4 @@ generate keybing via table, just use following functions:
 
 * End of configuration
 
-At long last we need only call the following function to send
-=req-package= on its merry way.
-
-#+BEGIN_SRC emacs-lisp
-  (req-package-finish)
-#+END_SRC
-
-Also setup =dotemacs-init-done= variable, this will help me to use
-=C-c C-c= to evalute keybinding config without restart emacs.
-#+BEGIN_SRC emacs-lisp
-  (setq dotemacs-init-done t)
-#+END_SRC
+Oh YA!! We finish loading emacs configuration :)
