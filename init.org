@@ -1124,7 +1124,7 @@ retrieve and display completion candidates.
 
 #+BEGIN_SRC emacs-lisp :noweb yes
   (add-hook 'company-mode-hook '(lambda()
-            <<define-keys(map="company-active-map", keys=company-active-keys)>> ))
+            <<define-keys(fn="define-key", map="company-active-map", keys=company-active-keys)>> ))
 #+END_SRC
 
 ** Snippet handle by yasnippet
@@ -1285,8 +1285,20 @@ TODO: take from https://github.com/edvorg/emacs-configs/blob/master/init.d/init-
   (req-package helm-github-stars
     :require helm
     :config (setq helm-github-stars-username (getenv "USER")))
+#+END_SRC
 
-(req-package helm-ag :require helm)
+*** Add silver_searcher support
+
+#+BEGIN_SRC emacs-lisp
+  (req-package helm-ag
+    :require (helm helm-projectile)
+    :config
+    (progn
+
+      (defun helm-projectile-ag ()
+        (interactive)
+        (helm-ag (projectile-project-root)))
+      ))
 #+END_SRC
 
 * GDB
@@ -1507,7 +1519,7 @@ persists across sessions.
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
   (add-hook 'org-mode-hook '(lambda()
-            <<define-keys(map="org-mode-map", keys=org-mode-keys)>> ))
+            <<define-keys(fn="define-key", map="org-mode-map", keys=org-mode-keys)>> ))
 #+END_SRC
 
 ** SSH Config
@@ -1930,7 +1942,7 @@ support for Zen Coding by producing HTML from CSS-like selectors.
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
     (add-hook 'magit-mode-hook '(lambda()
-              <<define-keys(map="magit-mode-map", keys=magit-mode-keys)>> ))
+              <<define-keys(fn="define-key", map="magit-mode-map", keys=magit-mode-keys)>> ))
 #+END_SRC
 
 * Keybinding
@@ -1945,13 +1957,18 @@ generate keybing via table, just use following functions:
   (defvar dotemacs-init-done nil)
 
   (when (not dotemacs-init-done) (princ "(add-hook 'after-load-functions \n '(lambda (x)\n"))
+  (require 's)
   (mapcar (lambda (l)
             (let* ((key (nth 0 l))
-                   (command (nth 1 l))
-                   (def (format "define-key %s (kbd \"%s\")" map key)))
+                   (command (nth 1 l)))
               ;; make sure key and command not nil
-              (if (and key command)
-                  (princ (format "(%s '%s)\n" def command)))))
+              (if (not (or (s-blank? key) (s-blank? command)))
+                  (princ (format "(%s %s %s '%s)\n"
+                                 fn map
+                                 (if (s-equals? fn "evil-ex-define-cmd")
+                                     (format "\"%s\"" key)
+                                   (format "(kbd \"%s\")" key))
+                                 command)))))
           ;; remove all `hline' tag first line in list
           (cdr (remove 'hline keys)))
   (when (not dotemacs-init-done) (princ "))"))
@@ -1972,7 +1989,7 @@ generate keybing via table, just use following functions:
 | M-]     | winner-redo         | restore resent window layout         |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
-    <<define-keys(map="evil-normal-state-map", keys=global-evil-normal)>>
+    <<define-keys(fn="define-key", map="evil-normal-state-map", keys=global-evil-normal)>>
 #+END_SRC
 
 ** Insert State
@@ -2009,8 +2026,21 @@ generate keybing via table, just use following functions:
 | C-x C-i  | indent-region-or-buffer-and-cleanup | Intent region/buffer and clean up    |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
-  <<define-keys(map="evil-insert-state-map", keys=global-evil-insert)>>
+  <<define-keys(fn="define-key", map="evil-insert-state-map", keys=global-evil-insert)>>
 #+END_SRC
+
+** Ex Command
+
+#+TBLNAME: global-evil-ex
+| Key         | Command            | description     |
+|-------------+--------------------+-----------------|
+| ag          | helm-ag            | Execute helm-ag |
+| agp[roject] | helm-projectile-ag |                 |
+
+#+BEGIN_SRC emacs-lisp :noweb yes
+  <<define-keys(fn="evil-ex-define-cmd", map="", keys=global-evil-ex)>>
+#+END_SRC
+
 
 * End of configuration
 
