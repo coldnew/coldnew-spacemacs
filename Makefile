@@ -6,8 +6,9 @@ all: compile
 test: clean
 	${MAKE} all
 
-bootstrap: init.el
+bootstrap:
 	${CASK} install
+	${MAKE} init.el
 
 clean:
 	$(RM) init.el
