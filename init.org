@@ -1873,6 +1873,10 @@ support for Zen Coding by producing HTML from CSS-like selectors.
 
 ** Git
 
+#+BEGIN_SRC emacs-lisp
+(add-hook 'server-done-hook 'kill-buffer)
+#+END_SRC
+
 *** Add suport for git configuration files
 
 
