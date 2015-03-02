@@ -1497,13 +1497,11 @@ persists across sessions.
 
 #+BEGIN_SRC emacs-lisp
   (req-package ssh-config-mode
-    :init
-    (progn
-      (add-to-list 'auto-mode-alist '(".ssh/config\\'"       . ssh-config-mode))
-      (add-to-list 'auto-mode-alist '("sshd?_config\\'"      . ssh-config-mode))
-      (add-to-list 'auto-mode-alist '("known_hosts\\'"       . ssh-known-hosts-mode))
-      (add-to-list 'auto-mode-alist '("authorized_keys2?\\'" . ssh-authorized-keys-mode))
-      (add-hook 'ssh-config-mode-hook 'turn-on-font-lock)))
+    :mode (("\\.ssh/config\\'"  . ssh-config-mode)
+           ("sshd?_config\\'"   . ssh-config-mode)
+           ("known_hosts\\'"    . ssh-known-hosts-mode)
+           ("authorized_keys2?\\'" . ssh-authorized-keys-mode))
+    :init (add-hook 'ssh-config-mode-hook 'turn-on-font-lock))
 #+END_SRC
 
 ** CMake
