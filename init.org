@@ -335,10 +335,10 @@ You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lan
 
 ** HACKS
 
-https://github.com/syl20bnr/spacemacs/issues/606
+see: https://github.com/syl20bnr/spacemacs/issues/606
 
 #+BEGIN_SRC emacs-lisp
-(add-hook 'server-done-hook 'kill-buffer)
+  (add-hook 'server-done-hook 'kill-buffer)
 #+END_SRC
 
 * Basic setup
