@@ -302,6 +302,14 @@ You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lan
   (add-to-list 'dotspacemacs-configuration-layers 'php)
 #+END_SRC
 
+*** vim-empty-lines
+
+You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/vim-empty-lines][here]]
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'dotspacemacs-configuration-layers 'vim-empty-lines)
+#+END_SRC
+
 ** Overwrite spacemacs function to let it not remove my packages
 
 #+BEGIN_SRC emacs-lisp
