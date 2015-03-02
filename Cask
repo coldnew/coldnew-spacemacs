@@ -7,3 +7,6 @@
 (depends-on "dash")
 (depends-on "pallet")
 (depends-on "req-package")
+
+;;;pallet-ignore
+(depends-on "bitbake" :git "https://github.com/canatella/bitbake-el.git")
