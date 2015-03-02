@@ -2037,7 +2037,7 @@ generate keybing via table, just use following functions:
 | ag          | helm-ag            | Execute helm-ag |
 | agp[roject] | helm-projectile-ag |                 |
 
-#+BEGIN_SRC emacs-lisp :noweb yes
+#+BEGIN_SRC emacs-lisp :noweb yes :results silent
   <<define-keys(fn="evil-ex-define-cmd", map="", keys=global-evil-ex)>>
 #+END_SRC
 
