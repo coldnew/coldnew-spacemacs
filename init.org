@@ -333,6 +333,14 @@ You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lan
   (switch-to-buffer "*scratch*")
 #+END_SRC
 
+** HACKS
+
+https://github.com/syl20bnr/spacemacs/issues/606
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'server-done-hook 'kill-buffer)
+#+END_SRC
+
 * Basic setup
 
 Most setup I want to use is done by [[https://github.com/syl20bnr/spacemacs][spacemacs]], but I still keep some
@@ -1872,10 +1880,6 @@ support for Zen Coding by producing HTML from CSS-like selectors.
 * Version Control
 
 ** Git
-
-#+BEGIN_SRC emacs-lisp
-(add-hook 'server-done-hook 'kill-buffer)
-#+END_SRC
 
 *** Add suport for git configuration files
 
