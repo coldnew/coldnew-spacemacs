@@ -1680,7 +1680,6 @@ stdint.h
      '(("\\<\\(int8_t\\|int16_t\\|int32_t\\|int64_t\\|uint8_t\\|uint16_t\\|uint32_t\\|uint64_t\\)\\>" . font-lock-keyword-face))))
 #+END_SRC
 
-
 ** Graphviz
 
 #+BEGIN_SRC emacs-lisp
@@ -1834,7 +1833,16 @@ stdint.h
 ** BitBake
 
 #+BEGIN_SRC emacs-lisp
-  (req-package bitbake)
+  (req-package bitbake
+    :config
+    (progn
+      ;; For .inc file if locate under meta-*/ dir, make it use bitbake-mode
+      (add-to-list 'magic-mode-alist
+                   `(,(lambda ()
+                        (and (string= (file-name-extension (or (buffer-file-name) "")) "inc")
+                             (string-match "meta-" (buffer-file-name))))
+                        . bitbake-mode))
+      ))
 #+END_SRC
 
 * Web Development
@@ -1882,7 +1890,8 @@ support for Zen Coding by producing HTML from CSS-like selectors.
 
   (req-package gitconfig-mode
     :mode (("/\\.?git/?config\\'" . gitconfig-mode)
-           ("/\\.gitmodules\\'" . gitconfig-mode))
+           ("/\\.gitmodules\\'" . gitconfig-mode)
+           ("/_gitconfig\\'" . gitconfig-mode))
     :config
     (add-hook 'gitconfig-mode-hook 'flyspell-mode))
 
