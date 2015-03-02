@@ -576,6 +576,7 @@ representing colors with the color they represent as background.
       ))
 #+END_SRC
 
+
 ** password-generator
 
 [[https://github.com/zargener/emacs-password-genarator][password-generator]] provides simple functions to create passwords and
