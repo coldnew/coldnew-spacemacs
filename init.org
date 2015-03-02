@@ -2042,7 +2042,6 @@ generate keybing via table, just use following functions:
   <<define-keys(fn="evil-ex-define-cmd", map="", keys=global-evil-ex)>>
 #+END_SRC
 
-
 * End of configuration
 
 At long last we need only call the following function to send
