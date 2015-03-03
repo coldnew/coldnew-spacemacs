@@ -1522,6 +1522,49 @@ which add a =j= command to let you jump to folder you has been access.
   (req-package eshell-autojump :require eshell)
 #+END_SRC
 
+*** Eshell commands setup
+
+**** ..
+
+#+BEGIN_SRC emacs-lisp
+  (defun eshell/.. (&optional level)
+    "Go up LEVEL directories"
+    (interactive)
+    (let ((level (or level 1)))
+      (eshell/cd (make-string (1+ level) ?.))
+      (eshell/ls)))
+#+END_SRC
+
+**** clear
+
+#+BEGIN_SRC emacs-lisp
+  (defun eshell/clear ()
+    "Clears the shell buffer ala Unix's clear or DOS' cls"
+    ;; the shell prompts are read-only, so clear that for the duration
+    (let ((inhibit-read-only t))
+      ;; simply delete the region
+      (delete-region (point-min) (point-max))))
+#+END_SRC
+
+**** emacs
+
+#+BEGIN_SRC emacs-lisp
+  (defun eshell/emacs (&rest args)
+    "Open a file in emacs. Some habits die hard."
+    (if (null args)
+        ;; If I just ran "emacs", I probably expect to be launching
+        ;; Emacs, which is rather silly since I'm already in Emacs.
+        ;; So just pretend to do what I ask.
+        (bury-buffer)
+      ;; We have to expand the file names or else naming a directory in an
+      ;; argument causes later arguments to be looked for in that directory,
+      ;; not the starting directory
+      (mapc #'find-file (mapcar #'expand-file-name (eshell-flatten-list (reverse args))))))
+
+  (defalias 'eshell/e 'eshell/emacs)
+#+END_SRC
+
+
 * Window Management
 
 ** Maximized window after emac start
