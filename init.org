@@ -1154,6 +1154,9 @@ they work nicely with version control systems.
 
 ** Create *scratch* automatically
 
+Sometimes I'll kill the =*scratch*= buffer to make it clean, just use
+following function to let emacs re-create it automatically.
+
 #+BEGIN_SRC emacs-lisp
   ;; Create *scratch* automatically
   (run-with-idle-timer 1 t
