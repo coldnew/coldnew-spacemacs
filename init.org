@@ -1778,7 +1778,7 @@ c/c++/objc-mode on .h file.
 
 *** C language coding style
 
-**** Use Linux coding style by default
+I always use =linux coding style= for c language by default.
 
 #+BEGIN_SRC emacs-lisp
   (add-hook 'c-mode-hook '(lambda () (c-set-style "linux")))
@@ -1786,7 +1786,7 @@ c/c++/objc-mode on .h file.
 
 *** C++ language coding style
 
-**** Use my C++ coding style
+Use my C++ coding style.
 
 #+BEGIN_SRC emacs-lisp
   (add-hook 'c++-mode-hook
