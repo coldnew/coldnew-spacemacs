@@ -28,4 +28,4 @@ compile: init.el
 		--eval '(setq byte-compile-error-on-warn nil)' \
 		--eval '(byte-recompile-directory (expand-file-name (getenv "PWD")) 0)'
 
-.PHONY: all init.el test unit compile
+.PHONY: all bootstrap init.el test unit compile
