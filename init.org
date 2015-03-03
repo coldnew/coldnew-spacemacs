@@ -1368,6 +1368,16 @@ TODO: take from https://github.com/edvorg/emacs-configs/blob/master/init.d/init-
       ))
 #+END_SRC
 
+*** Add Google search support
+
+https://github.com/steckerhalter/helm-google
+
+#+BEGIN_SRC emacs-lisp
+  (req-package helm-google
+    :require (helm)
+    :init (setq helm-google-use-regexp-parsing t))
+#+END_SRC
+
 * GDB
 
 #+BEGIN_SRC emacs-lisp
