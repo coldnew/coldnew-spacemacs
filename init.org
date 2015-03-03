@@ -2183,11 +2183,13 @@ generate keybing via table, just use following functions:
 ** Ex Command
 
 #+TBLNAME: global-evil-ex
-| Key             | Command            | description                    |
-|-----------------+--------------------+--------------------------------|
-| ag              | helm-ag            | Execute helm-ag                |
-| agp[roject]     | helm-projectile-ag |                                |
-| agi[nteractive] | helm-do-ag         | Interactive execute ag command |
+| Key             | Command             | description                    |
+|-----------------+---------------------+--------------------------------|
+| ag              | helm-ag             | Execute helm-ag                |
+| agp[roject]     | helm-projectile-ag  |                                |
+| agi[nteractive] | helm-do-ag          | Interactive execute ag command |
+| google          | helm-google         |                                |
+| google-suggest  | helm-google-suggest |                                |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
   <<define-keys(fn="evil-ex-define-cmd", map="", keys=global-evil-ex)>>
