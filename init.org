@@ -1493,13 +1493,13 @@ like is it fully integrated with emacs.
 
 #+BEGIN_SRC emacs-lisp
   (eval-after-load 'eshell
-    (progn
-     (setq eshell-visual-commands
-           '("less" "tmux" "htop" "top" "bash" "zsh" "fish"))
+    '(progn
+      (setq eshell-visual-commands
+            '("less" "tmux" "htop" "top" "bash" "zsh" "fish"))
 
-     (setq eshell-visual-subcommands
-           '("git" ("log" "diff" "show")))
-     ))
+      (setq eshell-visual-subcommands
+            '("git" ("log" "diff" "show")))
+      ))
 #+END_SRC
 
 *** Support for multi-eshell instance
