@@ -580,10 +580,14 @@ representing colors with the color they represent as background.
       ;; If I'm edit my init.org, async generate init.el when save.
       (defun tangle-init ()
         "If the current buffer is 'init.org' the code-blocks are tangled."
-        (when (equal (buffer-file-name)
-                     (expand-file-name (concat user-emacs-directory "init.org")))
-          ;; build with `make init.el' command
-          (async-start-process "emacs build init.el" "make" 'ignore "init.el")))
+        (let ((buffer-name "async-make-init.el"))
+          (when (equal (buffer-file-name)
+                       (expand-file-name (concat user-emacs-directory "init.org")))
+            ;; If previous building buffer exist, discard it
+            (when (get-buffer (concat "*" buffer-name "*"))
+              (kill-buffer (concat "*" buffer-name "*")))
+            ;; build with `make init.el' command
+            (async-start-process buffer-name "make" 'ignore "init.el"))))
 
       (add-hook 'after-save-hook 'tangle-init)
       ))
@@ -2233,7 +2237,7 @@ generate keybing via table, just use following functions:
 | M-s      | helm-occur                          | Search in current buffer             |
 | s-<RET>  | insert-empty-line                   | Insert empty line after current line |
 | s-<SPC>  | insert-U200B-char                   | Insert <U200B> character             |
-| C-v      | set-mark-mode/rectangle-mark-mode         |                                      |
+| C-v      | set-mark-mode/rectangle-mark-mode   |                                      |
 | C-x C-i  | indent-region-or-buffer-and-cleanup | Intent region/buffer and clean up    |
 | M-v      | er/expand-region                    |                                      |
 
