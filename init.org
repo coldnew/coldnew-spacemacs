@@ -1971,6 +1971,12 @@ stdint.h
 
 * Web Development
 
+#+BEGIN_SRC emacs-lisp
+  (req-package web-mode
+    :mode (("\\.html?\\'" . web-mode)
+           ("\\.ejs?\\'" . web-mode)))
+#+END_SRC
+
 ** Use emmet-mode to add Zen Coding support
 
 [[https://github.com/smihica/emmet-mode][emmet-mode]] is a fork of [[https://github.com/rooney/zencoding][zencoding-mode]] which add minor mode providing
