@@ -1447,6 +1447,44 @@ https://github.com/steckerhalter/helm-google
 eshell is not really a system shell, it's written in pure lisp. What I
 like is it fully integrated with emacs.
 
+#+BEGIN_SRC emacs-lisp
+  (req-package eshell
+    :init
+    ;; move eshell cache dir to ~/.emacs.d/.cache
+    (setq eshell-directory-name (concat user-emacs-directory ".cache/eshell")))
+#+END_SRC
+
+*** Use bash like prompt with color
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load 'eshell
+    '(progn
+       ;; Make eshell prompt look likes default bash prompt
+       (setq eshell-prompt-function
+             '(lambda ()
+                (concat
+                 user-login-name "@" system-name " "
+                 (if (search (directory-file-name (expand-file-name (getenv "HOME"))) (eshell/pwd))
+                     (replace-regexp-in-string (expand-file-name (getenv "HOME")) "~" (eshell/pwd))
+                   (eshell/pwd))
+                 (if (= (user-uid) 0) " # " " $ "))))
+       ;; Add color for eshell prompt like Gentoo does
+       (defun colorfy-eshell-prompt ()
+         (let* ((mpoint)
+                (user-string-regexp (concat "^" user-login-name "@" system-name)))
+           (save-excursion
+             (goto-char (point-min))
+             (while (re-search-forward (concat user-string-regexp ".*[$#]") (point-max) t)
+               (setq mpoint (point))
+               (overlay-put (make-overlay (point-at-bol) mpoint) 'face '(:foreground "dodger blue")))
+             (goto-char (point-min))
+             (while (re-search-forward user-string-regexp (point-max) t)
+               (setq mpoint (point))
+               (overlay-put (make-overlay (point-at-bol) mpoint) 'face '(:foreground "green3"))))))
+       ;; Make eshell prompt more colorful
+       (add-hook 'eshell-output-filter-functions 'colorfy-eshell-prompt)))
+#+END_SRC
+
 *** Support for multi-eshell instance
 
 #+BEGIN_SRC emacs-lisp
