@@ -619,6 +619,18 @@ the current Emacs major mode.
   (req-package discover-my-major)
 #+END_SRC
 
+** google-translate
+
+#+BEGIN_SRC emacs-lisp
+  (req-package google-translate
+    :config
+    (progn
+      ;; defaylt language for translation
+      (setq google-translate-default-source-language "en")
+      (setq google-translate-default-target-language "zh_TW")
+      ))
+#+END_SRC
+
 * Interactive Commands
 
 In emacs, we can use =M-x= to execute interactive commands, I
