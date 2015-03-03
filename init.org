@@ -1594,7 +1594,13 @@ persists across sessions.
           ))))
 #+END_SRC
 
-*** Setup quick links
+*** Setup link abbreviations
+
+[[https://www.gnu.org/software/emacs/manual/html_node/org/Link-abbreviations.html][Link abbreviations]]
+
+An abbreviated link looks like
+
+: [[linkword:tag][description]]
 
 #+BEGIN_SRC emacs-lisp
   (setq org-link-abbrev-alist
