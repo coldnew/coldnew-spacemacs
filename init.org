@@ -631,6 +631,16 @@ the current Emacs major mode.
       ))
 #+END_SRC
 
+** howdoi
+
+[[https://github.com/atykhonov/emacs-howdoi][howdoi]] is a way to query Stack Overflow directly from the Emacs and
+get back the most upvoted answer to the first question that comes up
+for that query.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package howdoi)
+#+END_SRC
+
 * Interactive Commands
 
 In emacs, we can use =M-x= to execute interactive commands, I
