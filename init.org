@@ -400,6 +400,7 @@ For language, though Traditional Chinese is my mothertone, I still
 prefer use =en_US= to display time info.
 
 #+BEGIN_SRC emacs-lisp
+  (prefer-coding-system 'utf-8)
   (setq system-time-locale "en_US" )
 #+END_SRC
 
