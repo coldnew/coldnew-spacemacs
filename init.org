@@ -1485,6 +1485,13 @@ like is it fully integrated with emacs.
        (add-hook 'eshell-output-filter-functions 'colorfy-eshell-prompt)))
 #+END_SRC
 
+*** Use ansi-term to render visual commands
+
+#+BEGIN_SRC emacs-lisp
+  (setq eshell-visual-commands
+        '("less" "tmux" "htop" "top" "bash" "zsh" "fish"))
+#+END_SRC
+
 *** Support for multi-eshell instance
 
 #+BEGIN_SRC emacs-lisp
