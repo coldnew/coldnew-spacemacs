@@ -1392,6 +1392,8 @@ https://github.com/steckerhalter/helm-google
 * TAGS
 ** Add GTAGS support
 
+[[https://github.com/leoliu/ggtags][ggtags]] is an Emacs frontend to GNU Global source code tagging system.
+
 #+BEGIN_SRC emacs-lisp
   (req-package ggtags
     :init
