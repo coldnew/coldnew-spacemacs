@@ -785,12 +785,12 @@ For more info, please see: [[https://lists.gnu.org/archive/html/emacs-orgmode/20
 *** Set mark or expand region
 
 #+BEGIN_SRC emacs-lisp
-  (defun set-mark-mode/expand-region ()
-    "toggle between set-mark-command or cua-rectangle-mark"
+  (defun set-mark-mode/rectangle-mark-mode ()
+    "toggle between set-mark-command or rectangle-mark-mode"
     (interactive)
     (if (not mark-active)
-       (call-interactively 'set-mark-mode)
-      (call-interactively 'er/expand-region)))
+       (call-interactively 'set-mark-command)
+      (call-interactively 'rectangle-mark-mode)))
 #+END_SRC
 
 *** Indent region/buffer and cleanup
@@ -2173,8 +2173,9 @@ generate keybing via table, just use following functions:
 | M-s      | helm-occur                          | Search in current buffer             |
 | s-<RET>  | insert-empty-line                   | Insert empty line after current line |
 | s-<SPC>  | insert-U200B-char                   | Insert <U200B> character             |
-| C-v      | set-mark-mode/expand-region         |                                      |
+| C-v      | set-mark-mode/rectangle-mark-mode         |                                      |
 | C-x C-i  | indent-region-or-buffer-and-cleanup | Intent region/buffer and clean up    |
+| M-v      | er/expand-region                    |                                      |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
   <<define-keys(fn="define-key", map="evil-insert-state-map", keys=global-evil-insert)>>
