@@ -1982,6 +1982,7 @@ support for Zen Coding by producing HTML from CSS-like selectors.
     (progn
       ;; Following mode support emmet-mode
       (add-hook 'html-mode-hook 'emmet-mode)
+      (add-hook 'sgml-mode-hook 'emmet-mode)
       (add-hook 'nxml-mode-hook 'emmet-mode)
       (add-hook 'css-mode-hook  'emmet-mode)
 
