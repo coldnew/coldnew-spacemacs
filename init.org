@@ -610,6 +610,15 @@ easily create your own.
   (req-package skeletor)
 #+END_SRC
 
+** discover-my-major
+
+[[https://github.com/steckerhalter/discover-my-major][discover-my-major]] make you discover key bindings and their meaning for
+the current Emacs major mode.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package discover-my-major)
+#+END_SRC
+
 * Interactive Commands
 
 In emacs, we can use =M-x= to execute interactive commands, I
