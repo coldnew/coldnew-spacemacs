@@ -1493,7 +1493,7 @@ like is it fully integrated with emacs.
 
 #+BEGIN_SRC emacs-lisp
   (eval-after-load 'eshell
-    (porgn
+    (progn
      (setq eshell-visual-commands
            '("less" "tmux" "htop" "top" "bash" "zsh" "fish"))
 
