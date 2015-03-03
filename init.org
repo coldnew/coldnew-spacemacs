@@ -1143,6 +1143,15 @@ they work nicely with version control systems.
       (setq epa-file-cache-passphrase-for-symmetric-encryption t)))
 #+END_SRC
 
+** Remote file editing
+
+#+BEGIN_SRC emacs-lisp
+  (req-package tramp
+    :config
+    (progn
+      (setq tramp-default-method "scp")))
+#+END_SRC
+
 ** Create *scratch* automatically
 
 #+BEGIN_SRC emacs-lisp
