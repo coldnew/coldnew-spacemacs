@@ -1594,6 +1594,15 @@ persists across sessions.
           ))))
 #+END_SRC
 
+*** Setup quick links
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-link-abbrev-alist
+        '(("google" . "http://www.google.com/search?q=")
+          ("google-map" . "http://maps.google.com/maps?q=%s")
+          ))
+#+END_SRC
+
 *** Key Bindings
 
 #+TBLNAME: org-mode-keys
