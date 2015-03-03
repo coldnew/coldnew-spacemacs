@@ -1498,7 +1498,7 @@ like is it fully integrated with emacs.
             '("less" "tmux" "htop" "top" "bash" "zsh" "fish"))
 
       (setq eshell-visual-subcommands
-            '("git" ("log" "diff" "show")))
+            '(("git" "log" "diff" "show")))
       ))
 #+END_SRC
 
