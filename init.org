@@ -1389,6 +1389,18 @@ https://github.com/steckerhalter/helm-google
     :init (setq helm-google-use-regexp-parsing t))
 #+END_SRC
 
+* TAGS
+** Add GTAGS support
+
+#+BEGIN_SRC emacs-lisp
+  (req-package ggtags
+    :init
+    (add-hook 'c-mode-common-hook
+              (lambda ()
+                (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+                  (ggtags-mode 1)))))
+#+END_SRC
+
 * GDB
 
 #+BEGIN_SRC emacs-lisp
@@ -1690,9 +1702,6 @@ An abbreviated link looks like
   (req-package clang-format
     :commands clang-format-region)
 #+END_SRC
-
-
-
 
 *** Highlight a few dangerous types in C/C++
 
