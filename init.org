@@ -1492,8 +1492,14 @@ like is it fully integrated with emacs.
 *** Use ansi-term to render visual commands
 
 #+BEGIN_SRC emacs-lisp
-  (setq eshell-visual-commands
-        '("less" "tmux" "htop" "top" "bash" "zsh" "fish"))
+  (eval-after-load 'eshell
+    (porgn
+     (setq eshell-visual-commands
+           '("less" "tmux" "htop" "top" "bash" "zsh" "fish"))
+
+     (setq eshell-visual-subcommands
+           '(("git" "log" "l" "diff" "show")))
+     ))
 #+END_SRC
 
 *** Support for multi-eshell instance
