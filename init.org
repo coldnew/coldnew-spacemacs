@@ -1258,7 +1258,7 @@ For c-mode, just do the same but change the relative
   (setq c-mode-expand-alist '(("i" . "include")))
 #+END_SRC
 
-** Helm
+* Helm
 
 #+BEGIN_SRC emacs-lisp
   (req-package helm
