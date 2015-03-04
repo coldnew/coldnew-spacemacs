@@ -1564,7 +1564,6 @@ which add a =j= command to let you jump to folder you has been access.
   (defalias 'eshell/e 'eshell/emacs)
 #+END_SRC
 
-
 * Window Management
 
 ** Maximized window after emac start
@@ -2297,13 +2296,14 @@ generate keybing via table, just use following functions:
 ** Ex Command
 
 #+TBLNAME: global-evil-ex
-| Key             | Command             | description                    |
-|-----------------+---------------------+--------------------------------|
-| ag              | helm-ag             | Execute helm-ag                |
-| agp[roject]     | helm-projectile-ag  |                                |
-| agi[nteractive] | helm-do-ag          | Interactive execute ag command |
-| google          | helm-google         |                                |
-| google-suggest  | helm-google-suggest |                                |
+| Key             | Command             | description                         |
+|-----------------+---------------------+-------------------------------------|
+| ag              | helm-ag             | Search with silver searcher         |
+| agp[roject]     | helm-projectile-ag  | Search project with silver searcher |
+| agi[nteractive] | helm-do-ag          | Interactive execute ag command      |
+| google          | helm-google         | Search with google                  |
+| google-suggest  | helm-google-suggest | Search with google-suggest          |
+| gtag            | ggtags-create-tags  | Create gtags                        |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
   <<define-keys(fn="evil-ex-define-cmd", map="", keys=global-evil-ex)>>
