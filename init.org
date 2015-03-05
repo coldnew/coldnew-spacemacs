@@ -1747,6 +1747,18 @@ An abbreviated link looks like
           ))
 #+END_SRC
 
+*** Make spell-checking tool ignore somce org-mode section
+
+see: http://emacs.stackexchange.com/questions/450/intelligent-spell-checking-in-org-mode
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load 'ispell
+    '(progn
+       (add-to-list 'ispell-skip-region-alist '(":\\(PROPERTIES\\|LOGBOOK\\):" . ":END:"))
+       (add-to-list 'ispell-skip-region-alist '("#\\+BEGIN_SRC" . "#\\+END_SRC"))
+       ))
+#+END_SRC
+
 *** Key Bindings
 
 #+TBLNAME: org-mode-keys
