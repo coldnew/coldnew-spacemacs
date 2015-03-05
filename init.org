@@ -2296,14 +2296,15 @@ generate keybing via table, just use following functions:
 ** Ex Command
 
 #+TBLNAME: global-evil-ex
-| Key             | Command             | description                         |
-|-----------------+---------------------+-------------------------------------|
-| ag              | helm-ag             | Search with silver searcher         |
-| agp[roject]     | helm-projectile-ag  | Search project with silver searcher |
-| agi[nteractive] | helm-do-ag          | Interactive execute ag command      |
-| google          | helm-google         | Search with google                  |
-| google-suggest  | helm-google-suggest | Search with google-suggest          |
-| gtag            | ggtags-create-tags  | Create gtags                        |
+| Key             | Command             | description                           |
+|-----------------+---------------------+---------------------------------------|
+| ag              | helm-ag             | Search with silver searcher           |
+| agp[roject]     | helm-projectile-ag  | Search project with silver searcher   |
+| agi[nteractive] | helm-do-ag          | Interactive execute ag command        |
+| google          | helm-google         | Search with google                    |
+| google-suggest  | helm-google-suggest | Search with google-suggest            |
+| gtag            | ggtags-create-tags  | Create gtags                          |
+| howdoi          | howdoi-query        | Show coding answers in another buffer |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
   <<define-keys(fn="evil-ex-define-cmd", map="", keys=global-evil-ex)>>
