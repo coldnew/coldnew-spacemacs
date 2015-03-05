@@ -1251,7 +1251,13 @@ You can type the bit that you like better, or is easier to remember,
 or is easier to type.
 
 #+BEGIN_SRC emacs-lisp
-  (req-package bbyac :init (bbyac-global-mode 1))
+  (req-package bbyac
+    :init (bbyac-global-mode 1)
+    :config
+    (eval-after-load 'yasnippet
+      '(progn
+   ;;      (defadvice yas-expand (around bbyac activate) (bbyac-expand-symbols) ad-do-it)
+         )))
 #+END_SRC
 
 ** Snippet handle by yasnippet
@@ -2229,6 +2235,33 @@ support for Zen Coding by producing HTML from CSS-like selectors.
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
     (add-hook 'magit-mode-hook '(lambda()
               <<define-keys(fn="define-key", map="magit-mode-map", keys=magit-mode-keys)>> ))
+#+END_SRC
+
+* Email
+
+I use mu4e.
+
+#+BEGIN_SRC emacs-lisp
+  (when (eq system-type 'darwin)
+    (add-to-list 'load-path "/usr/local/Cellar/mu/HEAD/share/emacs/site-lisp/mu4e"))
+
+  (req-package mu4e
+    :require (w3m)
+    :config
+    (progn
+      ;; Use mu4e as default mail agent
+      (setq mail-user-agent 'mu4e-user-agent)
+      ;; Mail folder set to ~/Maildir
+      (setq mu4e-maildir "~/Maildir")
+      ;; Fetch mail by offlineimap
+      (setq mu4e-get-mail-command "offlineimap")
+      ;; Fetch mail in 60 sec interval
+      (setq mu4e-update-interval 60)
+      ;; Use 'w3m' to read html email
+      (setq mu4e-html2text-command "w3m -dump -T text/html")
+      ;; Show mail's image
+      (setq mu4e-view-show-images t)
+      ))
 #+END_SRC
 
 * Finalize package install
