@@ -52,7 +52,8 @@ are =optional= but can make my spacemacs work more nicely.
     brew install the_silver_searcher \
          fasd \
          mu --with-emacs --HEAD \
-         doxymacs
+         doxymacs \
+         aspell --with-lang-en
   #+END_SRC
 
 
@@ -62,7 +63,8 @@ are =optional= but can make my spacemacs work more nicely.
     USE="emacs" emerge sys-apps/the_silver_searcher \
        app-shells/fasd \
        net-mail/mu \
-       app-emacs/doxymacs
+       app-emacs/doxymacs \
+       aspell
   #+END_SRC
 
 * The early setup
