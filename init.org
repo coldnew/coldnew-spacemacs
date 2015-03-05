@@ -1238,6 +1238,22 @@ retrieve and display completion candidates.
             <<define-keys(fn="define-key", map="company-active-map", keys=company-active-keys)>> ))
 #+END_SRC
 
+** Completion with Bit Bang
+
+[[https://github.com/baohaojun/bbyac/][bbyac]] is another emacs completion framework, which will let you type
+a little bit, and bang! You can complete it into a much longer string.
+
+Say you have a very-very-long-emacs-lisp-variable-name, you need only
+type vvn and press a shortcut key (M-s <return>), it will be completed
+into that long name. Or you can type vln if you like that better.
+
+You can type the bit that you like better, or is easier to remember,
+or is easier to type.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package bbyac :init (bbyac-global-mode 1))
+#+END_SRC
+
 ** Snippet handle by yasnippet
 
 #+BEGIN_SRC emacs-lisp
