@@ -2246,7 +2246,7 @@ I use mu4e.
     (add-to-list 'load-path "/usr/local/Cellar/mu/HEAD/share/emacs/site-lisp/mu4e"))
 
   (req-package mu4e
-    :require (w3m smtp)
+    :require w3m
     :config
     (progn
       ;; Use mu4e as default mail agent
@@ -2415,7 +2415,7 @@ org-mode  is really nice for literature programmering, I can use it to
 generate keybing via table, just use following functions:
 
 #+NAME: define-keys
-#+BEGIN_SRC emacs-lisp :results output :tangle no :exports none :colnames nil
+#+BEGIN_SRC emacs-lisp :results output :tangle no :colnames nil
   (require 's)
   (mapcar (lambda (l)
             (let* ((key (nth 0 l))
