@@ -261,6 +261,8 @@ You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/com
 You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lang/c-c%2B%2B][here]]
 
 #+BEGIN_SRC emacs-lisp
+  ;; FIXME: this need to setup before load spacemacs c++ contrib
+  (setq srecode-map-save-file (concat user-emacs-directory "/.cache/srecode-map.el"))
   (add-to-list 'dotspacemacs-configuration-layers 'c-c++)
 #+END_SRC
 

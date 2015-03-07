@@ -79,4 +79,4 @@ init.el*
 .sx/
 request/
 .litable-lists.el
-srecode-map.el*
+spacemacs/srecode-map.el*
