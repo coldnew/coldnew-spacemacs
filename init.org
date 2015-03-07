@@ -2205,6 +2205,14 @@ support for Zen Coding by producing HTML from CSS-like selectors.
            ("/git/ignore\\'" . gitignore-mode)))
 #+END_SRC
 
+*** Use git-wip to view your WIP commit
+
+https://github.com/itsjeyd/git-wip-timemachine
+
+#+BEGIN_SRC emacs-lisp
+  (req-package git-wip-timemachine)
+#+END_SRC
+
 *** Major mode expand
 
 #+BEGIN_SRC emacs-lisp
