@@ -298,6 +298,14 @@ You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lan
   (add-to-list 'dotspacemacs-configuration-layers 'markdown)
 #+END_SRC
 
+*** org-repo-todo
+
+You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/org-repo-todo][here]]
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'dotspacemacs-configuration-layers 'org-repo-todo)
+#+END_SRC
+
 *** php
 
 You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lang/php][here]]
