@@ -1450,6 +1450,17 @@ https://github.com/steckerhalter/helm-google
                   (ggtags-mode 1)))))
 #+END_SRC
 
+* Cedet
+
+#+BEGIN_SRC emacs-lisp
+  (req-package cedet
+    :config
+    (progn
+      (setq ede-project-placeholder-cache-file (concat user-emacs-directory ".cache/ede-projects.el"))
+      (setq semanticdb-default-save-directory (concat user-emacs-directory ".cache/semanticdb"))
+      ))
+#+END_SRC
+
 * GDB
 
 #+BEGIN_SRC emacs-lisp
