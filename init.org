@@ -2264,6 +2264,51 @@ I use mu4e.
       ))
 #+END_SRC
 
+** Make offlineimap get password from emacs
+
+My email password is saved in =~/.authinfo.gpg=, which is encrypted by
+gnupg, since I prefer make =prompt for password dialog= show on my
+emacs, I let offlineimap get the emacs password via my emacs.
+
+To achive this, you need add following conifg in =~/.offlineimaprc=
+
+: pythonfile = ~/.offlineimap.py
+
+Then create a file named =~/.offlineimap.py= with following code
+
+#+begin_src python :tangle no
+  #!/usr/bin/env python
+
+  import subprocess
+
+  def get_output(cmd):
+      # Bunch of boilerplate to catch the output of a command:
+      pipe = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+      (output, errout) = pipe.communicate()
+      assert pipe.returncode == 0 and not errout
+      return output
+
+  def get_password_emacs(host, port):
+      cmd = "emacsclient --eval '(offlineimap-get-password \"%s\" \"%s\")'" % (host,port)
+      return get_output(cmd).strip().lstrip('"').rstrip('"')
+#+end_src
+
+From =~/offlineimap.py=, we can see I use emacsclient call eslip
+function to get the password, so you also need to add
+=offlineimap-get-password= function in your ~/.emacs
+
+#+begin_src emacs-lisp
+  (defun offlineimap-get-password (host port)
+    (require 'netrc)
+    (let* ((netrc (netrc-parse (expand-file-name "~/.authinfo.gpg")))
+           (hostentry (netrc-machine netrc host port port)))
+      (when hostentry (netrc-get hostentry "password"))))
+#+end_src
+
+After all is done, add following line in =~/.offlineimaprc= and we can get password by emacs.
+
+: remotepasseval = get_password_emacs("imap.gmail.com")
+
 * Finalize package install
 
 At long last we need only call the following function to send
