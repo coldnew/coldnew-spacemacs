@@ -1921,7 +1921,7 @@ c/c++/objc-mode on .h file.
 
 #+BEGIN_SRC emacs-lisp
   (req-package cpputils-cmake
-    :require (flycheck flycheck)
+    :require (flymake flycheck)
     :config
     (progn
       (add-hook 'c-mode-common-hook
