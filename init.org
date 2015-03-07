@@ -314,6 +314,14 @@ You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lan
   (add-to-list 'dotspacemacs-configuration-layers 'php)
 #+END_SRC
 
+*** go
+
+You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lang/go][here]]
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'dotspacemacs-configuration-layers 'go)
+#+END_SRC
+
 *** vim-empty-lines
 
 You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/vim-empty-lines][here]]
