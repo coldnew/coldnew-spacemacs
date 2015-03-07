@@ -2039,6 +2039,13 @@ stdint.h
     :init (add-hook 'json-mode-hook (lambda () (flymake-json-load))))
 #+END_SRC
 
+** Java
+
+#+BEGIN_SRC emacs-lisp
+  (req-package malabar-mode
+    :mode "\\.java$")
+#+END_SRC
+
 ** Markdown
 
 #+BEGIN_SRC emacs-lisp
