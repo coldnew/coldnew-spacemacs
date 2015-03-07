@@ -2246,7 +2246,7 @@ I use mu4e.
     (add-to-list 'load-path "/usr/local/Cellar/mu/HEAD/share/emacs/site-lisp/mu4e"))
 
   (req-package mu4e
-    :require (w3m)
+    :require (w3m smtp)
     :config
     (progn
       ;; Use mu4e as default mail agent
@@ -2261,6 +2261,10 @@ I use mu4e.
       (setq mu4e-html2text-command "w3m -dump -T text/html")
       ;; Show mail's image
       (setq mu4e-view-show-images t)
+      ;; SMTP setup
+      (setq message-send-mail-function 'smtpmail-send-it
+            smtpmail-stream-type 'starttls
+            starttls-use-gnutls t)
       ))
 #+END_SRC
 
@@ -2338,6 +2342,30 @@ Since I use list to store my account info, add foollowing function to setup defa
   (coldnew/mu4e-set-default-account "Gmail")
 #+END_SRC
 
+Select my email account when sending email.
+
+#+BEGIN_SRC emacs-lisp
+  (defun coldnew/mu4e-set-account ()
+    "Set the account for composing a message."
+    (interactive)
+    (let* ((account
+            (if mu4e-compose-parent-message
+                (let ((maildir (mu4e-msg-field mu4e-compose-parent-message :maildir)))
+                  (string-match "/\\(.*?\\)/" maildir)
+                  (match-string 1 maildir))
+              (completing-read (format "Compose with account: (%s) "
+                                       (mapconcat #'(lambda (var) (car var)) coldnew/mu4e-account-alist "/"))
+                               (mapcar #'(lambda (var) (car var)) coldnew/mu4e-account-alist)
+                               nil t nil nil (caar coldnew/mu4e-account-alist))))
+           (account-vars (cdr (assoc account coldnew/mu4e-account-alist))))
+      (if account-vars
+          (mapc #'(lambda (var)
+                    (set (car var) (cadr var)))
+                account-vars))))
+
+  (add-hook 'mu4e-compose-pre-hook 'coldnew/mu4e-set-account)
+#+END_SRC
+
 ** Let mu4e fontify diff contents
 
 I always use mu4e to read maliing-list, it's really nice to fontify diff contents.
@@ -2367,7 +2395,6 @@ I always use mu4e to read maliing-list, it's really nice to fontify diff content
 
   (add-hook 'mu4e-view-mode-hook 'mu4e~view-fontify-diff)
 #+END_SRC
-
 
 * Finalize package install
 
