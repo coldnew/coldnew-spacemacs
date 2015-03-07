@@ -2309,6 +2309,35 @@ After all is done, add following line in =~/.offlineimaprc= and we can get passw
 
 : remotepasseval = get_password_emacs("imap.gmail.com")
 
+** Setup my email acount list
+
+#+begin_src emacs-lisp
+  (setq coldnew/mu4e-account-alist
+        '(("Gmail"
+           (mu4e-sent-folder "/Gmail/Sent")
+           (mu4e-drafts-folder "/Gmail/Drafts")
+           (mu4e-trash-folder "/Gmail/Trash")
+           (user-mail-address "coldnew.tw@gmail.com")
+           (smtpmail-smtp-server "smtp.gmail.com")
+           (smtpmail-smtp-service 587)
+           (smtpmail-smtp-user "coldnew.tw@gmail.com")
+           (user-full-name "Yen-Chin, Lee")
+           (mu4e-compose-signature ""))))
+#+end_src
+
+Since I use list to store my account info, add foollowing function to setup default account.
+
+#+BEGIN_SRC emacs-lisp
+  (defun coldnew/mu4e-set-default-account (account)
+    "Setup the default account based on coldnew/mu4e-account-alist."
+    (let* ((account (cdr (assoc account coldnew/mu4e-account-alist))))
+      (when account (mapc #'(lambda (a)
+                              (set (car a) (if (stringp (cadr a)) (cadr a) (eval (cadr a))))) account))))
+
+  ;; set Gmail to default
+  (coldnew/mu4e-set-default-account "Gmail")
+#+END_SRC
+
 * Finalize package install
 
 At long last we need only call the following function to send
