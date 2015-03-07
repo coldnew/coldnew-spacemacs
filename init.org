@@ -2338,6 +2338,37 @@ Since I use list to store my account info, add foollowing function to setup defa
   (coldnew/mu4e-set-default-account "Gmail")
 #+END_SRC
 
+** Let mu4e fontify diff contents
+
+I always use mu4e to read maliing-list, it's really nice to fontify diff contents.
+
+#+BEGIN_SRC emacs-lisp
+  (defun mu4e~view-fontify-diff ()
+    "Colorize diff message."
+    (interactive)
+    (let ((inhibit-read-only t))
+      (save-excursion
+        (goto-char (point-min))
+        ;; consider only lines that heuristically look like a citation line...
+        (while (re-search-forward "^\\(\\(\\+\\)[^+]\\|\\(-\\)[^-]\\)" nil t)
+          (let ((cur-point (or (match-beginning 2) (match-beginning 3)))
+                (color (if (match-beginning 2)
+                           "green"
+                         "deep pink")))
+            (end-of-line)
+            (add-text-properties cur-point (point)
+                                 `(face ((foreground-color . ,color))))))
+        (goto-char (point-min))
+        (while (re-search-forward "^\\(\\+\\+\\+\\|---\\)" nil t)
+          (let ((cur-point (match-beginning 1)))
+            (end-of-line)
+            (add-text-properties cur-point (point)
+                                 '(face ((weight . bold)))))))))
+
+  (add-hook 'mu4e-view-mode-hook 'mu4e~view-fontify-diff)
+#+END_SRC
+
+
 * Finalize package install
 
 At long last we need only call the following function to send
