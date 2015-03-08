@@ -314,12 +314,12 @@ You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lan
   (add-to-list 'dotspacemacs-configuration-layers 'php)
 #+END_SRC
 
-*** go
+*** lua
 
-You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lang/go][here]]
+You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lang/lua][here]]
 
 #+BEGIN_SRC emacs-lisp
-  (add-to-list 'dotspacemacs-configuration-layers 'go)
+  (add-to-list 'dotspacemacs-configuration-layers 'lua)
 #+END_SRC
 
 *** vim-empty-lines
@@ -2277,6 +2277,14 @@ https://github.com/itsjeyd/git-wip-timemachine
 * Email
 
 I use mu4e.
+
+install in osx
+
+: brew install mu --with-emacs --HEAD
+
+install in gentoo
+
+: USE="emacs" emerge net-mail/mu
 
 #+BEGIN_SRC emacs-lisp
   (when (eq system-type 'darwin)
