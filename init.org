@@ -237,6 +237,14 @@ file, I move this file to =~/.emacs.d/spacemacs.el=.
 spacemacs has many configuration layers, which can take as a
 predefined keybinding/syntax highlight mode.
 
+*** company-mode
+
+You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/company-mode][here]]
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'dotspacemacs-configuration-layers 'company-mode)
+#+END_SRC
+
 *** git
 
 You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/git][here]]
@@ -248,15 +256,7 @@ You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/git
                      ))
 #+END_SRC
 
-*** company-mode
-
-You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/company-mode][here]]
-
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'dotspacemacs-configuration-layers 'company-mode)
-#+END_SRC
-
-*** c-c++
+*** lang/c-c++
 
 You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lang/c-c%2B%2B][here]]
 
@@ -266,7 +266,7 @@ You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lan
   (add-to-list 'dotspacemacs-configuration-layers 'c-c++)
 #+END_SRC
 
-*** clojure
+*** lang/clojure
 
 You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lang/clojure][here]]
 
@@ -274,7 +274,7 @@ You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lan
   (add-to-list 'dotspacemacs-configuration-layers 'clojure)
 #+END_SRC
 
-*** html
+*** lang/html
 
 You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lang/html][here]]
 
@@ -282,7 +282,7 @@ You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lan
   (add-to-list 'dotspacemacs-configuration-layers 'html)
 #+END_SRC
 
-*** javascript
+*** lang/javascript
 
 You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lang/javascript][here]]
 
@@ -290,12 +290,28 @@ You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lan
   (add-to-list 'dotspacemacs-configuration-layers 'javascript)
 #+END_SRC
 
-*** markdown
+*** lang/lua
+
+You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lang/lua][here]]
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'dotspacemacs-configuration-layers 'lua)
+#+END_SRC
+
+*** lang/markdown
 
 You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lang/markdown][here]]
 
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'dotspacemacs-configuration-layers 'markdown)
+#+END_SRC
+
+*** lang/php
+
+You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lang/php][here]]
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'dotspacemacs-configuration-layers 'php)
 #+END_SRC
 
 *** org-repo-todo
@@ -304,22 +320,6 @@ You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/org
 
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'dotspacemacs-configuration-layers 'org-repo-todo)
-#+END_SRC
-
-*** php
-
-You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lang/php][here]]
-
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'dotspacemacs-configuration-layers 'php)
-#+END_SRC
-
-*** lua
-
-You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lang/lua][here]]
-
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'dotspacemacs-configuration-layers 'lua)
 #+END_SRC
 
 *** vim-empty-lines
