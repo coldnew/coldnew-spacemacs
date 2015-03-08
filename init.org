@@ -1,4 +1,4 @@
-#+TITLE: coldnew's emacs config
+i#+TITLE: coldnew's emacs config
 #+AUTHOR: Yen-Chin, Lee <coldnew>
 #+email: coldnew.tw at gmail.com
 #+STARTUP: overview indent align
@@ -2001,6 +2001,20 @@ stdint.h
      '(("\\<\\(int8_t\\|int16_t\\|int32_t\\|int64_t\\|uint8_t\\|uint16_t\\|uint32_t\\|uint64_t\\)\\>" . font-lock-keyword-face))))
 #+END_SRC
 
+*** Key Bindings
+
+#+TBLNAME: c=c++-mode-keys
+| Key     | Command            | description                      |
+|---------+--------------------+----------------------------------|
+| C-c C-o | ff-find-other-file | Find header/source in C/C++ file |
+
+#+BEGIN_SRC emacs-lisp :noweb yes :results silent
+  (add-hook 'c-mode-hook '(lambda()
+            <<define-keys(fn="define-key", map="c-mode-map", keys=c-c++-mode-keys)>> ))
+  (add-hook 'c++-mode-hook '(lambda()
+            <<define-keys(fn="define-key", map="c++-mode-map", keys=c-c++-mode-keys)>> ))
+#+END_SRC
+
 ** Graphviz
 
 #+BEGIN_SRC emacs-lisp
@@ -2510,7 +2524,6 @@ generate keybing via table, just use following functions:
 | C-w      | backward-kill-word                  | Backward delete word                 |
 | C-x C-f  | lusty-file-explorer                 | Use lusty-file-explorer to find-file |
 | C-x C-n  | company-complete                    | Complete with company-mode           |
-| C-x C-o  | ff-find-other-file                  | Find header/source in C/C++ file     |
 | C-x C-q  | read-only-mode                      | toggle read-only-mode                |
 | C-x C-s  | save-buffer-always                  | Always save buffer even not modified |
 | C-x M-1  | deft-or-close                       | Use deft open my note                |
