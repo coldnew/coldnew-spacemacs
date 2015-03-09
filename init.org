@@ -1342,7 +1342,10 @@ For c-mode, just do the same but change the relative
     :init (helm-mode 1)
     :config
     (progn
-      (setq helm-M-x-fuzzy-match t)
+      ;; Use fuzzy match in helm
+      (setq  helm-M-x-fuzzy-match t
+             helm-buffers-fuzzy-matching t
+             helm-recentf-fuzzy-match    t)
 
       (bind-key "TAB" 'helm-execute-persistent-action helm-map)
       (bind-key "<tab>" 'helm-execute-persistent-action helm-map)
@@ -2545,6 +2548,7 @@ generate keybing via table, just use following functions:
 | C-x C-i  | indent-region-or-buffer-and-cleanup | Intent region/buffer and clean up       |
 | M-v      | er/expand-region                    |                                         |
 | M-x      | helm-M-x                            | Use heml for interactive commands (M-x) |
+| M-y      | helm-show-kill-ring                 | Show kill-ring by helm                  |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
   <<define-keys(fn="define-key", map="evil-insert-state-map", keys=global-evil-insert)>>
