@@ -1342,6 +1342,8 @@ For c-mode, just do the same but change the relative
     :init (helm-mode 1)
     :config
     (progn
+      (setq helm-M-x-fuzzy-match t)
+
       (bind-key "TAB" 'helm-execute-persistent-action helm-map)
       (bind-key "<tab>" 'helm-execute-persistent-action helm-map)
       ))
@@ -2003,7 +2005,7 @@ stdint.h
 
 *** Key Bindings
 
-#+TBLNAME: c=c++-mode-keys
+#+TBLNAME: c-c++-mode-keys
 | Key     | Command            | description                      |
 |---------+--------------------+----------------------------------|
 | C-c C-o | ff-find-other-file | Find header/source in C/C++ file |
@@ -2496,14 +2498,15 @@ generate keybing via table, just use following functions:
 ** Normal State
 
 #+TBLNAME: global-evil-normal
-| Key     | Command             | description                          |
-|---------+---------------------+--------------------------------------|
-| C-x C-f | lusty-file-explorer | Use lusty-file-explorer to find-file |
-| C-x C-q | read-only-mode      | toggle read-only-mode                |
-| C-x C-s | save-buffer-always  | Always save buffer even not modified |
-| C-x M-1 | deft-or-close       | Use deft open my note                |
-| M-[     | winner-undo         | switch back to earlier window layout |
-| M-]     | winner-redo         | restore resent window layout         |
+| Key     | Command             | description                             |
+|---------+---------------------+-----------------------------------------|
+| C-x C-f | lusty-file-explorer | Use lusty-file-explorer to find-file    |
+| C-x C-q | read-only-mode      | toggle read-only-mode                   |
+| C-x C-s | save-buffer-always  | Always save buffer even not modified    |
+| C-x M-1 | deft-or-close       | Use deft open my note                   |
+| M-[     | winner-undo         | switch back to earlier window layout    |
+| M-]     | winner-redo         | restore resent window layout            |
+| M-x     | helm-M-x            | Use heml for interactive commands (M-x) |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
     <<define-keys(fn="define-key", map="evil-normal-state-map", keys=global-evil-normal)>>
@@ -2512,35 +2515,36 @@ generate keybing via table, just use following functions:
 ** Insert State
 
 #+TBLNAME: global-evil-insert
-| Key      | Command                             | description                          |
-|----------+-------------------------------------+--------------------------------------|
-| <delete> | hungry-delete-backward              | backward delete with hungru-mode     |
-| C-;      | iedit-mode                          | Quicklly modify all same words       |
-| C-d      | hungry-delete-forward               | forward delete with hungry-mode      |
-| C-l      | hungry-delete-backward              | backward delete with hungru-mode     |
-| C-n      | evil-next-line                      | next-line                            |
-| C-o      | evil-execute-in-normal-state        | Temporary switch to Normal sate      |
-| C-p      | evil-previous-line                  | previous-line                        |
-| C-w      | backward-kill-word                  | Backward delete word                 |
-| C-x C-f  | lusty-file-explorer                 | Use lusty-file-explorer to find-file |
-| C-x C-n  | company-complete                    | Complete with company-mode           |
-| C-x C-q  | read-only-mode                      | toggle read-only-mode                |
-| C-x C-s  | save-buffer-always                  | Always save buffer even not modified |
-| C-x M-1  | deft-or-close                       | Use deft open my note                |
-| C-x M-2  | multi-eshell                        | Show eshell window                   |
-| C-x vl   | magit-log                           |                                      |
-| C-x vp   | magit-push                          |                                      |
-| C-x vs   | magit-status                        |                                      |
-| M-<SPC>  | insert-U200B-char                   | Insert <U200B> character             |
-| M-[      | winner-undo                         | switch back to earlier window layout |
-| M-]      | winner-redo                         | restore resent window layout         |
-| M-s      | helm-occur                          | Find in this file                    |
-| M-s      | helm-occur                          | Search in current buffer             |
-| s-<RET>  | insert-empty-line                   | Insert empty line after current line |
-| s-<SPC>  | insert-U200B-char                   | Insert <U200B> character             |
-| C-v      | set-mark-mode/rectangle-mark-mode   |                                      |
-| C-x C-i  | indent-region-or-buffer-and-cleanup | Intent region/buffer and clean up    |
-| M-v      | er/expand-region                    |                                      |
+| Key      | Command                             | description                             |
+|----------+-------------------------------------+-----------------------------------------|
+| <delete> | hungry-delete-backward              | backward delete with hungru-mode        |
+| C-;      | iedit-mode                          | Quicklly modify all same words          |
+| C-d      | hungry-delete-forward               | forward delete with hungry-mode         |
+| C-l      | hungry-delete-backward              | backward delete with hungru-mode        |
+| C-n      | evil-next-line                      | next-line                               |
+| C-o      | evil-execute-in-normal-state        | Temporary switch to Normal sate         |
+| C-p      | evil-previous-line                  | previous-line                           |
+| C-w      | backward-kill-word                  | Backward delete word                    |
+| C-x C-f  | lusty-file-explorer                 | Use lusty-file-explorer to find-file    |
+| C-x C-n  | company-complete                    | Complete with company-mode              |
+| C-x C-q  | read-only-mode                      | toggle read-only-mode                   |
+| C-x C-s  | save-buffer-always                  | Always save buffer even not modified    |
+| C-x M-1  | deft-or-close                       | Use deft open my note                   |
+| C-x M-2  | multi-eshell                        | Show eshell window                      |
+| C-x vl   | magit-log                           |                                         |
+| C-x vp   | magit-push                          |                                         |
+| C-x vs   | magit-status                        |                                         |
+| M-<SPC>  | insert-U200B-char                   | Insert <U200B> character                |
+| M-[      | winner-undo                         | switch back to earlier window layout    |
+| M-]      | winner-redo                         | restore resent window layout            |
+| M-s      | helm-occur                          | Find in this file                       |
+| M-s      | helm-occur                          | Search in current buffer                |
+| s-<RET>  | insert-empty-line                   | Insert empty line after current line    |
+| s-<SPC>  | insert-U200B-char                   | Insert <U200B> character                |
+| C-v      | set-mark-mode/rectangle-mark-mode   |                                         |
+| C-x C-i  | indent-region-or-buffer-and-cleanup | Intent region/buffer and clean up       |
+| M-v      | er/expand-region                    |                                         |
+| M-x      | helm-M-x                            | Use heml for interactive commands (M-x) |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
   <<define-keys(fn="define-key", map="evil-insert-state-map", keys=global-evil-insert)>>
