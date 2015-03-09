@@ -2501,15 +2501,15 @@ generate keybing via table, just use following functions:
 ** Normal State
 
 #+TBLNAME: global-evil-normal
-| Key     | Command             | description                             |
-|---------+---------------------+-----------------------------------------|
-| C-x C-f | lusty-file-explorer | Use lusty-file-explorer to find-file    |
-| C-x C-q | read-only-mode      | toggle read-only-mode                   |
-| C-x C-s | save-buffer-always  | Always save buffer even not modified    |
-| C-x M-1 | deft-or-close       | Use deft open my note                   |
-| M-[     | winner-undo         | switch back to earlier window layout    |
-| M-]     | winner-redo         | restore resent window layout            |
-| M-x     | helm-M-x            | Use heml for interactive commands (M-x) |
+| Key     | Command            | description                             |
+|---------+--------------------+-----------------------------------------|
+| C-x C-f | helm-find-files    | find-file by helm                       |
+| C-x C-q | read-only-mode     | toggle read-only-mode                   |
+| C-x C-s | save-buffer-always | Always save buffer even not modified    |
+| C-x M-1 | deft-or-close      | Use deft open my note                   |
+| M-[     | winner-undo        | switch back to earlier window layout    |
+| M-]     | winner-redo        | restore resent window layout            |
+| M-x     | helm-M-x           | Use heml for interactive commands (M-x) |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
     <<define-keys(fn="define-key", map="evil-normal-state-map", keys=global-evil-normal)>>
@@ -2528,7 +2528,7 @@ generate keybing via table, just use following functions:
 | C-o      | evil-execute-in-normal-state        | Temporary switch to Normal sate         |
 | C-p      | evil-previous-line                  | previous-line                           |
 | C-w      | backward-kill-word                  | Backward delete word                    |
-| C-x C-f  | lusty-file-explorer                 | Use lusty-file-explorer to find-file    |
+| C-x C-f  | helm-find-files                     | find-file by helm                       |
 | C-x C-n  | company-complete                    | Complete with company-mode              |
 | C-x C-q  | read-only-mode                      | toggle read-only-mode                   |
 | C-x C-s  | save-buffer-always                  | Always save buffer even not modified    |
