@@ -1,4 +1,4 @@
-i#+TITLE: coldnew's emacs config
+#+TITLE: coldnew's emacs config
 #+AUTHOR: Yen-Chin, Lee <coldnew>
 #+email: coldnew.tw at gmail.com
 #+STARTUP: overview indent align
@@ -1140,9 +1140,17 @@ they work nicely with version control systems.
   (req-package evil
     :require (undo-tree)
     :ensure evil
-    :init (evil-mode t)
+    :init
+    (progn
+      ;; Default state set to `'insert-state'
+      (setq evil-default-state 'insert)
+
+      (evil-mode t)
+      )
     :config
     (progn
+
+
       ;; Bind all emacs-state key to insert state
       (setcdr evil-insert-state-map nil)
       (define-key evil-insert-state-map
@@ -1345,7 +1353,11 @@ For c-mode, just do the same but change the relative
       ;; Use fuzzy match in helm
       (setq  helm-M-x-fuzzy-match t
              helm-buffers-fuzzy-matching t
-             helm-recentf-fuzzy-match    t)
+             helm-recentf-fuzzy-match    t
+
+             helm-move-to-line-cycle-in-source t
+             helm-ff-search-library-in-sexp t
+             helm-ff-file-name-history-use-recentf t)
 
       (bind-key "TAB" 'helm-execute-persistent-action helm-map)
       (bind-key "<tab>" 'helm-execute-persistent-action helm-map)
@@ -1462,10 +1474,11 @@ https://github.com/steckerhalter/helm-google
 *** Key Bindings
 
 #+TBLNAME: helm-keys
-| Key      | Command                | description                      |
-|----------+------------------------+----------------------------------|
-| C-w      | backward-delete-word   |                                  |
-| <delete> | hungry-delete-backward | backward delete with hungru-mode |
+| Key      | Command                   | description                      |
+|----------+---------------------------+----------------------------------|
+| C-w      | backward-delete-word      |                                  |
+| <delete> | hungry-delete-backward    | backward delete with hungru-mode |
+| C-c f    | helm-ff-file-name-history | Search recent files              |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
   (add-hook 'helm-mode-hook '(lambda()
