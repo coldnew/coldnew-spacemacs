@@ -2355,6 +2355,8 @@ install in gentoo
       (setq message-send-mail-function 'smtpmail-send-it
             smtpmail-stream-type 'starttls
             starttls-use-gnutls t)
+      ;; don't save messages to Sent Messages, Gmail/IMAP takes care of this
+      (setq mu4e-sent-messages-behavior 'delete)
       ))
 #+END_SRC
 
