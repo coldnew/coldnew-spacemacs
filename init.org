@@ -2357,6 +2357,9 @@ install in gentoo
             starttls-use-gnutls t)
       ;; don't save messages to Sent Messages, Gmail/IMAP takes care of this
       (setq mu4e-sent-messages-behavior 'delete)
+      ;; Setup default mu4e search result mails list, if I want to see
+      ;; more, use M-x `mu4e-headers-toggle-full-search' to make mi4e show all mails
+      (setq mu4e-headers-results-limit 1000)
       ))
 #+END_SRC
 
