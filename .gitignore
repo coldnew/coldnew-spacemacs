@@ -81,3 +81,4 @@ request/
 .litable-lists.el
 spacemacs/srecode-map.el*
 TODO.org
+network-security.data
