@@ -475,6 +475,8 @@ really added to the contents, it just like to do so.
   (req-package pangu-spacing
     :init
     (progn
+      ;; start pangu-spacing globally
+      (global-pangu-spacing-mode 1)
       ;; Always insert `real' space in org-mode.
       (add-hook 'org-mode-hook
                 '(lambda ()
