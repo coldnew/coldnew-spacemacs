@@ -1374,10 +1374,6 @@ For c-mode, just do the same but change the relative
 
 TODO: take from https://github.com/edvorg/emacs-configs/blob/master/init.d/init-helm.el
 #+BEGIN_SRC emacs-lisp
-  ;; helm google
-
-  (req-package helm-google :commands helm-google)
-
   ;; helm proc
 
   (req-package helm-proc
