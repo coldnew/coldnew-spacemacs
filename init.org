@@ -256,6 +256,14 @@ You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/git
                      ))
 #+END_SRC
 
+*** fasd
+
+You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/fasd][here]]
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'dotspacemacs-configuration-layers 'fasd)
+#+END_SRC
+
 *** lang/c-c++
 
 You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lang/c-c%2B%2B][here]]
