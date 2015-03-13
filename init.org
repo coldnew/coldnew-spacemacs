@@ -67,7 +67,7 @@ are =optional= but can make my spacemacs work more nicely.
        aspell
   #+END_SRC
 
-* The early setup
+* Initialization Emacs
 
 There's some setups I need to put to the beging of emacs config. These
 setup is derived from my original's init.el file.
@@ -89,6 +89,14 @@ setup is derived from my original's init.el file.
   ;;    emacs -q -l ~/coldnew-spacemacs/init.el
   (setq user-emacs-directory
         (file-name-directory (or load-file-name (buffer-file-name))))
+#+END_SRC
+
+** Define user-cache-directory variable
+
+#+BEGIN_SRC emacs-lisp
+  (defconst user-cache-directory
+    (file-name-as-directory (concat user-emacs-directory ".cache"))
+    "My emacs storage area for persistent files.")
 #+END_SRC
 
 * Package Management with Cask and Pallet
@@ -1509,9 +1517,9 @@ https://github.com/steckerhalter/helm-google
   (req-package cedet
     :config
     (progn
-      (setq ede-project-placeholder-cache-file (concat user-emacs-directory ".cache/ede-projects.el"))
-      (setq semanticdb-default-save-directory (concat user-emacs-directory ".cache/semanticdb"))
-      (setq srecode-map-save-file (concat user-emacs-directory ".cache/srecode-map.el"))
+      (setq ede-project-placeholder-cache-file (concat user-cache-directory "ede-projects.el"))
+      (setq semanticdb-default-save-directory (concat user-cache-directory "semanticdb"))
+      (setq srecode-map-save-file (concat user-cache-directory "srecode-map.el"))
       ))
 #+END_SRC
 
@@ -1536,7 +1544,7 @@ like is it fully integrated with emacs.
   (req-package eshell
     :init
     ;; move eshell cache dir to ~/.emacs.d/.cache
-    (setq eshell-directory-name (concat user-emacs-directory ".cache/eshell")))
+    (setq eshell-directory-name (concat user-cache-directory "eshell")))
 #+END_SRC
 
 *** Use bash like prompt with color
