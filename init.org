@@ -950,12 +950,21 @@ unload previous theme before loading a new one.
       (define-key minibuffer-local-map (kbd "M-t") '(lambda()
                                                       (interactive)
                                                       (let ((dir (if (eq system-type 'darwin)
-                                                                     "~/ramdisk/" "/tmp/")))
+                                                                     "/Volumes/ramdisk" "/tmp/")))
                                                         (coldnew/minibuffer-switch-dir dir))))
       ;; switch to home dir
       (define-key minibuffer-local-map (kbd "M-h") '(lambda()
                                                       (interactive)
-                                                      (coldnew/minibuffer-switch-dir "~/")))
+                                                      (coldnew/minibuffer-switch-dir (file-name-as-directory (getenv "HOME")))))
+
+      ;; other with C-x prefix to prevent conflict with helm
+      (define-key minibuffer-local-map (kbd "C-x r") '(lambda()
+                                                      (interactive)
+                                                      (coldnew/minibuffer-switch-dir "/")))
+
+      (define-key minibuffer-local-map (kbd "C-x s") '(lambda()
+                                                      (interactive)
+                                                      (coldnew/minibuffer-switch-dir "/ssh:")))
       ))
 #+END_SRC
 
