@@ -2553,6 +2553,7 @@ generate keybing via table, just use following functions:
 | M-[     | winner-undo        | switch back to earlier window layout    |
 | M-]     | winner-redo        | restore resent window layout            |
 | M-x     | helm-M-x           | Use heml for interactive commands (M-x) |
+| C-x C-o | other-frame        | Switch to other frame                   |
 | M-o     | other-window       | Switch to other window                  |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
@@ -2594,6 +2595,7 @@ generate keybing via table, just use following functions:
 | M-x      | helm-M-x                            | Use heml for interactive commands (M-x) |
 | M-y      | helm-show-kill-ring                 | Show kill-ring by helm                  |
 | M-o      | other-window                        | Switch to other window                  |
+| C-x C-o  | other-frame                         | Switch to other frame                   |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
   <<define-keys(fn="define-key", map="evil-insert-state-map", keys=global-evil-insert)>>
