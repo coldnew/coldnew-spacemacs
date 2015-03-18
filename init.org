@@ -497,28 +497,6 @@ really added to the contents, it just like to do so.
                    (set (make-local-variable 'pangu-spacing-real-insert-separtor) t)))))
 #+END_SRC
 
-** lusty-explorer
-
-[[https://github.com/sjbach/lusty-emacs][lusty-explorer]] s a fast and responsive way to manage files and
-buffers. It includes both a filesystem explorer and a buffer switcher
-through a common interface.
-
-#+BEGIN_SRC emacs-lisp
-  (req-package lusty-explorer
-    :init
-    (progn
-      ;; use lusty-explorer method to do completion
-      (eval-after-load "helm-mode"
-        '(progn
-           (add-to-list 'helm-completing-read-handlers-alist '(lusty-file-explorer . nil))
-           (add-to-list 'helm-completing-read-handlers-alist '(lusty-buffer-explorer . nil)))))
-    :config
-    (progn
-      (add-hook 'lusty-setup-hook
-                '(lambda ()
-                   (define-key lusty-mode-map (kbd "RET") 'lusty-select-current-name)))))
-#+END_SRC
-
 ** sx
 
 [[https://github.com/vermiculus/sx.el/][SX]] is a full featured Stack Exchange mode for GNU Emacs 24+. Using the
