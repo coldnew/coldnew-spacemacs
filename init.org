@@ -652,6 +652,18 @@ for that query.
   (req-package howdoi)
 #+END_SRC
 
+** org-download
+
+#+BEGIN_SRC emacs-lisp
+  (req-package org-download)
+#+END_SRC
+
+** org-screenshot
+
+#+BEGIN_SRC emacs-lisp
+  (req-package org-screenshot)
+#+END_SRC
+
 * Interactive Commands
 
 In emacs, we can use =M-x= to execute interactive commands, I
@@ -1823,7 +1835,7 @@ An abbreviated link looks like
           ))
 #+END_SRC
 
-*** Make spell-checking tool ignore somce org-mode section
+*** Make spell-checking tool ignore some org-mode section
 
 see: http://emacs.stackexchange.com/questions/450/intelligent-spell-checking-in-org-mode
 
