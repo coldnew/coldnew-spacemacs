@@ -664,6 +664,25 @@ for that query.
   (req-package org-screenshot)
 #+END_SRC
 
+** exec-path-from-shell
+
+[[https://github.com/purcell/exec-path-from-shell][exec-path-from-shell]] is A GNU Emacs library to ensure environment variables
+inside Emacs look the same as in the user's shell.
+
+Ever find that a command works in your shell, but not in Emacs?
+
+This happens a lot on OS X, where an Emacs instance started from the GUI
+inherits a default set of environment variables.
+
+This library works solves this problem by copying important environment
+variables from the user's shell: it works by asking your shell to print out the
+variables of interest, then copying them into the Emacs environment.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package exec-path-from-shell
+    :init (when (memq window-system '(mac ns x )) (exec-path-from-shell-initialize)))
+#+END_SRC
+
 * Interactive Commands
 
 In emacs, we can use =M-x= to execute interactive commands, I
