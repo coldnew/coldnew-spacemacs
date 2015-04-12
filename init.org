@@ -938,7 +938,7 @@ unload previous theme before loading a new one.
   ;; use coldnew-theme-night by default
   (req-package coldnew-theme
     :require (powerline powerline-evil)
-    :init (coldnew-theme-night))
+    :config (coldnew-theme-night))
 #+END_SRC
 
 * Minibuffers
