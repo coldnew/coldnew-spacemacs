@@ -1869,13 +1869,14 @@ see: http://emacs.stackexchange.com/questions/450/intelligent-spell-checking-in-
 *** Key Bindings
 
 #+TBLNAME: org-mode-keys
-| Key   | Command         | description |
-|-------+-----------------+-------------|
-| C-c b | org-metaleft    |             |
-| C-c f | org-metaright   |             |
-| C-c p | org-metaup      |             |
-| C-c n | org-metadown    |             |
-| C-c i | org-insert-link |             |
+| Key   | Command                  | description                 |
+|-------+--------------------------+-----------------------------|
+| C-c b | org-metaleft             |                             |
+| C-c f | org-metaright            |                             |
+| C-c p | org-metaup               |                             |
+| C-c n | org-metadown             |                             |
+| C-c i | org-insert-link          |                             |
+| C-c I | org-toggle-inline-images | Toggle display inline image |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
   (add-hook 'org-mode-hook '(lambda()
