@@ -2525,6 +2525,30 @@ I always use mu4e to read maliing-list, it's really nice to fontify diff content
   (add-hook 'mu4e-view-mode-hook 'mu4e~view-fontify-diff)
 #+END_SRC
 
+* IRC
+
+I always use =ERC= as my irc client, which is bundle with emacs.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package erc
+    :config
+    (progn
+      ;; set prompt to ->>
+      (setq erc-prompt "->> ")
+      ;; Encoding with utf-8
+      (setq erc-server-coding-system '(utf-8 . utf-8))
+      ;; column with is 100
+      (setq erc-fill-column 100)
+      ;; Auto join irc server when erc start
+      (erc-autojoin-mode t)
+      ;; truncate too long line
+      (erc-truncate-mode +1)
+      ;; Enable track with erc
+      (erc-track-mode t)
+      ))
+#+END_SRC
+
+
 * Finalize package install
 
 At long last we need only call the following function to send
