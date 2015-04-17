@@ -1904,8 +1904,11 @@ see: http://emacs.stackexchange.com/questions/450/intelligent-spell-checking-in-
 
 ** Rust
 
+[[https://github.com/rust-lang/rust-mode][rust-mode]] is a major emacs-mode for editing Rust source code.
+
 #+BEGIN_SRC emacs-lisp
-  (req-package rust-mode)
+  (req-package rust-mode
+    :mode "\\.rs\\'")
 #+END_SRC
 
 ** Go
