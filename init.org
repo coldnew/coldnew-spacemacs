@@ -2238,14 +2238,10 @@ stdint.h
            ("\\.dtsi$" . dts-mode)))
 #+END_SRC
 
-** Swift
+** Vala
 
 #+BEGIN_SRC emacs-lisp
-  (req-package swift-mode
-    :require flycheck
-    :mode (("\\.dts$" . dts-mode)
-           ("\\.dtsi$" . dts-mode))
-    :init (add-to-list 'flycheck-checkers 'swift))
+  (req-package vala-mode :mode "\\.vala\'")
 #+END_SRC
 
 ** BitBake
