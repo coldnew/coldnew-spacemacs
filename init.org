@@ -2611,7 +2611,7 @@ generate keybing via table, just use following functions:
 #+TBLNAME: global-evil-insert
 | Key      | Command                             | description                             |
 |----------+-------------------------------------+-----------------------------------------|
-| <delete> | hungry-delete-backward              | backward delete with hungru-mode        |
+| <delete> | hungry-delete-backward              | backward delete with hungry-mode        |
 | C-;      | iedit-mode                          | Quicklly modify all same words          |
 | C-d      | hungry-delete-forward               | forward delete with hungry-mode         |
 | C-l      | hungry-delete-backward              | backward delete with hungru-mode        |
