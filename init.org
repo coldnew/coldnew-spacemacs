@@ -237,111 +237,17 @@ The original spacemacs will load =~/.spacemacs= as user configuration
 file, I move this file to =~/.emacs.d/spacemacs.el=.
 
 #+BEGIN_SRC emacs-lisp
+  ;; Use `~/.emacs.d/spacemacs.el' instead of `~/.spacemacs'
+  (setq-default dotspacemacs-filepath
+                (concat user-emacs-directory "spacemacs.el"))
+
+  ;; FIXME: why (dotspacemacs/location) not following dotspacemacs-filepath ?
+  ;; it's BUG!!!!!!
+  (let ((dotspacemacs/location "~/.spacemacs"))
+    (if (not (file-exists-p dotspacemacs/location))
+        (make-symbolic-link (concat user-emacs-directory "spacemacs.el") dotspacemacs/location)))
+
   (load (concat user-emacs-directory "spacemacs.el"))
-#+END_SRC
-
-** Setup spacemacs configuration layers
-
-spacemacs has many configuration layers, which can take as a
-predefined keybinding/syntax highlight mode.
-
-*** company-mode
-
-You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/company-mode][here]]
-
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'dotspacemacs-configuration-layers 'company-mode)
-#+END_SRC
-
-*** git
-
-You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/git][here]]
-
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'dotspacemacs-configuration-layers
-               '(git :variables
-                     git-gutter-use-fringe t
-                     ))
-#+END_SRC
-
-*** fasd
-
-You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/fasd][here]]
-
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'dotspacemacs-configuration-layers 'fasd)
-#+END_SRC
-
-*** lang/c-c++
-
-You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lang/c-c%2B%2B][here]]
-
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'dotspacemacs-configuration-layers 'c-c++)
-#+END_SRC
-
-*** lang/clojure
-
-You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lang/clojure][here]]
-
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'dotspacemacs-configuration-layers 'clojure)
-#+END_SRC
-
-*** lang/html
-
-You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lang/html][here]]
-
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'dotspacemacs-configuration-layers 'html)
-#+END_SRC
-
-*** lang/javascript
-
-You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lang/javascript][here]]
-
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'dotspacemacs-configuration-layers 'javascript)
-#+END_SRC
-
-*** lang/lua
-
-You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lang/lua][here]]
-
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'dotspacemacs-configuration-layers 'lua)
-#+END_SRC
-
-*** lang/markdown
-
-You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lang/markdown][here]]
-
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'dotspacemacs-configuration-layers 'markdown)
-#+END_SRC
-
-*** lang/php
-
-You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/lang/php][here]]
-
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'dotspacemacs-configuration-layers 'php)
-#+END_SRC
-
-*** org-repo-todo
-
-You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/org-repo-todo][here]]
-
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'dotspacemacs-configuration-layers 'org-repo-todo)
-#+END_SRC
-
-*** vim-empty-lines
-
-You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/vim-empty-lines][here]]
-
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'dotspacemacs-configuration-layers 'vim-empty-lines)
 #+END_SRC
 
 ** Overwrite spacemacs function to let it not remove my packages
@@ -351,6 +257,10 @@ You can find doc [[https://github.com/syl20bnr/spacemacs/tree/master/contrib/vim
   (defadvice configuration-layer/delete-orphan-packages (around null-func activate)
     "Overwrite the spacemacs's `configuration-layer/delete-orphan-packages'
     to make it not remove any orphan packages.")
+
+  (defadvice spacemacs/check-for-new-version (around null-func activate)
+    "Overwrite the spacemacs's `spacemacs/check-for-new-version' to
+    makt it useless since I use git submodule to bundle spacemacs with my emacs.")
 #+END_SRC
 
 ** Load spacemacs
@@ -2539,7 +2449,6 @@ I always use =ERC= as my irc client, which is bundle with emacs.
       (erc-track-mode t)
       ))
 #+END_SRC
-
 
 * Finalize package install
 

@@ -23,7 +23,19 @@
      ;; markdown
      ;; org
      ;; syntax-checking
-
+     company-mode
+     git (:variables git-gutter-use-fringe t)
+     fast
+     ;; languages
+     c-c++
+     clojure
+     html
+     javascript
+     lua
+     markdown
+     php
+     org-repo-todo
+     vim-empty-lines
      )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -137,7 +149,7 @@ before layers configuration."
   "Configuration function.
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
-)
+  )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
