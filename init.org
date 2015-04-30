@@ -1177,14 +1177,10 @@ they work nicely with version control systems.
     :init
     (progn
       ;; Default state set to `'insert-state'
-      (setq evil-default-state 'insert)
-
-      (evil-mode t)
-      )
+      ;;(setq evil-default-state 'insert)
+      (evil-mode t))
     :config
     (progn
-
-
       ;; Bind all emacs-state key to insert state
       (setcdr evil-insert-state-map nil)
       (define-key evil-insert-state-map
