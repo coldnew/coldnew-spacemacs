@@ -593,6 +593,12 @@ variables of interest, then copying them into the Emacs environment.
     :init (when (memq window-system '(mac ns x )) (exec-path-from-shell-initialize)))
 #+END_SRC
 
+** htmlize
+
+#+BEGIN_SRC emacs-lisp
+  (req-package htmlize)
+#+END_SRC
+
 * Interactive Commands
 
 In emacs, we can use =M-x= to execute interactive commands, I
