@@ -459,8 +459,8 @@ representing colors with the color they represent as background.
       (define-minor-mode deft-note-mode "Deft notes" nil " Deft-Notes" nil)
       (setq deft-text-mode 'deft-note-mode)
 
-      ;; My notes set to ~/Copy/org
-      (setq deft-directory "~/Copy/org/")
+      ;; My notes set to ~/Org
+      (setq deft-directory "~/Org/")
 
       ;; Use filename as title
       (setq deft-use-filename-as-title t)
