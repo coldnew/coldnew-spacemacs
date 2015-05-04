@@ -34,6 +34,7 @@
      lua
      markdown
      php
+     org
      org-repo-todo
      vim-empty-lines
      )
@@ -153,3 +154,84 @@ layers configuration."
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ahs-case-fold-search nil)
+ '(ahs-default-range (quote ahs-range-whole-buffer))
+ '(ahs-idle-interval 0.25)
+ '(ahs-idle-timer 0 t)
+ '(ahs-inhibit-face-list nil)
+ '(compilation-message-face (quote default))
+ '(cua-global-mark-cursor-color "#2aa198")
+ '(cua-normal-cursor-color "#657b83")
+ '(cua-overwrite-cursor-color "#b58900")
+ '(cua-read-only-cursor-color "#859900")
+ '(fci-rule-color "#eee8d5")
+ '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
+ '(highlight-symbol-colors
+   (--map
+    (solarized-color-blend it "#fdf6e3" 0.25)
+    (quote
+     ("#b58900" "#2aa198" "#dc322f" "#6c71c4" "#859900" "#cb4b16" "#268bd2"))))
+ '(highlight-symbol-foreground-color "#586e75")
+ '(highlight-tail-colors
+   (quote
+    (("#eee8d5" . 0)
+     ("#B4C342" . 20)
+     ("#69CABF" . 30)
+     ("#69B7F0" . 50)
+     ("#DEB542" . 60)
+     ("#F2804F" . 70)
+     ("#F771AC" . 85)
+     ("#eee8d5" . 100))))
+ '(hl-bg-colors
+   (quote
+    ("#DEB542" "#F2804F" "#FF6E64" "#F771AC" "#9EA0E5" "#69B7F0" "#69CABF" "#B4C342")))
+ '(hl-fg-colors
+   (quote
+    ("#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3")))
+ '(magit-diff-use-overlays nil)
+ '(magit-use-overlays nil)
+ '(package-selected-packages
+   (quote
+    (org-repo-todo org-pomodoro alert gntp zenburn-theme yaml-mode window-numbering wgrep-helm web-mode w3m volatile-highlights visual-regexp-steroids vim-empty-lines-mode vi-tilde-fringe vala-mode tagedit sx string-edit stickyfunc-enhance ssh-config-mode srefactor smooth-scrolling smeargle slim-mode skeletor scss-mode sass-mode rust-mode rfringe req-package rake rainbow-mode rainbow-delimiters qml-mode powerline-evil php-mode password-generator paradox pangu-spacing pallet page-break-lines org-screenshot org-magit org-mac-link org-download org-bullets noflet neotree multi-term multi-eshell move-text monokai-theme markdown-toc malabar-mode magit-svn magit-gitflow magit-gh-pulls lua-mode litable linum-relative linum-off leuven-theme less-css-mode json-mode js2-refactor jinja2-mode info+ indent-guide ido-vertical-mode hungry-delete htmlize howdoi hl-anything highlight-numbers highlight-indentation highlight-escape-sequences highlight-cl helm-themes helm-swoop helm-projectile helm-proc helm-package helm-open-github helm-mode-manager helm-make helm-helm-commands helm-google helm-github-stars helm-flyspell helm-flymake helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag guide-key-tip graphviz-dot-mode google-translate golden-ratio go-mode glsl-mode gitignore-mode github-browse-file gitconfig-mode gitattributes-mode git-wip-timemachine git-timemachine git-messenger git-link git-gutter-fringe gist ggtags flymake-shell flymake-json flycheck flx-ido fish-mode fill-column-indicator fasd fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-terminal-cursor-changer evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-matchit evil-lisp-state evil-jumper evil-indent-textobject evil-iedit-state evil-exchange evil-escape evil-args evil-anzu ethan-wspace eshell-autojump emmet-mode elisp-slime-nav editorconfig dummy-h-mode dts-mode discover-my-major dired+ deft css-eldoc cpputils-cmake company-tern company-quickhelp company-c-headers coffee-mode cmake-font-lock clj-refactor clang-format cider-eval-sexp-fu c-eldoc buffer-move bitbake bbyac batch-mode base16-theme auto-highlight-symbol auto-dictionary ascii-art-to-unicode ascii android-mode align-cljlet aggressive-indent ag adaptive-wrap ace-window ace-link ac-cider 4clojure)))
+ '(pos-tip-background-color "#eee8d5")
+ '(pos-tip-foreground-color "#586e75")
+ '(ring-bell-function (quote ignore))
+ '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#eee8d5" 0.2))
+ '(term-default-bg-color "#fdf6e3")
+ '(term-default-fg-color "#657b83")
+ '(vc-annotate-background nil)
+ '(vc-annotate-color-map
+   (quote
+    ((20 . "#dc322f")
+     (40 . "#c85d17")
+     (60 . "#be730b")
+     (80 . "#b58900")
+     (100 . "#a58e00")
+     (120 . "#9d9100")
+     (140 . "#959300")
+     (160 . "#8d9600")
+     (180 . "#859900")
+     (200 . "#669b32")
+     (220 . "#579d4c")
+     (240 . "#489e65")
+     (260 . "#399f7e")
+     (280 . "#2aa198")
+     (300 . "#2898af")
+     (320 . "#2793ba")
+     (340 . "#268fc6")
+     (360 . "#268bd2"))))
+ '(vc-annotate-very-old-color nil)
+ '(weechat-color-list
+   (quote
+    (unspecified "#fdf6e3" "#eee8d5" "#990A1B" "#dc322f" "#546E00" "#859900" "#7B6000" "#b58900" "#00629D" "#268bd2" "#93115C" "#d33682" "#00736F" "#2aa198" "#657b83" "#839496"))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
