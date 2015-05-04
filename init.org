@@ -1706,15 +1706,34 @@ persists across sessions.
            ("\\.org_archive\\'" . org-mode))
   :config
   (progn
+    ;; Always enable auto indent mode
+    (setq org-indent-mode t)
     ;; fontify source code
     (setq org-src-fontify-natively t)
+
     ;; Use current window when switch to source block
     (setq org-src-window-setup 'current-window)
     ;; Disable prompting to evaluate babel blocks
     (setq org-confirm-babel-evaluate nil)
-    ;; Always enable auto indent mode
-    (setq org-indent-mode t)
     ))
+#+END_SRC
+
+*** Agenda setup
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load 'org
+    '(progn
+       ;; make agenda show on current window
+       (setq org-agenda-window-setup 'current-window)
+       ;; highlight current in agenda
+       (add-hook 'org-agenda-mode-hook 'hl-line-mode)
+       ;; Setup files for agenda
+       (setq org-agenda-files (list "~/Org/task/Task.org"))
+       ;; Always use `C-g' to exit agenda
+       (add-hook 'org-agenda-mode-hook
+                 '(lambda ()
+                    (local-set-key (kbd "C-g") 'org-agenda-exit)))
+       ))
 #+END_SRC
 
 *** Extend org-mode's easy templates
