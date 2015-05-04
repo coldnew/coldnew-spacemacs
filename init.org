@@ -1712,6 +1712,8 @@ persists across sessions.
     (setq org-src-window-setup 'current-window)
     ;; Disable prompting to evaluate babel blocks
     (setq org-confirm-babel-evaluate nil)
+    ;; Always enable auto indent mode
+    (setq org-indent-mode t)
     ))
 #+END_SRC
 
