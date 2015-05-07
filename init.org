@@ -2526,6 +2526,9 @@ generate keybing via table, just use following functions:
 | C-x M-1 | deft-or-close       | Use deft open my note                   |
 | C-x M-2 | multi-eshell        | Show eshell window                      |
 | C-x M-3 | mu4e                | Use mu4e to read mail                   |
+| C-x vl  | magit-log           |                                         |
+| C-x vp  | magit-push          |                                         |
+| C-x vs  | magit-status        |                                         |
 | M-[     | winner-undo         | switch back to earlier window layout    |
 | M-]     | winner-redo         | restore resent window layout            |
 | M-x     | helm-M-x            | Use heml for interactive commands (M-x) |
