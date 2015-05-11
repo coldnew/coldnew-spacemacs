@@ -1718,7 +1718,7 @@ persists across sessions.
     ))
 #+END_SRC
 
-*** Agenda setup
+*** Capture and Agenda
 
 #+BEGIN_SRC emacs-lisp
   (eval-after-load 'org
@@ -1728,7 +1728,10 @@ persists across sessions.
        ;; highlight current in agenda
        (add-hook 'org-agenda-mode-hook 'hl-line-mode)
        ;; Setup files for agenda
-       (setq org-agenda-files (list "~/Org/task/Task.org"))
+       (setq org-agenda-files (list "~/Org/task/Office.org" "~/Org/task/Personal.org"))
+       ;;
+       (setq org-directory "~/Org")
+       (setq org-default-notes-file (f-join org-directory "task" "Office.org"))
        ;; Always use `C-g' to exit agenda
        (add-hook 'org-agenda-mode-hook
                  '(lambda ()
