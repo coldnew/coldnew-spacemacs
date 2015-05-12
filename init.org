@@ -11,11 +11,11 @@
 
 * About
 
-This is my another emacs config, which is a totally rewrite version
+This is another emacs config of mine, which is a totally rewritten version
 based on top of [[https://github.com/syl20bnr/spacemacs][spacemacs]] and [[https://github.com/coldnew/coldnew-emacs][coldnew-emacs]] with [[http://en.wikipedia.org/wiki/Literate_programming][literate programming]]
-in [[http://orgmode.org/][org-mode]] ,but use English to write this config instead.
+in [[http://orgmode.org/][org-mode]], but it uses English to write this config instead.
 
-Feal free to use it :).
+Feel free to use it :).
 
 ** Install or testing this config
 
@@ -28,23 +28,23 @@ Feal free to use it :).
   : git submodule init
   : git submodule update
 
-- Befor trying starting emacs, you need to bootstrap with [[https://github.com/cask/cask][Cask]]
+- Before trying to start emacs, you need to bootstrap it with [[https://github.com/cask/cask][Cask]]
 
   : cask install
 
-- Then use =make= command to generate init.el file
+- Then use the =make= command to generate an init.el file
 
   : make init.el
 
-- If you don not put this repo on =~/.emacs.d=, you need to use following
+- If you do not put this repo on =~/.emacs.d=, you need to use following
   command to start emacs
 
   : emacs -q -l ~/coldnew-spacemacs/init.el
 
 ** Packages need to install in system (Optional)
 
-Some extra packages need to install in system manually. These packages
-are =optional= but can make my spacemacs work more nicely.
+Some extra packages need to be installed in the system manually. These packages
+are =optional= but can make this spacemacs config work much more nicely.
 
 - Mac OSX
 
@@ -69,8 +69,8 @@ are =optional= but can make my spacemacs work more nicely.
 
 * Initialization Emacs
 
-There's some setups I need to put to the beging of emacs config. These
-setup is derived from my original's init.el file.
+There are some configurations I need to put at the beginning of the emacs config. These
+configurations are derived from my original init.el file.
 
 ** load prefer newer
 
@@ -150,7 +150,7 @@ Finally, we add the following lines to our init file:
 
 ** Initialize Pallet
 
-Since we already install pallet via cask, we just need to use
+Since we already install pallet via cask, we just need to use the 
 following code to initialize pallet.
 
 #+BEGIN_SRC emacs-lisp
