@@ -345,6 +345,7 @@ prefer use =en_US= to display time info.
 Most of emacs packages do not need many configs or just provide
 commands/functions to use, I put them here.
 
+
 ** 4clojure
 
 [[https://github.com/losingkeys/4clojure.el][4clojure.el]] let you open and evaluate [[http://www.4clojure.com/][4clojure]] questions.
@@ -1819,6 +1820,7 @@ see: http://emacs.stackexchange.com/questions/450/intelligent-spell-checking-in-
             <<define-keys(fn="define-key", map="org-mode-map", keys=org-mode-keys)>> ))
 #+END_SRC
 
+
 ** SSH Config
 
 #+BEGIN_SRC emacs-lisp
@@ -2060,6 +2062,12 @@ stdint.h
     :require flymake-json
     :mode ("\\.json$" . json-mode)
     :init (add-hook 'json-mode-hook (lambda () (flymake-json-load))))
+#+END_SRC
+
+** Python
+
+#+BEGIN_SRC emacs-lisp
+  (req-package jinja2-mode)
 #+END_SRC
 
 ** Java
@@ -2608,3 +2616,12 @@ generate keybing via table, just use following functions:
 * End of configuration
 
 Oh YA!! We finish loading emacs configuration :)
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'load-path "~/Workspace/org-pelican")
+  (add-to-list 'load-path "~/Workspace/emacs-blogit-pelican")
+  (require 'blogit)
+  (setq blogit-project-alist
+        '(("coldnew's blog" :config "~/Workspace/blog/blogit.el")
+          ))
+#+END_SRC

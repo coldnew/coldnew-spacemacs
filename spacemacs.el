@@ -151,9 +151,6 @@ before layers configuration."
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
   )
-
-;; Do not write anything past this comment. This is where Emacs will
-;; auto-generate custom variable definitions.
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -195,9 +192,7 @@ layers configuration."
     ("#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3")))
  '(magit-diff-use-overlays nil)
  '(magit-use-overlays nil)
- '(package-selected-packages
-   (quote
-    (org-repo-todo org-pomodoro alert gntp zenburn-theme yaml-mode window-numbering wgrep-helm web-mode w3m volatile-highlights visual-regexp-steroids vim-empty-lines-mode vi-tilde-fringe vala-mode tagedit sx string-edit stickyfunc-enhance ssh-config-mode srefactor smooth-scrolling smeargle slim-mode skeletor scss-mode sass-mode rust-mode rfringe req-package rake rainbow-mode rainbow-delimiters qml-mode powerline-evil php-mode password-generator paradox pangu-spacing pallet page-break-lines org-screenshot org-magit org-mac-link org-download org-bullets noflet neotree multi-term multi-eshell move-text monokai-theme markdown-toc malabar-mode magit-svn magit-gitflow magit-gh-pulls lua-mode litable linum-relative linum-off leuven-theme less-css-mode json-mode js2-refactor jinja2-mode info+ indent-guide ido-vertical-mode hungry-delete htmlize howdoi hl-anything highlight-numbers highlight-indentation highlight-escape-sequences highlight-cl helm-themes helm-swoop helm-projectile helm-proc helm-package helm-open-github helm-mode-manager helm-make helm-helm-commands helm-google helm-github-stars helm-flyspell helm-flymake helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag guide-key-tip graphviz-dot-mode google-translate golden-ratio go-mode glsl-mode gitignore-mode github-browse-file gitconfig-mode gitattributes-mode git-wip-timemachine git-timemachine git-messenger git-link git-gutter-fringe gist ggtags flymake-shell flymake-json flycheck flx-ido fish-mode fill-column-indicator fasd fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-terminal-cursor-changer evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-matchit evil-lisp-state evil-jumper evil-indent-textobject evil-iedit-state evil-exchange evil-escape evil-args evil-anzu ethan-wspace eshell-autojump emmet-mode elisp-slime-nav editorconfig dummy-h-mode dts-mode discover-my-major dired+ deft css-eldoc cpputils-cmake company-tern company-quickhelp company-c-headers coffee-mode cmake-font-lock clj-refactor clang-format cider-eval-sexp-fu c-eldoc buffer-move bitbake bbyac batch-mode base16-theme auto-highlight-symbol auto-dictionary ascii-art-to-unicode ascii android-mode align-cljlet aggressive-indent ag adaptive-wrap ace-window ace-link ac-cider 4clojure)))
+ '(org-agenda-files (quote ("~/Org/task/Personal.org")))
  '(pos-tip-background-color "#eee8d5")
  '(pos-tip-foreground-color "#586e75")
  '(ring-bell-function (quote ignore))
