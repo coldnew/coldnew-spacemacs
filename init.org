@@ -243,6 +243,7 @@ file, I move this file to =~/.emacs.d/spacemacs.el=.
 
   ;; FIXME: why (dotspacemacs/location) not following dotspacemacs-filepath ?
   ;; it's BUG!!!!!!
+  ;; This is fixed in spacemacs's commit `afde9f2', but not for stable-release yet.
   (let ((dotspacemacs/location "~/.spacemacs"))
     (if (not (file-exists-p dotspacemacs/location))
         (make-symbolic-link (concat user-emacs-directory "spacemacs.el") dotspacemacs/location)))
