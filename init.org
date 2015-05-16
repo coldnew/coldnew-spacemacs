@@ -2183,6 +2183,12 @@ stdint.h
            ("\\.dtsi$" . dts-mode)))
 #+END_SRC
 
+** newlisp
+
+#+BEGIN_SRC emacs-lisp
+  (req-package newlisp :mode "\\.lsp$")
+#+END_SRC
+
 ** Vala
 
 #+BEGIN_SRC emacs-lisp
