@@ -1201,7 +1201,7 @@ retrieve and display completion candidates.
 
 #+BEGIN_SRC emacs-lisp :noweb yes
   (add-hook 'company-mode-hook '(lambda()
-            <<define-keys(fn="define-key", map="company-active-map", keys=company-active-keys)>> ))
+            <<define-keys(fn="define-key", state="", map="company-active-map", keys=company-active-keys)>> ))
 #+END_SRC
 
 ** Completion with Bit Bang
@@ -1426,7 +1426,7 @@ https://github.com/steckerhalter/helm-google
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
   (add-hook 'helm-mode-hook '(lambda()
-            <<define-keys(fn="define-key", map="helm-map", keys=helm-keys)>> ))
+            <<define-keys(fn="define-key", state="",map="helm-map", keys=helm-keys)>> ))
 #+END_SRC
 
 * TAGS
@@ -1818,9 +1818,8 @@ see: http://emacs.stackexchange.com/questions/450/intelligent-spell-checking-in-
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
   (add-hook 'org-mode-hook '(lambda()
-            <<define-keys(fn="define-key", map="org-mode-map", keys=org-mode-keys)>> ))
+            <<define-keys(fn="define-key", state="", map="org-mode-map", keys=org-mode-keys)>> ))
 #+END_SRC
-
 
 ** SSH Config
 
@@ -1891,6 +1890,18 @@ see: http://emacs.stackexchange.com/questions/450/intelligent-spell-checking-in-
     :commands clang-format-region)
 #+END_SRC
 
+*** Guess indent setup automatically
+
+GitHub: https://github.com/jscheid/dtrt-indent
+
+#+BEGIN_SRC emacs-lisp
+  (req-package dtrt-indent
+    :config
+    (add-hook 'c-mode-common-hook
+              (lambda()
+                (dtrt-indent-mode t))))
+#+END_SRC
+
 *** Highlight a few dangerous types in C/C++
 
 [[http://www.emacswiki.org/emacs/CWarnMode][cwarn-mode]] is a minor mode that ca highlight a few dangerous types in C/C++.
@@ -1955,7 +1966,54 @@ c/c++/objc-mode on .h file.
 I always use =linux coding style= for c language by default.
 
 #+BEGIN_SRC emacs-lisp
-  (add-hook 'c-mode-hook '(lambda () (c-set-style "linux")))
+  (add-hook 'c-mode-hook
+            '(lambda ()
+               (c-set-style "linux")
+               (setq c-basic-offset 8)))
+#+END_SRC
+
+As part of Linux Kernel developer, I use 
+
+#+BEGIN_SRC emacs-lisp
+  ;; (defun c-lineup-arglist-tabs-only (ignored)
+  ;;   "Line up argument lists by tabs, not spaces"
+  ;;   (let* ((anchor (c-langelem-pos c-syntactic-element))
+  ;;     (column (c-langelem-2nd-pos c-syntactic-element))
+  ;;     (offset (- (1+ column) anchor))
+  ;;     (steps (floor offset c-basic-offset)))
+  ;;     (* (max steps 1)
+  ;;        c-basic-offset)))
+
+  ;; (add-hook 'c-mode-common-hook
+  ;;           (lambda ()
+  ;;             ;; Add kernel style
+  ;;             (c-add-style
+  ;;              "linux-tabs-only"
+  ;;              '("linux" (c-offsets-alist
+  ;;                         (arglist-cont-nonempty
+  ;;                          c-lineup-gcc-asm-reg
+  ;;                          c-lineup-arglist-tabs-only))))))
+
+  ;; (defun my-kernel-source-hook ()
+  ;;   (let ((filename (buffer-file-name)))
+  ;;     ;; Enable kernel mode for the appropriate files
+  ;;     (when (and filename
+  ;;                (or (string-match (expand-file-name "/local/mnt/workspace/mitchelh/.*/kernel")
+  ;;                                  filename)
+  ;;                    (string-match "/local/mnt/workspace/mitchelh/msm-kvm"
+  ;;                                  filename)
+  ;;                    (locate-dominating-file filename "Kbuild")
+  ;;                    (locate-dominating-file filename "Kconfig")
+  ;;                    (save-excursion (goto-char 0)
+  ;;                                    (search-forward-regexp "^#include <linux/\\(module\\|kernel\\)\\.h>$" nil t))))
+  ;;       ;; (setq indent-tabs-mode t)
+  ;;       ;; (setq c-basic-offset 8)
+  ;;       ;; (setq tab-width 8)
+  ;;       (message "Setting up indentation for the linux kernel")
+  ;;       (c-set-style "linux"))))
+
+  ;; (add-hook 'c-mode-hook 'my-kernel-source-hook)
+
 #+END_SRC
 
 *** C++ language coding style
@@ -2014,9 +2072,9 @@ stdint.h
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
   (add-hook 'c-mode-hook '(lambda()
-            <<define-keys(fn="define-key", map="c-mode-map", keys=c-c++-mode-keys)>> ))
+            <<define-keys(fn="define-key", state="", map="c-mode-map", keys=c-c++-mode-keys)>> ))
   (add-hook 'c++-mode-hook '(lambda()
-            <<define-keys(fn="define-key", map="c++-mode-map", keys=c-c++-mode-keys)>> ))
+            <<define-keys(fn="define-key", state="", map="c++-mode-map", keys=c-c++-mode-keys)>> ))
 #+END_SRC
 
 ** Graphviz
@@ -2297,7 +2355,7 @@ https://github.com/itsjeyd/git-wip-timemachine
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
     (add-hook 'magit-mode-hook '(lambda()
-              <<define-keys(fn="define-key", map="magit-mode-map", keys=magit-mode-keys)>> ))
+              <<define-keys(fn="define-key", state="" ,map="magit-mode-map", keys=magit-mode-keys)>> ))
 #+END_SRC
 
 * Email
@@ -2495,22 +2553,30 @@ I always use =ERC= as my irc client, which is bundle with emacs.
       ))
 #+END_SRC
 
-* Finalize package install
-
-At long last we need only call the following function to send
-=req-package= on its merry way.
-
-Put this before setting keybindings make my keybindings work as global one.
-
-#+BEGIN_SRC emacs-lisp
-  (req-package-finish)
-#+END_SRC
-
 * Keybinding
+
+Create my minor-mode to control all keybindings
+
+#+begin_src emacs-lisp
+  (defvar coldnew-editor-map (make-keymap))
+
+  (define-minor-mode coldnew-editor-mode
+    "coldnew's editor minor mode."
+    :init-value t
+    :keymap coldnew-editor-map)
+
+  (define-globalized-minor-mode global-coldnew-editor-mode
+    coldnew-editor-mode (lambda ()
+                          (if (not (minibufferp (current-buffer)))
+                              (coldnew-editor-mode 1))))
+
+  ;; Gloabal enable
+  (global-coldnew-editor-mode t)
+#+end_src
 
 ** Generate keymap from org-mode table
 
-org-mode  is really nice for literature programmering, I can use it to
+org-mode is really nice for literature programmering, I can use it to
 generate keybing via table, just use following functions:
 
 #+NAME: define-keys
@@ -2521,8 +2587,10 @@ generate keybing via table, just use following functions:
                    (command (nth 1 l)))
               ;; make sure key and command not nil
               (if (not (or (s-blank? key) (s-blank? command)))
-                  (princ (format "(%s %s %s '%s)\n"
-                                 fn map
+                  (princ (format "(%s %s %s %s '%s)\n"
+                                 fn
+                                 (if (string= state "") "" (concat "'" state))
+                                 map
                                  (if (s-equals? fn "evil-ex-define-cmd")
                                      (format "\"%s\"" key)
                                    (format "(kbd \"%s\")" key))
@@ -2556,7 +2624,7 @@ generate keybing via table, just use following functions:
 | C-=     | text-scale-increase | Increase text scale                     |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
-    <<define-keys(fn="define-key", map="evil-normal-state-map", keys=global-evil-normal)>>
+    <<define-keys(fn="evil-define-key", state="normal", map="coldnew-editor-map", keys=global-evil-normal)>>
 #+END_SRC
 
 ** Insert State
@@ -2600,7 +2668,7 @@ generate keybing via table, just use following functions:
 | C-=      | text-scale-increase                 | Increase text scale                     |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
-  <<define-keys(fn="define-key", map="evil-insert-state-map", keys=global-evil-insert)>>
+  <<define-keys(fn="evil-define-key", state="insert", map="coldnew-editor-map", keys=global-evil-insert)>>
 #+END_SRC
 
 ** Ex Command
@@ -2617,12 +2685,19 @@ generate keybing via table, just use following functions:
 | howdoi          | howdoi-query        | Show coding answers in another buffer |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
-  <<define-keys(fn="evil-ex-define-cmd", map="", keys=global-evil-ex)>>
+  <<define-keys(fn="evil-ex-define-cmd", state="", map="", keys=global-evil-ex)>>
 #+END_SRC
 
 * End of configuration
 
 Oh YA!! We finish loading emacs configuration :)
+
+However, since we use =req-package= for loading and installing packages, be sure
+to execute following line to send =req-package= on its merry way.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package-finish)
+#+END_SRC
 
 In the end of configuration, I'll load some private config from
 =~/.personal.el=, which contains something like password or account settings.
