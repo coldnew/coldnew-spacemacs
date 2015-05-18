@@ -2699,7 +2699,7 @@ to execute following line to send =req-package= on its merry way.
   (req-package-finish)
 #+END_SRC
 
-In the end of configuration, I'll load some private config from
+In the end of configuration, I'll load my private config from
 =~/.personal.el=, which contains something like password or account settings.
 
 #+BEGIN_SRC emacs-lisp
