@@ -1069,6 +1069,11 @@ https://github.com/glasserc/ethan-wspace
                 '(lambda()
                    (setq ethan-wspace-errors (remove 'tabs ethan-wspace-errors))))
 
+      ;; Not use in diff-mode since it breaking my syntax-highlight
+      (add-hook 'diff-mode-hook
+                '(lambda()
+                   (ethan-wspace-mode -1)))
+      
       ;; Ignore no trailing newline error
       (setq-default ethan-wspace-errors (remove 'no-nl-eof ethan-wspace-errors))))
 #+END_SRC
