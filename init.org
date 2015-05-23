@@ -2097,11 +2097,22 @@ stdint.h
     :init (defalias 'dot-mode 'graphviz-dot-mode))
 #+END_SRC
 
-** Clojure/Clojurescript
+** Clojure
 
 #+BEGIN_SRC emacs-lisp
   (req-package clojure-mode
+    :require (clojure-mode-extra-font-locking flycheck-clojure)
     :mode "\\.\\(clj\\|boot\\|cljs\\|cljs.hl\\)\\'")
+#+END_SRC
+
+*** Use cider for interactive development
+
+[[https://github.com/clojure-emacs/cider][cider]] is a Clojure Interactive Development Environment that Rocks for Emacs
+
+#+BEGIN_SRC emacs-lisp
+  (req-package cider
+    :require (cider-decompile cider-eval-sexp-fu)
+    )
 #+END_SRC
 
 ** GLSL
