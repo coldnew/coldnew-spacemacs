@@ -51,9 +51,10 @@ are =optional= but can make this spacemacs config work much more nicely.
   #+BEGIN_SRC sh
     brew install the_silver_searcher \
          fasd \
-         mu --with-emacs --HEAD \
          doxymacs \
          aspell --with-lang-en
+
+    brew install mu --with-emacs --HEAD
   #+END_SRC
 
 
