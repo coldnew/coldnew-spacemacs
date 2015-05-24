@@ -2748,6 +2748,6 @@ In the end of configuration, I'll load my private config from
 =~/.personal.el=, which contains something like password or account settings.
 
 #+BEGIN_SRC emacs-lisp
-  (let ((config "~/.personal.el"))
-    (when (file-exists-p config) (load-file config)))
+  (let ((secret "~/.personal.el"))
+    (when (file-exists-p secret) (load-file secret)))
 #+END_SRC
