@@ -2643,6 +2643,7 @@ generate keybing via table, just use following functions:
 | M-[     | winner-undo         | switch back to earlier window layout    |
 | M-]     | winner-redo         | restore resent window layout            |
 | M-x     | helm-M-x            | Use heml for interactive commands (M-x) |
+| M-s     | helm-occur          | Search in current buffer                |
 | C-x C-o | other-frame         | Switch to other frame                   |
 | M-o     | other-window        | Switch to other window                  |
 | C--     | text-scale-decrease | Decrease text scale                     |
@@ -2678,7 +2679,6 @@ generate keybing via table, just use following functions:
 | M-<SPC>  | insert-U200B-char                   | Insert <U200B> character                |
 | M-[      | winner-undo                         | switch back to earlier window layout    |
 | M-]      | winner-redo                         | restore resent window layout            |
-| M-s      | helm-occur                          | Find in this file                       |
 | M-s      | helm-occur                          | Search in current buffer                |
 | s-<RET>  | insert-empty-line                   | Insert empty line after current line    |
 | s-<SPC>  | insert-U200B-char                   | Insert <U200B> character                |
