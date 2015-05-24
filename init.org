@@ -866,6 +866,18 @@ others user.
       (message (concat "Made " buffer-file-name " executable"))))
 #+END_SRC
 
+*** Clone current file to new one
+
+#+BEGIN_SRC emacs-lisp
+  (defun clone-file-and-open (filename)
+    "Clone the current buffer writing it into FILENAME and open it"
+    (interactive "FClone to file: ")
+    (save-restriction
+      (widen)
+      (write-region (point-min) (point-max) filename nil nil nil 'confirm))
+    (find-file filename))
+#+END_SRC
+
 ** Debug
 
 *** Eval emacs buffer until error
