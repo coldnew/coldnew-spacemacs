@@ -848,6 +848,24 @@ For more info, please see: [[https://lists.gnu.org/archive/html/emacs-orgmode/20
                      name (file-name-nondirectory new-name)))))))
 #+END_SRC
 
+*** Add executable attribute to file
+
+Actually this command is the same as =chmod +x= but it doesn't use any shell
+command, it use emacs's logior function to change file attribute.
+
+I only make =owener= can has executable permission, not change it for gourp or
+others user.
+
+#+BEGIN_SRC emacs-lisp
+  (defun set-file-executable()
+    "Add executable permissions on current file."
+    (interactive)
+    (when (buffer-file-name)
+      (set-file-modes buffer-file-name
+                      (logior (file-modes buffer-file-name) #o100))
+      (message (concat "Made " buffer-file-name " executable"))))
+#+END_SRC
+
 ** Debug
 
 *** Eval emacs buffer until error
