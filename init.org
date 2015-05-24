@@ -2682,7 +2682,7 @@ generate keybing via table, just use following functions:
                                      (format "\"%s\"" key)
                                    (format "(kbd \"%s\")" key))
                                  command)))))
-          ;; remove all `hline' tag first line in list
+          ;; remove all `hline' tag
           (remove 'hline keys))
 #+END_SRC
 
