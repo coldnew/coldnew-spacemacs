@@ -695,6 +695,16 @@ not modified.
              (insert (current-kill 0)))))
 #+END_SRC
 
+*** Quick folding source block
+
+#+BEGIN_SRC emacs-lisp
+  (defun quick-folding-source ()
+    "Use emacs buildin easy to folding code."
+    (interactive)
+    (set-selective-display
+     (if selective-display nil 1)))
+#+END_SRC
+
 ** Edit (Insert/Remove)
 
 *** Insert U200B char
