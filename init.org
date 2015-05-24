@@ -602,7 +602,7 @@ variables of interest, then copying them into the Emacs environment.
   (req-package htmlize)
 #+END_SRC
 
-* Interactive Commands
+* Interactive Commands                                              :command:
 
 In emacs, we can use =M-x= to execute interactive commands, I
 implement some of them to make my emacs more easy to use.
@@ -852,7 +852,7 @@ A really nice command help me to find error on elisp buffer.
     (while t (eval (read (current-buffer)))))
 #+END_SRC
 
-* Theme
+* Theme                                                               :theme:
 
 I always use dark theme for coding, [[https://github.com/kuanyui/moe-theme.el][moe-theme]] is a good start point,
 it's bright and has good default faces for most modes. It also has
@@ -1296,7 +1296,7 @@ For c-mode, just do the same but change the relative
   (setq c-mode-expand-alist '(("i" . "include")))
 #+END_SRC
 
-* Helm
+* Helm                                                                 :helm:
 
 #+BEGIN_SRC emacs-lisp
   (req-package helm
@@ -1461,7 +1461,7 @@ https://github.com/steckerhalter/helm-google
       ))
 #+END_SRC
 
-* GDB
+* GDB                                                                 :debug:
 
 #+BEGIN_SRC emacs-lisp
   (req-package gdb-mi
@@ -1471,7 +1471,7 @@ https://github.com/steckerhalter/helm-google
            (setq gdb-show-main t)))
 #+END_SRC
 
-* Terminal Emulator
+* Terminal Emulator                                                    :term:
 
 ** Eshell
 
@@ -1613,7 +1613,7 @@ which add a =j= command to let you jump to folder you has been access.
 
 * Programming Languages
 
-** Android
+** Android                                                    :android:java:
 
 #+BEGIN_SRC emacs-lisp
   (req-package android-mode
@@ -1642,7 +1642,7 @@ which add a =j= command to let you jump to folder you has been access.
   (req-package batch-mode :mode "\\.bat\\'")
 #+END_SRC
 
-** Emacs Lisp
+** Emacs Lisp                                                   :lisp:elisp:
 
 #+BEGIN_SRC emacs-lisp
   (req-package lisp-mode
@@ -1713,7 +1713,7 @@ persists across sessions.
   (add-hook 'emacs-lisp-mode-hook 'remove-elc-on-save)
 #+END_SRC
 
-** Org
+** Org                                                                 :org:
 
 #+BEGIN_SRC emacs-lisp
   (req-package org
@@ -1846,7 +1846,7 @@ see: http://emacs.stackexchange.com/questions/450/intelligent-spell-checking-in-
     :init (add-hook 'ssh-config-mode-hook 'turn-on-font-lock))
 #+END_SRC
 
-** CMake
+** CMake                                                             :c:cpp:
 
 #+BEGIN_SRC emacs-lisp
   (req-package cmake-font-lock
@@ -1854,7 +1854,7 @@ see: http://emacs.stackexchange.com/questions/450/intelligent-spell-checking-in-
     :init (add-hook 'cmake-mode-hook 'cmake-font-lock-activate))
 #+END_SRC
 
-** Rust
+** Rust                                                               :rust:
 
 [[https://github.com/rust-lang/rust-mode][rust-mode]] is a major emacs-mode for editing Rust source code.
 
@@ -1863,7 +1863,7 @@ see: http://emacs.stackexchange.com/questions/450/intelligent-spell-checking-in-
     :mode "\\.rs\\'")
 #+END_SRC
 
-** Go
+** Go                                                               :golang:
 
 #+BEGIN_SRC emacs-lisp
   (req-package go-mode
@@ -1874,7 +1874,7 @@ see: http://emacs.stackexchange.com/questions/450/intelligent-spell-checking-in-
       (add-hook 'before-save-hook 'gofmt-before-save)))
 #+END_SRC
 
-** C/C++
+** C/C++                                                             :c:cpp:
 
 #+BEGIN_SRC emacs-lisp
   (req-package cc-mode
@@ -2098,7 +2098,7 @@ stdint.h
     :init (defalias 'dot-mode 'graphviz-dot-mode))
 #+END_SRC
 
-** Clojure
+** Clojure                                                         :clojure:
 
 #+BEGIN_SRC emacs-lisp
   (req-package clojure-mode
@@ -2127,7 +2127,7 @@ stdint.h
                                           ("\\.vs$" (".fs")))))
 #+END_SRC
 
-** javascript
+** javascript                                                   :javascript:
 
 #+BEGIN_SRC emacs-lisp
   (req-package js2-mode
@@ -2135,7 +2135,7 @@ stdint.h
     :mode "\\.js$")
 #+END_SRC
 
-** Json
+** Json                                                    :javascript:json:
 
 #+BEGIN_SRC emacs-lisp
   (req-package json-reformat :commands json-reformat-region)
@@ -2148,27 +2148,27 @@ stdint.h
     :init (add-hook 'json-mode-hook (lambda () (flymake-json-load))))
 #+END_SRC
 
-** Python
+** Python                                                           :python:
 
 #+BEGIN_SRC emacs-lisp
   (req-package jinja2-mode)
 #+END_SRC
 
-** Java
+** Java                                                               :java:
 
 #+BEGIN_SRC emacs-lisp
   (req-package malabar-mode
     :mode "\\.java$")
 #+END_SRC
 
-** Markdown
+** Markdown                                                       :markdown:
 
 #+BEGIN_SRC emacs-lisp
   (req-package markdown-mode
     :mode "\\.\\(md\\|markdown\\)\\'")
 #+END_SRC
 
-** Ruby
+** Ruby                                                               :ruby:
 
 #+BEGIN_SRC emacs-lisp
   (req-package ruby-mode
@@ -2188,7 +2188,7 @@ stdint.h
   (req-package rake)
 #+END_SRC
 
-** QML
+** QML                                                              :qml:qt:
 
 #+BEGIN_SRC emacs-lisp
   (req-package qml-mode
@@ -2215,7 +2215,7 @@ stdint.h
       ))
 #+END_SRC
 
-** SCSS
+** SCSS                                                           :css:scss:
 
 #+BEGIN_SRC emacs-lisp
   (req-package scss-mode
@@ -2226,7 +2226,7 @@ stdint.h
       (setq scss-compile-at-save nil)))
 #+END_SRC
 
-** CSS
+** CSS                                                                 :css:
 
 #+BEGIN_SRC emacs-lisp
   (req-package css-mode :mode "\\.css\\'")
@@ -2243,7 +2243,7 @@ stdint.h
       (add-hook 'less-css-mode-hook 'turn-on-css-eldoc)))
 #+END_SRC
 
-** Less
+** Less                                                               :less:
 
 #+BEGIN_SRC emacs-lisp
   (req-package less-css-mode
@@ -2258,7 +2258,7 @@ stdint.h
     :mode "\\.yml$")
 #+END_SRC
 
-** Device Tree
+** Device Tree                                                :linux:kernel:
 
 #+BEGIN_SRC emacs-lisp
   (req-package dts-mode
