@@ -1207,7 +1207,7 @@ retrieve and display completion candidates.
 
 #+BEGIN_SRC emacs-lisp :noweb yes
   (add-hook 'company-mode-hook '(lambda()
-            <<define-keys(fn="define-key", state="", map="company-active-map", keys=company-active-keys)>> ))
+            <<define-keys(fn="define-key", map="company-active-map", keys=company-active-keys)>> ))
 #+END_SRC
 
 ** Completion with Bit Bang
@@ -1432,7 +1432,7 @@ https://github.com/steckerhalter/helm-google
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
   (add-hook 'helm-mode-hook '(lambda()
-            <<define-keys(fn="define-key", state="",map="helm-map", keys=helm-keys)>> ))
+            <<define-keys(fn="define-key", map="helm-map", keys=helm-keys)>> ))
 #+END_SRC
 
 * TAGS
@@ -1832,7 +1832,7 @@ see: http://emacs.stackexchange.com/questions/450/intelligent-spell-checking-in-
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
   (add-hook 'org-mode-hook '(lambda()
-            <<define-keys(fn="define-key", state="", map="org-mode-map", keys=org-mode-keys)>> ))
+            <<define-keys(fn="define-key", map="org-mode-map", keys=org-mode-keys)>> ))
 #+END_SRC
 
 ** SSH Config
@@ -2086,9 +2086,9 @@ stdint.h
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
   (add-hook 'c-mode-hook '(lambda()
-            <<define-keys(fn="define-key", state="", map="c-mode-map", keys=c-c++-mode-keys)>> ))
+            <<define-keys(fn="define-key", map="c-mode-map", keys=c-c++-mode-keys)>> ))
   (add-hook 'c++-mode-hook '(lambda()
-            <<define-keys(fn="define-key", state="", map="c++-mode-map", keys=c-c++-mode-keys)>> ))
+            <<define-keys(fn="define-key", map="c++-mode-map", keys=c-c++-mode-keys)>> ))
 #+END_SRC
 
 ** Graphviz
@@ -2625,6 +2625,7 @@ org-mode is really nice for literature programmering, I can use it to
 generate keybing via table, just use following functions:
 
 #+NAME: define-keys
+#+HEADERS: :var fn="define-key" state="" map=""
 #+BEGIN_SRC emacs-lisp :results output :tangle no :colnames nil
   (require 's)
   (mapcar (lambda (l)
@@ -2730,7 +2731,7 @@ generate keybing via table, just use following functions:
 | howdoi          | howdoi-query        | Show coding answers in another buffer |
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
-  <<define-keys(fn="evil-ex-define-cmd", state="", map="", keys=global-evil-ex)>>
+  <<define-keys(fn="evil-ex-define-cmd", map="", keys=global-evil-ex)>>
 #+END_SRC
 
 * End of configuration
