@@ -2116,6 +2116,26 @@ stdint.h
     )
 #+END_SRC
 
+*** Insert libraries in project more easily
+
+[[https://github.com/AdamClements/latest-clojure-libraries][latest-clojure-libraries]] helps to looks up the latest version of clojure
+libraries on clojars/maven and automatically populates the buffer with the
+appropriate dependency vector. Optionally uses pomegranate to load the
+dependency directly into your running nrepl.
+
+To use this plugin, you need to edit your =~/.lein/profiles.clj= :plugins vector
+to include =[lein-ancient "0.5.1"]= and optionally add
+=[com.cemerick/pomegranate "0.2.0"]= to your :dependencies vector if you want
+the feature which automatically adds the library to your classpath without
+restarting the repl.
+
+After all step done, use =M-x latest-clojure-libraries-insert-dependency= to
+insert latest clojure libraries to your project.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package latest-clojure-libraries)
+#+END_SRC
+
 ** GLSL
 
 #+BEGIN_SRC emacs-lisp
