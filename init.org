@@ -593,7 +593,7 @@ variables of interest, then copying them into the Emacs environment.
 
 #+BEGIN_SRC emacs-lisp
   (req-package exec-path-from-shell
-    :init (when (memq window-system '(mac ns x )) (exec-path-from-shell-initialize)))
+    :init (when (memq window-system '(mac ns x)) (exec-path-from-shell-initialize)))
 #+END_SRC
 
 ** htmlize
@@ -900,7 +900,7 @@ unload previous theme before loading a new one.
       (define-key minibuffer-local-map (kbd "M-t") '(lambda()
                                                       (interactive)
                                                       (let ((dir (if (eq system-type 'darwin)
-                                                                     "/Volumes/ramdisk" "/tmp/")))
+                                                                     "/Volumes/ramdisk/" "/tmp/")))
                                                         (coldnew/minibuffer-switch-dir dir))))
       ;; switch to home dir
       (define-key minibuffer-local-map (kbd "M-h") '(lambda()
