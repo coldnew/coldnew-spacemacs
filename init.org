@@ -1766,11 +1766,12 @@ persists across sessions.
     (setq org-indent-mode t)
     ;; fontify source code
     (setq org-src-fontify-natively t)
-
     ;; Use current window when switch to source block
     (setq org-src-window-setup 'current-window)
     ;; Disable prompting to evaluate babel blocks
     (setq org-confirm-babel-evaluate nil)
+    ;; Disable add validation link when export to HTML
+    (setq org-html-validation-link nil)
     ))
 #+END_SRC
 
