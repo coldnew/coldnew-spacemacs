@@ -2642,7 +2642,7 @@ generate keybing via table, just use following functions:
                                    (format "(kbd \"%s\")" key))
                                  command)))))
           ;; remove all `hline' tag first line in list
-          (cdr (remove 'hline keys)))
+          (remove 'hline keys))
 #+END_SRC
 
 ** Spacemacs Map
