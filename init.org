@@ -2702,7 +2702,7 @@ generate keybing via table, just use following functions:
 | C-x vl  | magit-log           |                                         |
 | C-x vp  | magit-push          |                                         |
 | C-x vs  | magit-status        |                                         |
-| C-x b   | helm-buffer-list    | Siwtch to another buffer by helm        |
+| C-x b   | helm-buffers-list   | Siwtch to another buffer by helm        |
 | M-[     | winner-undo         | switch back to earlier window layout    |
 | M-]     | winner-redo         | restore resent window layout            |
 | M-x     | helm-M-x            | Use heml for interactive commands (M-x) |
@@ -2739,7 +2739,7 @@ generate keybing via table, just use following functions:
 | C-x vl   | magit-log                           |                                         |
 | C-x vp   | magit-push                          |                                         |
 | C-x vs   | magit-status                        |                                         |
-| C-x b    | helm-buffer-list                    | Siwtch to another buffer by helm        |
+| C-x b    | helm-buffers-list                   | Siwtch to another buffer by helm        |
 | M-<SPC>  | insert-U200B-char                   | Insert <U200B> character                |
 | M-[      | winner-undo                         | switch back to earlier window layout    |
 | M-]      | winner-redo                         | restore resent window layout            |
