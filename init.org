@@ -284,7 +284,10 @@ file, I move this file to =~/.emacs.d/spacemacs.el=.
   (global-hl-line-mode -1)
 
   ;; After spacemacs loading finished, switch back to `*scratch*' buffer
+  ;; and make sure it's in `lisp-interaction-mode'
   (switch-to-buffer "*scratch*")
+  (with-current-buffer (get-buffer-create "*scratch*")
+    (lisp-interaction-mode))
 #+END_SRC
 
 * Basic setup
