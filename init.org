@@ -1188,10 +1188,10 @@ they work nicely with version control systems.
       (setq tramp-default-method "scp")))
 #+END_SRC
 
-** Create *scratch* automatically
+** Create *scratch* automatically                                   :buffer:
 
-Sometimes I'll kill the =*scratch*= buffer to make it clean, just use
-following function to let emacs re-create it automatically.
+Sometimes I'll clean the =*scratch*= buffer by kill it, add following function
+to let emacs re-create it automatically.
 
 #+BEGIN_SRC emacs-lisp
   ;; Create *scratch* automatically
