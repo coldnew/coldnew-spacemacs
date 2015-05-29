@@ -922,7 +922,7 @@ unload previous theme before loading a new one.
     :config (coldnew-theme-night))
 #+END_SRC
 
-* Minibuffers
+* Minibuffers                                                    :minibuffer:
 
 #+BEGIN_SRC emacs-lisp
   (req-package minibuffer
@@ -2358,7 +2358,7 @@ insert latest clojure libraries to your project.
       ))
 #+END_SRC
 
-* Web Development
+* Web Development                                                       :web:
 
 #+BEGIN_SRC emacs-lisp
   (req-package web-mode
@@ -2447,7 +2447,7 @@ https://github.com/itsjeyd/git-wip-timemachine
             <<define-keys(map="magit-mode-map", keys=magit-mode-keys)>> ))
 #+END_SRC
 
-* Email
+* Email                                                               :email:
 
 I use mu4e.
 
@@ -2619,7 +2619,7 @@ I always use mu4e to read maliing-list, it's really nice to fontify diff content
   (add-hook 'mu4e-view-mode-hook 'mu4e~view-fontify-diff)
 #+END_SRC
 
-* IRC
+* IRC                                                                   :irc:
 
 I always use =ERC= as my irc client, which is bundle with emacs.
 
@@ -2642,7 +2642,7 @@ I always use =ERC= as my irc client, which is bundle with emacs.
       ))
 #+END_SRC
 
-* Keybinding
+* Keybinding                                                     :keybinding:
 
 Create my minor-mode to control all keybindings
 
