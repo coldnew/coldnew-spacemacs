@@ -2853,3 +2853,8 @@ In the end of configuration, I'll load my private config from
   (let ((secret "~/.personal.el"))
     (when (file-exists-p secret) (load-file secret)))
 #+END_SRC
+* Reference
+
+Following link is refrence for my emac config.
+
+https://github.com/r0man/.emacs.d/blob/master/init.el.org
