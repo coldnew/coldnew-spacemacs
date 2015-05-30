@@ -2147,7 +2147,7 @@ stdint.h
 #+BEGIN_SRC emacs-lisp
   (req-package clojure-mode
     :require (clojure-mode-extra-font-locking flycheck-clojure)
-    :mode "\\.\\(clj\\|boot\\|cljs\\|cljs.hl\\)\\'")
+    :mode "\\.\\(clj\\|boot\\|cljx\\|edn\\|cljs\\|cljs.hl\\)\\'")
 #+END_SRC
 
 *** Use cider for interactive development
