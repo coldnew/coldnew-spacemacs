@@ -1654,6 +1654,129 @@ which add a =j= command to let you jump to folder you has been access.
       (winner-mode t)))
 #+END_SRC
 
+* Org                                                                   :org:
+
+#+BEGIN_SRC emacs-lisp
+  (req-package org
+    :require (org-crypt org-mac-link org-magit)
+    :mode (("\\.org\\'" . org-mode)
+           ("\\.org_archive\\'" . org-mode))
+  :config
+  (progn
+    ;; Always enable auto indent mode
+    (setq org-indent-mode t)
+    ;; fontify source code
+    (setq org-src-fontify-natively t)
+    ;; Use current window when switch to source block
+    (setq org-src-window-setup 'current-window)
+    ;; Disable prompting to evaluate babel blocks
+    (setq org-confirm-babel-evaluate nil)
+    ;; Disable add validation link when export to HTML
+    (setq org-html-validation-link nil)
+    ))
+#+END_SRC
+
+** Capture and Agenda
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load 'org
+    '(progn
+       ;; make agenda show on current window
+       (setq org-agenda-window-setup 'current-window)
+       ;; highlight current in agenda
+       (add-hook 'org-agenda-mode-hook 'hl-line-mode)
+       ;; Setup files for agenda
+       (setq org-agenda-files (list "~/Org/task/Office.org" "~/Org/task/Personal.org"))
+       ;;
+       (setq org-directory "~/Org")
+       (setq org-default-notes-file (f-join org-directory "task" "Office.org"))
+       ;; Always use `C-g' to exit agenda
+       (add-hook 'org-agenda-mode-hook
+                 '(lambda ()
+                    (local-set-key (kbd "C-g") 'org-agenda-exit)))
+       ))
+#+END_SRC
+
+** Extend org-mode's easy templates
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load 'org
+    '(progn
+      (add-to-list 'org-structure-template-alist
+                   '("E" "#+BEGIN_SRC emacs-lisp\n?\n#+END_SRC"))
+      (add-to-list 'org-structure-template-alist
+                   '("S" "#+BEGIN_SRC sh\n?\n#+END_SRC"))
+      (add-to-list 'org-structure-template-alist
+                   '("p" "#+BEGIN_SRC plantuml :file uml.png \n?\n#+END_SRC"))
+      ))
+#+END_SRC
+
+** Extend babel support languages
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load 'org
+    '(progn
+       (org-babel-do-load-languages
+        'org-babel-load-languages
+        '((emacs-lisp . t)
+          (C . t)
+          (ditaa . t)
+          (dot . t)
+          (js . t)
+          (latex . t)
+          (perl . t)
+          (python . t)
+          (ruby . t)
+          (sh . t)
+          (plantuml . t)
+          (clojure . t)
+          ))))
+#+END_SRC
+
+** Setup link abbreviations
+
+[[https://www.gnu.org/software/emacs/manual/html_node/org/Link-abbreviations.html][Link abbreviations]]
+
+An abbreviated link looks like
+
+: [[linkword:tag][description]]
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-link-abbrev-alist
+        '(("google" . "http://www.google.com/search?q=")
+          ("google-map" . "http://maps.google.com/maps?q=%s")
+          ))
+#+END_SRC
+
+** Make spell-checking tool ignore some org-mode section
+
+see: http://emacs.stackexchange.com/questions/450/intelligent-spell-checking-in-org-mode
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load 'ispell
+    '(progn
+       (add-to-list 'ispell-skip-region-alist '(":\\(PROPERTIES\\|LOGBOOK\\):" . ":END:"))
+       (add-to-list 'ispell-skip-region-alist '("#\\+BEGIN_SRC" . "#\\+END_SRC"))
+       ))
+#+END_SRC
+
+** Key Bindings
+
+#+TBLNAME: org-mode-keys
+| Key   | Command                  | description                 |
+|-------+--------------------------+-----------------------------|
+| C-c b | org-metaleft             |                             |
+| C-c f | org-metaright            |                             |
+| C-c p | org-metaup               |                             |
+| C-c n | org-metadown             |                             |
+| C-c i | org-insert-link          |                             |
+| C-c I | org-toggle-inline-images | Toggle display inline image |
+
+#+BEGIN_SRC emacs-lisp :noweb yes :results silent
+  (add-hook 'org-mode-hook '(lambda()
+            <<define-keys(map="org-mode-map", keys=org-mode-keys)>> ))
+#+END_SRC
+
 * Programming Languages
 
 ** Android                                                    :android:java:
@@ -1754,129 +1877,6 @@ persists across sessions.
                     (delete-file (concat buffer-file-name "c"))))))
 
   (add-hook 'emacs-lisp-mode-hook 'remove-elc-on-save)
-#+END_SRC
-
-** Org                                                                 :org:
-
-#+BEGIN_SRC emacs-lisp
-  (req-package org
-    :require (org-crypt org-mac-link org-magit)
-    :mode (("\\.org\\'" . org-mode)
-           ("\\.org_archive\\'" . org-mode))
-  :config
-  (progn
-    ;; Always enable auto indent mode
-    (setq org-indent-mode t)
-    ;; fontify source code
-    (setq org-src-fontify-natively t)
-    ;; Use current window when switch to source block
-    (setq org-src-window-setup 'current-window)
-    ;; Disable prompting to evaluate babel blocks
-    (setq org-confirm-babel-evaluate nil)
-    ;; Disable add validation link when export to HTML
-    (setq org-html-validation-link nil)
-    ))
-#+END_SRC
-
-*** Capture and Agenda
-
-#+BEGIN_SRC emacs-lisp
-  (eval-after-load 'org
-    '(progn
-       ;; make agenda show on current window
-       (setq org-agenda-window-setup 'current-window)
-       ;; highlight current in agenda
-       (add-hook 'org-agenda-mode-hook 'hl-line-mode)
-       ;; Setup files for agenda
-       (setq org-agenda-files (list "~/Org/task/Office.org" "~/Org/task/Personal.org"))
-       ;;
-       (setq org-directory "~/Org")
-       (setq org-default-notes-file (f-join org-directory "task" "Office.org"))
-       ;; Always use `C-g' to exit agenda
-       (add-hook 'org-agenda-mode-hook
-                 '(lambda ()
-                    (local-set-key (kbd "C-g") 'org-agenda-exit)))
-       ))
-#+END_SRC
-
-*** Extend org-mode's easy templates
-
-#+BEGIN_SRC emacs-lisp
-  (eval-after-load 'org
-    '(progn
-      (add-to-list 'org-structure-template-alist
-                   '("E" "#+BEGIN_SRC emacs-lisp\n?\n#+END_SRC"))
-      (add-to-list 'org-structure-template-alist
-                   '("S" "#+BEGIN_SRC sh\n?\n#+END_SRC"))
-      (add-to-list 'org-structure-template-alist
-                   '("p" "#+BEGIN_SRC plantuml :file uml.png \n?\n#+END_SRC"))
-      ))
-#+END_SRC
-
-*** Extend babel support languages
-
-#+BEGIN_SRC emacs-lisp
-  (eval-after-load 'org
-    '(progn
-       (org-babel-do-load-languages
-        'org-babel-load-languages
-        '((emacs-lisp . t)
-          (C . t)
-          (ditaa . t)
-          (dot . t)
-          (js . t)
-          (latex . t)
-          (perl . t)
-          (python . t)
-          (ruby . t)
-          (sh . t)
-          (plantuml . t)
-          (clojure . t)
-          ))))
-#+END_SRC
-
-*** Setup link abbreviations
-
-[[https://www.gnu.org/software/emacs/manual/html_node/org/Link-abbreviations.html][Link abbreviations]]
-
-An abbreviated link looks like
-
-: [[linkword:tag][description]]
-
-#+BEGIN_SRC emacs-lisp
-  (setq org-link-abbrev-alist
-        '(("google" . "http://www.google.com/search?q=")
-          ("google-map" . "http://maps.google.com/maps?q=%s")
-          ))
-#+END_SRC
-
-*** Make spell-checking tool ignore some org-mode section
-
-see: http://emacs.stackexchange.com/questions/450/intelligent-spell-checking-in-org-mode
-
-#+BEGIN_SRC emacs-lisp
-  (eval-after-load 'ispell
-    '(progn
-       (add-to-list 'ispell-skip-region-alist '(":\\(PROPERTIES\\|LOGBOOK\\):" . ":END:"))
-       (add-to-list 'ispell-skip-region-alist '("#\\+BEGIN_SRC" . "#\\+END_SRC"))
-       ))
-#+END_SRC
-
-*** Key Bindings
-
-#+TBLNAME: org-mode-keys
-| Key   | Command                  | description                 |
-|-------+--------------------------+-----------------------------|
-| C-c b | org-metaleft             |                             |
-| C-c f | org-metaright            |                             |
-| C-c p | org-metaup               |                             |
-| C-c n | org-metadown             |                             |
-| C-c i | org-insert-link          |                             |
-| C-c I | org-toggle-inline-images | Toggle display inline image |
-
-#+BEGIN_SRC emacs-lisp :noweb yes :results silent
-  (add-hook 'org-mode-hook '(lambda()
-            <<define-keys(map="org-mode-map", keys=org-mode-keys)>> ))
 #+END_SRC
 
 ** SSH Config
