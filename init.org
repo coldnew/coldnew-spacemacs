@@ -1760,6 +1760,17 @@ see: http://emacs.stackexchange.com/questions/450/intelligent-spell-checking-in-
        ))
 #+END_SRC
 
+** Use org-mode to write literature Clojure code
+
+TODO: need to use 8.3 org-mode
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  (require 'org)
+  (require 'ob-clojure)
+  (setq org-babel-clojure-backend 'cider)
+  (require 'cider)
+#+END_SRC
+
 ** Key Bindings
 
 #+TBLNAME: org-mode-keys
@@ -2164,6 +2175,9 @@ stdint.h
       (eval-after-load 'eldoc
         '(progn
            (add-hook 'cider-mode-hook #'eldoc-mode)))
+
+      ;; always use `dev' profile with `cider-jack-in'
+      (setq cider-lein-parameters "with-profile dev, repl :headless")
 
       ;; Hide `*nrepl-connection*' and `*nrepl-server*' buffers from appearing
       ;; in some buffer switching commands like switch-to-buffer
