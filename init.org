@@ -2118,6 +2118,21 @@ Use my C++ coding style.
 
                ;; make open-braces after a case
                (c-set-offset 'case-label '+)
+
+               ;; Not indent code inside a namespace
+               ;; for example:
+               ;;                namespace A {
+               ;;
+               ;;                int namespace_global_variable;
+               ;;
+               ;;                class Class {
+               ;;
+               ;;                Class();
+               ;;                //...
+               ;;                };
+               ;;
+               ;;                }
+               (c-set-offset 'innamespace 0)
                ))
 #+END_SRC
 
