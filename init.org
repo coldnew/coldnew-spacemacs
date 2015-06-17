@@ -2900,4 +2900,6 @@ In the end of configuration, I'll load my private config from
 
 Following link is refrence for my emac config.
 
-https://github.com/r0man/.emacs.d/blob/master/init.el.org
+~[1]~ https://github.com/r0man/.emacs.d/blob/master/init.el.org
+
+~[2]~ https://github.com/bodil/emacs.d
