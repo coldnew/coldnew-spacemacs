@@ -1448,7 +1448,8 @@ store changes and power of helm to fetch backups easily.
 #+BEGIN_SRC emacs-lisp
   (req-package helm-backup
     :require (helm)
-    :init (add-hook 'after-save-hook 'helm-backup-versioning))
+    :init (add-hook 'after-save-hook 'helm-backup-versioning)
+    :config (setq helm-backup-path (concat spacemacs-cache-directory "helm-backup")))
 #+END_SRC
 
 ** Add silver searcher support
