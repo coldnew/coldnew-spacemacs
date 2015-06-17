@@ -1461,8 +1461,9 @@ store changes and power of helm to fetch backups easily.
 #+BEGIN_SRC emacs-lisp
   (req-package helm-backup
     :require (helm)
-    :init (add-hook 'after-save-hook 'helm-backup-versioning)
-    :config (setq helm-backup-path (concat spacemacs-cache-directory "helm-backup")))
+    :config (progn (setq helm-backup-path (concat spacemacs-cache-directory "helm-backup"))
+    (add-hook 'after-save-hook 'helm-backup-versioning)
+))
 #+END_SRC
 
 ** Add silver searcher support
@@ -1489,7 +1490,7 @@ https://github.com/steckerhalter/helm-google
     :init (setq helm-google-use-regexp-parsing t))
 #+END_SRC
 
-*** Key Bindings
+** Key Bindings
 
 #+TBLNAME: helm-keys
 | Key      | Command                   | description                      |
