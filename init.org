@@ -1435,9 +1435,22 @@ TODO: take from https://github.com/edvorg/emacs-configs/blob/master/init.d/init-
 
   ;; helm github stars
 
+#+END_SRC
+
+** Browse GitHub starred repositories in Emacs
+
+[[https://github.com/Sliim/helm-github-stars][helm-github-stars]] provides capabilities to fetch your starred repositories from
+github and select one for browsing.
+
+#+BEGIN_SRC emacs-lisp
   (req-package helm-github-stars
     :require helm
-    :config (setq helm-github-stars-username (getenv "USER")))
+    :config
+    (progn
+      ;; setup user
+      (setq helm-github-stars-username (getenv "USER"))
+      ;; setup cache path
+      (setq helm-github-stars-cache-file (concat spacemacs-cache-directory "helm-github-stars.cache"))))
 #+END_SRC
 
 ** helm-backup
