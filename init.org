@@ -1440,7 +1440,18 @@ TODO: take from https://github.com/edvorg/emacs-configs/blob/master/init.d/init-
     :config (setq helm-github-stars-username (getenv "USER")))
 #+END_SRC
 
-*** Add silver searcher support
+** helm-backup
+
+[[https://github.com/antham/helm-backup][helm-backup]] aims to create a backup system for emacs using both power of git to
+store changes and power of helm to fetch backups easily.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package helm-backup
+    :require (helm)
+    :init (add-hook 'after-save-hook 'helm-backup-versioning))
+#+END_SRC
+
+** Add silver searcher support
 
 #+BEGIN_SRC emacs-lisp
   (req-package helm-ag
@@ -1454,7 +1465,7 @@ TODO: take from https://github.com/edvorg/emacs-configs/blob/master/init.d/init-
       ))
 #+END_SRC
 
-*** Add Google search support
+** Add Google search support
 
 https://github.com/steckerhalter/helm-google
 
@@ -2774,6 +2785,8 @@ generate keybing via table, just use following functions:
 #+END_SRC
 
 ** Spacemacs Map
+
+spacemacs reserve the =SPC-o= for user setup theirs own keymap, I think I should add something here :(
 
 ** Normal State
 
