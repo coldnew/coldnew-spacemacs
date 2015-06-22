@@ -1351,8 +1351,8 @@ For c-mode, just do the same but change the relative
       (setq  helm-M-x-fuzzy-match t
              helm-buffers-fuzzy-matching t
              helm-recentf-fuzzy-match    t
-
-             helm-move-to-line-cycle-in-source t
+             ;; make helm can select anything even not match
+             helm-move-to-line-cycle-in-source nil
              helm-ff-search-library-in-sexp t
              helm-ff-file-name-history-use-recentf t)
 
