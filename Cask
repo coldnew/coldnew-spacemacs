@@ -7,6 +7,7 @@
 (depends-on "pallet")
 (depends-on "req-package")
 (depends-on "s")
+(depends-on "noflet")
 
 ;;;pallet-ignore
 (depends-on "bitbake" :git "https://github.com/coldnew/bitbake-el.git")
