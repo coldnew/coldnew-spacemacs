@@ -574,12 +574,6 @@ for that query.
   (req-package org-download)
 #+END_SRC
 
-** org-screenshot
-
-#+BEGIN_SRC emacs-lisp
-  (req-package org-screenshot)
-#+END_SRC
-
 ** exec-path-from-shell
 
 [[https://github.com/purcell/exec-path-from-shell][exec-path-from-shell]] is A GNU Emacs library to ensure environment variables
