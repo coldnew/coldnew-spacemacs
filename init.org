@@ -2193,6 +2193,20 @@ stdint.h
     :mode "\\.\\(clj\\|boot\\|cljx\\|edn\\|cljs\\|cljs.hl\\)\\'")
 #+END_SRC
 
+*** Add refactor function support
+
+https://github.com/clojure-emacs/clj-refactor.el
+
+#+BEGIN_SRC emacs-lisp
+  (req-package clj-refactor
+    :config
+    (progn
+      ;; Add clj-refactor to clojure-mode
+      (add-hook 'clojure-mode-hook '(lambda () (clj-refactor-mode 1)))
+      ;; Use `C-c C-x' as prefix
+      (cljr-add-keybindings-with-prefix "C-c C-x")))
+#+END_SRC
+
 *** Use cider for interactive development
 
 [[https://github.com/clojure-emacs/cider][cider]] is a Clojure Interactive Development Environment that Rocks for Emacs
