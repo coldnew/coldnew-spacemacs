@@ -2097,8 +2097,8 @@ This coding style is document in https://www.kernel.org/doc/Documentation/Coding
                      (locate-dominating-file filename "Kconfig")
                      (save-excursion (goto-char 0)
                                      (search-forward-regexp "^#include <linux/\\(module\\|kernel\\)\\.h>$" nil t))))
-        (setq indent-tabs-mode t)
-        (setq show-trailing-whitespace t)
+        ;; (setq indent-tabs-mode t)
+        ;; (setq show-trailing-whitespace t)
         (c-set-style "linux-kernel")
         (message "Setting up indentation for the linux kernel"))))
 
