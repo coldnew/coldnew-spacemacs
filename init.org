@@ -2068,6 +2068,8 @@ use =tabs= as indent and follow linux kernel development rules. Use following
 code to make emacs switch to =linux-kernel= style automatically when enter linux
 kernel directories.
 
+This coding style is document in https://www.kernel.org/doc/Documentation/CodingStyle.
+
 #+BEGIN_SRC emacs-lisp
   (defun c-lineup-arglist-tabs-only (ignored)
     "Line up argument lists by tabs, not spaces"
@@ -2079,11 +2081,13 @@ kernel directories.
          c-basic-offset)))
 
   ;; Add Linux kernel style
-  (c-add-style "linux-kernel"
-   '("linux" (c-offsets-alist
-              (arglist-cont-nonempty
-               c-lineup-gcc-asm-reg
-               c-lineup-arglist-tabs-only))))
+  (add-hook 'c-mode-common-hook
+            (lambda ()
+              (c-add-style "linux-kernel"
+                           '("linux" (c-offsets-alist
+                                      (arglist-cont-nonempty
+                                       c-lineup-gcc-asm-reg
+                                       c-lineup-arglist-tabs-only))))))
 
   (defun linux-kernel-development-setup ()
     (let ((filename (buffer-file-name)))
@@ -2093,11 +2097,10 @@ kernel directories.
                      (locate-dominating-file filename "Kconfig")
                      (save-excursion (goto-char 0)
                                      (search-forward-regexp "^#include <linux/\\(module\\|kernel\\)\\.h>$" nil t))))
-        ;; (setq indent-tabs-mode t)
-        ;; (setq c-basic-offset 8)
-        ;; (setq tab-width 8)
-        (message "Setting up indentation for the linux kernel")
-        (c-set-style "linux-kernel"))))
+        (setq indent-tabs-mode t)
+        (setq show-trailing-whitespace t)
+        (c-set-style "linux-kernel")
+        (message "Setting up indentation for the linux kernel"))))
 
   (add-hook 'c-mode-hook 'linux-kernel-development-setup)
 #+END_SRC
