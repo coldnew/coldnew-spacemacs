@@ -608,6 +608,14 @@ buffer.
   (req-package manage-minor-mode)
 #+END_SRC
 
+** rpn-calc
+
+[[https://github.com/zk-phi/rpn-calc][rpn-calc]] is an quick RPN calculator for emacs.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package rpn-calc)
+#+END_SRC
+
 * Interactive Commands                                              :command:
 
 In emacs, we can use =M-x= to execute interactive commands, I
