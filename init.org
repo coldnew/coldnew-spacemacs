@@ -599,6 +599,15 @@ variables of interest, then copying them into the Emacs environment.
   (req-package htmlize)
 #+END_SRC
 
+** manage-minor-mode
+
+[[https://github.com/ShingoFukuyama/manage-minor-mode][manage-minor-mode]] let you manage your minor-mode on the dedicated interface
+buffer.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package manage-minor-mode)
+#+END_SRC
+
 * Interactive Commands                                              :command:
 
 In emacs, we can use =M-x= to execute interactive commands, I
