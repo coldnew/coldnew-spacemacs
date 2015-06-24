@@ -1663,6 +1663,27 @@ which add a =j= command to let you jump to folder you has been access.
   (defalias 'eshell/e 'eshell/emacs)
 #+END_SRC
 
+**** unpack
+
+#+BEGIN_SRC emacs-lisp
+  (defun eshell/unpack (file)
+    (let ((command (some (lambda (x)
+                           (if (string-match-p (car x) file)
+                               (cadr x)))
+                         '((".*\.tar.bz2" "tar xjf")
+                           (".*\.tar.gz" "tar xzf")
+                           (".*\.bz2" "bunzip2")
+                           (".*\.rar" "unrar x")
+                           (".*\.gz" "gunzip")
+                           (".*\.tar" "tar xf")
+                           (".*\.tbz2" "tar xjf")
+                           (".*\.tgz" "tar xzf")
+                           (".*\.zip" "unzip")
+                           (".*\.Z" "uncompress")
+                           (".*" "echo 'Could not unpack the file:'")))))
+      (eshell-command-result (concat command " " file))))
+#+END_SRC
+
 * Window Management
 
 ** Maximized window after emac start
