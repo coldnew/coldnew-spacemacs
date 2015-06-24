@@ -1594,7 +1594,7 @@ like is it fully integrated with emacs.
   (eval-after-load 'eshell
     '(progn
       (setq eshell-visual-commands
-            '("less" "tmux" "htop" "top" "bash" "zsh" "fish"))
+            '("less" "tmux" "htop" "top" "bash" "zsh" "fish" "ssh" "tail"))
 
       (setq eshell-visual-subcommands
             '(("git" "log" "diff" "show")))
