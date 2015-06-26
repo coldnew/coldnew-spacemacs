@@ -2855,25 +2855,6 @@ I always use =ERC= as my irc client, which is bundle with emacs.
                                        "324" "329" "332" "333" "353" "477"))))
 #+END_SRC
 
-** Logging irc messages
-
-#+BEGIN_SRC emacs-lisp
-  (req-package erc-log
-    :require (erc)
-    :config
-    (progn
-      (erc-log-mode 1)
-      ;; setup log file path
-      (setq erc-log-channels-directory (concat user-cache-directory "erc"))
-      (unless (file-exists-p erc-log-channels-directory)
-        (mkdir erc-log-channels-directory t))
-      ;; all log save as utf-8
-      (setq erc-log-file-coding-system 'utf-8)
-      ;; when send/recv message save it to log
-      (setq erc-log-write-after-send t)
-      (setq erc-log-write-after-insert t)))
-#+END_SRC
-
 ** Enable spell checking
 
 #+BEGIN_SRC emacs-lisp
