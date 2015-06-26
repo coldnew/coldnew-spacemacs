@@ -2781,6 +2781,7 @@ I always use =ERC= as my irc client, which is bundle with emacs.
 
 #+BEGIN_SRC emacs-lisp
   (req-package erc
+    :require (erc-notify)
     :config
     (progn
       ;; set prompt to ->>
@@ -2793,9 +2794,104 @@ I always use =ERC= as my irc client, which is bundle with emacs.
       (erc-autojoin-mode t)
       ;; truncate too long line
       (erc-truncate-mode +1)
-      ;; Enable track with erc
-      (erc-track-mode t)
-      ))
+      ;; Interpret mIRC-style color commands in IRC chats
+      (setq erc-interpret-mirc-color t)
+      ;; Kill buffers for channels after /part
+      (setq erc-kill-buffer-on-part t)
+      ;; Kill buffers for private queries after quitting the server
+      (setq erc-kill-queries-on-quit t)
+      ;; Kill buffers for server messages after quitting the server
+      (setq erc-kill-server-buffer-on-quit t)
+      ;; open query buffers in the current window
+      (setq erc-query-display 'buffer)
+      (setq erc-save-buffer-on-part t)))
+#+END_SRC
+
+** Setup default irc room I want to join
+
+#+begin_src emacs-lisp
+  (setq erc-autojoin-channels-alist
+        '(
+          ;; english channel
+          (".*\\.freenode.net" "#emacs" "#clojure" "#wayland" "#libhybris" "#webos-ports")
+          (".*\\.mozilla.org" "#b2g")
+          ;; Chinese channel
+          (".*\\.freenode.net" "#emacs.tw" "#tossug" "#coscup" "#g0v.tw" "#clojure.tw" "#lisp.tw")
+          (".*\\.oftc.net" "#dot")))
+#+end_src
+
+** Hide some sort of message
+
+#+begin_src emacs-lisp
+  (setq erc-hide-list
+        '(;; notices
+          "JOIN" "PART" "QUIT" "LEFT" "NICK"
+          ;; robot
+          "^j[a-z]*bot!" "^fussbot!"))
+#+end_src
+
+** Add timestamp for messages
+
+#+BEGIN_SRC emacs-lisp
+  (erc-timestamp-mode 1)
+  (setq erc-insert-timestamp-function 'erc-insert-timestamp-left)
+#+END_SRC
+
+** Coloify user's nickname
+
+#+BEGIN_SRC emacs-lisp
+  (req-package erc-hl-nicks)
+#+END_SRC
+
+** Enable track-mode for erc
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load 'erc
+    '(progn
+       ;; enable track-mode
+       (erc-track-mode t)
+       ;; do not track some type of message
+       (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
+                                       "324" "329" "332" "333" "353" "477"))))
+#+END_SRC
+
+** Logging irc messages
+
+#+BEGIN_SRC emacs-lisp
+  (req-package erc-log
+    :require (erc)
+    :config
+    (progn
+      (erc-log-mode 1)
+      ;; setup log file path
+      (setq erc-log-channels-directory (concat user-cache-directory "erc"))
+      (unless (file-exists-p erc-log-channels-directory)
+        (mkdir erc-log-channels-directory t))
+      ;; all log save as utf-8
+      (setq erc-log-file-coding-system 'utf-8)
+      ;; when send/recv message save it to log
+      (setq erc-log-write-after-send t)
+      (setq erc-log-write-after-insert t)))
+#+END_SRC
+
+** Enable spell checking
+
+#+BEGIN_SRC emacs-lisp
+  (req-package erc-spelling
+    :config
+    (progn
+      (erc-spelling-mode 0)))
+#+END_SRC
+
+** Autoaway setup
+
+#+BEGIN_SRC emacs-lisp
+  (req-package erc-autoaway
+    :config
+    (progn
+      (setq erc-auto-discard-away t)
+      (setq erc-autoaway-idle-seconds 600)
+      (setq erc-autoaway-use-emacs-idle t)))
 #+END_SRC
 
 * Keybinding                                                     :keybinding:
