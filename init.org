@@ -2263,9 +2263,6 @@ https://github.com/clojure-emacs/clj-refactor.el
         '(progn
            (add-hook 'cider-mode-hook #'eldoc-mode)))
 
-      ;; always use `dev' profile with `cider-jack-in'
-      (setq cider-lein-parameters "with-profile dev, repl :headless")
-
       ;; Hide `*nrepl-connection*' and `*nrepl-server*' buffers from appearing
       ;; in some buffer switching commands like switch-to-buffer
       (setq nrepl-hide-special-buffers nil)
