@@ -23,6 +23,7 @@
      ;; markdown
      ;; org
      ;; syntax-checking
+     emacs-lisp
      company-mode
      git (:variables git-gutter-use-fringe t)
      fast
@@ -33,7 +34,6 @@
      javascript
      lua
      markdown
-     php
      org
      org-repo-todo
      vim-empty-lines
@@ -103,6 +103,9 @@ before layers configuration."
    ;; If non nil the paste micro-state is enabled. While enabled pressing `p`
    ;; several times cycle between the kill ring content.
    dotspacemacs-enable-paste-micro-state t
+   ;; If non nil then `ido' replaces `helm' for some commands. For now only
+   ;; `find-files' (SPC f f) is replaced.
+   dotspacemacs-use-ido nil
    ;; Guide-key delay in seconds. The Guide-key is the popup buffer listing
    ;; the commands bound to the current keystrokes.
    dotspacemacs-guide-key-delay 0.4

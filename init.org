@@ -2993,7 +2993,7 @@ spacemacs reserve the =SPC-o= for user setup theirs own keymap, I think I should
 | C-x M-1  | deft-or-close                       | Use deft open my note                   |
 | C-x M-2  | multi-eshell                        | Show eshell window                      |
 | C-x M-3  | mu4e                                | Use mu4e to read mail                   |
-| C-x M-4 | erc-start-or-switch | Switch to erc budder                    |
+| C-x M-4  | erc-start-or-switch                 | Switch to erc budder                    |
 | C-x vl   | magit-log                           |                                         |
 | C-x vp   | magit-push                          |                                         |
 | C-x vs   | magit-status                        |                                         |
