@@ -1177,6 +1177,12 @@ they work nicely with version control systems.
   (req-package evil-terminal-cursor-changer)
 #+END_SRC
 
+#+BEGIN_SRC emacs-lisp
+  (req-package vim-empty-lines-mode
+    :config (progn
+              (add-hook 'diff-mode-hook (lambda () (vim-empty-lines-mode -1)))))
+#+END_SRC
+
 ** En/Decrypt files by [[http://emacswiki.org/emacs/EasyPG][EasyPG]]
 
 #+BEGIN_SRC emacs-lisp
@@ -1772,23 +1778,25 @@ which add a =j= command to let you jump to folder you has been access.
 ** Extend babel support languages
 
 #+BEGIN_SRC emacs-lisp
-  (eval-after-load 'org
-    '(progn
-       (org-babel-do-load-languages
-        'org-babel-load-languages
-        '((emacs-lisp . t)
-          (C . t)
-          (ditaa . t)
-          (dot . t)
-          (js . t)
-          (latex . t)
-          (perl . t)
-          (python . t)
-          (ruby . t)
-          (sh . t)
-          (plantuml . t)
-          (clojure . t)
-          ))))
+    (eval-after-load 'org
+      '(progn
+         (org-babel-do-load-languages
+          'org-babel-load-languages
+          '((emacs-lisp . t)
+            (C . t)
+            (ditaa . t)
+            (dot . t)
+            (js . t)
+            (latex . t)
+            (perl . t)
+            (python . t)
+            (ruby . t)
+            (sh . t)
+            (plantuml . t)
+            (clojure . t)
+            ))
+         (add-to-list 'org-src-lang-modes '("dot" . graphviz-dot))
+  ))
 #+END_SRC
 
 ** Setup link abbreviations
@@ -2511,6 +2519,16 @@ insert latest clojure libraries to your project.
       ))
 #+END_SRC
 
+** diff
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load 'vim-empty-lines-mode
+    '(progn
+            (add-hook 'diff-mode-hook (lambda () (vim-empty-lines-mode -1)))
+            (add-hook 'diff-mode-hook (lambda () (whitespace-mode -1)))
+       ))
+#+END_SRC
+
 * Web Development                                                       :web:
 
 #+BEGIN_SRC emacs-lisp
@@ -2552,9 +2570,6 @@ support for Zen Coding by producing HTML from CSS-like selectors.
 
 
 #+BEGIN_SRC emacs-lisp
-  (req-package git-rebase-mode
-    :mode ("/git-rebase-todo\\'" . git-rebase-mode))
-
   (req-package gitconfig-mode
     :mode (("/\\.?git/?config\\'" . gitconfig-mode)
            ("/\\.gitmodules\\'" . gitconfig-mode)
@@ -2574,18 +2589,6 @@ https://github.com/itsjeyd/git-wip-timemachine
 
 #+BEGIN_SRC emacs-lisp
   (req-package git-wip-timemachine)
-#+END_SRC
-
-*** Major mode expand
-
-#+BEGIN_SRC emacs-lisp
-  (setq git-commit-mode-expand-alist
-        '(("s" . git-commit-signoff)
-          ("a" . git-commit-ack)
-          ("t" . git-commit-test)
-          ("R" . git-commit-review)
-          ("c" . git-commit-cc)
-          ("r" . git-commit-reported)))
 #+END_SRC
 
 *** Key Bindings
@@ -2872,6 +2875,24 @@ I always use =ERC= as my irc client, which is bundle with emacs.
       (setq erc-autoaway-use-emacs-idle t)))
 #+END_SRC
 
+** Quick start/switch erc with one command                         :command:
+
+#+BEGIN_SRC emacs-lisp
+  (defun erc-start-or-switch ()
+    "Connect to IRC, if already connected, switch to active irc buffer."
+    (interactive)
+    (let ((irc-active-p (and (fboundp 'erc-buffer-list)
+                             (erc-buffer-list))))
+      ;; we track irc.freenode.net to make sure erc is already active
+      (if irc-active-p
+          (erc-track-switch-buffer 1)
+        (progn
+          ;; connect to irc server
+          (erc-tls :server "irc.freenode.net" :port 6697 :nick erc-nick)
+          (erc-tls :server "irc.debian.org" :port 6697 :nick erc-nick)
+          (erc-tls :server "irc.mozilla.org" :port 6697 :nick erc-nick)))))
+#+END_SRC
+
 * Keybinding                                                     :keybinding:
 
 Create my minor-mode to control all keybindings
@@ -2934,6 +2955,7 @@ spacemacs reserve the =SPC-o= for user setup theirs own keymap, I think I should
 | C-x M-1 | deft-or-close       | Use deft open my note                   |
 | C-x M-2 | multi-eshell        | Show eshell window                      |
 | C-x M-3 | mu4e                | Use mu4e to read mail                   |
+| C-x M-4 | erc-start-or-switch | Switch to erc budder                    |
 | C-x vl  | magit-log           |                                         |
 | C-x vp  | magit-push          |                                         |
 | C-x vs  | magit-status        |                                         |
@@ -2971,6 +2993,7 @@ spacemacs reserve the =SPC-o= for user setup theirs own keymap, I think I should
 | C-x M-1  | deft-or-close                       | Use deft open my note                   |
 | C-x M-2  | multi-eshell                        | Show eshell window                      |
 | C-x M-3  | mu4e                                | Use mu4e to read mail                   |
+| C-x M-4 | erc-start-or-switch | Switch to erc budder                    |
 | C-x vl   | magit-log                           |                                         |
 | C-x vp   | magit-push                          |                                         |
 | C-x vs   | magit-status                        |                                         |
