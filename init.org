@@ -298,6 +298,12 @@ really annoying.
   (remove-hook 'helm-minibuffer-set-up-hook 'helm-hide-minibuffer-maybe)
 #+END_SRC
 
+Disable =ido-mode= if spacemacs enable it.
+
+#+BEGIN_SRC emacs-lisp
+  (ido-mode -1)
+#+END_SRC
+
 * Basic setup
 
 Most setup I want to use is done by [[https://github.com/syl20bnr/spacemacs][spacemacs]], but I still keep some
