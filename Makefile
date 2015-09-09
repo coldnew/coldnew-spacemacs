@@ -16,6 +16,7 @@ clean:
 	$(RM) */*.elc
 
 init.el:
+	$(RM) init.el
 	${CASK} exec ${EMACS} -Q -batch \
 		--eval "(require 'org)" \
 		--eval '(setq org-confirm-babel-evaluate nil)' \
