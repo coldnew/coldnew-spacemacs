@@ -4,6 +4,7 @@
 #+STARTUP: overview indent align
 #+BABEL: :cache yes
 #+OPTIONS: ^:nil
+#+PROPERTY: header-args :comments link
 
 # Badge
 [[http://www.gnu.org/licenses/gpl-3.0.txt][https://img.shields.io/badge/license-GPL_3-green.svg?dummy]]
@@ -238,13 +239,10 @@ The original spacemacs will load =~/.spacemacs= as user configuration
 file, I move this file to =~/.emacs.d/spacemacs.el=.
 
 #+BEGIN_SRC emacs-lisp
-  ;; Use `~/.emacs.d/spacemacs.el' instead of `~/.spacemacs'
-  (setq-default dotspacemacs-filepath
-                (concat user-emacs-directory "spacemacs.el"))
 
-  ;; FIXME: why (dotspacemacs/location) not following dotspacemacs-filepath ?
-  ;; it's BUG!!!!!!
-  ;; This is fixed in spacemacs's commit `afde9f2', but not for stable-release yet.
+  ;; ;; FIXME: why (dotspacemacs/location) not following dotspacemacs-filepath ?
+  ;; ;; it's BUG!!!!!!
+  ;; ;; This is fixed in spacemacs's commit `afde9f2', but not for stable-release yet.
   (let ((dotspacemacs/location "~/.spacemacs"))
     (if (not (file-exists-p dotspacemacs/location))
         (make-symbolic-link (concat user-emacs-directory "spacemacs.el") dotspacemacs/location)))
@@ -263,11 +261,21 @@ file, I move this file to =~/.emacs.d/spacemacs.el=.
   (defadvice spacemacs/check-for-new-version (around null-func activate)
     "Overwrite the spacemacs's `spacemacs/check-for-new-version' to
     makt it useless since I use git submodule to bundle spacemacs with my emacs.")
+
 #+END_SRC
 
 ** Load spacemacs
 
+The original spacemacs is suggest to clone it to =~/.emacs.d=, I really not like
+this. Instead, I move it to =~/.emacs.d/spacemacs= so I can use org-mode with
+literature writing, I also change =~/.spacemacs= to =~/.emacs.d/spacemacs.el=
+which make all of my config track by git.
+
 #+BEGIN_SRC emacs-lisp
+  ;; Use `~/.emacs.d/spacemacs.el' instead of `~/.spacemacs'
+  (defconst dotspacemacs-filepath
+    (concat user-emacs-directory "spacemacs.el"))
+
   ;; Make a fake entry point for spacemacs, also modify the
   ;; `user-emacs-directory' temporary to mislead spacemacs real emacs
   ;; directory.
@@ -275,11 +283,20 @@ file, I move this file to =~/.emacs.d/spacemacs.el=.
           (directory-file-name (concat user-emacs-directory "spacemacs")))
          (spacemacs-init
           (concat (file-name-as-directory spacemacs-dir) "init.el"))
-         (user-emacs-directory (file-name-directory spacemacs-init)))
+         (user-emacs-directory (file-name-directory spacemacs-init))
+         ;; move `~/.spacemacs' to `~/.emacs.d/spacemacs.el'
+         ;;(dotspacemacs-filepath (concat user-emacs-directory "spacemacs.el"))
+         (dotspacemacs-filepath dotspacemacs-filepath))
 
     ;; Initial spacemacs, our emacs run on top of it
     (load spacemacs-init))
+#+END_SRC
 
+** Some function should execute after loading spacemacs-init.
+
+spacemacs is really awesome, but there's something I don't like.
+
+#+BEGIN_SRC emacs-lisp
   ;; Disable global highlight by default (which is set by spacemacs.)
   (global-hl-line-mode -1)
 
@@ -944,7 +961,8 @@ unload previous theme before loading a new one.
   ;; use coldnew-theme-night by default
   (req-package coldnew-theme
     :require (powerline powerline-evil)
-    :config (coldnew-theme-night))
+    :config (coldnew-theme-night)
+)
 #+END_SRC
 
 * Minibuffers                                                    :minibuffer:
@@ -1840,17 +1858,6 @@ see: http://emacs.stackexchange.com/questions/450/intelligent-spell-checking-in-
        ))
 #+END_SRC
 
-** Use org-mode to write literature Clojure code
-
-TODO: need to use 8.3 org-mode
-
-#+BEGIN_SRC emacs-lisp :tangle no
-  (require 'org)
-  (require 'ob-clojure)
-  (setq org-babel-clojure-backend 'cider)
-  (require 'cider)
-#+END_SRC
-
 ** Key Bindings
 
 #+TBLNAME: org-mode-keys
@@ -2194,7 +2201,7 @@ Use my C++ coding style.
                ;;                     {                        {
                ;;                        ;                         ;
                ;;                     }                        }
-               (c-set-offset 'substatement-open '0)
+               (c-set-offset 'substatement-open 0)
 
                ;; make open-braces after a case
                (c-set-offset 'case-label '+)
@@ -2398,6 +2405,9 @@ insert latest clojure libraries to your project.
 #+BEGIN_SRC emacs-lisp
   (req-package malabar-mode
     :mode "\\.java$")
+
+  (req-package gradle-mode
+    :mode "\\.gradle$")
 #+END_SRC
 
 ** Markdown                                                       :markdown:
@@ -2503,6 +2513,16 @@ insert latest clojure libraries to your project.
   (req-package dts-mode
     :mode (("\\.dts$" . dts-mode)
            ("\\.dtsi$" . dts-mode)))
+#+END_SRC
+
+** scala
+
+#+BEGIN_SRC emacs-lisp
+  (req-package scala-mode
+    :mode (("\\.scala$" . scala-mode)))
+
+  (req-package sbt-mode
+    :mode (("\\.sbt$" . sbt-mode)))
 #+END_SRC
 
 ** newlisp
