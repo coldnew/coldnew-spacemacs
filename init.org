@@ -961,8 +961,7 @@ unload previous theme before loading a new one.
   ;; use coldnew-theme-night by default
   (req-package coldnew-theme
     :require (powerline powerline-evil)
-    :config (coldnew-theme-night)
-)
+    :config (coldnew-theme-night))
 #+END_SRC
 
 * Minibuffers                                                    :minibuffer:
@@ -2515,7 +2514,7 @@ insert latest clojure libraries to your project.
            ("\\.dtsi$" . dts-mode)))
 #+END_SRC
 
-** scala
+** scala                                                             :scala:
 
 #+BEGIN_SRC emacs-lisp
   (req-package scala-mode
@@ -2525,7 +2524,7 @@ insert latest clojure libraries to your project.
     :mode (("\\.sbt$" . sbt-mode)))
 #+END_SRC
 
-** newlisp
+** newlisp                                                            :lisp:
 
 #+BEGIN_SRC emacs-lisp
   (req-package newlisp :mode "\\.lsp$")
