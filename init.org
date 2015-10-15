@@ -1857,6 +1857,17 @@ see: http://emacs.stackexchange.com/questions/450/intelligent-spell-checking-in-
        ))
 #+END_SRC
 
+** Latex Export
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-format-latex-options
+        '(:forground "black" :background "white"
+                     :scale 2.0
+                     :html-foreground "Black" :html-background "Transparent"
+                     :html-scale 1.0
+                     :matchers ("begin" "$1" "$" "$$" "\\(" "\\[")))
+#+END_SRC
+
 ** Key Bindings
 
 #+TBLNAME: org-mode-keys
@@ -2560,6 +2571,8 @@ insert latest clojure libraries to your project.
             (add-hook 'diff-mode-hook (lambda () (vim-empty-lines-mode -1)))
             (add-hook 'diff-mode-hook (lambda () (whitespace-mode -1)))
        ))
+
+ (remove-hook 'diff-mode-hook 'whitespace-mode t)
 #+END_SRC
 
 * Web Development                                                       :web:
