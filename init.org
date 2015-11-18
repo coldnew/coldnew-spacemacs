@@ -342,9 +342,12 @@ Under Mac OSX, I always bind =Caps lock= as Control key, and make the
 
 The =Option= key will be setup as =Super=.
 
+We also disable some keys like =⌘-h= bypass to system in emacs-mac port.
+
 #+BEGIN_SRC emacs-lisp
   (setq mac-option-modifier 'super)
   (setq mac-command-modifier 'meta)
+  (setq mac-pass-command-to-system nil)
 #+END_SRC
 
 ** Don't ask me when close emacs with process is running
