@@ -2862,10 +2862,10 @@ I always use =ERC= as my irc client, which is bundle with emacs.
   (setq erc-autojoin-channels-alist
         '(
           ;; english channel
-          (".*\\.freenode.net" "#emacs" "#clojure" "#wayland" "#libhybris" "#webos-ports")
+          (".*\\.freenode.net" "#clojure" "#wayland" "#libhybris" "#webos-ports")
           (".*\\.mozilla.org" "#b2g")
           ;; Chinese channel
-          (".*\\.freenode.net" "#emacs.tw" "#tossug" "#coscup" "#g0v.tw" "#clojure.tw" "#lisp.tw")
+          (".*\\.freenode.net" "#emacs.tw" "#cschat.tw" "#clojure.tw" "#lisp.tw")
           (".*\\.oftc.net" "#dot")))
 #+end_src
 
