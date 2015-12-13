@@ -2578,6 +2578,14 @@ insert latest clojure libraries to your project.
  (remove-hook 'diff-mode-hook 'whitespace-mode t)
 #+END_SRC
 
+** ebnf
+
+#+BEGIN_SRC emacs-lisp
+  (req-package ebnf-mode
+    :mode (("\\.bnf$" . bnf-mode)
+           ("\\.ebnf$" . ebnf-mode)))
+#+END_SRC
+
 * Web Development                                                       :web:
 
 #+BEGIN_SRC emacs-lisp
