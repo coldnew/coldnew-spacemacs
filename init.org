@@ -235,19 +235,8 @@ After all spacemacs init done, switch back to =*scratch*= buffer.
 
 ** Load basic spacemacs configuration file
 
-The original spacemacs will load =~/.spacemacs= as user configuration
-file, I move this file to =~/.emacs.d/spacemacs.el=.
-
 #+BEGIN_SRC emacs-lisp
-
-  ;; ;; FIXME: why (dotspacemacs/location) not following dotspacemacs-filepath ?
-  ;; ;; it's BUG!!!!!!
-  ;; ;; This is fixed in spacemacs's commit `afde9f2', but not for stable-release yet.
-  (let ((dotspacemacs/location "~/.spacemacs"))
-    (if (not (file-exists-p dotspacemacs/location))
-        (make-symbolic-link (concat user-emacs-directory "spacemacs.el") dotspacemacs/location)))
-
-  (load (concat user-emacs-directory "spacemacs.el"))
+  (setenv "SPACEMACSDIR" (concat user-emacs-directory "spacemacs.d"))
 #+END_SRC
 
 ** Overwrite spacemacs function to let it not remove my packages
