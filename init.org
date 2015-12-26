@@ -609,6 +609,18 @@ GitHub: https://github.com/nicferrier/emacs-noflet
   (req-package noflet)
 #+END_SRC
 
+
+** expand-region
+
+Expand region increases the selected region by semantic units. Just keep
+pressing the key until it selects what you want.
+
+GitHub: https://github.com/magnars/expand-region.el
+
+#+BEGIN_SRC emacs-lisp
+  (req-package expand-region)
+#+END_SRC
+
 * Interactive Commands                                              :command:
 
 In emacs, we can use =M-x= to execute interactive commands, I
