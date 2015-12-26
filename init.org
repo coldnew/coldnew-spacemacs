@@ -1977,6 +1977,8 @@ GitHub: https://github.com/AdamClements/latest-clojure-libraries
 [[https://github.com/smihica/emmet-mode][emmet-mode]] is a fork of [[https://github.com/rooney/zencoding][zencoding-mode]] which add minor mode providing support
 for Zen Coding by producing HTML from CSS-like selectors.
 
+GitHub: https://github.com/smihica/emmet-mode
+
 #+BEGIN_SRC emacs-lisp :tangle no
   (req-package emmet-mode
     :config
