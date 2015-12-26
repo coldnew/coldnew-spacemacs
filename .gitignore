@@ -73,12 +73,12 @@ python-*-docs-html
 
 /games/
 
-init.el*
+/init.el*
 .cask/
 .sx/
 request/
 .litable-lists.el
-spacemacs/srecode-map.el*
+modules/spacemacs/srecode-map.el*
 TODO.org
 network-security.data
 .c2/
