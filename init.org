@@ -1,16 +1,18 @@
 #+TITLE: coldnew's emacs config
 #+AUTHOR: Yen-Chin, Lee <coldnew>
 #+email: coldnew.tw at gmail.com
+#+DESCRIPTION: A literate programming style exposition of my Emacs configuration
+#+LANGUAGE: en
 #+STARTUP: overview indent align
 #+BABEL: :cache yes
 #+OPTIONS: ^:nil
-#+PROPERTY: header-args :comments link
+#+PROPERTY: header-args :comments link :tangle init.el
 
 # Badge
 [[http://www.gnu.org/licenses/gpl-3.0.txt][https://img.shields.io/badge/license-GPL_3-green.svg?dummy]]
 [[https://travis-ci.org/coldnew/coldnew-spacemacs][https://travis-ci.org/coldnew/coldnew-spacemacs.svg?branch=master]]
 
-* About
+* Introduction
 
 This is another emacs config of mine, which is a totally rewritten version
 based on top of [[https://github.com/syl20bnr/spacemacs][spacemacs]] and [[https://github.com/coldnew/coldnew-emacs][coldnew-emacs]] with [[http://en.wikipedia.org/wiki/Literate_programming][literate programming]]
@@ -18,6 +20,28 @@ in [[http://orgmode.org/][org-mode]], but it uses English to write this config i
 
 Feel free to use it :).
 
+** How to install emacs
+
+My emacs is running under =Mac OSX= and =Gentoo Linux= and I really like them,
+following are some record for how I installed my emacs.
+
+*** Mac OSX
+
+In Mac OSX, I use [[http://brew.sh/][homebrew]] to mantain opensource packages, I always install latest
+version of emacs via following command
+
+#+BEGIN_EXAMPLE
+  brew install emacs --HEAD --use-git-head --with-cocoa --with-gnutls --with-rsvg --with-imagemagick
+  brew linkapps
+#+END_EXAMPLE
+
+*** Gentoo Linux
+
+[[https://www.gentoo.org/][Gentoo Linux]] is the best linux distrobution I ever used and it's really easy to install latest apps.
+
+#+BEGIN_EXAMPLE
+  USE="X gtk3 inotify xft imagemagick" emerge app-editors/emacs
+#+END_EXAMPLE
 ** Install or testing this config
 
 - First use git to download whole repo
@@ -29,11 +53,15 @@ Feel free to use it :).
   : git submodule init
   : git submodule update
 
-- Before trying to start emacs, you need to bootstrap it with [[https://github.com/cask/cask][Cask]]
+- You also need to install [[https://github.com/cask/cask][Cask]] for package management
 
-  : cask install
+  : curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
 
-- Then use the =make= command to generate an init.el file
+- Then use the =make= command bootstrap this config
+
+  : make bootstrap
+
+- If you only want to generate the =init.el=, jut type
 
   : make init.el
 
@@ -45,34 +73,37 @@ Feel free to use it :).
 ** Packages need to install in system (Optional)
 
 Some extra packages need to be installed in the system manually. These packages
-are =optional= but can make this spacemacs config work much more nicely.
+are =optional= but can make this configuration work more nicely.
 
-- Mac OSX
+*** Mac OSX
 
-  #+BEGIN_SRC sh
-    brew install the_silver_searcher \
-         fasd \
-         doxymacs \
-         aspell --with-lang-en
+#+BEGIN_SRC sh :tangle no
+  brew install the_silver_searcher
+  brew install fasd
+  brew install docmacs
+  brew install aspell --with-lang-en
+#+END_SRC
 
-    brew install mu --with-emacs --HEAD
-  #+END_SRC
+*** Gentoo Linux
 
+In Gentoo Linux, don't forget to enable ~USE=emacs~ to make gentoo auto install
+emacs-related packages.
 
-- Gentoo Linux
-
-  #+BEGIN_SRC sh
-    USE="emacs" emerge sys-apps/the_silver_searcher \
-       app-shells/fasd \
-       net-mail/mu \
-       app-emacs/doxymacs \
-       aspell
-  #+END_SRC
+#+BEGIN_SRC sh :tangle no
+  emerge sys-apps/the_silver_searcher
+  emerge app-shells/fasd
+  emerge app-shells/doxymacs
+  emerge app-shells/aspell
+#+END_SRC
 
 * Initialization Emacs
 
-There are some configurations I need to put at the beginning of the emacs config. These
-configurations are derived from my original init.el file.
+There are some configurations I need to put at the beginning of the emacs
+config. These configurations are derived from my original init.el file.
+
+** TODO fix emacs 25.1.50 install packages error
+
+see: https://github.com/syl20bnr/spacemacs/issues/3854
 
 ** load prefer newer
 
@@ -82,7 +113,10 @@ configurations are derived from my original init.el file.
   (setq load-prefer-newer t)
 #+END_SRC
 
-** Change the user-emacs-directory
+** change the user-emacs-directory
+
+I this configuration, =user-emacs-directory= always refer to the emacs
+configuration's init.el parent directory.
 
 #+BEGIN_SRC emacs-lisp
   ;; We set `user-emacs-directory' here so we can use command-line
@@ -93,7 +127,9 @@ configurations are derived from my original init.el file.
         (file-name-directory (or load-file-name (buffer-file-name))))
 #+END_SRC
 
-** Define user-cache-directory variable
+** define user-cache-directory variable
+
+Setup the cache directory to store some cache content.
 
 #+BEGIN_SRC emacs-lisp
   (defconst user-cache-directory
@@ -103,16 +139,16 @@ configurations are derived from my original init.el file.
 
 * Package Management with Cask and Pallet
 
-[[https://github.com/rdallasgray/pallet][Pallet]] is a wonderful little tool built on [[https://github.com/cask/cask][Cask]], a dependency
-management tool for Emacs packages. Pallet adds automatic updating of
-the =Caskfile= when packages are installed and deleted.
+[[https://github.com/rdallasgray/pallet][Pallet]] is a wonderful little tool built on [[https://github.com/cask/cask][Cask]], a dependency management tool
+for Emacs packages. Pallet adds automatic updating of the =Caskfile= when
+packages are installed and deleted.
 
 ** Installing Cask
 
 Just run this command in your terminal of choice:
 
 #+BEGIN_SRC sh :tangle no
-  $ curl -fsSkL https://raw.github.com/cask/cask/master/go | python
+  curl -fsSkL https://raw.github.com/cask/cask/master/go | python
 #+END_SRC
 
 then add =~/.cask/bin= to your =PATH= so that you can use =cask=.
@@ -122,7 +158,7 @@ then add =~/.cask/bin= to your =PATH= so that you can use =cask=.
 For now, we just need a minimal =Cask= to get Pallet set up. Mine
 looks like this:
 
-#+BEGIN_SRC emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp :tangle (if (file-exists-p "Cask") "no" "Cask")
   (source gnu)
   (source melpa)
 
@@ -130,8 +166,13 @@ looks like this:
   (depends-on "f")
   (depends-on "s")
   (depends-on "dash")
+  (depends-on "noflet")
   (depends-on "pallet")
   (depends-on "req-package")
+  (depends-on "projectile")
+  (depends-on "clojure-mode")
+  (depends-on "mustache")           ;; TODO: remove
+  (depends-on "highlight-numbers")  ;; TODO: remove
 #+END_SRC
 
 Then run the following command in your =.emacs.d= directory to set up
@@ -139,6 +180,12 @@ Then run the following command in your =.emacs.d= directory to set up
 
 #+BEGIN_SRC sh :tangle no
   cask install
+#+END_SRC
+
+Since the =Cask= file is just emacs-lisp file, add it to mode-alist.
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'auto-mode-alist '("Cask$" . emacs-lisp-mode))
 #+END_SRC
 
 ** Initialize Cask
@@ -152,8 +199,8 @@ Finally, we add the following lines to our init file:
 
 ** Initialize Pallet
 
-Since we already install pallet via cask, we just need to use the 
-following code to initialize pallet.
+Since we already install pallet via cask, we just need to use the following code
+to initialize pallet.
 
 #+BEGIN_SRC emacs-lisp
   (require 'pallet)
@@ -162,11 +209,11 @@ following code to initialize pallet.
 
 * Dependency Management with req-package
 
-[[https://github.com/edvorg/req-package][req-package]] is a wrapper on top of [[https://github.com/jwiegley/use-package][use-package]], a package dependency
-management tool. The documentation for =use-package= is immensely
-helpful for figuring out how to describe package dependencies and
-settings. =req-package= adds the =:require= keyword which allows us to
-define dependencies between related packages.
+[[https://github.com/edvorg/req-package][req-package]] is a wrapper on top of [[https://github.com/jwiegley/use-package][use-package]], a package dependency management
+tool. The documentation for =use-package= is immensely helpful for figuring out
+how to describe package dependencies and settings. =req-package= adds the
+=:require= keyword which allows us to define dependencies between related
+packages.
 
 ** Initialize req-package
 
@@ -179,8 +226,8 @@ line to our init file to begin using =req-package=:
 
 ** Start loading packages in right order
 
-To start loading packages in right order, we need to added following
-in the last of emacs config.
+To start loading packages in right order, we need to added following in the last
+of emacs config.
 
 #+BEGIN_SRC emacs-lisp :tangle no
   (req-package-finish)
@@ -190,18 +237,18 @@ You can take a look at [[*End%20of%20configuration][End of configuration]] secti
 
 * Load Path
 
-The variable =load-path= lists all the directories where Emacs should
-look for Elisp files.
+The variable =load-path= lists all the directories where Emacs should look for
+Elisp files.
 
-Though I use =Cask= as package management in my emacs, some local
-packages like my own theme or others can't fetch by elpa need to add
-to load-path, this will help emacs find them.
+Though I use =Cask= as package management in my emacs, some local packages like
+my own theme or others can't fetch by elpa need to add to load-path, this will
+help emacs find them.
 
-Following are my method to add directories to load-path ~recursively~,
-this function also create directory to prevent directory not exist.
+Following are my method to add directories to load-path ~recursively~, this
+function also create directory to prevent directory not exist.
 
-If you don't have any local elisp and all packages is mantain by cask
-or elpa or spacemacs, you can skip following code.
+If you don't have any local elisp and all packages is mantain by cask or elpa or
+spacemacs, you can skip following code.
 
 #+BEGIN_SRC emacs-lisp
   ;; Add directories to emacs's `load-path' recursively.
@@ -220,20 +267,24 @@ or elpa or spacemacs, you can skip following code.
                   (normal-top-level-add-subdirs-to-load-path)))
                load-path)))))
 #+END_SRC
+
 * Spacemacs
 
-[[https://github.com/syl20bnr/spacemacs][Spacemacs]] is an emacs starterkit focus on [[https://gitorious.org/evil/pages/Home][Evil]], which emulate vim
-keymap on Emacs.
+[[https://github.com/syl20bnr/spacemacs][Spacemacs]] is an emacs starterkit focus on [[https://gitorious.org/evil/pages/Home][Evil]], which emulate vim keymap on
+Emacs.
 
 I make my emacs on top of spacemacs since I also use vim keymap.
 
-In my config file, the original =~/.spacemacs= file has move to
-=spacemacs.el= under user-emacs-directory folder, I also advice spacemacs funtion
-to prevent orphan packages deleted by spacemacs.
+In my config file, the original =~/.spacemacs= file has moved to
+=~/.emacs.d/spacemacs.d/init.el= , I also advice spacemacs funtion to
+prevent orphan packages deleted by spacemacs.
 
 After all spacemacs init done, switch back to =*scratch*= buffer.
 
 ** Load basic spacemacs configuration file
+
+Latest spacemacs can setup =SPACEMACSDIR= to load customize spacemacs init.el
+file.
 
 #+BEGIN_SRC emacs-lisp
   (setenv "SPACEMACSDIR" (concat user-emacs-directory "spacemacs.d"))
@@ -241,42 +292,42 @@ After all spacemacs init done, switch back to =*scratch*= buffer.
 
 ** Overwrite spacemacs function to let it not remove my packages
 
+I use =Cask= to handle all packages, spacemacs should do nothing here.
+
 #+BEGIN_SRC emacs-lisp
-  ;; Make spacemacs not remove my orphan packages.
+  ;; Make spacemacs not remove my packages.
   (defadvice configuration-layer/delete-orphan-packages (around null-func activate)
     "Overwrite the spacemacs's `configuration-layer/delete-orphan-packages'
     to make it not remove any orphan packages.")
+#+END_SRC
 
+** Spacemacs no need to check newer version
+
+Since my spacemacs is installed as submodule, it's no need to check for newer
+version, I'll handle this myself.
+
+#+BEGIN_SRC emacs-lisp
   (defadvice spacemacs/check-for-new-version (around null-func activate)
     "Overwrite the spacemacs's `spacemacs/check-for-new-version' to
     makt it useless since I use git submodule to bundle spacemacs with my emacs.")
-
 #+END_SRC
 
 ** Load spacemacs
 
 The original spacemacs is suggest to clone it to =~/.emacs.d=, I really not like
-this. Instead, I move it to =~/.emacs.d/spacemacs= so I can use org-mode with
-literature writing, I also change =~/.spacemacs= to =~/.emacs.d/spacemacs.el=
-which make all of my config track by git.
+this. Instead, I move it to =~/.emacs.d/modules/spacemacs= so I can use org-mode
+with literature writing.
 
 #+BEGIN_SRC emacs-lisp
-  ;; Use `~/.emacs.d/spacemacs.el' instead of `~/.spacemacs'
-  (defconst dotspacemacs-filepath
-    (concat user-emacs-directory "spacemacs.el"))
-
   ;; Make a fake entry point for spacemacs, also modify the
   ;; `user-emacs-directory' temporary to mislead spacemacs real emacs
   ;; directory.
+  (require 'f)
   (let* ((spacemacs-dir
-          (directory-file-name (concat user-emacs-directory "spacemacs")))
+          (directory-file-name (f-join user-emacs-directory "modules" "spacemacs")))
          (spacemacs-init
           (concat (file-name-as-directory spacemacs-dir) "init.el"))
-         (user-emacs-directory (file-name-directory spacemacs-init))
-         ;; move `~/.spacemacs' to `~/.emacs.d/spacemacs.el'
-         ;;(dotspacemacs-filepath (concat user-emacs-directory "spacemacs.el"))
-         (dotspacemacs-filepath dotspacemacs-filepath))
-
+         (user-emacs-directory (file-name-directory spacemacs-init)))
     ;; Initial spacemacs, our emacs run on top of it
     (load spacemacs-init))
 #+END_SRC
@@ -285,16 +336,31 @@ which make all of my config track by git.
 
 spacemacs is really awesome, but there's something I don't like.
 
-#+BEGIN_SRC emacs-lisp
-  ;; Disable global highlight by default (which is set by spacemacs.)
-  (global-hl-line-mode -1)
+*** Disable global highlight by default
 
+#+BEGIN_SRC emacs-lisp
+  (global-hl-line-mode -1)
+#+END_SRC
+
+*** switch back to `*scratch*' buffer after loading spacemacs finished
+
+#+BEGIN_SRC emacs-lisp
   ;; After spacemacs loading finished, switch back to `*scratch*' buffer
   ;; and make sure it's in `lisp-interaction-mode'
   (switch-to-buffer "*scratch*")
   (with-current-buffer (get-buffer-create "*scratch*")
     (lisp-interaction-mode))
 #+END_SRC
+
+*** Not use ido-mode
+
+I don't like the =ido-mode=.
+
+#+BEGIN_SRC emacs-lisp
+  (ido-mode -1)
+#+END_SRC
+
+*** Move helm input in minibuffer
 
 I *really* hate spacemacs default echo the helm input in header line, it's
 really annoying.
@@ -304,16 +370,10 @@ really annoying.
   (remove-hook 'helm-minibuffer-set-up-hook 'helm-hide-minibuffer-maybe)
 #+END_SRC
 
-Disable =ido-mode= if spacemacs enable it.
-
-#+BEGIN_SRC emacs-lisp
-  (ido-mode -1)
-#+END_SRC
-
 * Basic setup
 
-Most setup I want to use is done by [[https://github.com/syl20bnr/spacemacs][spacemacs]], but I still keep some
-basic setup here, some are not set or just keep for backward compability.
+Most setup I want to use is done by [[https://github.com/syl20bnr/spacemacs][spacemacs]], but I still keep some basic setup
+here, some are not set or just keep for backward compability.
 
 ** Startup emacs server
 
@@ -326,8 +386,8 @@ basic setup here, some are not set or just keep for backward compability.
 
 ** Under Mac OSX use Command key as ALT
 
-Under Mac OSX, I always bind =Caps lock= as Control key, and make the
-=Command= key as =ALT= key like I done in Linux.
+Under Mac OSX, I always bind =Caps lock= as Control key, and make the =Command=
+key as =ALT= key like I done in Linux.
 
 The =Option= key will be setup as =Super=.
 
@@ -357,22 +417,36 @@ We also disable some keys like =⌘-h= bypass to system in emacs-mac port.
 
 * Languages and Encodings
 
-Since current Emacs default run on UTF-8, it's no need to setup the
-encoding.
+Since current Emacs default run on UTF-8, it's no need to setup the encoding.
 
-For language, though Traditional Chinese is my mothertone, I still
-prefer use =en_US= to display time info.
+For language, though Traditional Chinese is my mothertone, I still prefer use
+=en_US= to display time info.
 
 #+BEGIN_SRC emacs-lisp
   (prefer-coding-system 'utf-8)
   (setq system-time-locale "en_US" )
 #+END_SRC
 
-* Packages
+* Buildin Packages
+
+Some buildin packages not loaded by emacs, load it here.
+
+** cl-lib
+
+#+BEGIN_SRC emacs-lisp
+  (req-package cl-lib)
+#+END_SRC
+
+** htmlize
+
+#+BEGIN_SRC emacs-lisp
+  (req-package htmlize)
+#+END_SRC
+
+* External Packages
 
 Most of emacs packages do not need many configs or just provide
 commands/functions to use, I put them here.
-
 
 ** 4clojure
 
@@ -384,22 +458,20 @@ commands/functions to use, I put them here.
 
 ** ascii
 
-[[http://www.emacswiki.org/emacs/AsciiMode][Ascii]] provides a way to display ASCII code on a window, that is,
-display in another window an ASCII table highlighting the current
-character code.
+[[http://www.emacswiki.org/emacs/AsciiMode][Ascii]] provides a way to display ASCII code on a window, that is, display in
+another window an ASCII table highlighting the current character code.
 
 #+BEGIN_SRC emacs-lisp
   (req-package ascii
-    :init
-    (progn
-      ;; ascii-toggle
-      (defun ascii-toggle ()
-        "Toggle ascii-mode."
-        (interactive)
-        (if (not (ascii-off)) (ascii-on)))
+    :init (progn
+            ;; ascii-toggle
+            (defun ascii-toggle ()
+              "Toggle ascii-mode."
+              (interactive)
+              (if (not (ascii-off)) (ascii-on)))
 
-      ;; alias ascii to ascii-toggle
-      (defalias 'ascii 'ascii-toggle)))
+            ;; alias ascii to ascii-toggle
+            (defalias 'ascii 'ascii-toggle)))
 #+END_SRC
 
 ** ascii-art-to-unicode
@@ -420,9 +492,9 @@ Convert simple ASCII art drawings (and org-tables) to beautiful Unicode.
 
 ** pangu-spacing
 
-[[https://github.com/coldnew/pangu-spacing][pangu-spcing]] is an minor-mode to auto add =space= between Chinese and
-English characters. Note that these white-space characters are not
-really added to the contents, it just like to do so.
+[[https://github.com/coldnew/pangu-spacing][pangu-spcing]] is an minor-mode to auto add =space= between Chinese and English
+characters. Note that these white-space characters are not really added to the
+contents, it just like to do so.
 
 #+BEGIN_SRC emacs-lisp
   (req-package pangu-spacing
@@ -438,9 +510,9 @@ really added to the contents, it just like to do so.
 
 ** sx
 
-[[https://github.com/vermiculus/sx.el/][SX]] is a full featured Stack Exchange mode for GNU Emacs 24+. Using the
-official API, it provides a versatile experience for the Stack
-Exchange network within Emacs itself.
+[[https://github.com/vermiculus/sx.el/][SX]] is a full featured Stack Exchange mode for GNU Emacs 24+. Using the official
+API, it provides a versatile experience for the Stack Exchange network within
+Emacs itself.
 
 #+BEGIN_SRC emacs-lisp
   (req-package sx :require sx-load)
@@ -448,8 +520,8 @@ Exchange network within Emacs itself.
 
 ** hungry-delete
 
-[[https://github.com/nflath/hungry-delete][hungry-delete]] borrows hungry deletion from =cc-mode=, which will
-causes deletion to delete all whitespace in the direction you are deleting.
+[[https://github.com/nflath/hungry-delete][hungry-delete]] borrows hungry deletion from =cc-mode=, which will causes deletion
+to delete all whitespace in the direction you are deleting.
 
 #+BEGIN_SRC emacs-lisp
   (req-package hungry-delete
@@ -458,8 +530,8 @@ causes deletion to delete all whitespace in the direction you are deleting.
 
 ** rainbow-mode
 
-[[https://julien.danjou.info/projects/emacs-packages][rainbow-mode]] s a minor mode for Emacs which displays strings
-representing colors with the color they represent as background.
+[[https://julien.danjou.info/projects/emacs-packages][rainbow-mode]] s a minor mode for Emacs which displays strings representing colors
+with the color they represent as background.
 
 #+BEGIN_SRC emacs-lisp
   (req-package rainbow-mode)
@@ -473,128 +545,31 @@ representing colors with the color they represent as background.
     (add-hook 'prog-mode-hook '(lambda () (doxymacs-mode))))
 #+END_SRC
 
-** deft
-
-[[http://jblevins.org/projects/deft/][deft]]
-
-#+BEGIN_SRC emacs-lisp
-  (req-package deft
-    :config
-    (progn
-      ;; default extension set to .org
-      (setq deft-extension "org")
-
-      ;; setup an minor-mode to quickly kill all deft buffers
-      (define-minor-mode deft-note-mode "Deft notes" nil " Deft-Notes" nil)
-      (setq deft-text-mode 'deft-note-mode)
-
-      ;; My notes set to ~/Org
-      (setq deft-directory "~/Org/")
-
-      ;; Use filename as title
-      (setq deft-use-filename-as-title t)
-
-      ;; Do not make deft automatically save file
-      (setq deft-auto-save-interval 0)
-
-      ;; Quickly kill deft buffers
-      (defun kill-all-deft-notes ()
-        (interactive)
-        (save-excursion
-          (let ((count 0))
-            (dolist (buffer (buffer-list))
-              (set-buffer buffer)
-              (when (not (eq nil deft-note-mode))
-                (setq count (1+ count))
-                (kill-buffer buffer))))))
-
-      ;; Enable/Disable defts
-      (defun deft-or-close ()
-        (interactive)
-        (if (or (eq major-mode 'deft-mode) (not (eq nil deft-note-mode)))
-            (progn (kill-all-deft-notes) (kill-buffer "*Deft*"))
-          (deft)))))
-#+END_SRC
-
-** async
-
-#+BEGIN_SRC emacs-lisp
-  (req-package async
-    :config
-    (progn
-      ;; If I'm edit my init.org, async generate init.el when save.
-      (defun tangle-init ()
-        "If the current buffer is 'init.org' the code-blocks are tangled."
-        (let ((buffer-name "async-make-init.el"))
-          (when (equal (buffer-file-name)
-                       (expand-file-name (concat user-emacs-directory "init.org")))
-            ;; If previous building buffer exist, discard it
-            (when (get-buffer (concat "*" buffer-name "*"))
-              (kill-buffer (concat "*" buffer-name "*")))
-            ;; build with `make init.el' command
-            (async-start-process buffer-name "make" 'ignore "init.el"))))
-
-      (add-hook 'after-save-hook 'tangle-init)
-      ))
-#+END_SRC
-
 ** password-generator
 
-[[https://github.com/zargener/emacs-password-genarator][password-generator]] provides simple functions to create passwords and
-insert them inside buffer immediately.
+[[https://github.com/zargener/emacs-password-genarator][password-generator]] provides simple functions to create passwords and insert them
+inside buffer immediately.
 
 #+BEGIN_SRC emacs-lisp
   (req-package password-generator)
 #+END_SRC
 
-** skeletor
-
-[[https://github.com/chrisbarrett/skeletor.el][Skeletor]] provides project templates for Emacs. It also automates the
-mundane parts of setting up a new project like version control,
-licenses and tooling.
-
-Skeletor comes with a number of predefined templates and allows you to
-easily create your own.
-
-#+BEGIN_SRC emacs-lisp
-  (req-package skeletor)
-#+END_SRC
-
 ** discover-my-major
 
-[[https://github.com/steckerhalter/discover-my-major][discover-my-major]] make you discover key bindings and their meaning for
-the current Emacs major mode.
+[[https://github.com/steckerhalter/discover-my-major][discover-my-major]] make you discover key bindings and their meaning for the
+current Emacs major mode.
 
 #+BEGIN_SRC emacs-lisp
   (req-package discover-my-major)
 #+END_SRC
 
-** google-translate
-
-#+BEGIN_SRC emacs-lisp
-  (req-package google-translate
-    :config
-    (progn
-      ;; defaylt language for translation
-      (setq google-translate-default-source-language "en")
-      (setq google-translate-default-target-language "zh_TW")
-      ))
-#+END_SRC
-
 ** howdoi
 
-[[https://github.com/atykhonov/emacs-howdoi][howdoi]] is a way to query Stack Overflow directly from the Emacs and
-get back the most upvoted answer to the first question that comes up
-for that query.
+[[https://github.com/atykhonov/emacs-howdoi][howdoi]] is a way to query Stack Overflow directly from the Emacs and get back the
+most upvoted answer to the first question that comes up for that query.
 
 #+BEGIN_SRC emacs-lisp
   (req-package howdoi)
-#+END_SRC
-
-** org-download
-
-#+BEGIN_SRC emacs-lisp
-  (req-package org-download)
 #+END_SRC
 
 ** exec-path-from-shell
@@ -613,13 +588,8 @@ variables of interest, then copying them into the Emacs environment.
 
 #+BEGIN_SRC emacs-lisp
   (req-package exec-path-from-shell
-    :init (when (memq window-system '(mac ns x)) (exec-path-from-shell-initialize)))
-#+END_SRC
-
-** htmlize
-
-#+BEGIN_SRC emacs-lisp
-  (req-package htmlize)
+    :init (when (memq window-system '(mac ns x))
+            (exec-path-from-shell-initialize)))
 #+END_SRC
 
 ** manage-minor-mode
@@ -631,12 +601,12 @@ buffer.
   (req-package manage-minor-mode)
 #+END_SRC
 
-** rpn-calc
+** noflet 
 
-[[https://github.com/zk-phi/rpn-calc][rpn-calc]] is an quick RPN calculator for emacs.
+GitHub: https://github.com/nicferrier/emacs-noflet
 
 #+BEGIN_SRC emacs-lisp
-  (req-package rpn-calc)
+  (req-package noflet)
 #+END_SRC
 
 * Interactive Commands                                              :command:
@@ -931,85 +901,93 @@ A really nice command help me to find error on elisp buffer.
 
 * Theme                                                               :theme:
 
-I always use dark theme for coding, [[https://github.com/kuanyui/moe-theme.el][moe-theme]] is a good start point,
-it's bright and has good default faces for most modes. It also has
-dark and light versions, which is convenient.
+I always use dark theme for coding, [[https://github.com/kuanyui/moe-theme.el][moe-theme]] is a good start point, it's bright
+and has good default faces for most modes. It also has dark and light versions,
+which is convenient.
 
-However, I always want to customize everything on my own, so I rebuild
-another emacs theme called =coldnew-theme-night= and
-=coldnew-theme-day= which are based on [[https://github.com/kuanyui/moe-theme.el][moe-theme]], you can find them at
-[[file:theme/coldnew-theme.el]].
+However, I always want to customize everything on my own, so I rebuild another
+emacs theme called =coldnew-theme-night= and =coldnew-theme-day=, you can find
+them at [[file:theme/coldnew-theme.el]].
 
 Before use emacs's =load-theme= function, I advise it to it fully
 unload previous theme before loading a new one.
 
 #+BEGIN_SRC emacs-lisp
-  ;; Make `load-theme' fully unload previous theme before loading a new
-  ;; one.
+  ;; Make `load-theme' fully unload previous theme before loading a new one.
   (defadvice load-theme
       (before theme-dont-propagate activate)
     (mapc #'disable-theme custom-enabled-themes))
 
-  ;; use coldnew-theme-night by default
-  (req-package coldnew-theme
-    :require (powerline powerline-evil)
+  ;; My light theme
+  (req-package coldnew-theme-day-theme
+    :require (powerline powerline-evil))
+
+  ;; My night them (default)
+  (req-package coldnew-theme-night-theme
     :config (coldnew-theme-night))
+
+  (req-package coldnew-modeline-config
+    :require (powerline powerline-evil))
 #+END_SRC
 
-* Minibuffers                                                    :minibuffer:
+* Minibuffer                                                    :minibuffer:
 
 #+BEGIN_SRC emacs-lisp
   (req-package minibuffer
     :config
     (progn
-
       ;; Make cursor in minibufer use bar shape
-      (add-hook 'minibuffer-setup-hook '(lambda () (setq cursor-type 'bar)))
+      (add-hook 'minibuffer-setup-hook '(lambda () (setq cursor-type 'bar)))))
+#+END_SRC
 
-      (define-key minibuffer-local-map (kbd "C-w") 'backward-kill-word)
-      (define-key minibuffer-local-map (kbd "M-p") 'previous-history-element)
-      (define-key minibuffer-local-map (kbd "M-n") 'next-history-element)
-      (define-key minibuffer-local-map (kbd "C-g") 'minibuffer-keyboard-quit)
+** Setup keybindings                                            :keybinding:
 
-      (defun coldnew/minibuffer-switch-dir (path) (kill-line 0) (insert path))
+Some general purpose keybinding I famillier with.
 
+#+BEGIN_SRC emacs-lisp
+  (define-key minibuffer-local-map (kbd "C-w") 'backward-kill-word)
+  (define-key minibuffer-local-map (kbd "M-p") 'previous-history-element)
+  (define-key minibuffer-local-map (kbd "M-n") 'next-history-element)
+  (define-key minibuffer-local-map (kbd "C-g") 'minibuffer-keyboard-quit)
+#+END_SRC
+
+Some shortcuts let me access system path more easily.
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook
+   'minibuffer-setup-hook
+   '(lambda ()
       ;; switch to tmp dir
-      (define-key minibuffer-local-map (kbd "M-t") '(lambda()
-                                                      (interactive)
-                                                      (let ((dir (if (eq system-type 'darwin)
-                                                                     "/Volumes/ramdisk/" "/tmp/")))
-                                                        (coldnew/minibuffer-switch-dir dir))))
+      (define-key minibuffer-local-map
+        (kbd "M-t") '(lambda()
+                       (interactive)
+                       (let ((dir (if (eq system-type 'darwin)
+                                      "/Volumes/ramdisk/" "/tmp/")))
+                         (kill-line 0) (insert dir))))
+
       ;; switch to home dir
-      (define-key minibuffer-local-map (kbd "M-h") '(lambda()
-                                                      (interactive)
-                                                      (coldnew/minibuffer-switch-dir (file-name-as-directory (getenv "HOME")))))
+      (define-key minibuffer-local-map
+        (kbd "M-h") '(lambda() (interactive) (kill-line 0)
+                       (insert (file-name-as-directory (getenv "HOME")))))
 
       ;; other with C-x prefix to prevent conflict with helm
-      (define-key minibuffer-local-map (kbd "C-x r") '(lambda()
-                                                      (interactive)
-                                                      (coldnew/minibuffer-switch-dir "/")))
+      (define-key minibuffer-local-map
+        (kbd "C-x r") '(lambda() (interactive) (kill-line 0) (insert "/")))
 
-      (define-key minibuffer-local-map (kbd "C-x s") '(lambda()
-                                                      (interactive)
-                                                      (coldnew/minibuffer-switch-dir "/ssh:")))
+      ;; More easy for tramp connect
+      (define-key minibuffer-local-map
+        (kbd "C-x s") '(lambda() (interactive) (kill-line 0) (insert "/ssh:")))
       ))
 #+END_SRC
 
 * Editors
 
-Why emacs config has an editor section, doesn't means emacs is not an
-editor ? Yes, Emacs is an OS :)
+Why emacs config has an editor section, doesn't means emacs is not an editor ?
+Yes, Emacs is an OS :)
 
 I put some editor/IDE relative functions and packages here.
 
-** Setup tab width
-
-#+BEGIN_SRC emacs-lisp
-  (setq tab-width 8)
-  (setq indent-tabs-mode nil)
-#+END_SRC
-
-** Line Numbers
+** Line Numbers                                                      :linum:
 
 In most case, I'll make line numers display globally by =linum=.
 
@@ -1034,11 +1012,11 @@ I use =linum-off= to disable some mode.
 
 ** Keeping files in sync
 
-By default, Emacs will not update the contents of open buffers when a
-file changes on disk. This is inconvenient when switching branches in
-Git - as you’d risk editing stale buffers.
+By default, Emacs will not update the contents of open buffers when a file
+changes on disk. This is inconvenient when switching branches in Git - as you’d
+risk editing stale buffers.
 
-This problem can be solved
+This problem can be solved by:
 
 #+BEGIN_SRC emacs-lisp
   (global-auto-revert-mode 1)
@@ -1062,9 +1040,85 @@ depth.
     (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 #+END_SRC
 
+** Vim Emulation                                                      :evil:
+
+Though I am really familier with emacs, I still like some vim command.
+
+#+BEGIN_SRC emacs-lisp :noweb no-export :exports code
+  (req-package evil
+    :require (undo-tree)
+    :init (evil-mode t)
+    :config
+    (progn
+      ;; default state set to insert-state
+      (setq evil-default-state 'insert)
+      ;; Bind all emacs-state key to insert state
+      (setcdr evil-insert-state-map nil)
+      (define-key evil-insert-state-map
+        (read-kbd-macro evil-toggle-key) 'evil-emacs-state)
+      ;; Make sure `ESC' in insert-state will call `evil-normal-state'
+      (define-key evil-insert-state-map [escape] 'evil-normal-state)
+      ;; Make all emacs-state buffer become to insert-state
+      (dolist (m evil-emacs-state-modes)
+        (add-to-list 'evil-insert-state-modes m))
+      ))
+#+END_SRC
+
+** Add support for editorconfig                               :editorconfig:
+
+[[http://editorconfig.org/][EditorConfig]] helps developers define and maintain consistent coding
+styles between different editors and IDEs. The EditorConfig project
+consists of a file format for defining coding styles and a collection
+of text editor plugins that enable editors to read the file format and
+adhere to defined styles. EditorConfig files are easily readable and
+they work nicely with version control systems.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package editorconfig)
+#+END_SRC
+
+** En/Decrypt files by EasyPG
+
+#+BEGIN_SRC emacs-lisp
+  (req-package epa-file
+    :init (epa-file-enable)
+    :config
+    (progn
+      ;; Control whether or not to pop up the key selection dialog.
+      (setq epa-file-select-keys 0)
+      ;; Cache passphrase for symmetric encryption.
+      (setq epa-file-cache-passphrase-for-symmetric-encryption t)))
+#+END_SRC
+
+** Remote file editing                                               :tramp:
+
+#+BEGIN_SRC emacs-lisp
+  (req-package tramp
+    :config
+    (progn
+      (setq tramp-default-method "rsync")))
+#+END_SRC
+
+** Create *scratch* automatically                                   :buffer:
+
+Sometimes I'll clean the =*scratch*= buffer by kill it, add following function
+to let emacs re-create it automatically.
+
+#+BEGIN_SRC emacs-lisp
+  ;; Create *scratch* automatically
+  (run-with-idle-timer 1 t
+                       '(lambda ()
+                          (unless (get-buffer "*scratch*")
+                            (with-current-buffer (get-buffer-create "*scratch*")
+                              (lisp-interaction-mode)))))
+#+END_SRC
+
 ** Highlight numbers
 
-[[https://github.com/Fanael/highlight-numbers][highlight-numbers]]
+=highlight-numbers= is an Emacs minor mode that highlights numeric literals in
+source code.
+
+GitHub: https://github.com/Fanael/highlight-numbers
 
 #+BEGIN_SRC emacs-lisp
   (req-package highlight-numbers
@@ -1077,7 +1131,7 @@ depth.
 
 ** Highlight escape charset
 
-https://github.com/dgutov/highlight-escape-sequences
+GitHub: https://github.com/dgutov/highlight-escape-sequences
 
 #+BEGIN_SRC emacs-lisp
   (req-package highlight-escape-sequences
@@ -1111,149 +1165,13 @@ https://github.com/dgutov/highlight-escape-sequences
   (add-hook 'prog-mode-hook 'font-lock-comment-annotations)
 #+end_src
 
-** Highlight indentation
 
 
-TODO: only dupport python
-#+BEGIN_SRC emacs-lisp
-  (req-package highlight-indentation)
-#+END_SRC
+** Completion with Company mode                                    :company:
 
-** Blocking syntax highlight
-
-FIXME: buggy, can't really use
-#+BEGIN_SRC emacs-lisp :tangle no
-  (req-package rainbow-blocks
-    :init (global-rainbow-blocks-mode t))
-#+END_SRC
-
-** Takes care of trailing whitespaces (removal, highlighting)
-
-https://github.com/glasserc/ethan-wspace
-
-#+BEGIN_SRC emacs-lisp
-  (req-package ethan-wspace
-    :config
-    (progn
-      ;; Turn off `mode-require-final-newline' since ethan-wspace
-      ;; supersedes `require-final-newline'.
-      (setq mode-require-final-newline nil)
-
-      ;; Enable ethan-wspace globally
-      (global-ethan-wspace-mode 1)
-
-      ;; Prevent etha-wspace touch my TAB on makefile mode
-      (add-hook 'makefile-mode-hook
-                '(lambda()
-                   (setq ethan-wspace-errors (remove 'tabs ethan-wspace-errors))))
-
-      ;; Not use in diff-mode since it breaking my syntax-highlight
-      (add-hook 'diff-mode-hook
-                '(lambda()
-                   (ethan-wspace-mode -1)))
-      
-      ;; Ignore no trailing newline error
-      (setq-default ethan-wspace-errors (remove 'no-nl-eof ethan-wspace-errors))))
-#+END_SRC
-
-** Add support for editorconfig
-
-[[http://editorconfig.org/][EditorConfig]] helps developers define and maintain consistent coding
-styles between different editors and IDEs. The EditorConfig project
-consists of a file format for defining coding styles and a collection
-of text editor plugins that enable editors to read the file format and
-adhere to defined styles. EditorConfig files are easily readable and
-they work nicely with version control systems.
-
-#+BEGIN_SRC emacs-lisp
-  (req-package editorconfig)
-#+END_SRC
-
-** Vim Emulation
-
-#+BEGIN_SRC emacs-lisp
-  (req-package evil
-    :require (undo-tree)
-    :ensure evil
-    :init
-    (progn
-      ;; Default state set to `'insert-state'
-      ;;(setq evil-default-state 'insert)
-      (evil-mode t))
-    :config
-    (progn
-      ;; Bind all emacs-state key to insert state
-      (setcdr evil-insert-state-map nil)
-      (define-key evil-insert-state-map
-        (read-kbd-macro evil-toggle-key) 'evil-emacs-state)
-
-      ;; Make sure `ESC' in insert-state will call `evil-normal-state'
-      (define-key evil-insert-state-map [escape] 'evil-normal-state)
-
-      ;; Make all emacs-state buffer become to insert-state
-      (dolist (m evil-emacs-state-modes)
-        (add-to-list 'evil-insert-state-modes m))
-      ))
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
-  (req-package evil-terminal-cursor-changer)
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
-  (req-package vim-empty-lines-mode
-    :config (progn
-              (add-hook 'diff-mode-hook (lambda () (vim-empty-lines-mode -1)))))
-#+END_SRC
-
-** En/Decrypt files by [[http://emacswiki.org/emacs/EasyPG][EasyPG]]
-
-#+BEGIN_SRC emacs-lisp
-  (req-package epa-file
-    :init (epa-file-enable)
-    :config
-    (progn
-      ;; Control whether or not to pop up the key selection dialog.
-      (setq epa-file-select-keys 0)
-      ;; Cache passphrase for symmetric encryption.
-      (setq epa-file-cache-passphrase-for-symmetric-encryption t)))
-#+END_SRC
-
-** Remote file editing
-
-#+BEGIN_SRC emacs-lisp
-  (req-package tramp
-    :config
-    (progn
-      (setq tramp-default-method "scp")))
-#+END_SRC
-
-** Create *scratch* automatically                                   :buffer:
-
-Sometimes I'll clean the =*scratch*= buffer by kill it, add following function
-to let emacs re-create it automatically.
-
-#+BEGIN_SRC emacs-lisp
-  ;; Create *scratch* automatically
-  (run-with-idle-timer 1 t
-                       '(lambda ()
-                          (unless (get-buffer "*scratch*")
-                            (with-current-buffer (get-buffer-create "*scratch*")
-                              (lisp-interaction-mode)))))
-#+END_SRC
-
-** Project management with projectile
-
-#+BEGIN_SRC emacs-lisp
-  (req-package projectile
-    :interpreter ("projectile" . projectil-mode))
-#+END_SRC
-
-** Completion with Company mode
-
-[[http://company-mode.github.io/][Company]] is a text completion framework for Emacs. The name stands for
-"complete anything". It uses pluggable back-ends and front-ends to
-retrieve and display completion candidates.
+[[http://company-mode.github.io/][Company]] is a text completion framework for Emacs. The name stands for "complete
+anything". It uses pluggable back-ends and front-ends to retrieve and display
+completion candidates.
 
 #+BEGIN_SRC emacs-lisp
   (req-package company
@@ -1277,45 +1195,22 @@ retrieve and display completion candidates.
     :init (company-quickhelp-mode 1))
 #+END_SRC
 
-*** Key Bindings
 
-#+TBLNAME: company-active-keys
-| Key   | Command                    | description                          |
-|-------+----------------------------+--------------------------------------|
-| C-g   | company-abort              | abort company completion             |
-| C-n   | company-select-next        | select next completion               |
-| C-p   | company-select-previous    | select previous completion           |
-| TAB   | company-complete-selection | Use TAB to select current completion |
-| <tab> | company-complete-selection | Use TAB to select current completion |
 
-#+BEGIN_SRC emacs-lisp :noweb yes
-  (add-hook 'company-mode-hook '(lambda()
-            <<define-keys(map="company-active-map", keys=company-active-keys)>> ))
-#+END_SRC
-
-** Completion with Bit Bang
-
-[[https://github.com/baohaojun/bbyac/][bbyac]] is another emacs completion framework, which will let you type
-a little bit, and bang! You can complete it into a much longer string.
-
-Say you have a very-very-long-emacs-lisp-variable-name, you need only
-type vvn and press a shortcut key (M-s <return>), it will be completed
-into that long name. Or you can type vln if you like that better.
-
-You can type the bit that you like better, or is easier to remember,
-or is easier to type.
+*** Setup keybindings                                          :keybinding:
 
 #+BEGIN_SRC emacs-lisp
-  (req-package bbyac
-    :init (bbyac-global-mode 1)
-    :config
-    (eval-after-load 'yasnippet
-      '(progn
-   ;;      (defadvice yas-expand (around bbyac activate) (bbyac-expand-symbols) ad-do-it)
-         )))
+  (add-hook
+   'company-mode-hook
+   '(lambda()
+      (define-key company-active-map (kbd "C-g") 'company-abort)
+      (define-key company-active-map (kbd "C-n") 'company-select-next)
+      (define-key company-active-map (kbd "C-p") 'company-select-previous)
+      (define-key company-active-map (kbd "TAB") 'company-complete-selection)
+      (define-key company-active-map (kbd "<tab>") 'company-complete-selection)))
 #+END_SRC
 
-** Snippet handle by yasnippet
+** Snippet handle by yasnippet                                   :yasnippet:
 
 #+BEGIN_SRC emacs-lisp
   (req-package yasnippet
@@ -1332,9 +1227,9 @@ or is easier to type.
 
 *** Implement org-mode's easy-template like function
 
-I really like org-mode's =easy-template= function, so I implement one
-called =major-mode-expand= which will let you use easy-template like
-function in any major-mode.
+I really like org-mode's =easy-template= function, so I implement one called
+=major-mode-expand= which will let you use easy-template like function in any
+major-mode.
 
 #+BEGIN_SRC emacs-lisp
   (eval-after-load 'yasnippet
@@ -1388,201 +1283,684 @@ For c-mode, just do the same but change the relative
     :config
     (progn
       ;; Use fuzzy match in helm
-      (setq  helm-M-x-fuzzy-match t
-             helm-buffers-fuzzy-matching t
-             helm-recentf-fuzzy-match    t
-             ;; make helm can select anything even not match
-             helm-move-to-line-cycle-in-source nil
-             helm-ff-search-library-in-sexp t
-             helm-ff-file-name-history-use-recentf t)
-
-      (bind-key "TAB" 'helm-execute-persistent-action helm-map)
-      (bind-key "<tab>" 'helm-execute-persistent-action helm-map)
+      (setq helm-M-x-fuzzy-match t)
+      (setq helm-buffers-fuzzy-matching t)
+      (setq helm-recentf-fuzzy-match t)
+      ;; make helm can select anything even not match
+      (setq helm-move-to-line-cycle-in-source nil)
+      (setq helm-ff-search-library-in-sexp t)
+      (setq helm-ff-file-name-history-use-recentf t)
       ))
 #+END_SRC
-
-TODO: take from https://github.com/edvorg/emacs-configs/blob/master/init.d/init-helm.el
-#+BEGIN_SRC emacs-lisp
-  ;; helm proc
-
-  ;;(req-package helm-proc
-  ;;  :require helm)
-
-  ;; helm company
-
-  (req-package helm-company
-    :require company
-    :commands helm-company
-    :config (progn (define-key company-mode-map (kbd "C-:") 'helm-company)
-                   (define-key company-active-map (kbd "C-:") 'helm-company)))
-
-  ;; helm helm commands
-
-  (req-package helm-helm-commands
-    :require helm)
-
-  ;; helm swoop
-
-  (req-package helm-swoop
-    :require
-    helm
-    :config
-    (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch))
-
-  ;; helm desc binds
-
-  (req-package helm-descbinds :require helm)
-
-  ;; helm open github
-
-  (req-package helm-open-github
-    :require helm
-    :commands (helm-open-github-from-commit
-               helm-open-github-from-file
-               helm-open-github-from-issues
-               helm-open-github-from-pull-requests)
-    :bind (("C-c o f" . helm-open-github-from-file)
-           ("C-c o c" . helm-open-github-from-commit)
-           ("C-c o i" . helm-open-github-from-issues)
-           ("C-c o p" . helm-open-github-from-pull-requests)))
-
-  ;; helm package
-
-  (req-package helm-package
-    :require
-    helm)
-
-  ;; helm flymake
-
-  (req-package helm-flymake
-    :require
-    (helm flymake))
-
-  ;; helm make
-
-  (req-package helm-make
-    :require
-    (helm makefile-runner)
-    :config
-    (global-set-key (kbd "s-B")
-                    (lambda () (interactive) (helm-make (makefile-runner--find-makefile)))))
-
-  ;; helm wgrep
-
-  (req-package wgrep-helm
-    :require
-    (helm wgrep grep))
-
-  ;; helm github stars
-
-#+END_SRC
-
-** Browse GitHub starred repositories in Emacs
-
-[[https://github.com/Sliim/helm-github-stars][helm-github-stars]] provides capabilities to fetch your starred repositories from
-github and select one for browsing.
-
-#+BEGIN_SRC emacs-lisp
-  (req-package helm-github-stars
-    :require helm
-    :config
-    (progn
-      ;; setup user
-      (setq helm-github-stars-username (getenv "USER"))
-      ;; setup cache path
-      (setq helm-github-stars-cache-file (concat spacemacs-cache-directory "helm-github-stars.cache"))))
-#+END_SRC
-
-** helm-backup
-
-[[https://github.com/antham/helm-backup][helm-backup]] aims to create a backup system for emacs using both power of git to
-store changes and power of helm to fetch backups easily.
-
-#+BEGIN_SRC emacs-lisp
-  (req-package helm-backup
-    :require (helm)
-    :config (progn (setq helm-backup-path (concat spacemacs-cache-directory "helm-backup"))
-    (add-hook 'after-save-hook 'helm-backup-versioning)
-))
-#+END_SRC
-
-** Add silver searcher support
-
-#+BEGIN_SRC emacs-lisp
-  (req-package helm-ag
-    :require (helm helm-projectile)
-    :config
-    (progn
-
-      (defun helm-projectile-ag ()
-        (interactive)
-        (helm-ag (projectile-project-root)))
-      ))
-#+END_SRC
-
-** Add Google search support
-
-https://github.com/steckerhalter/helm-google
-
-#+BEGIN_SRC emacs-lisp
-  (req-package helm-google
-    :require (helm)
-    :init (setq helm-google-use-regexp-parsing t))
-#+END_SRC
-
-** Key Bindings
-
-#+TBLNAME: helm-keys
-| Key      | Command                   | description                      |
-|----------+---------------------------+----------------------------------|
-| C-w      | backward-delete-word      |                                  |
-| <delete> | hungry-delete-backward    | backward delete with hungru-mode |
-| C-c f    | helm-ff-file-name-history | Search recent files              |
+** Setup keybindings                                          :keybinding:
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
-  (add-hook 'helm-mode-hook '(lambda()
-            <<define-keys(map="helm-map", keys=helm-keys)>> ))
+  (add-hook
+   'helm-mode-hook
+   '(lambda()
+      ;; use TAB to complete helm
+      (define-key helm-map (kbd "TAB")   'helm-execute-persistent-action)
+      (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+      (define-key helm-map (kbd "C-w") 'backward-kill-word)))
 #+END_SRC
 
-* TAGS
-** Add GTAGS support
 
-[[https://github.com/leoliu/ggtags][ggtags]] is an Emacs frontend to GNU Global source code tagging system.
+* Org                                                                   :org:
 
 #+BEGIN_SRC emacs-lisp
-  (req-package ggtags
-    :init
-    (add-hook 'c-mode-common-hook
-              (lambda ()
-                (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
-                  (ggtags-mode 1)))))
+  (req-package org
+    :require (org-crypt)
+    :mode (("\\.org\\'" . org-mode)
+           ("\\.org_archive\\'" . org-mode))
+  :config
+  (progn
+    ;; Always enable auto indent mode
+    (setq org-indent-mode t)
+    ;; fontify source code
+    (setq org-src-fontify-natively t)
+    ;; Use current window when switch to source block
+    (setq org-src-window-setup 'current-window)
+    ;; Disable prompting to evaluate babel blocks
+    (setq org-confirm-babel-evaluate nil)
+    ;; Disable add validation link when export to HTML
+    (setq org-html-validation-link nil)))
 #+END_SRC
 
-* Cedet
+** Capture and Agenda
 
 #+BEGIN_SRC emacs-lisp
-  (req-package cedet
-    :config
-    (progn
-      (setq ede-project-placeholder-cache-file (concat user-cache-directory "ede-projects.el"))
-      (setq semanticdb-default-save-directory (concat user-cache-directory "semanticdb"))
-      (setq srecode-map-save-file (concat user-cache-directory "srecode-map.el"))
+  (eval-after-load 'org
+    '(progn
+       ;; make agenda show on current window
+       (setq org-agenda-window-setup 'current-window)
+       ;; highlight current in agenda
+       (add-hook 'org-agenda-mode-hook 'hl-line-mode)
+       ;; Setup files for agenda
+       (setq org-agenda-files (list "~/Org/task/Office.org" "~/Org/task/Personal.org"))
+       ;;
+       (setq org-directory "~/Org")
+       (setq org-default-notes-file (f-join org-directory "task" "Office.org"))
+       ;; Always use `C-g' to exit agenda
+       (add-hook 'org-agenda-mode-hook
+                 '(lambda ()
+                    (local-set-key (kbd "C-g") 'org-agenda-exit)))
+       ))
+#+END_SRC
+
+** Extend org-mode's easy templates
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load 'org
+    '(progn
+      (add-to-list 'org-structure-template-alist
+                   '("E" "#+BEGIN_SRC emacs-lisp\n?\n#+END_SRC"))
+      (add-to-list 'org-structure-template-alist
+                   '("S" "#+BEGIN_SRC sh\n?\n#+END_SRC"))
+      (add-to-list 'org-structure-template-alist
+                   '("p" "#+BEGIN_SRC plantuml :file uml.png \n?\n#+END_SRC"))
       ))
 #+END_SRC
 
-* GDB                                                                 :debug:
+** Extend babel support languages
 
 #+BEGIN_SRC emacs-lisp
-  (req-package gdb-mi
-    :require cc-mode
+    (eval-after-load 'org
+      '(progn
+         (org-babel-do-load-languages
+          'org-babel-load-languages
+          '((emacs-lisp . t)
+            (C . t)
+            (ditaa . t)
+            (dot . t)
+            (js . t)
+            (latex . t)
+            (perl . t)
+            (python . t)
+            (ruby . t)
+            (sh . t)
+            (plantuml . t)
+            (clojure . t)
+            ))
+         (add-to-list 'org-src-lang-modes '("dot" . graphviz-dot))
+  ))
+#+END_SRC
+
+** Setup link abbreviations
+
+[[https://www.gnu.org/software/emacs/manual/html_node/org/Link-abbreviations.html][Link abbreviations]]
+
+An abbreviated link looks like
+
+: [[linkword:tag][description]]
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-link-abbrev-alist
+        '(("google" . "http://www.google.com/search?q=")
+          ("google-map" . "http://maps.google.com/maps?q=%s")
+          ))
+#+END_SRC
+
+** Make spell-checking tool ignore some org-mode section
+
+see: http://emacs.stackexchange.com/questions/450/intelligent-spell-checking-in-org-mode
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load 'ispell
+    '(progn
+       (add-to-list 'ispell-skip-region-alist '(":\\(PROPERTIES\\|LOGBOOK\\):" . ":END:"))
+       (add-to-list 'ispell-skip-region-alist '("#\\+BEGIN_SRC" . "#\\+END_SRC"))
+       ))
+#+END_SRC
+
+** Latex Export
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-format-latex-options
+        '(:forground "black" :background "white"
+                     :scale 1.5
+                     :html-foreground "Black" :html-background "Transparent"
+                     :html-scale 1.0
+                     :matchers ("begin" "$1" "$" "$$" "\\(" "\\[")))
+#+END_SRC
+
+** Setup keybindings                                          :keybinding:
+
+#+BEGIN_SRC emacs-lisp :noweb yes :results silent
+  (add-hook
+   'org-mode-hook
+   '(lambda()
+      (define-key org-mode-map (kbd "C-c b") 'org-metaleft)
+      (define-key org-mode-map (kbd "C-c f") 'org-metaright)
+      (define-key org-mode-map (kbd "C-c p") 'org-metaup)
+      (define-key org-mode-map (kbd "C-c p") 'org-metadown)
+      (define-key org-mode-map (kbd "C-c i") 'org-insert-link)
+      (define-key org-mode-map (kbd "C-c I") 'org-toggle-inline-images)))
+#+END_SRC
+
+* Programming Languages
+
+** Bash                                                               :bash:
+
+#+BEGIN_SRC emacs-lisp
+  (req-package flymake-shell
+    :require (flymake shell)
+    :config (add-hook 'sh-set-shell-hook 'flymake-shell-load))
+#+END_SRC
+
+** Batch                                                               :bat:
+
+#+BEGIN_SRC emacs-lisp
+  (req-package batch-mode :mode "\\.bat\\'")
+#+END_SRC
+
+** C / C++                                                              :cpp:
+
+#+BEGIN_SRC emacs-lisp
+  (req-package cc-mode
+    :mode
+    (("\\.h\\'" . c-mode)
+     ("\\.c\\'" . c-mode)
+     ("\\.hpp\\'" . c++-mode)
+     ("\\.cpp\\'" . c++-mode))
     :config
-    (progn (setq gdb-many-windows t)
-           (setq gdb-show-main t)))
+    (progn
+      ;; use regexp to check if it's C++ header
+      (add-to-list 'magic-mode-alist
+                   `(,(lambda ()
+                        (and (string= (file-name-extension (or (buffer-file-name) "")) "h")
+                             (or (re-search-forward "#include <\\w+>"
+                                                    magic-mode-regexp-match-limit t)
+                                 (re-search-forward "\\W\\(class\\|template\\namespace\\)\\W"
+                                                    magic-mode-regexp-match-limit t)
+                                 (re-search-forward "std::"
+                                                    magic-mode-regexp-match-limit t))))
+                     . c++-mode))
+      ))
+#+END_SRC
+
+*** Add eldoc support for C/C++                                     :eldoc:
+
+#+BEGIN_SRC emacs-lisp
+  (req-package c-eldoc
+    :config
+    (progn
+      (add-hook 'c-mode-common-hook
+                '(lambda ()
+                   (setq c-eldoc-includes "`pkg-config gtk+-3.0 --cflags --libs` -I./ -I../")
+                   (c-turn-on-eldoc-mode)))))
+#+END_SRC
+
+*** Highlight a few dangerous types in C/C++                   :cwarn:
+
+[[http://www.emacswiki.org/emacs/CWarnMode][cwarn-mode]] is a minor mode that ca highlight a few dangerous types in C/C++.
+
+By default it highlights:
+
+- Semicolons right after conditions and loops (e.g. ~if (x == y);~)
+- Assignments in tests (e.g. ~if (x = y) {~)
+- Functions with reference parameters (e.g. ~void funct(string &p) {~)
+
+#+BEGIN_SRC emacs-lisp
+  (req-package cwarn
+    :init (add-hook 'c-mode-common-hook '(lambda () (cwarn-mode 1))))
+#+END_SRC
+
+*** Use dummy-h-mode to help detect header's major mode
+
+[[https://github.com/yascentur/dummy-h-mode-el][dummy-h-mode]] is an major-mode to help switch major mode to c/c++/objc-mode on .h
+file.
+
+GitHub: https://github.com/yascentur/dummy-h-mode-el
+
+#+BEGIN_SRC emacs-lisp
+  (req-package dummy-h-mode
+    :require cc-mode
+    :mode "\\.h$"
+    :config
+    (progn
+      (add-hook 'dummy-h-mode-hook
+                (lambda ()
+                  (setq dummy-h-mode-default-major-mode 'c-mode)))
+      (add-hook 'dummy-h-mode-hook
+                (lambda ()
+                  (setq dummy-h-mode-search-limit 60000)))))
+#+END_SRC
+
+*** Extra highlight keywords for C/C++
+
+Extra hightlight for =stdint.h=
+
+#+BEGIN_SRC emacs-lisp
+  (dolist (m '(c-mode c++-mode))
+    (font-lock-add-keywords
+     m
+     '(("\\<\\(int8_t\\|int16_t\\|int32_t\\|int64_t\\|uint8_t\\|uint16_t\\|uint32_t\\|uint64_t\\)\\>" . font-lock-keyword-face))))
+#+END_SRC
+
+*** Syntax check and code-completion with CMake project    :cmake:
+
+[[https://github.com/redguardtoo/cpputils-cmake][cpputils-cmake]] is a nice tool for cmake project.
+
+GitHub: https://github.com/redguardtoo/cpputils-cmake
+
+#+BEGIN_SRC emacs-lisp
+  (req-package cpputils-cmake
+    :require (flymake flycheck)
+    :config
+    (progn
+      (add-hook 'c-mode-common-hook
+                (lambda ()
+                  (when (derived-mode-p 'c-mode 'c++-mode)
+                    (cppcm-reload-all))))))
+#+END_SRC
+
+** CMake                                                             :c:cpp:
+
+#+BEGIN_SRC emacs-lisp
+  (req-package cmake-font-lock
+    :require (cmake-mode)
+    :init (add-hook 'cmake-mode-hook 'cmake-font-lock-activate))
+#+END_SRC
+
+** CSS                                                                 :css:
+
+#+BEGIN_SRC emacs-lisp
+  (req-package css-mode :mode "\\.css\\'")
+#+END_SRC
+
+*** Add support for eldoc                                           :eldoc:
+
+#+BEGIN_SRC emacs-lisp
+  (req-package css-eldoc
+    :config
+    (progn
+      (add-hook 'css-mode-hook 'turn-on-css-eldoc)
+      (add-hook 'scss-mode-hook 'turn-on-css-eldoc)
+      (add-hook 'less-css-mode-hook 'turn-on-css-eldoc)))
+#+END_SRC
+
+** GLSL                                                               :glsl:
+
+#+BEGIN_SRC emacs-lisp
+  (req-package glsl-mode
+    :mode (("\\.vs\\'" . glsl-mode)
+           ("\\.fs\\'" . glsl-mode)
+           ("\\.gs\\'" . glsl-mode))
+    :config (setq glsl-other-file-alist '(("\\.fs$" (".vs"))
+                                          ("\\.vs$" (".fs")))))
+#+END_SRC
+
+** Go                                                               :golang:
+
+#+BEGIN_SRC emacs-lisp
+  (req-package go-mode
+    :mode "\\.go$"
+    :config
+    (progn
+      ;; Use gofmt to format code before save
+      (add-hook 'before-save-hook 'gofmt-before-save)))
+#+END_SRC
+
+** Graphviz                                                       :graphviz:
+
+#+BEGIN_SRC emacs-lisp
+  (req-package graphviz-dot-mode
+    :init (defalias 'dot-mode 'graphviz-dot-mode))
+#+END_SRC
+
+** Java                                                               :java:
+
+#+BEGIN_SRC emacs-lisp
+  (req-package malabar-mode
+    :mode "\\.java$")
+
+  (req-package gradle-mode
+    :mode "\\.gradle$")
+#+END_SRC
+
+** javascript                                                   :javascript:
+
+#+BEGIN_SRC emacs-lisp
+  (req-package js2-mode
+    :init (setq js2-highlight-level 3)
+    :mode "\\.js$")
+#+END_SRC
+
+** Json                                                    :javascript:json:
+
+#+BEGIN_SRC emacs-lisp
+  (req-package json-reformat :commands json-reformat-region)
+
+  (req-package flymake-json :require flymake)
+
+  (req-package json-mode
+    :require flymake-json
+    :mode ("\\.json$" . json-mode)
+    :init (add-hook 'json-mode-hook (lambda () (flymake-json-load))))
+#+END_SRC
+
+** Less                                                               :less:
+
+#+BEGIN_SRC emacs-lisp
+  (req-package less-css-mode
+    :init (add-to-list 'auto-mode-alist '("\\.less$" . less-css-mode))
+    :mode "\\.less$")
+#+END_SRC
+
+** Markdown                                                       :markdown:
+
+#+BEGIN_SRC emacs-lisp
+  (req-package markdown-mode
+    :mode "\\.\\(md\\|markdown\\)\\'")
+#+END_SRC
+
+** Python                                                           :python:
+
+#+BEGIN_SRC emacs-lisp
+  (req-package jinja2-mode)
+#+END_SRC
+
+** QML                                                              :qml:qt:
+
+#+BEGIN_SRC emacs-lisp
+  (req-package qml-mode
+    :init (add-to-list 'auto-mode-alist '("\\.qml$" . qml-mode)))
+#+END_SRC
+
+** Ruby                                                               :ruby:
+
+#+BEGIN_SRC emacs-lisp
+  (req-package ruby-mode
+    :mode (("Rakefile\\'" . ruby-mode)
+           ("\\.rake$" . ruby-mode)
+           ("\\.gemspec$" . ruby-mode)
+           ("\\.rb$'" . ruby-mode)
+           ("\\.ru$" . ruby-mode)
+           ("Gemfile$" . ruby-mode)
+           ("Guardfile$" . ruby-mode))
+    :config
+    (progn
+      ;; We never want to edit Rubinius bytecode
+      (add-to-list 'completion-ignored-extensions ".rbc")
+      ))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (req-package rake)
+#+END_SRC
+** Rust                                                               :rust:
+
+[[https://github.com/rust-lang/rust-mode][rust-mode]] is a major emacs-mode for editing Rust source code.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package rust-mode
+    :mode "\\.rs\\'")
+#+END_SRC
+
+** scala                                                             :scala:
+
+#+BEGIN_SRC emacs-lisp
+  (req-package scala-mode
+    :mode (("\\.scala$" . scala-mode)))
+
+  (req-package sbt-mode
+    :mode (("\\.sbt$" . sbt-mode)))
+#+END_SRC
+
+** SCSS                                                           :css:scss:
+
+#+BEGIN_SRC emacs-lisp
+  (req-package scss-mode
+    :mode "\\.scss\\'"
+    :config
+    (progn
+      ;; dont' build scss to css after save file
+      (setq scss-compile-at-save nil)))
+#+END_SRC
+
+** SSH Config                                                          :ssh:
+
+#+BEGIN_SRC emacs-lisp
+  (req-package ssh-config-mode
+    :mode (("\\.ssh/config\\'"  . ssh-config-mode)
+           ("sshd?_config\\'"   . ssh-config-mode)
+           ("known_hosts\\'"    . ssh-known-hosts-mode)
+           ("authorized_keys2?\\'" . ssh-authorized-keys-mode))
+    :init (add-hook 'ssh-config-mode-hook 'turn-on-font-lock))
+#+END_SRC
+
+** XML                                                                 :xml:
+
+#+BEGIN_SRC emacs-lisp
+  (req-package nxml-mode
+    :mode (("\\.pom$" . nxml-mode))
+    :config
+    (progn
+      ;; Any file start with xml will be treat as nxml-mode
+      (add-to-list 'magic-mode-alist '("<\\?xml" . nxml-mode))
+
+      ;; Use nxml-mode instead of sgml, xml or html mode.
+      (mapc
+       (lambda (pair)
+         (if (or (eq (cdr pair) 'xml-mode)
+                 (eq (cdr pair) 'sgml-mode))
+             (setcdr pair 'nxml-mode)))
+       auto-mode-alist)
+      ))
+#+END_SRC
+
+** YAML                                                               :yaml:
+
+#+BEGIN_SRC emacs-lisp
+  (req-package yaml-mode
+    :mode "\\.yml$")
+#+END_SRC
+
+* LISP Development                                                    :lisp:
+
+Though =LISP= has many dialet, it still is the best programming language I ever
+met.
+
+** Emacs Lisp                                                        :elisp:
+
+*** Add eldoc support                                               :eldoc:
+
+#+BEGIN_SRC emacs-lisp
+  (req-package eldoc
+    :init
+    (add-hook 'emacs-lisp-mode-hook
+              '(lambda ()
+                 ;; enable eldoc
+                 (turn-on-eldoc-mode)
+                 ;; fix for paredit if exist
+                 (eval-after-load 'paredit
+                   '(progn
+                      (eldoc-add-command 'paredit-backward-delete
+                                         'paredit-close-round))))))
+#+END_SRC
+
+*** On-the-fly evaluation/substitution of emacs lisp code         :litable:
+
+[[https://github.com/Fuco1/litable][litable]] keeps a list of pure functions as a safeguard for unwanted evaluations.
+A function must first be accepted into this list (using =M-x litable-accept-as-pure=)
+before it can be evaluated on-the-fly.
+
+You should take care of what function you accept as pure to avoid any
+unfortunate accidents. Also, note that the pure functions list persists across
+sessions.
+
+GitHub: https://github.com/Fuco1/litable
+
+#+BEGIN_SRC emacs-lisp
+  (req-package litable :init (litable-mode))
+#+END_SRC
+
+*** Highlight defined symbols
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  (req-package hl-defined
+    :config
+    (add-hook 'emacs-lisp-mode-hook 'hdefd-highlight-mode)
+    (add-hook 'lisp-interaction-mode-hook 'hdefd-highlight-mode))
+#+END_SRC
+
+*** Highlight functions or macros belone to cl.el
+
+#+BEGIN_SRC emacs-lisp
+  (req-package highlight-cl
+    :init
+    (add-hook 'emacs-lisp-mode-hook
+              '(lambda ()
+                 (highlight-cl-add-font-lock-keywords))))
+#+END_SRC
+
+*** Remove *.elc when save
+
+#+BEGIN_SRC emacs-lisp
+  (defun remove-elc-on-save ()
+    "If you're saving an elisp file, likely the .elc is no longer valid."
+    (make-local-variable 'after-save-hook)
+    (add-hook 'after-save-hook
+              (lambda ()
+                (if (file-exists-p (concat buffer-file-name "c"))
+                    (delete-file (concat buffer-file-name "c"))))))
+
+  (add-hook 'emacs-lisp-mode-hook 'remove-elc-on-save)
+#+END_SRC
+
+** Clojure                                                         :clojure:
+
+#+BEGIN_SRC emacs-lisp
+  (req-package clojure-mode
+    :require (clojure-mode-extra-font-locking flycheck-clojure)
+    :mode "\\.\\(clj\\|boot\\|cljx\\|edn\\|cljs\\|cljs.hl\\)\\'")
+#+END_SRC
+
+*** Add refactor function support
+
+https://github.com/clojure-emacs/clj-refactor.el
+
+#+BEGIN_SRC emacs-lisp
+  (req-package clj-refactor
+    :config
+    (progn
+      ;; Add clj-refactor to clojure-mode
+      (add-hook 'clojure-mode-hook '(lambda () (clj-refactor-mode 1)))
+      ;; Use `C-c C-x' as prefix
+      (cljr-add-keybindings-with-prefix "C-c C-x")))
+#+END_SRC
+
+*** Use cider for interactive development
+
+[[https://github.com/clojure-emacs/cider][cider]] is a Clojure Interactive Development Environment that Rocks for Emacs
+
+#+BEGIN_SRC emacs-lisp
+  (req-package cider
+    :require (cider-decompile cider-eval-sexp-fu eldoc)
+    :config
+    (progn
+
+      ;; Enable eldoc in Clojure buffers
+      (eval-after-load 'eldoc
+        '(progn
+           (add-hook 'cider-mode-hook #'eldoc-mode)))
+
+      ;; Hide `*nrepl-connection*' and `*nrepl-server*' buffers from appearing
+      ;; in some buffer switching commands like switch-to-buffer
+      (setq nrepl-hide-special-buffers t)
+
+      ;; Enabling CamelCase support for editing commands(like forward-word,
+      ;; backward-word, etc) in the REPL is quite useful since we often have
+      ;; to deal with Java class and method names. The built-in Emacs minor
+      ;; mode subword-mode provides such functionality
+      (add-hook 'cider-repl-mode-hook #'subword-mode)
+
+      ;; The use of paredit when editing Clojure (or any other Lisp) code is
+      ;; highly recommended. You're probably using it already in your
+      ;; clojure-mode buffers (if you're not you probably should). You might
+      ;; also want to enable paredit in the REPL buffer as well.
+      ;; (add-hook 'cider-repl-mode-hook #'paredit-mode)
+
+      ;; Auto-select the error buffer when it's displayed:
+      (setq cider-auto-select-error-buffer t)
+
+      ;; Controls whether to pop to the REPL buffer on connect.
+      (setq cider-repl-pop-to-buffer-on-connect nil)
+
+      ;; Controls whether to auto-select the error popup buffer.
+      (setq cider-auto-select-error-buffer t)
+
+      ;; T to wrap history around when the end is reached.
+      (setq cider-repl-wrap-history t)
+
+      ;; Log protocol messages to the `nrepl-message-buffer-name' buffer.
+      (setq nrepl-log-messages t)
+
+      ;; Toggle between test and implementation, instead of showing test report buffer.
+      (eval-adter-load 'projectile
+                       (define-key cider-mode-map (kbd "C-c C-t") 'projectile-toggle-between-implementation-and-test))
+      ))
+#+END_SRC
+
+*** Insert libraries in project more easily
+
+[[https://github.com/AdamClements/latest-clojure-libraries][latest-clojure-libraries]] helps to looks up the latest version of clojure
+libraries on clojars/maven and automatically populates the buffer with the
+appropriate dependency vector. Optionally uses pomegranate to load the
+dependency directly into your running nrepl.
+
+To use this plugin, you need to edit your =~/.lein/profiles.clj= :plugins vector
+to include =[lein-ancient "0.5.1"]= and optionally add
+=[com.cemerick/pomegranate "0.2.0"]= to your :dependencies vector if you want
+the feature which automatically adds the library to your classpath without
+restarting the repl.
+
+After all step done, use =M-x latest-clojure-libraries-insert-dependency= to
+insert latest clojure libraries to your project.
+
+GitHub: https://github.com/AdamClements/latest-clojure-libraries
+
+#+BEGIN_SRC emacs-lisp
+  (req-package latest-clojure-libraries)
+#+END_SRC
+
+
+* Web Development                                                       :web:
+
+#+BEGIN_SRC emacs-lisp
+  (req-package web-mode
+    :mode (("\\.html?\\'" . web-mode)
+           ("\\.ejs?\\'" . web-mode)))
+#+END_SRC
+
+** Use emmet-mode to add Zen Coding support
+
+[[https://github.com/smihica/emmet-mode][emmet-mode]] is a fork of [[https://github.com/rooney/zencoding][zencoding-mode]] which add minor mode providing support
+for Zen Coding by producing HTML from CSS-like selectors.
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  (req-package emmet-mode
+    :config
+    (progn
+      ;; Following mode support emmet-mode
+      (add-hook 'html-mode-hook 'emmet-mode)
+      (add-hook 'sgml-mode-hook 'emmet-mode)
+      (add-hook 'nxml-mode-hook 'emmet-mode)
+      (add-hook 'css-mode-hook  'emmet-mode)
+
+      ;; Move cursor between quotes after expand
+      (add-hook 'emmt-mode-hook
+                '(lambda()
+                   (setq emmet-move-cursor-between-quotes t)))
+
+      ;; Make tab can also expand emmt instead of use yasnippet directly
+      (define-key emmt-mode-keymap (kbd "TAB") 'emmt-expand-yas)
+      (define-key emmt-mode-keymap (kbd "<tab>") 'emmt-expand-yas)))
 #+END_SRC
 
 * Terminal Emulator                                                    :term:
 
-** Eshell
+** Eshell                                                           :eshell:
 
 eshell is not really a system shell, it's written in pure lisp. What I
 like is it fully integrated with emacs.
@@ -1721,7 +2099,7 @@ which add a =j= command to let you jump to folder you has been access.
       (eshell-command-result (concat command " " file))))
 #+END_SRC
 
-* Window Management
+* Window Management                                                  :window:
 
 ** Maximized window after emac start
 
@@ -1729,7 +2107,7 @@ which add a =j= command to let you jump to folder you has been access.
   (modify-all-frames-parameters '((fullscreen . maximized)))
 #+END_SRC
 
-** winner-mode
+** winner-mode                                                      :winner:
 
 #+BEGIN_SRC emacs-lisp
   (req-package winner
@@ -1741,876 +2119,9 @@ which add a =j= command to let you jump to folder you has been access.
       (winner-mode t)))
 #+END_SRC
 
-* Org                                                                   :org:
-
-#+BEGIN_SRC emacs-lisp
-  (req-package org
-    :require (org-crypt org-mac-link org-magit)
-    :mode (("\\.org\\'" . org-mode)
-           ("\\.org_archive\\'" . org-mode))
-  :config
-  (progn
-    ;; Always enable auto indent mode
-    (setq org-indent-mode t)
-    ;; fontify source code
-    (setq org-src-fontify-natively t)
-    ;; Use current window when switch to source block
-    (setq org-src-window-setup 'current-window)
-    ;; Disable prompting to evaluate babel blocks
-    (setq org-confirm-babel-evaluate nil)
-    ;; Disable add validation link when export to HTML
-    (setq org-html-validation-link nil)
-    ))
-#+END_SRC
-
-** Capture and Agenda
-
-#+BEGIN_SRC emacs-lisp
-  (eval-after-load 'org
-    '(progn
-       ;; make agenda show on current window
-       (setq org-agenda-window-setup 'current-window)
-       ;; highlight current in agenda
-       (add-hook 'org-agenda-mode-hook 'hl-line-mode)
-       ;; Setup files for agenda
-       (setq org-agenda-files (list "~/Org/task/Office.org" "~/Org/task/Personal.org"))
-       ;;
-       (setq org-directory "~/Org")
-       (setq org-default-notes-file (f-join org-directory "task" "Office.org"))
-       ;; Always use `C-g' to exit agenda
-       (add-hook 'org-agenda-mode-hook
-                 '(lambda ()
-                    (local-set-key (kbd "C-g") 'org-agenda-exit)))
-       ))
-#+END_SRC
-
-** Extend org-mode's easy templates
-
-#+BEGIN_SRC emacs-lisp
-  (eval-after-load 'org
-    '(progn
-      (add-to-list 'org-structure-template-alist
-                   '("E" "#+BEGIN_SRC emacs-lisp\n?\n#+END_SRC"))
-      (add-to-list 'org-structure-template-alist
-                   '("S" "#+BEGIN_SRC sh\n?\n#+END_SRC"))
-      (add-to-list 'org-structure-template-alist
-                   '("p" "#+BEGIN_SRC plantuml :file uml.png \n?\n#+END_SRC"))
-      ))
-#+END_SRC
-
-** Extend babel support languages
-
-#+BEGIN_SRC emacs-lisp
-    (eval-after-load 'org
-      '(progn
-         (org-babel-do-load-languages
-          'org-babel-load-languages
-          '((emacs-lisp . t)
-            (C . t)
-            (ditaa . t)
-            (dot . t)
-            (js . t)
-            (latex . t)
-            (perl . t)
-            (python . t)
-            (ruby . t)
-            (sh . t)
-            (plantuml . t)
-            (clojure . t)
-            ))
-         (add-to-list 'org-src-lang-modes '("dot" . graphviz-dot))
-  ))
-#+END_SRC
-
-** Setup link abbreviations
-
-[[https://www.gnu.org/software/emacs/manual/html_node/org/Link-abbreviations.html][Link abbreviations]]
-
-An abbreviated link looks like
-
-: [[linkword:tag][description]]
-
-#+BEGIN_SRC emacs-lisp
-  (setq org-link-abbrev-alist
-        '(("google" . "http://www.google.com/search?q=")
-          ("google-map" . "http://maps.google.com/maps?q=%s")
-          ))
-#+END_SRC
-
-** Make spell-checking tool ignore some org-mode section
-
-see: http://emacs.stackexchange.com/questions/450/intelligent-spell-checking-in-org-mode
-
-#+BEGIN_SRC emacs-lisp
-  (eval-after-load 'ispell
-    '(progn
-       (add-to-list 'ispell-skip-region-alist '(":\\(PROPERTIES\\|LOGBOOK\\):" . ":END:"))
-       (add-to-list 'ispell-skip-region-alist '("#\\+BEGIN_SRC" . "#\\+END_SRC"))
-       ))
-#+END_SRC
-
-** Latex Export
-
-#+BEGIN_SRC emacs-lisp
-  (setq org-format-latex-options
-        '(:forground "black" :background "white"
-                     :scale 1.5
-                     :html-foreground "Black" :html-background "Transparent"
-                     :html-scale 1.0
-                     :matchers ("begin" "$1" "$" "$$" "\\(" "\\[")))
-#+END_SRC
-
-** Key Bindings
-
-#+TBLNAME: org-mode-keys
-| Key   | Command                  | description                 |
-|-------+--------------------------+-----------------------------|
-| C-c b | org-metaleft             |                             |
-| C-c f | org-metaright            |                             |
-| C-c p | org-metaup               |                             |
-| C-c n | org-metadown             |                             |
-| C-c i | org-insert-link          |                             |
-| C-c I | org-toggle-inline-images | Toggle display inline image |
-
-#+BEGIN_SRC emacs-lisp :noweb yes :results silent
-  (add-hook 'org-mode-hook '(lambda()
-            <<define-keys(map="org-mode-map", keys=org-mode-keys)>> ))
-#+END_SRC
-
-* Programming Languages
-
-** Android                                                    :android:java:
-
-#+BEGIN_SRC emacs-lisp
-  (req-package android-mode
-    :init (setq android-mode-sdk-dir (getenv "ANDROID_HOME")))
-#+END_SRC
-
-** Assembly
-
-#+BEGIN_SRC emacs-lisp
-  (req-package nasm-mode
-      :mode (("\\.asm$" . nasm-mode)
-             ("\\.nasm$" . nasm-mode)))
-#+END_SRC
-
-** Bash
-
-#+BEGIN_SRC emacs-lisp
-  (req-package flymake-shell
-    :require (flymake shell)
-    :config (add-hook 'sh-set-shell-hook 'flymake-shell-load))
-#+END_SRC
-
-** Batch
-
-#+BEGIN_SRC emacs-lisp
-  (req-package batch-mode :mode "\\.bat\\'")
-#+END_SRC
-
-** Emacs Lisp                                                   :lisp:elisp:
-
-#+BEGIN_SRC emacs-lisp
-  (req-package lisp-mode
-    :init
-    (progn
-      (add-to-list 'auto-mode-alist '("\\.el$" . emacs-lisp-mode))
-      (add-to-list 'auto-mode-alist '("Cask" . emacs-lisp-mode))
-      ))
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
-  (req-package eldoc
-    :init
-    (add-hook 'emacs-lisp-mode-hook
-              '(lambda ()
-                 ;; enable eldoc
-                 (turn-on-eldoc-mode)
-                 ;; fix for paredit if exist
-                 (eval-after-load 'paredit
-                   '(progn
-                      (eldoc-add-command 'paredit-backward-delete
-                                         'paredit-close-round))))))
-#+END_SRC
-
-*** On-the-fly evaluation/substitution of emacs lisp code
-
-[[https://github.com/Fuco1/litable][litable]] keeps a list of pure functions as a safeguard for unwanted
-evaluations. A function must first be accepted into this list (using
-M-x litable-accept-as-pure) before it can be evaluated on-the-fly. You
-should take care of what function you accept as pure to avoid any
-unfortunate accidents. Also, note that the pure functions list
-persists across sessions.
-
-#+BEGIN_SRC emacs-lisp
-  (req-package litable :init (litable-mode))
-#+END_SRC
-
-*** Highlight defined symbols
-
-#+BEGIN_SRC emacs-lisp :tangle no
-  (req-package hl-defined
-    :config
-    (add-hook 'emacs-lisp-mode-hook 'hdefd-highlight-mode)
-    (add-hook 'lisp-interaction-mode-hook 'hdefd-highlight-mode))
-#+END_SRC
-
-*** Highlight functions or macros belone to cl.el
-
-#+BEGIN_SRC emacs-lisp
-  (req-package highlight-cl
-    :init
-    (add-hook 'emacs-lisp-mode-hook
-              '(lambda ()
-                 (highlight-cl-add-font-lock-keywords))))
-#+END_SRC
-
-*** Remove *.elc when save
-
-#+BEGIN_SRC emacs-lisp
-  (defun remove-elc-on-save ()
-    "If you're saving an elisp file, likely the .elc is no longer valid."
-    (make-local-variable 'after-save-hook)
-    (add-hook 'after-save-hook
-              (lambda ()
-                (if (file-exists-p (concat buffer-file-name "c"))
-                    (delete-file (concat buffer-file-name "c"))))))
-
-  (add-hook 'emacs-lisp-mode-hook 'remove-elc-on-save)
-#+END_SRC
-
-** SSH Config
-
-#+BEGIN_SRC emacs-lisp
-  (req-package ssh-config-mode
-    :mode (("\\.ssh/config\\'"  . ssh-config-mode)
-           ("sshd?_config\\'"   . ssh-config-mode)
-           ("known_hosts\\'"    . ssh-known-hosts-mode)
-           ("authorized_keys2?\\'" . ssh-authorized-keys-mode))
-    :init (add-hook 'ssh-config-mode-hook 'turn-on-font-lock))
-#+END_SRC
-
-** CMake                                                             :c:cpp:
-
-#+BEGIN_SRC emacs-lisp
-  (req-package cmake-font-lock
-    :require (cmake-mode)
-    :init (add-hook 'cmake-mode-hook 'cmake-font-lock-activate))
-#+END_SRC
-
-** Rust                                                               :rust:
-
-[[https://github.com/rust-lang/rust-mode][rust-mode]] is a major emacs-mode for editing Rust source code.
-
-#+BEGIN_SRC emacs-lisp
-  (req-package rust-mode
-    :mode "\\.rs\\'")
-#+END_SRC
-
-** Go                                                               :golang:
-
-#+BEGIN_SRC emacs-lisp
-  (req-package go-mode
-    :mode "\\.go$"
-    :config
-    (progn
-      ;; Use gofmt to format code before save
-      (add-hook 'before-save-hook 'gofmt-before-save)))
-#+END_SRC
-
-** C/C++                                                             :c:cpp:
-
-#+BEGIN_SRC emacs-lisp
-  (req-package cc-mode
-    :mode
-    (("\\.h\\'" . c-mode)
-     ("\\.c\\'" . c-mode)
-     ("\\.hpp\\'" . c++-mode)
-     ("\\.cpp\\'" . c++-mode))
-    :config
-    (progn
-      ;; use regexp to check if it's C++ header
-      (add-to-list 'magic-mode-alist
-                   `(,(lambda ()
-                        (and (string= (file-name-extension (or (buffer-file-name) "")) "h")
-                             (or (re-search-forward "#include <\\w+>"
-                                                    magic-mode-regexp-match-limit t)
-                                 (re-search-forward "\\W\\(class\\|template\\namespace\\)\\W"
-                                                    magic-mode-regexp-match-limit t)
-                                 (re-search-forward "std::"
-                                                    magic-mode-regexp-match-limit t))))
-                     . c++-mode))
-      ))
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
-  (req-package clang-format
-    :commands clang-format-region)
-#+END_SRC
-
-*** Guess indent setup automatically
-
-GitHub: https://github.com/jscheid/dtrt-indent
-
-#+BEGIN_SRC emacs-lisp
-  (req-package dtrt-indent
-    :config
-    (add-hook 'c-mode-common-hook
-              (lambda()
-                (dtrt-indent-mode t))))
-#+END_SRC
-
-*** Highlight a few dangerous types in C/C++
-
-[[http://www.emacswiki.org/emacs/CWarnMode][cwarn-mode]] is a minor mode that ca highlight a few dangerous types in C/C++.
-
-By default it highlights:
-
-- Semicolons right after conditions and loops (e.g. ~if (x == y);~)
-- Assignments in tests (e.g. ~if (x = y) {~)
-- Functions with reference parameters (e.g. ~void funct(string &p) {~)
-
-#+BEGIN_SRC emacs-lisp
-  (req-package cwarn
-    :init (add-hook 'c-mode-common-hook '(lambda () (cwarn-mode 1))))
-#+END_SRC
-
-*** Add eldoc support for C/C++
-
-#+BEGIN_SRC emacs-lisp
-  (req-package c-eldoc
-    :config
-    (progn
-      (add-hook 'c-mode-common-hook
-                '(lambda ()
-                   (setq c-eldoc-includes "`pkg-config gtk+-3.0 --cflags --libs` -I./ -I../")
-                   (c-turn-on-eldoc-mode)))))
-#+END_SRC
-
-*** Use dummy-h-mode to help detect header's major mode
-
-[[https://github.com/yascentur/dummy-h-mode-el][dummy-h-mode]] is an major-mode to help switch major mode to
-c/c++/objc-mode on .h file.
-
-#+BEGIN_SRC emacs-lisp
-  (req-package dummy-h-mode
-    :require cc-mode
-    :mode "\\.h$"
-    :config
-    (progn
-      (add-hook 'dummy-h-mode-hook
-                (lambda ()
-                  (setq dummy-h-mode-default-major-mode 'c-mode)))
-      (add-hook 'dummy-h-mode-hook
-                (lambda ()
-                  (setq dummy-h-mode-search-limit 60000)))))
-#+END_SRC
-
-*** Syntax check and code-completion with CMake project
-
-[[https://github.com/redguardtoo/cpputils-cmake][cpputils-cmake]] is a nice tool for cmake project.
-
-#+BEGIN_SRC emacs-lisp
-  (req-package cpputils-cmake
-    :require (flymake flycheck)
-    :config
-    (progn
-      (add-hook 'c-mode-common-hook
-                (lambda () (when (derived-mode-p 'c-mode 'c++-mode) (cppcm-reload-all))))))
-#+END_SRC
-
-*** C language coding style
-
-I always use =linux coding style= for c language by default.
-
-#+BEGIN_SRC emacs-lisp
-  (add-hook 'c-mode-hook
-            '(lambda ()
-               (c-set-style "linux")
-               (setq c-basic-offset 8)
-               ;; Make TAB equivilent to 8 spaces
-               (setq tab-width 8)))
-#+END_SRC
-
-As part of Linux Kernel developer, I add =linux-kernel= coding style rule, which
-use =tabs= as indent and follow linux kernel development rules. Use following
-code to make emacs switch to =linux-kernel= style automatically when enter linux
-kernel directories.
-
-This coding style is document in https://www.kernel.org/doc/Documentation/CodingStyle.
-
-#+BEGIN_SRC emacs-lisp
-  (defun c-lineup-arglist-tabs-only (ignored)
-    "Line up argument lists by tabs, not spaces"
-    (let* ((anchor (c-langelem-pos c-syntactic-element))
-           (column (c-langelem-2nd-pos c-syntactic-element))
-           (offset (- (1+ column) anchor))
-           (steps (floor offset c-basic-offset)))
-      (* (max steps 1)
-         c-basic-offset)))
-
-  ;; Add Linux kernel style
-  (add-hook 'c-mode-common-hook
-            (lambda ()
-              (c-add-style "linux-kernel"
-                           '("linux" (c-offsets-alist
-                                      (arglist-cont-nonempty
-                                       c-lineup-gcc-asm-reg
-                                       c-lineup-arglist-tabs-only))))))
-
-  (defun linux-kernel-development-setup ()
-    (let ((filename (buffer-file-name)))
-      ;; Enable kernel mode for the appropriate files
-      (when (and filename
-                 (or (locate-dominating-file filename "Kbuild")
-                     (locate-dominating-file filename "Kconfig")
-                     (save-excursion (goto-char 0)
-                                     (search-forward-regexp "^#include <linux/\\(module\\|kernel\\)\\.h>$" nil t))))
-        ;; (setq indent-tabs-mode t)
-        ;; (setq show-trailing-whitespace t)
-        (c-set-style "linux-kernel")
-        (message "Setting up indentation for the linux kernel"))))
-
-  (add-hook 'c-mode-hook 'linux-kernel-development-setup)
-#+END_SRC
-
-*** C++ language coding style
-
-Use my C++ coding style.
-
-#+BEGIN_SRC emacs-lisp
-  (add-hook 'c++-mode-hook
-            '(lambda ()
-
-               ;; Use stroustrup style
-               (c-set-style "stroustrup")
-
-               ;; Setting indentation lvel
-               (setq c-basic-offset 4)
-
-               ;; Make TAB equivilent to 4 spaces
-               (setq tab-width 4)
-
-               ;; Use spaces to indent instead of tabs.
-               (setq indent-tabs-mode nil)
-
-               ;; Indent the continuation by 2
-               (setq c-continued-statement-offset 2)
-
-               ;; Brackets should be at same indentation level as the statements they open
-               ;; for example:
-               ;;                 if (0)        becomes        if (0)
-               ;;                     {                        {
-               ;;                        ;                         ;
-               ;;                     }                        }
-               (c-set-offset 'substatement-open 0)
-
-               ;; make open-braces after a case
-               (c-set-offset 'case-label '+)
-
-               ;; Not indent code inside a namespace
-               ;; for example:
-               ;;                namespace A {
-               ;;
-               ;;                int namespace_global_variable;
-               ;;
-               ;;                class Class {
-               ;;
-               ;;                Class();
-               ;;                //...
-               ;;                };
-               ;;
-               ;;                }
-               (c-set-offset 'innamespace 0)
-               ))
-#+END_SRC
-
-*** Extra highlight keywords for C/C++
-
-stdint.h
-
-#+BEGIN_SRC emacs-lisp
-  (dolist (m '(c-mode c++-mode))
-    (font-lock-add-keywords
-     m
-     '(("\\<\\(int8_t\\|int16_t\\|int32_t\\|int64_t\\|uint8_t\\|uint16_t\\|uint32_t\\|uint64_t\\)\\>" . font-lock-keyword-face))))
-#+END_SRC
-
-*** Key Bindings
-
-#+TBLNAME: c-c++-mode-keys
-| Key     | Command            | description                      |
-|---------+--------------------+----------------------------------|
-| C-c C-o | ff-find-other-file | Find header/source in C/C++ file |
-
-#+BEGIN_SRC emacs-lisp :noweb yes :results silent
-  (add-hook 'c-mode-hook '(lambda()
-            <<define-keys(map="c-mode-map", keys=c-c++-mode-keys)>> ))
-  (add-hook 'c++-mode-hook '(lambda()
-            <<define-keys(map="c++-mode-map", keys=c-c++-mode-keys)>> ))
-#+END_SRC
-
-** Graphviz
-
-#+BEGIN_SRC emacs-lisp
-  (req-package graphviz-dot-mode
-    :init (defalias 'dot-mode 'graphviz-dot-mode))
-#+END_SRC
-
-** Clojure                                                         :clojure:
-
-#+BEGIN_SRC emacs-lisp
-  (req-package clojure-mode
-    :require (clojure-mode-extra-font-locking flycheck-clojure)
-    :mode "\\.\\(clj\\|boot\\|cljx\\|edn\\|cljs\\|cljs.hl\\)\\'")
-#+END_SRC
-
-*** Add refactor function support
-
-https://github.com/clojure-emacs/clj-refactor.el
-
-#+BEGIN_SRC emacs-lisp
-  (req-package clj-refactor
-    :config
-    (progn
-      ;; Add clj-refactor to clojure-mode
-      (add-hook 'clojure-mode-hook '(lambda () (clj-refactor-mode 1)))
-      ;; Use `C-c C-x' as prefix
-      (cljr-add-keybindings-with-prefix "C-c C-x")))
-#+END_SRC
-
-*** Use cider for interactive development
-
-[[https://github.com/clojure-emacs/cider][cider]] is a Clojure Interactive Development Environment that Rocks for Emacs
-
-#+BEGIN_SRC emacs-lisp
-  (req-package cider
-    :require (cider-decompile cider-eval-sexp-fu eldoc)
-    :config
-    (progn
-
-      ;; Enable eldoc in Clojure buffers
-      (eval-after-load 'eldoc
-        '(progn
-           (add-hook 'cider-mode-hook #'eldoc-mode)))
-
-      ;; Hide `*nrepl-connection*' and `*nrepl-server*' buffers from appearing
-      ;; in some buffer switching commands like switch-to-buffer
-      (setq nrepl-hide-special-buffers t)
-
-      ;; Enabling CamelCase support for editing commands(like forward-word,
-      ;; backward-word, etc) in the REPL is quite useful since we often have
-      ;; to deal with Java class and method names. The built-in Emacs minor
-      ;; mode subword-mode provides such functionality
-      (add-hook 'cider-repl-mode-hook #'subword-mode)
-
-      ;; The use of paredit when editing Clojure (or any other Lisp) code is
-      ;; highly recommended. You're probably using it already in your
-      ;; clojure-mode buffers (if you're not you probably should). You might
-      ;; also want to enable paredit in the REPL buffer as well.
-      ;; (add-hook 'cider-repl-mode-hook #'paredit-mode)
-
-      ;; Auto-select the error buffer when it's displayed:
-      (setq cider-auto-select-error-buffer t)
-
-      ;; Controls whether to pop to the REPL buffer on connect.
-      (setq cider-repl-pop-to-buffer-on-connect nil)
-
-      ;; Controls whether to auto-select the error popup buffer.
-      (setq cider-auto-select-error-buffer t)
-
-      ;; T to wrap history around when the end is reached.
-      (setq cider-repl-wrap-history t)
-
-      ;; Log protocol messages to the `nrepl-message-buffer-name' buffer.
-      (setq nrepl-log-messages t)
-
-      ;; Toggle between test and implementation, instead of showing test report buffer.
-      ;;(define-key cider-mode-map (kbd "C-c C-t") 'projectile-toggle-between-implementation-and-test)
-
-      ;; (defun piggiepack-repl ()
-      ;;   (interactive)
-      ;;   ;; (cider-jack-in)
-      ;;   (cider-interactive-eval
-      ;;    "(require 'cljs.repl.browser)
-      ;;     (cemerick.piggieback/cljs-repl :repl-env (cljs.repl.browser/repl-env :port 9000))"))
-
-      ;; (defun node-repl ()
-      ;;   (interactive)
-      ;;   (cider-interactive-eval
-      ;;    "(require '[cljs.repl.node :as node])
-      ;;     (node/run-node-nrepl)"))
-
-      ))
-#+END_SRC
-
-*** Insert libraries in project more easily
-
-[[https://github.com/AdamClements/latest-clojure-libraries][latest-clojure-libraries]] helps to looks up the latest version of clojure
-libraries on clojars/maven and automatically populates the buffer with the
-appropriate dependency vector. Optionally uses pomegranate to load the
-dependency directly into your running nrepl.
-
-To use this plugin, you need to edit your =~/.lein/profiles.clj= :plugins vector
-to include =[lein-ancient "0.5.1"]= and optionally add
-=[com.cemerick/pomegranate "0.2.0"]= to your :dependencies vector if you want
-the feature which automatically adds the library to your classpath without
-restarting the repl.
-
-After all step done, use =M-x latest-clojure-libraries-insert-dependency= to
-insert latest clojure libraries to your project.
-
-#+BEGIN_SRC emacs-lisp
-  (req-package latest-clojure-libraries)
-#+END_SRC
-
-** GLSL
-
-#+BEGIN_SRC emacs-lisp
-  (req-package glsl-mode
-    :mode (("\\.vs\\'" . glsl-mode)
-           ("\\.fs\\'" . glsl-mode)
-           ("\\.gs\\'" . glsl-mode))
-    :config (setq glsl-other-file-alist '(("\\.fs$" (".vs"))
-                                          ("\\.vs$" (".fs")))))
-#+END_SRC
-
-** javascript                                                   :javascript:
-
-#+BEGIN_SRC emacs-lisp
-  (req-package js2-mode
-    :init (setq js2-highlight-level 3)
-    :mode "\\.js$")
-#+END_SRC
-
-** Json                                                    :javascript:json:
-
-#+BEGIN_SRC emacs-lisp
-  (req-package json-reformat :commands json-reformat-region)
-
-  (req-package flymake-json :require flymake)
-
-  (req-package json-mode
-    :require flymake-json
-    :mode ("\\.json$" . json-mode)
-    :init (add-hook 'json-mode-hook (lambda () (flymake-json-load))))
-#+END_SRC
-
-** Python                                                           :python:
-
-#+BEGIN_SRC emacs-lisp
-  (req-package jinja2-mode)
-#+END_SRC
-
-** Java                                                               :java:
-
-#+BEGIN_SRC emacs-lisp
-  (req-package malabar-mode
-    :mode "\\.java$")
-
-  (req-package gradle-mode
-    :mode "\\.gradle$")
-#+END_SRC
-
-** Markdown                                                       :markdown:
-
-#+BEGIN_SRC emacs-lisp
-  (req-package markdown-mode
-    :mode "\\.\\(md\\|markdown\\)\\'")
-#+END_SRC
-
-** Ruby                                                               :ruby:
-
-#+BEGIN_SRC emacs-lisp
-  (req-package ruby-mode
-    :mode (("Rakefile\\'" . ruby-mode)
-           ("\\.rake$" . ruby-mode)
-           ("\\.gemspec$" . ruby-mode)
-           ("\\.rb$'" . ruby-mode)
-           ("\\.ru$" . ruby-mode)
-           ("Gemfile$" . ruby-mode)
-           ("Guardfile$" . ruby-mode))
-    :config
-    (progn
-      ;; We never want to edit Rubinius bytecode
-      (add-to-list 'completion-ignored-extensions ".rbc")
-      ))
-
-  (req-package rake)
-#+END_SRC
-
-** QML                                                              :qml:qt:
-
-#+BEGIN_SRC emacs-lisp
-  (req-package qml-mode
-    :init (add-to-list 'auto-mode-alist '("\\.qml$" . qml-mode)))
-#+END_SRC
-
-** XML
-
-#+BEGIN_SRC emacs-lisp
-  (req-package nxml-mode
-    :mode (("\\.pom$" . nxml-mode))
-    :config
-    (progn
-      ;; Any file start with xml will be treat as nxml-mode
-      (add-to-list 'magic-mode-alist '("<\\?xml" . nxml-mode))
-
-      ;; Use nxml-mode instead of sgml, xml or html mode.
-      (mapc
-       (lambda (pair)
-         (if (or (eq (cdr pair) 'xml-mode)
-                 (eq (cdr pair) 'sgml-mode))
-             (setcdr pair 'nxml-mode)))
-       auto-mode-alist)
-      ))
-#+END_SRC
-
-** SCSS                                                           :css:scss:
-
-#+BEGIN_SRC emacs-lisp
-  (req-package scss-mode
-    :mode "\\.scss\\'"
-    :config
-    (progn
-      ;; dont' build scss to css after save file
-      (setq scss-compile-at-save nil)))
-#+END_SRC
-
-** CSS                                                                 :css:
-
-#+BEGIN_SRC emacs-lisp
-  (req-package css-mode :mode "\\.css\\'")
-#+END_SRC
-
-*** Add support for eldoc
-
-#+BEGIN_SRC emacs-lisp
-  (req-package css-eldoc
-    :config
-    (progn
-      (add-hook 'css-mode-hook 'turn-on-css-eldoc)
-      (add-hook 'scss-mode-hook 'turn-on-css-eldoc)
-      (add-hook 'less-css-mode-hook 'turn-on-css-eldoc)))
-#+END_SRC
-
-** Less                                                               :less:
-
-#+BEGIN_SRC emacs-lisp
-  (req-package less-css-mode
-    :init (add-to-list 'auto-mode-alist '("\\.less$" . less-css-mode))
-    :mode "\\.less$")
-#+END_SRC
-
-** YAML
-
-#+BEGIN_SRC emacs-lisp
-  (req-package yaml-mode
-    :mode "\\.yml$")
-#+END_SRC
-
-** Device Tree                                                :linux:kernel:
-
-#+BEGIN_SRC emacs-lisp
-  (req-package dts-mode
-    :mode (("\\.dts$" . dts-mode)
-           ("\\.dtsi$" . dts-mode)))
-#+END_SRC
-
-** scala                                                             :scala:
-
-#+BEGIN_SRC emacs-lisp
-  (req-package scala-mode
-    :mode (("\\.scala$" . scala-mode)))
-
-  (req-package sbt-mode
-    :mode (("\\.sbt$" . sbt-mode)))
-#+END_SRC
-
-** newlisp                                                            :lisp:
-
-#+BEGIN_SRC emacs-lisp
-  (req-package newlisp :mode "\\.lsp$")
-#+END_SRC
-
-** Vala
-
-#+BEGIN_SRC emacs-lisp
-  (req-package vala-mode :mode "\\.vala\'")
-#+END_SRC
-
-** BitBake
-
-#+BEGIN_SRC emacs-lisp
-  (req-package bitbake
-    :mode "\\.bbclass$"
-    :config
-    (progn
-      ;; For .inc file if locate under meta-*/ dir, make it use bitbake-mode
-      (add-to-list 'magic-mode-alist
-                   `(,(lambda ()
-                        (and (string= (file-name-extension (or (buffer-file-name) "")) "inc")
-                             (string-match "meta-" (buffer-file-name))))
-                        . bitbake-mode))
-      ))
-#+END_SRC
-
-** diff
-
-#+BEGIN_SRC emacs-lisp
-  (eval-after-load 'vim-empty-lines-mode
-    '(progn
-            (add-hook 'diff-mode-hook (lambda () (vim-empty-lines-mode -1)))
-            (add-hook 'diff-mode-hook (lambda () (whitespace-mode -1)))
-       ))
-
- (remove-hook 'diff-mode-hook 'whitespace-mode t)
-#+END_SRC
-
-** ebnf
-
-#+BEGIN_SRC emacs-lisp
-  (req-package ebnf-mode
-    :mode (("\\.bnf$" . bnf-mode)
-           ("\\.ebnf$" . ebnf-mode)))
-#+END_SRC
-
-* Web Development                                                       :web:
-
-#+BEGIN_SRC emacs-lisp
-  (req-package web-mode
-    :mode (("\\.html?\\'" . web-mode)
-           ("\\.ejs?\\'" . web-mode)))
-#+END_SRC
-
-** Use emmet-mode to add Zen Coding support
-
-[[https://github.com/smihica/emmet-mode][emmet-mode]] is a fork of [[https://github.com/rooney/zencoding][zencoding-mode]] which add minor mode providing
-support for Zen Coding by producing HTML from CSS-like selectors.
-
-#+BEGIN_SRC emacs-lisp :tangle no
-  (req-package emmet-mode
-    :config
-    (progn
-      ;; Following mode support emmet-mode
-      (add-hook 'html-mode-hook 'emmet-mode)
-      (add-hook 'sgml-mode-hook 'emmet-mode)
-      (add-hook 'nxml-mode-hook 'emmet-mode)
-      (add-hook 'css-mode-hook  'emmet-mode)
-
-      ;; Move cursor between quotes after expand
-      (add-hook 'emmt-mode-hook
-                '(lambda()
-                   (setq emmet-move-cursor-between-quotes t)))
-
-      ;; Make tab can also expand emmt instead of use yasnippet directly
-      (define-key emmt-mode-keymap (kbd "TAB") 'emmt-expand-yas)
-      (define-key emmt-mode-keymap (kbd "<tab>") 'emmt-expand-yas)))
-#+END_SRC
-
 * Version Control
 
-** Git
+** Git                                                                 :git:
 
 *** Add suport for git configuration files
 
@@ -2637,307 +2148,15 @@ https://github.com/itsjeyd/git-wip-timemachine
   (req-package git-wip-timemachine)
 #+END_SRC
 
-*** Key Bindings
-
-#+TBLNAME: magit-mode-keys
-| Key | Command                | description            |
-|-----+------------------------+------------------------|
-| C-g | magit-mode-quit-window | Exit magit mode window |
+*** Setup keybindings                                          :keybinding:
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
-  (add-hook 'magit-mode-hook '(lambda()
-            <<define-keys(map="magit-mode-map", keys=magit-mode-keys)>> ))
+  (add-hook
+   'magit-mode-hook
+   '(lambda()
+      (define-key magit-mode-map (kbd "C-g") 'magit-mode-quit-window)))
 #+END_SRC
 
-* Email                                                               :email:
-
-I use mu4e.
-
-install in osx
-
-: brew install mu --with-emacs --HEAD
-
-install in gentoo
-
-: USE="emacs" emerge net-mail/mu
-
-#+BEGIN_SRC emacs-lisp
-  (when (eq system-type 'darwin)
-    (add-to-list 'load-path "/usr/local/Cellar/mu/HEAD/share/emacs/site-lisp/mu4e"))
-
-  (req-package mu4e
-    :require w3m
-    :config
-    (progn
-      ;; Use mu4e as default mail agent
-      (setq mail-user-agent 'mu4e-user-agent)
-      ;; Mail folder set to ~/Maildir
-      (setq mu4e-maildir "~/Maildir")
-      ;; Fetch mail by offlineimap
-      (setq mu4e-get-mail-command "offlineimap")
-      ;; Fetch mail in 60 sec interval
-      (setq mu4e-update-interval 60)
-      ;; Use 'w3m' to read html email
-      (setq mu4e-html2text-command "w3m -dump -T text/html")
-      ;; Show mail's image
-      (setq mu4e-view-show-images t)
-      ;; SMTP setup
-      (setq message-send-mail-function 'smtpmail-send-it
-            smtpmail-stream-type 'starttls
-            starttls-use-gnutls t)
-      ;; don't save messages to Sent Messages, Gmail/IMAP takes care of this
-      (setq mu4e-sent-messages-behavior 'delete)
-      ;; Setup default mu4e search result mails list, if I want to see
-      ;; more, use M-x `mu4e-headers-toggle-full-search' to make mi4e show all mails
-      (setq mu4e-headers-results-limit 1000)
-      ))
-#+END_SRC
-
-** Make offlineimap get password from emacs
-
-My email password is saved in =~/.authinfo.gpg=, which is encrypted by
-gnupg, since I prefer make =prompt for password dialog= show on my
-emacs, I let offlineimap get the emacs password via my emacs.
-
-To achive this, you need add following conifg in =~/.offlineimaprc=
-
-: pythonfile = ~/.offlineimap.py
-
-Then create a file named =~/.offlineimap.py= with following code
-
-#+begin_src python :tangle no
-  #!/usr/bin/env python
-
-  import subprocess
-
-  def get_output(cmd):
-      # Bunch of boilerplate to catch the output of a command:
-      pipe = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-      (output, errout) = pipe.communicate()
-      assert pipe.returncode == 0 and not errout
-      return output
-
-  def get_password_emacs(host, port):
-      cmd = "emacsclient --eval '(offlineimap-get-password \"%s\" \"%s\")'" % (host,port)
-      return get_output(cmd).strip().lstrip('"').rstrip('"')
-#+end_src
-
-From =~/offlineimap.py=, we can see I use emacsclient call eslip
-function to get the password, so you also need to add
-=offlineimap-get-password= function in your ~/.emacs
-
-#+begin_src emacs-lisp
-  (defun offlineimap-get-password (host port)
-    (require 'netrc)
-    (let* ((netrc (netrc-parse (expand-file-name "~/.authinfo.gpg")))
-           (hostentry (netrc-machine netrc host port port)))
-      (when hostentry (netrc-get hostentry "password"))))
-#+end_src
-
-After all is done, add following line in =~/.offlineimaprc= and we can get password by emacs.
-
-: remotepasseval = get_password_emacs("imap.gmail.com")
-
-** Setup my email acount list
-
-#+begin_src emacs-lisp
-  (setq coldnew/mu4e-account-alist
-        '(("Gmail"
-           (mu4e-sent-folder "/Gmail/Sent")
-           (mu4e-drafts-folder "/Gmail/Drafts")
-           (mu4e-trash-folder "/Gmail/Trash")
-           (user-mail-address "coldnew.tw@gmail.com")
-           (smtpmail-smtp-server "smtp.gmail.com")
-           (smtpmail-smtp-service 587)
-           (smtpmail-smtp-user "coldnew.tw@gmail.com")
-           (user-full-name "Yen-Chin, Lee")
-           (mu4e-compose-signature ""))))
-#+end_src
-
-Since I use list to store my account info, add foollowing function to setup default account.
-
-#+BEGIN_SRC emacs-lisp
-  (defun coldnew/mu4e-set-default-account (account)
-    "Setup the default account based on coldnew/mu4e-account-alist."
-    (let* ((account (cdr (assoc account coldnew/mu4e-account-alist))))
-      (when account (mapc #'(lambda (a)
-                              (set (car a) (if (stringp (cadr a)) (cadr a) (eval (cadr a))))) account))))
-
-  ;; set Gmail to default
-  (coldnew/mu4e-set-default-account "Gmail")
-#+END_SRC
-
-Select my email account when sending email.
-
-#+BEGIN_SRC emacs-lisp
-  (defun coldnew/mu4e-set-account ()
-    "Set the account for composing a message."
-    (interactive)
-    (let* ((account
-            (if mu4e-compose-parent-message
-                (let ((maildir (mu4e-msg-field mu4e-compose-parent-message :maildir)))
-                  (string-match "/\\(.*?\\)/" maildir)
-                  (match-string 1 maildir))
-              (completing-read (format "Compose with account: (%s) "
-                                       (mapconcat #'(lambda (var) (car var)) coldnew/mu4e-account-alist "/"))
-                               (mapcar #'(lambda (var) (car var)) coldnew/mu4e-account-alist)
-                               nil t nil nil (caar coldnew/mu4e-account-alist))))
-           (account-vars (cdr (assoc account coldnew/mu4e-account-alist))))
-      (if account-vars
-          (mapc #'(lambda (var)
-                    (set (car var) (cadr var)))
-                account-vars))))
-
-  (add-hook 'mu4e-compose-pre-hook 'coldnew/mu4e-set-account)
-#+END_SRC
-
-** Let mu4e fontify diff contents
-
-I always use mu4e to read maliing-list, it's really nice to fontify diff contents.
-
-#+BEGIN_SRC emacs-lisp
-  (defun mu4e~view-fontify-diff ()
-    "Colorize diff message."
-    (interactive)
-    (let ((inhibit-read-only t))
-      (save-excursion
-        (goto-char (point-min))
-        ;; consider only lines that heuristically look like a citation line...
-        (while (re-search-forward "^\\(\\(\\+\\)[^+]\\|\\(-\\)[^-]\\)" nil t)
-          (let ((cur-point (or (match-beginning 2) (match-beginning 3)))
-                (color (if (match-beginning 2)
-                           "green"
-                         "deep pink")))
-            (end-of-line)
-            (add-text-properties cur-point (point)
-                                 `(face ((foreground-color . ,color))))))
-        (goto-char (point-min))
-        (while (re-search-forward "^\\(\\+\\+\\+\\|---\\)" nil t)
-          (let ((cur-point (match-beginning 1)))
-            (end-of-line)
-            (add-text-properties cur-point (point)
-                                 '(face ((weight . bold)))))))))
-
-  (add-hook 'mu4e-view-mode-hook 'mu4e~view-fontify-diff)
-#+END_SRC
-
-* IRC                                                                   :irc:
-
-I always use =ERC= as my irc client, which is bundle with emacs.
-
-#+BEGIN_SRC emacs-lisp
-  (req-package erc
-    :require (erc-notify)
-    :config
-    (progn
-      ;; set prompt to ->>
-      (setq erc-prompt "->> ")
-      ;; Encoding with utf-8
-      (setq erc-server-coding-system '(utf-8 . utf-8))
-      ;; column with is 100
-      (setq erc-fill-column 100)
-      ;; Auto join irc server when erc start
-      (erc-autojoin-mode t)
-      ;; truncate too long line
-      (erc-truncate-mode +1)
-      ;; Interpret mIRC-style color commands in IRC chats
-      (setq erc-interpret-mirc-color t)
-      ;; Kill buffers for channels after /part
-      (setq erc-kill-buffer-on-part t)
-      ;; Kill buffers for private queries after quitting the server
-      (setq erc-kill-queries-on-quit t)
-      ;; Kill buffers for server messages after quitting the server
-      (setq erc-kill-server-buffer-on-quit t)
-      ;; open query buffers in the current window
-      (setq erc-query-display 'buffer)
-      (setq erc-save-buffer-on-part t)))
-#+END_SRC
-
-** Setup default irc room I want to join
-
-#+begin_src emacs-lisp
-  (setq erc-autojoin-channels-alist
-        '(
-          ;; english channel
-          (".*\\.freenode.net" "#clojure" "#wayland" "#libhybris" "#webos-ports")
-          (".*\\.mozilla.org" "#b2g")
-          ;; Chinese channel
-          (".*\\.freenode.net" "#emacs.tw" "#cschat.tw" "#clojure.tw" "#lisp.tw")
-          (".*\\.oftc.net" "#dot")))
-#+end_src
-
-** Hide some sort of message
-
-#+begin_src emacs-lisp
-  (setq erc-hide-list
-        '(;; notices
-          "JOIN" "PART" "QUIT" "LEFT" "NICK"
-          ;; robot
-          "^j[a-z]*bot!" "^fussbot!"))
-#+end_src
-
-** Add timestamp for messages
-
-#+BEGIN_SRC emacs-lisp
-  (erc-timestamp-mode 1)
-  (setq erc-insert-timestamp-function 'erc-insert-timestamp-left)
-#+END_SRC
-
-** Coloify user's nickname
-
-#+BEGIN_SRC emacs-lisp
-  (req-package erc-hl-nicks)
-#+END_SRC
-
-** Enable track-mode for erc
-
-#+BEGIN_SRC emacs-lisp
-  (eval-after-load 'erc
-    '(progn
-       ;; enable track-mode
-       (erc-track-mode t)
-       ;; do not track some type of message
-       (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
-                                       "324" "329" "332" "333" "353" "477"))))
-#+END_SRC
-
-** Enable spell checking
-
-#+BEGIN_SRC emacs-lisp
-  (req-package erc-spelling
-    :config
-    (progn
-      (erc-spelling-mode 0)))
-#+END_SRC
-
-** Autoaway setup
-
-#+BEGIN_SRC emacs-lisp
-  (req-package erc-autoaway
-    :config
-    (progn
-      (setq erc-auto-discard-away t)
-      (setq erc-autoaway-idle-seconds 600)
-      (setq erc-autoaway-use-emacs-idle t)))
-#+END_SRC
-
-** Quick start/switch erc with one command                         :command:
-
-#+BEGIN_SRC emacs-lisp
-  (defun erc-start-or-switch ()
-    "Connect to IRC, if already connected, switch to active irc buffer."
-    (interactive)
-    (let ((irc-active-p (and (fboundp 'erc-buffer-list)
-                             (erc-buffer-list))))
-      ;; we track irc.freenode.net to make sure erc is already active
-      (if irc-active-p
-          (erc-track-switch-buffer 1)
-        (progn
-          ;; connect to irc server
-          (erc-tls :server "irc.freenode.net" :port 6697 :nick erc-nick)
-          (erc-tls :server "irc.debian.org" :port 6697 :nick erc-nick)
-          (erc-tls :server "irc.mozilla.org" :port 6697 :nick erc-nick)))))
-#+END_SRC
 
 * Keybinding                                                     :keybinding:
 
@@ -2960,125 +2179,88 @@ Create my minor-mode to control all keybindings
   (global-coldnew-editor-mode t)
 #+end_src
 
-** Generate keymap from org-mode table
-
-org-mode is really nice for literature programmering, I can use it to
-generate keybing via table, just use following functions:
-
-#+NAME: define-keys
-#+HEADERS: :var fn="define-key" state="" map=""
-#+BEGIN_SRC emacs-lisp :results output :tangle no :colnames nil
-  (require 's)
-  (mapcar (lambda (l)
-            (let* ((key (nth 0 l))
-                   (command (nth 1 l)))
-              ;; make sure key and command not nil
-              (if (not (or (s-blank? key) (s-blank? command)))
-                  (princ (format "(%s %s %s %s '%s)\n"
-                                 fn
-                                 (if (string= state "") "" (concat "'" state))
-                                 map
-                                 (if (s-equals? fn "evil-ex-define-cmd")
-                                     (format "\"%s\"" key)
-                                   (format "(kbd \"%s\")" key))
-                                 command)))))
-          ;; remove all `hline' tag
-          (remove 'hline keys))
-#+END_SRC
-
 ** Spacemacs Map
 
 spacemacs reserve the =SPC-o= for user setup theirs own keymap, I think I should add something here :(
 
 ** Normal State
 
-#+TBLNAME: global-evil-normal
-| Key     | Command             | description                             |
-|---------+---------------------+-----------------------------------------|
-| C-x C-f | helm-find-files     | find-file by helm                       |
-| C-x C-q | read-only-mode      | toggle read-only-mode                   |
-| C-x C-s | save-buffer-always  | Always save buffer even not modified    |
-| C-x M-1 | deft-or-close       | Use deft open my note                   |
-| C-x M-2 | multi-eshell        | Show eshell window                      |
-| C-x M-3 | mu4e                | Use mu4e to read mail                   |
-| C-x M-4 | erc-start-or-switch | Switch to erc budder                    |
-| C-x vl  | magit-log           |                                         |
-| C-x vp  | magit-push          |                                         |
-| C-x vs  | magit-status        |                                         |
-| C-x b   | helm-buffers-list   | Siwtch to another buffer by helm        |
-| M-[     | winner-undo         | switch back to earlier window layout    |
-| M-]     | winner-redo         | restore resent window layout            |
-| M-x     | helm-M-x            | Use heml for interactive commands (M-x) |
-| M-s     | helm-occur          | Search in current buffer                |
-| C-x C-o | other-frame         | Switch to other frame                   |
-| M-o     | other-window        | Switch to other window                  |
-| C--     | text-scale-decrease | Decrease text scale                     |
-| C-=     | text-scale-increase | Increase text scale                     |
-
-#+BEGIN_SRC emacs-lisp :noweb yes :results silent
-    <<define-keys(fn="evil-define-key", state="normal", map="coldnew-editor-map", keys=global-evil-normal)>>
+#+BEGIN_SRC emacs-lisp
+  (evil-define-key 'normal coldnew-editor-map
+      (kbd "C-x C-f") 'helm-find-files
+      (kbd "C-x C-q") 'read-only-mode
+      (kbd "C-x C-s") 'save-buffer-always
+      (kbd "C-x M-1") 'deft-or-close
+      (kbd "C-x M-2") 'multi-eshell
+      (kbd "C-x M-3") 'mu4e
+      (kbd "C-x M-4") 'erc-start-or-switch
+      (kbd "C-x vl") 'magit-log
+      (kbd "C-x vp") 'magit-push
+      (kbd "C-x vs") 'magit-status
+      (kbd "C-x b") 'helm-buffers-list
+      (kbd "M-[") 'winner-undo
+      (kbd "M-]") 'winner-redo
+      (kbd "M-x") 'helm-M-x
+      (kbd "M-s") 'helm-occur
+      (kbd "C-x C-o") 'other-frame
+      (kbd "M-o") 'other-window
+      (kbd "C--") 'text-scale-decrease
+      (kbd "C-=") 'text-scale-increase
+      )
 #+END_SRC
 
 ** Insert State
 
-#+TBLNAME: global-evil-insert
-| Key      | Command                             | description                             |
-|----------+-------------------------------------+-----------------------------------------|
-| <delete> | hungry-delete-backward              | backward delete with hungry-mode        |
-| C-;      | iedit-mode                          | Quicklly modify all same words          |
-| C-d      | hungry-delete-forward               | forward delete with hungry-mode         |
-| C-l      | hungry-delete-backward              | backward delete with hungru-mode        |
-| C-n      | evil-next-line                      | next-line                               |
-| C-o      | evil-execute-in-normal-state        | Temporary switch to Normal sate         |
-| C-p      | evil-previous-line                  | previous-line                           |
-| C-w      | backward-kill-word                  | Backward delete word                    |
-| C-x C-f  | helm-find-files                     | find-file by helm                       |
-| C-x C-n  | company-complete                    | Complete with company-mode              |
-| C-x C-q  | read-only-mode                      | toggle read-only-mode                   |
-| C-x C-s  | save-buffer-always                  | Always save buffer even not modified    |
-| C-x M-1  | deft-or-close                       | Use deft open my note                   |
-| C-x M-2  | multi-eshell                        | Show eshell window                      |
-| C-x M-3  | mu4e                                | Use mu4e to read mail                   |
-| C-x M-4  | erc-start-or-switch                 | Switch to erc budder                    |
-| C-x vl   | magit-log                           |                                         |
-| C-x vp   | magit-push                          |                                         |
-| C-x vs   | magit-status                        |                                         |
-| C-x b    | helm-buffers-list                   | Siwtch to another buffer by helm        |
-| M-<SPC>  | insert-U200B-char                   | Insert <U200B> character                |
-| M-[      | winner-undo                         | switch back to earlier window layout    |
-| M-]      | winner-redo                         | restore resent window layout            |
-| M-s      | helm-occur                          | Search in current buffer                |
-| s-<RET>  | insert-empty-line                   | Insert empty line after current line    |
-| s-<SPC>  | insert-U200B-char                   | Insert <U200B> character                |
-| C-v      | set-mark-mode/rectangle-mark-mode   |                                         |
-| C-x C-i  | indent-region-or-buffer-and-cleanup | Intent region/buffer and clean up       |
-| M-v      | er/expand-region                    |                                         |
-| M-x      | helm-M-x                            | Use heml for interactive commands (M-x) |
-| M-y      | helm-show-kill-ring                 | Show kill-ring by helm                  |
-| M-o      | other-window                        | Switch to other window                  |
-| C-x C-o  | other-frame                         | Switch to other frame                   |
-| C--      | text-scale-decrease                 | Decrease text scale                     |
-| C-=      | text-scale-increase                 | Increase text scale                     |
-
-#+BEGIN_SRC emacs-lisp :noweb yes :results silent
-  <<define-keys(fn="evil-define-key", state="insert", map="coldnew-editor-map", keys=global-evil-insert)>>
+#+BEGIN_SRC emacs-lisp
+  (evil-define-key 'insert coldnew-editor-map
+    (kbd "<delete>") 'hungry-delete-backward
+    (kbd "C-;") 'iedit-mode
+    (kbd "C-d") 'hungry-delete-forward
+    (kbd "C-l") 'hungry-delete-backward
+    (kbd "C-n") 'evil-next-line
+    (kbd "C-o") 'evil-execute-in-normal-state
+    (kbd "C-p") 'evil-previous-line
+    (kbd "C-w") 'backward-kill-word
+    (kbd "C-x C-f") 'helm-find-files
+    (kbd "C-x C-n") 'company-complete
+    (kbd "C-x C-q") 'read-only-mode
+    (kbd "C-x C-s") 'save-buffer-always
+    (kbd "C-x M-1") 'deft-or-close
+    (kbd "C-x M-2") 'multi-eshell
+    (kbd "C-x M-3") 'mu4e
+    (kbd "C-x M-4") 'erc-start-or-switch
+    (kbd "C-x vl") 'magit-log
+    (kbd "C-x vp") 'magit-push
+    (kbd "C-x vs") 'magit-status
+    (kbd "C-x b") 'helm-buffers-list
+    (kbd "M-<SPC>") 'insert-U200B-char
+    (kbd "M-[") 'winner-undo
+    (kbd "M-]") 'winner-redo
+    (kbd "M-s") 'helm-occur
+    (kbd "s-<RET>") 'insert-empty-line
+    (kbd "s-<SPC>") 'insert-U200B-char
+    (kbd "C-v") 'set-mark-mode/rectangle-mark-mode
+    (kbd "C-x C-i") 'indent-region-or-buffer-and-cleanup
+    (kbd "M-v") 'er/expand-region
+    (kbd "M-x") 'helm-M-x
+    (kbd "M-y") 'helm-show-kill-ring
+    (kbd "M-o") 'other-window
+    (kbd "C-x C-o") 'other-frame
+    (kbd "C--") 'text-scale-decrease
+    (kbd "C-=") 'text-scale-increase
+    )
 #+END_SRC
 
 ** Ex Command
 
-#+TBLNAME: global-evil-ex
-| Key             | Command             | description                           |
-|-----------------+---------------------+---------------------------------------|
-| ag              | helm-ag             | Search with silver searcher           |
-| agp[roject]     | helm-projectile-ag  | Search project with silver searcher   |
-| agi[nteractive] | helm-do-ag          | Interactive execute ag command        |
-| google          | helm-google         | Search with google                    |
-| google-suggest  | helm-google-suggest | Search with google-suggest            |
-| gtag            | ggtags-create-tags  | Create gtags                          |
-| howdoi          | howdoi-query        | Show coding answers in another buffer |
-
-#+BEGIN_SRC emacs-lisp :noweb yes :results silent
-  <<define-keys(fn="evil-ex-define-cmd", keys=global-evil-ex)>>
+#+BEGIN_SRC emacs-lisp
+  (evil-ex-define-cmd "ag" 'helm-ag)
+  (evil-ex-define-cmd "agp[roject]" 'helm-projectile-ag)
+  (evil-ex-define-cmd "agi[nteractive]" 'helm-do-ag)
+  (evil-ex-define-cmd "google" 'helm-google)
+  (evil-ex-define-cmd "google-suggest" 'helm-google-suggest)
+  (evil-ex-define-cmd "gtag" 'ggtags-create-tags)
+  (evil-ex-define-cmd "howdoi" 'howdoi-query)
 #+END_SRC
 
 * End of configuration
@@ -3092,13 +2274,14 @@ to execute following line to send =req-package= on its merry way.
   (req-package-finish)
 #+END_SRC
 
-In the end of configuration, I'll load my private config from
-=~/.personal.el=, which contains something like password or account settings.
+In the end of configuration, I'll load my private config from =~/.personal.el=,
+which contains something like password or account settings.
 
 #+BEGIN_SRC emacs-lisp
   (let ((secret "~/.personal.el"))
     (when (file-exists-p secret) (load-file secret)))
 #+END_SRC
+
 * Reference
 
 Following link is refrence for my emac config.
@@ -3108,3 +2291,13 @@ Following link is refrence for my emac config.
 ~[2]~ https://github.com/bodil/emacs.d
 
 ~[3]~ https://github.com/mgalgs/.emacs.d
+
+~[4]~ https://raw.githubusercontent.com/sbisaacson/literate-emacs/master/README.org
+
+~[5]~ https://github.com/jhenahan/emacs.d/blob/master/emacs-init.org
+
+~[6]~ https://ryuslash.org/dotfiles/emacs/init.html
+
+~[7]~ http://www.wisdomandwonder.com/wordpress/wp-content/uploads/2014/03/C3F.org_.txt
+
+~[8]~ https://github.com/howardabrams/dot-files

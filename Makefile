@@ -7,22 +7,27 @@ test: clean
 	${MAKE} all
 
 bootstrap:
+	${MAKE} clean
+	${MAKE} init.el
 	${CASK} install
+
+Cask:
+	${RM} Cask
 	${MAKE} init.el
 
 clean:
-	$(RM) init.el
+	$(RM) init.el Cask
 	$(RM) *.elc
 	$(RM) */*.elc
 
+# cask exec emacs -Q -batch -l "ob-tangle" -eval "(org-babel-tangle-file \"init.org\")"
 init.el:
 	$(RM) init.el
-	${CASK} exec ${EMACS} -Q -batch \
+	${EMACS} -Q -batch \
 		--eval "(require 'org)" \
 		--eval '(setq org-confirm-babel-evaluate nil)' \
-		--eval '(setq user-emacs-directory (file-name-directory (getenv "PWD")))' \
-		--eval "(org-babel-do-load-languages 'org-babel-load-languages '((emacs-lisp . t)))" \
-		--eval '(org-babel-load-file "init.org")'
+		--eval '(setq org-confirm-execute-src-block nil)' \
+		--eval '(org-babel-tangle-file "init.org")'
 
 compile: init.el
 	${CASK} exec ${EMACS} -Q -batch \
