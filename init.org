@@ -2038,6 +2038,26 @@ GitHub: https://github.com/smihica/emmet-mode
 
 * Terminal Emulator                                                    :term:
 
+** Sane Term
+
+Ansi Term with sane options and the ability to cycle/create terms.
+
+GitHub: https://github.com/adamrt/sane-term
+
+#+BEGIN_SRC emacs-lisp
+  (req-package sane-term
+    :config
+    (progn
+      ;; shell to use for sane-term
+      (setq sane-term-shell-command "/bin/bash")
+      ;; sane-term will create first term if none exist
+      (setq sane-term-initial-create t)
+      ;; `C-d' or `exit' will kill the term buffer.
+      (setq sane-term-kill-on-exit t)
+      ;; After killing a term buffer, not cycle to another.
+      (setq sane-term-next-on-kill nil)))
+#+END_SRC
+
 ** Eshell                                                           :eshell:
 
 eshell is not really a system shell, it's written in pure lisp. What I
@@ -2326,7 +2346,8 @@ spacemacs reserve the =SPC-o= for user setup theirs own keymap, I think I should
     (kbd "M-o") 'other-window
     (kbd "C-x C-o") 'other-frame
     (kbd "C--") 'text-scale-decrease
-    (kbd "C-=") 'text-scale-increase
+    (kbd "C-x t") 'sane-term
+    (kbd "C-x T") 'sane-term
     )
 #+END_SRC
 
