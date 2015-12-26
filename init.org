@@ -137,6 +137,20 @@ Setup the cache directory to store some cache content.
     "My emacs storage area for persistent files.")
 #+END_SRC
 
+** save custom-file as cache
+
+Most of my config is written in this file, it's no need to tracking the emacs's
+custom-setting.
+
+I move the file to cache-dir and make git ignore it.
+
+#+BEGIN_SRC emacs-lisp
+  (setq custom-file (concat user-cache-directory "custom.el"))
+  ;; load custom-file only when file exist
+  (when (file-exists-p custom-file)
+    (load-file custom-file))
+#+END_SRC
+
 * Package Management with Cask and Pallet
 
 [[https://github.com/rdallasgray/pallet][Pallet]] is a wonderful little tool built on [[https://github.com/cask/cask][Cask]], a dependency management tool

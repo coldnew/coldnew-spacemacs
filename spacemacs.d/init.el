@@ -213,18 +213,3 @@ user code."
  This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
 )
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    ("cwarn-mode" "cwarn-mod" "cwarn" disaster cmake-mode clang-format window-numbering which-key volatile-highlights vi-tilde-fringe toc-org sx spray spacemacs-theme smooth-scrolling smeargle smartparens skeletor req-package rainbow-mode rainbow-delimiters quelpa powerline-evil popwin pcre2el password-generator paradox pangu-spacing pallet page-break-lines org-repo-todo org-present org-pomodoro org-bullets open-junk-file noflet neotree mustache move-text mmm-mode markdown-toc manage-minor-mode magit-gitflow macrostep linum-relative leuven-theme info+ indent-guide ido-vertical-mode hungry-delete htmlize howdoi highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-descbinds helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger gh-md flycheck-pos-tip flx-ido fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-matchit evil-jumper evil-indent-textobject evil-iedit-state evil-exchange evil-escape evil-args evil-anzu eval-sexp-fu elisp-slime-nav discover-my-major diff-hl define-word clojure-mode clean-aindent-mode buffer-move auto-highlight-symbol auto-dictionary ascii-art-to-unicode ascii aggressive-indent adaptive-wrap ace-window ace-link 4clojure))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
- '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
