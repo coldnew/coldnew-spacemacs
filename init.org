@@ -426,7 +426,7 @@ For language, though Traditional Chinese is my mothertone, I still prefer use
   (setq system-time-locale "en_US" )
 #+END_SRC
 
-* Buildin Packages
+* Buildin Packages                                                  :buildin:
 
 Some buildin packages not loaded by emacs, load it here.
 
@@ -436,13 +436,13 @@ Some buildin packages not loaded by emacs, load it here.
   (req-package cl-lib)
 #+END_SRC
 
-** htmlize
+** htmlize                                                         :htmlize:
 
 #+BEGIN_SRC emacs-lisp
   (req-package htmlize)
 #+END_SRC
 
-* External Packages
+* External Packages                                                :packages:
 
 Most of emacs packages do not need many configs or just provide
 commands/functions to use, I put them here.
@@ -608,7 +608,7 @@ GitHub: https://github.com/nicferrier/emacs-noflet
   (req-package noflet)
 #+END_SRC
 
-** mustache
+** mustache                                                       :mustache:
 
 A mustache templating library in Emacs Lisp.
 
