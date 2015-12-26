@@ -168,6 +168,7 @@ looks like this:
   (depends-on "dash")
   (depends-on "noflet")
   (depends-on "pallet")
+  (depends-on "async")
   (depends-on "req-package")
   (depends-on "projectile")
   (depends-on "clojure-mode")
@@ -426,6 +427,25 @@ I move the file to cache-dir and make git ignore it.
   ;; load custom-file only when file exist
   (when (file-exists-p custom-file)
     (load-file custom-file))
+#+END_SRC
+
+** Async rebuild init.el after save
+
+#+BEGIN_SRC emacs-lisp
+  (when (require 'async nil 'noerror)
+    ;; If I'm edit my init.org, async generate init.el when save.
+    (defun tangle-init ()
+      "If the current buffer is 'init.org' the code-blocks are tangled."
+      (let ((buffer-name "async-make-init.el"))
+        (when (equal (buffer-file-name)
+                     (expand-file-name (concat user-emacs-directory "init.org")))
+          ;; If previous building buffer exist, discard it
+          (when (get-buffer (concat "*" buffer-name "*"))
+            (kill-buffer (concat "*" buffer-name "*")))
+          ;; build with `make init.el' command
+          (async-start-process buffer-name "make" 'ignore "init.el"))))
+    ;; Add to hook
+    (add-hook 'after-save-hook 'tangle-init))
 #+END_SRC
 
 * Languages and Encodings
@@ -1357,6 +1377,7 @@ For c-mode, just do the same but change the relative
       (setq helm-ff-file-name-history-use-recentf t)
       ))
 #+END_SRC
+
 ** Setup keybindings                                          :keybinding:
 
 #+BEGIN_SRC emacs-lisp :noweb yes :results silent
