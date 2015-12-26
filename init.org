@@ -1844,6 +1844,17 @@ met.
                                          'paredit-close-round))))))
 #+END_SRC
 
+*** Additional flavour to emacs-lisp programming                 :el@spice:
+
+el-spice is a minor mode that provides additional configuration to make
+programming in Emacs Lisp more enjoyable.
+
+GitHub: https://github.com/vedang/el-spice
+
+#+BEGIN_SRC emacs-lisp
+  (req-package el-spice)
+#+END_SRC
+
 *** On-the-fly evaluation/substitution of emacs lisp code         :litable:
 
 [[https://github.com/Fuco1/litable][litable]] keeps a list of pure functions as a safeguard for unwanted evaluations.
