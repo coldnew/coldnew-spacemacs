@@ -629,6 +629,25 @@ GitHub: https://github.com/magnars/expand-region.el
   (req-package expand-region)
 #+END_SRC
 
+** zzz-to-char
+
+This package provides two new commands: =zzz-to-char= and =zzz-up-to-char= which
+work like built-ins zap-to-char and zap-up-to-char, but allow you quickly select
+exact character you want to “zzz” to.
+
+The commands are minimalistic and often work like built-in ones when there is
+only one occurrence of target character (except they automatically work in
+backward direction too). You can also specify how many characters to scan from
+each side of point, see =zzz-to-char-reach=.
+
+This package uses avy as backend.
+
+GitHub: https://github.com/mrkkrp/zzz-to-char
+
+#+BEGIN_SRC emacs-lisp
+  (req-package zzz-to-char)
+#+END_SRC
+
 * Interactive Commands                                              :command:
 
 In emacs, we can use =M-x= to execute interactive commands, I
@@ -2238,6 +2257,7 @@ spacemacs reserve the =SPC-o= for user setup theirs own keymap, I think I should
     (kbd "C-d") 'hungry-delete-forward
     (kbd "C-l") 'hungry-delete-backward
     (kbd "C-n") 'evil-next-line
+    (kbd "M-z"  'zzz-to-char)
     (kbd "C-o") 'evil-execute-in-normal-state
     (kbd "C-p") 'evil-previous-line
     (kbd "C-w") 'backward-kill-word
