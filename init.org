@@ -171,7 +171,6 @@ looks like this:
   (depends-on "req-package")
   (depends-on "projectile")
   (depends-on "clojure-mode")
-  (depends-on "mustache")           ;; TODO: remove
   (depends-on "highlight-numbers")  ;; TODO: remove
 #+END_SRC
 
@@ -609,6 +608,15 @@ GitHub: https://github.com/nicferrier/emacs-noflet
   (req-package noflet)
 #+END_SRC
 
+** mustache
+
+A mustache templating library in Emacs Lisp.
+
+GitHub: https://github.com/Wilfred/mustache.el
+
+#+BEGIN_SRC emacs-lisp
+  (req-package mustache)
+#+END_SRC
 
 ** expand-region
 
