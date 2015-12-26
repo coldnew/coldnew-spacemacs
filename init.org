@@ -2271,7 +2271,7 @@ spacemacs reserve the =SPC-o= for user setup theirs own keymap, I think I should
     (kbd "C-d") 'hungry-delete-forward
     (kbd "C-l") 'hungry-delete-backward
     (kbd "C-n") 'evil-next-line
-    (kbd "M-z"  'zzz-to-char)
+    (kbd "M-z")   'zzz-to-char
     (kbd "C-o") 'evil-execute-in-normal-state
     (kbd "C-p") 'evil-previous-line
     (kbd "C-w") 'backward-kill-word
