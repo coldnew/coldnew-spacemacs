@@ -20,7 +20,7 @@ in [[http://orgmode.org/][org-mode]], but it uses English to write this config i
 
 Feel free to use it :).
 
-** How to install emacs
+** Install emacs
 
 My emacs is running under =Mac OSX= and =Gentoo Linux= and I really like them,
 following are some record for how I installed my emacs.
@@ -42,6 +42,7 @@ version of emacs via following command
 #+BEGIN_EXAMPLE
   USE="X gtk3 inotify xft imagemagick" emerge app-editors/emacs
 #+END_EXAMPLE
+
 ** Install or testing this config
 
 - First use git to download whole repo
@@ -137,7 +138,7 @@ Setup the cache directory to store some cache content.
     "My emacs storage area for persistent files.")
 #+END_SRC
 
-* Package Management with Cask and Pallet
+* Package Management with Cask and Pallet                       :cask:pallet:
 
 [[https://github.com/rdallasgray/pallet][Pallet]] is a wonderful little tool built on [[https://github.com/cask/cask][Cask]], a dependency management tool
 for Emacs packages. Pallet adds automatic updating of the =Caskfile= when
@@ -171,8 +172,6 @@ looks like this:
   (depends-on "async")
   (depends-on "req-package")
   (depends-on "projectile")
-  (depends-on "clojure-mode")
-  (depends-on "highlight-numbers")  ;; TODO: remove
 #+END_SRC
 
 Then run the following command in your =.emacs.d= directory to set up
@@ -457,7 +456,7 @@ For language, though Traditional Chinese is my mothertone, I still prefer use
 
 #+BEGIN_SRC emacs-lisp
   (prefer-coding-system 'utf-8)
-  (setq system-time-locale "en_US" )
+  (setq system-time-locale "en_US")
 #+END_SRC
 
 * Buildin Packages                                                  :buildin:
@@ -687,7 +686,7 @@ GitHub: https://github.com/mrkkrp/zzz-to-char
 In emacs, we can use =M-x= to execute interactive commands, I
 implement some of them to make my emacs more easy to use.
 
-** Buffers
+** Buffers                                                          :buffer:
 
 *** Kill all buffers except *scratch* buffer
 
@@ -1053,7 +1052,7 @@ Some shortcuts let me access system path more easily.
       ))
 #+END_SRC
 
-* Editors
+* Editors                                                            :editor:
 
 Why emacs config has an editor section, doesn't means emacs is not an editor ?
 Yes, Emacs is an OS :)
@@ -1284,7 +1283,6 @@ completion candidates.
 #+END_SRC
 
 
-
 *** Setup keybindings                                          :keybinding:
 
 #+BEGIN_SRC emacs-lisp
@@ -1407,7 +1405,6 @@ to let emacs re-create it automatically.
       (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
       (define-key helm-map (kbd "C-w") 'backward-kill-word)))
 #+END_SRC
-
 
 * Org                                                                   :org:
 
@@ -2039,7 +2036,6 @@ GitHub: https://github.com/AdamClements/latest-clojure-libraries
   (req-package latest-clojure-libraries)
 #+END_SRC
 
-
 * Web Development                                                       :web:
 
 #+BEGIN_SRC emacs-lisp
@@ -2293,7 +2289,6 @@ https://github.com/itsjeyd/git-wip-timemachine
    '(lambda()
       (define-key magit-mode-map (kbd "C-g") 'magit-mode-quit-window)))
 #+END_SRC
-
 
 * Keybinding                                                     :keybinding:
 
