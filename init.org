@@ -1734,6 +1734,24 @@ GitHub: https://github.com/redguardtoo/cpputils-cmake
                     (cppcm-reload-all))))))
 #+END_SRC
 
+*** Setup keybindings                                          :keybinding:
+
+#+BEGIN_SRC emacs-lisp
+  ;; C
+  (add-hook
+   'c-mode-hook
+   '(lambda()
+      (define-key helm-map (kbd "C-c C-o") 'ff-find-other-file)))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  ;; C++
+  (add-hook
+   'c++-mode-hook
+   '(lambda()
+      (define-key helm-map (kbd "C-c C-o") 'ff-find-other-file)))
+#+END_SRC
+
 ** CMake                                                             :c:cpp:
 
 #+BEGIN_SRC emacs-lisp
