@@ -2342,6 +2342,18 @@ https://github.com/itsjeyd/git-wip-timemachine
       (define-key magit-mode-map (kbd "C-g") 'magit-mode-quit-window)))
 #+END_SRC
 
+* Cedet                                                               :cedet:
+
+#+BEGIN_SRC emacs-lisp
+  (req-package cedet
+    :config
+    (progn
+      (setq ede-project-placeholder-cache-file (concat user-cache-directory "ede-projects.el"))
+      (setq semanticdb-default-save-directory (concat user-cache-directory "semanticdb"))
+      (setq srecode-map-save-file (concat user-cache-directory "srecode-map.el"))
+      ))
+#+END_SRC
+
 * Keybinding                                                     :keybinding:
 
 Create my minor-mode to control all keybindings
