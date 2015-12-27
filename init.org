@@ -1362,8 +1362,20 @@ For c-mode, just do the same but change the relative
   (setq c-mode-expand-alist '(("i" . "include")))
 #+END_SRC
 
-* Buffer                                                         :buffer:
+* Buffer                                                             :buffer:
 ** Create *scratch* automatically
+
+Sometimes I'll clean the =*scratch*= buffer by kill it, add following function
+to let emacs re-create it automatically.
+
+#+BEGIN_SRC emacs-lisp
+  ;; Create *scratch* automatically
+  (run-with-idle-timer 1 t
+                       '(lambda ()
+                          (unless (get-buffer "*scratch*")
+                            (with-current-buffer (get-buffer-create "*scratch*")
+                              (lisp-interaction-mode)))))
+#+END_SRC
 
 * Helm                                                                 :helm:
 
