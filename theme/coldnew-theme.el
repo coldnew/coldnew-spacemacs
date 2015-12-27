@@ -137,6 +137,9 @@ Also bind `class' to ((class color) (min-colors 89))."
      (compilation-info ((t (:foreground ,green :weight bold))))
      (compilation-warning ((t (:foreground ,orange :weight bold))))
 
+     ;; smartparens-mode
+     (sp-pair-overlay-face ((t (:forground ,foreground :background ,current-line))))
+
      ;; custom
      (custom-button
       ((t (:foreground ,base1 :background ,base02
@@ -916,9 +919,6 @@ Also bind `class' to ((class color) (min-colors 89))."
      ;; (woman-unknown ((t (:foreground ,red :weight bold))))
      ;; (woman-addition ((t (:foreground ,aqua))))
      ;; (woman-bold ((t (:inherit bold :foreground ,blue))))
-
-     ;; ;; smartparens-mode
-     ;; (sp-pair-overlay-face ((t (:forground ,foreground :background ,current-line))))
 
      ;; (custom-variable-tag ((,class (:foreground ,blue))))
      ;; (custom-group-tag ((,class (:foreground ,blue))))
