@@ -708,6 +708,11 @@ GitHub: https://github.com/magnars/expand-region.el
 verify-url is a little tool that used to find out invalid urls in the buffer or
 region.
 
+Use =M-x verify-url= to find invalid urls in current buffer.
+
+After executed command, you can use =verify-url/next-invalid-url= to goto next
+invalid-url or =verify-url/previous-invalid-url= to goto previous one.
+
 GitHub: https://github.com/lujun9972/verify-url
 
 #+BEGIN_SRC emacs-lisp
