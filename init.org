@@ -1704,23 +1704,6 @@ GitHub: https://github.com/redguardtoo/cpputils-cmake
     :init (add-hook 'cmake-mode-hook 'cmake-font-lock-activate))
 #+END_SRC
 
-** CSS                                                                 :css:
-
-#+BEGIN_SRC emacs-lisp
-  (req-package css-mode :mode "\\.css\\'")
-#+END_SRC
-
-*** Add support for eldoc                                           :eldoc:
-
-#+BEGIN_SRC emacs-lisp
-  (req-package css-eldoc
-    :config
-    (progn
-      (add-hook 'css-mode-hook 'turn-on-css-eldoc)
-      (add-hook 'scss-mode-hook 'turn-on-css-eldoc)
-      (add-hook 'less-css-mode-hook 'turn-on-css-eldoc)))
-#+END_SRC
-
 ** GLSL                                                               :glsl:
 
 #+BEGIN_SRC emacs-lisp
@@ -1781,14 +1764,6 @@ GitHub: https://github.com/redguardtoo/cpputils-cmake
     :init (add-hook 'json-mode-hook (lambda () (flymake-json-load))))
 #+END_SRC
 
-** Less                                                               :less:
-
-#+BEGIN_SRC emacs-lisp
-  (req-package less-css-mode
-    :init (add-to-list 'auto-mode-alist '("\\.less$" . less-css-mode))
-    :mode "\\.less$")
-#+END_SRC
-
 ** Markdown                                                       :markdown:
 
 #+BEGIN_SRC emacs-lisp
@@ -1847,17 +1822,6 @@ GitHub: https://github.com/redguardtoo/cpputils-cmake
 
   (req-package sbt-mode
     :mode (("\\.sbt$" . sbt-mode)))
-#+END_SRC
-
-** SCSS                                                           :css:scss:
-
-#+BEGIN_SRC emacs-lisp
-  (req-package scss-mode
-    :mode "\\.scss\\'"
-    :config
-    (progn
-      ;; dont' build scss to css after save file
-      (setq scss-compile-at-save nil)))
 #+END_SRC
 
 ** SSH Config                                                          :ssh:
@@ -2083,6 +2047,42 @@ GitHub: https://github.com/AdamClements/latest-clojure-libraries
   (req-package web-mode
     :mode (("\\.html?\\'" . web-mode)
            ("\\.ejs?\\'" . web-mode)))
+#+END_SRC
+
+** CSS                                                                 :css:
+
+#+BEGIN_SRC emacs-lisp
+  (req-package css-mode :mode "\\.css\\'")
+#+END_SRC
+
+*** Add support for eldoc                                           :eldoc:
+
+#+BEGIN_SRC emacs-lisp
+  (req-package css-eldoc
+    :config
+    (progn
+      (add-hook 'css-mode-hook 'turn-on-css-eldoc)
+      (add-hook 'scss-mode-hook 'turn-on-css-eldoc)
+      (add-hook 'less-css-mode-hook 'turn-on-css-eldoc)))
+#+END_SRC
+
+** Less                                                               :less:
+
+#+BEGIN_SRC emacs-lisp
+  (req-package less-css-mode
+    :init (add-to-list 'auto-mode-alist '("\\.less$" . less-css-mode))
+    :mode "\\.less$")
+#+END_SRC
+
+** SCSS                                                           :css:scss:
+
+#+BEGIN_SRC emacs-lisp
+  (req-package scss-mode
+    :mode "\\.scss\\'"
+    :config
+    (progn
+      ;; dont' build scss to css after save file
+      (setq scss-compile-at-save nil)))
 #+END_SRC
 
 ** Use emmet-mode to add Zen Coding support
