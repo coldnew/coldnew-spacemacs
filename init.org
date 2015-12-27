@@ -1075,8 +1075,10 @@ unload previous theme before loading a new one.
   (req-package coldnew-theme-night-theme
     :config (coldnew-theme-night))
 
-  (req-package coldnew-modeline-config
-    :require (powerline powerline-evil))
+  ;; (req-package coldnew-modeline-config
+  ;;   :require (powerline powerline-evil))
+  ;; TODO:
+  (req-package spaceline)
 #+END_SRC
 
 * Minibuffer                                                    :minibuffer:
