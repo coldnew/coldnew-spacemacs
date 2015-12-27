@@ -120,8 +120,9 @@ configuration's init.el parent directory.
   ;; switch different emacs configuration like following:
   ;;
   ;;    emacs -q -l ~/coldnew-spacemacs/init.el
-  (setq user-emacs-directory
-        (file-name-directory (or load-file-name (buffer-file-name))))
+  (defconst user-emacs-directory
+    (file-name-directory (or load-file-name (buffer-file-name)))
+    "My emacs config directory.")
 #+END_SRC
 
 ** define user-cache-directory variable
