@@ -1248,6 +1248,12 @@ GitHub: https://github.com/dgutov/highlight-escape-sequences
   (add-hook 'prog-mode-hook 'font-lock-comment-annotations)
 #+end_src
 
+** Project management with projectile
+
+#+BEGIN_SRC emacs-lisp
+  (req-package projectile
+    :interpreter ("projectile" . projectil-mode))
+#+END_SRC
 
 ** Completion with Company mode                                    :company:
 
