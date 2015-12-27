@@ -712,6 +712,16 @@ GitHub: https://github.com/Wilfred/mustache.el
   (req-package mustache)
 #+END_SRC
 
+** manage-minor-mode
+
+Manage your minor-mode on the dedicated interface buffer.
+
+GitHub: https://github.com/ShingoFukuyama/manage-minor-mode
+
+#+BEGIN_EXAMPLE
+  (req-package manage-minor-mode)
+#+END_EXAMPLE
+
 ** expand-region
 
 Expand region increases the selected region by semantic units. Just keep
