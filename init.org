@@ -2466,6 +2466,7 @@ spacemacs reserve the =SPC-o= for user setup theirs own keymap, I think I should
 #+BEGIN_SRC emacs-lisp
   (evil-define-key 'insert coldnew-editor-map
     (kbd "<delete>") 'hungry-delete-backward
+    (kbd "TAB") 'yas/expand
     (kbd "C-;") 'iedit-mode
     (kbd "C-d") 'hungry-delete-forward
     (kbd "C-l") 'hungry-delete-backward
