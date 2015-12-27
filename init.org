@@ -471,6 +471,14 @@ I hate the blinking cursor actually, it's really annoying.
   (blink-cursor-mode -1)
 #+END_SRC
 
+** Turn-off scroll bar
+
+Actually when you familier with emacs, you don't need to use scroll-bar anymore.
+
+#+BEGIN_SRC emacs-lisp
+  (scroll-bar-mode -1)
+#+END_SRC
+
 * Languages and Encodings
 
 Since current Emacs default run on UTF-8, it's no need to setup the encoding.
