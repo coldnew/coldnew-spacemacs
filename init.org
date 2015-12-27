@@ -414,7 +414,7 @@ We also disable some keys like =⌘-h= bypass to system in emacs-mac port.
               kill-buffer-query-functions))
 #+END_SRC
 
-** save custom-file as cache
+** Save custom-file as cache
 
 Most of my config is written in this file, it's no need to tracking the emacs's
 custom-setting.
@@ -445,6 +445,30 @@ I move the file to cache-dir and make git ignore it.
           (async-start-process buffer-name "make" 'ignore "init.el"))))
     ;; Add to hook
     (add-hook 'after-save-hook 'tangle-init))
+#+END_SRC
+
+** Turn-off menu bar
+
+The menu bar is one of the UI elements which work best with mouses.
+
+#+BEGIN_SRC emacs-lisp
+  (menu-bar-mode -1)
+#+END_SRC
+
+** Turn-off tool bar
+
+I never use the tool bar, it's really no need.
+
+#+BEGIN_SRC emacs-lisp
+  (tool-bar-mode -1)
+#+END_SRC
+
+** Turn-off blinking cursor
+
+I hate the blinking cursor actually, it's really annoying.
+
+#+BEGIN_SRC emacs-lisp
+  (blink-cursor-mode -1)
 #+END_SRC
 
 * Languages and Encodings
