@@ -102,10 +102,6 @@ emacs-related packages.
 There are some configurations I need to put at the beginning of the emacs
 config. These configurations are derived from my original init.el file.
 
-** TODO fix emacs 25.1.50 install packages error
-
-see: https://github.com/syl20bnr/spacemacs/issues/3854
-
 ** load prefer newer
 
 #+BEGIN_SRC emacs-lisp
