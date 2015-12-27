@@ -703,6 +703,17 @@ GitHub: https://github.com/magnars/expand-region.el
   (req-package expand-region)
 #+END_SRC
 
+** verify-url
+
+verify-url is a little tool that used to find out invalid urls in the buffer or
+region.
+
+GitHub: https://github.com/lujun9972/verify-url
+
+#+BEGIN_SRC emacs-lisp
+  (req-package verify-url)
+#+END_SRC
+
 ** zzz-to-char
 
 This package provides two new commands: =zzz-to-char= and =zzz-up-to-char= which
