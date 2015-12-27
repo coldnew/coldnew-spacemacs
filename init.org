@@ -1744,6 +1744,112 @@ GitHub: https://github.com/redguardtoo/cpputils-cmake
                     (cppcm-reload-all))))))
 #+END_SRC
 
+*** C language coding style
+
+I always use =linux coding style= for c language by default.
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'c-mode-hook
+            '(lambda ()
+               (c-set-style "linux")
+               (setq c-basic-offset 8)
+               ;; Make TAB equivilent to 8 spaces
+               (setq tab-width 8)))
+#+END_SRC
+
+As part of Linux Kernel developer, I add =linux-kernel= coding style rule, which
+use =tabs= as indent and follow linux kernel development rules. Use following
+code to make emacs switch to =linux-kernel= style automatically when enter linux
+kernel directories.
+
+This coding style is document in https://www.kernel.org/doc/Documentation/CodingStyle.
+
+#+BEGIN_SRC emacs-lisp
+  (defun c-lineup-arglist-tabs-only (ignored)
+    "Line up argument lists by tabs, not spaces"
+    (let* ((anchor (c-langelem-pos c-syntactic-element))
+           (column (c-langelem-2nd-pos c-syntactic-element))
+           (offset (- (1+ column) anchor))
+           (steps (floor offset c-basic-offset)))
+      (* (max steps 1)
+         c-basic-offset)))
+
+  ;; Add Linux kernel style
+  (add-hook 'c-mode-common-hook
+            (lambda ()
+              (c-add-style "linux-kernel"
+                           '("linux" (c-offsets-alist
+                                      (arglist-cont-nonempty
+                                       c-lineup-gcc-asm-reg
+                                       c-lineup-arglist-tabs-only))))))
+
+  (defun linux-kernel-development-setup ()
+    (let ((filename (buffer-file-name)))
+      ;; Enable kernel mode for the appropriate files
+      (when (and filename
+                 (or (locate-dominating-file filename "Kbuild")
+                     (locate-dominating-file filename "Kconfig")
+                     (save-excursion (goto-char 0)
+                                     (search-forward-regexp "^#include <linux/\\(module\\|kernel\\)\\.h>$" nil t))))
+        ;; (setq indent-tabs-mode t)
+        ;; (setq show-trailing-whitespace t)
+        (c-set-style "linux-kernel")
+        (message "Setting up indentation for the linux kernel"))))
+
+  (add-hook 'c-mode-hook 'linux-kernel-development-setup)
+#+END_SRC
+
+*** C++ language coding style
+
+Use my C++ coding style.
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'c++-mode-hook
+            '(lambda ()
+
+               ;; Use stroustrup style
+               (c-set-style "stroustrup")
+
+               ;; Setting indentation lvel
+               (setq c-basic-offset 4)
+
+               ;; Make TAB equivilent to 4 spaces
+               (setq tab-width 4)
+
+               ;; Use spaces to indent instead of tabs.
+               (setq indent-tabs-mode nil)
+
+               ;; Indent the continuation by 2
+               (setq c-continued-statement-offset 2)
+
+               ;; Brackets should be at same indentation level as the statements they open
+               ;; for example:
+               ;;                 if (0)        becomes        if (0)
+               ;;                     {                        {
+               ;;                        ;                         ;
+               ;;                     }                        }
+               (c-set-offset 'substatement-open 0)
+
+               ;; make open-braces after a case
+               (c-set-offset 'case-label '+)
+
+               ;; Not indent code inside a namespace
+               ;; for example:
+               ;;                namespace A {
+               ;;
+               ;;                int namespace_global_variable;
+               ;;
+               ;;                class Class {
+               ;;
+               ;;                Class();
+               ;;                //...
+               ;;                };
+               ;;
+               ;;                }
+               (c-set-offset 'innamespace 0)
+               ))
+#+END_SRC
+
 *** Setup keybindings                                          :keybinding:
 
 #+BEGIN_SRC emacs-lisp
