@@ -577,6 +577,8 @@ Convert simple ASCII art drawings (and org-tables) to beautiful Unicode.
 
 [[https://github.com/victorhge/iedit][iedit]] let you edit multiple regions in the same way simultaneously.
 
+GitHub: https://github.com/victorhge/iedit
+
 #+BEGIN_SRC emacs-lisp
   (req-package iedit)
 #+END_SRC
