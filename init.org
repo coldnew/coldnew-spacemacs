@@ -479,6 +479,15 @@ Actually when you familier with emacs, you don't need to use scroll-bar anymore.
   (scroll-bar-mode -1)
 #+END_SRC
 
+** Ask for y or n, not yes or no
+
+Emacs starts out asking for you to type yes or no with most important questions.
+Just let me use =y= or =n= with no =RET= required an I'm quite happy.
+
+#+BEGIN_SRC emacs-lisp
+  (defalias 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+
 * Languages and Encodings
 
 Since current Emacs default run on UTF-8, it's no need to setup the encoding.
