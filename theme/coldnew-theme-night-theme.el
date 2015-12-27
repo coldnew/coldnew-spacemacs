@@ -39,6 +39,7 @@
       (cursor            "#00c8c8" "#00c8c8")
       (current-line      "#2a2a2a" "#2a2a2a")
       (selection         "#3b3f41" "#3b3f41")
+      (highlight         "#CAE682" "#CAE682")
 
       ;; font-lock
       (buildin           "#ccaaff" "#ccaaff")

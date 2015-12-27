@@ -218,14 +218,17 @@ Also bind `class' to ((class color) (min-colors 89))."
      (outline-8 ((t (:foreground ,magenta))))
 
      ;; hl-line
-     (hl-line ((t (:background ,selection))))
+     (hl-line ((t (:background ,selection :underline nil))))
 
      ;; highlight
-     (highlight ((,class (:background ,black))))
+     (highlight ((,class (:foreground ,current-line :background ,highlight))))
 
      ;; fringe
      ;; (fringe ((t (:background ,current-line))))
      (fringe ((t (:foreground ,base01 :background ,base02))))
+
+     ;; header
+     (header-line ((t (:foreground ,base0 :background ,base02 :weight bold))))
 
      ;; linum
      (linum ((t (:foreground ,base01 :background ,base02))))
@@ -489,10 +492,6 @@ Also bind `class' to ((class color) (min-colors 89))."
 
      (escape-glyph-face ((,class (:foreground ,red))))
 
-
-     (header-line ((t (:foreground ,base0 :background ,base02 :weight bold :slant normal :underline nil  :inverse-video t)))) ; Pmenu
-;;     (highlight ((t (:background ,base02))))
-     (hl-line ((t (:underline t :background ,base02)))) ; CursorLine
      (isearch ((t (:foreground ,orange :backbround ,base03 :weight normal :slant normal  :underline nil :inverse-video t)))) ; IncSearch
      (isearch-fail ((t (:foreground ,orange :background ,base03 :weight normal :slant normal  :underline nil :inverse-video t)))) ; IncSearch
      (lazy-highlight ((t (:foreground ,yellow :background ,base03 :weight normal :slant normal :underline nil :inverse-video t)))) ; Search
