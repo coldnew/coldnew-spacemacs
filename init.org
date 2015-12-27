@@ -2085,6 +2085,17 @@ GitHub: https://github.com/AdamClements/latest-clojure-libraries
       (setq scss-compile-at-save nil)))
 #+END_SRC
 
+** mustache                                                       :mustache:
+
+Sometimes we will use [[https://mustache.github.io/][mustache]] as template system, [[https://github.com/mustache/emacs][mustache-mode]] is a nice
+helper.
+
+GitHub: https://github.com/mustache/emacs
+
+#+BEGIN_SRC emacs-lisp
+  (req-package mustache-mode :mode "\\.mustache$")
+#+END_SRC
+
 ** Use emmet-mode to add Zen Coding support
 
 [[https://github.com/smihica/emmet-mode][emmet-mode]] is a fork of [[https://github.com/rooney/zencoding][zencoding-mode]] which add minor mode providing support
