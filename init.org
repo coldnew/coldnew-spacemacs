@@ -1961,6 +1961,18 @@ Use my C++ coding style.
     :mode "\\.js$")
 #+END_SRC
 
+*** Simplify importing JS modules
+
+=import-js= is a tool to automatically import dependencies in your JavaScript
+project. Use it in Vim or Emacs by placing your cursor on a variable and hit
+=<leader>j (Vim)=, or =(M-x) import-js-import (Emacs)=.
+
+GitHub: https://github.com/trotzig/import-js
+
+#+BEGIN_SRC emacs-lisp
+  (req-package import-js)
+#+END_SRC
+
 ** Json                                                    :javascript:json:
 
 #+BEGIN_SRC emacs-lisp
