@@ -1371,6 +1371,20 @@ completion candidates.
     :init (company-quickhelp-mode 1))
 #+END_SRC
 
+*** Sort completion candidates by previous completion choices
+
+Company-statistics is a global minor mode built on top of the in-buffer
+completion system company-mode. The idea is to keep a log of a certain number of
+completions you choose, along with some context information, and use that to
+rank candidates the next time you have to choose — hopefully showing you
+likelier candidates at the top of the list.
+
+GitHub: https://github.com/company-mode/company-statistics
+
+#+BEGIN_SRC emacs-lisp
+  (req-package company-statistics
+    :init (add-hook 'after-init-hook 'company-statistics-mode))
+#+END_SRC
 
 *** Setup keybindings                                          :keybinding:
 
