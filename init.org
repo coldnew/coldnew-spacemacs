@@ -6,7 +6,7 @@
 #+STARTUP: overview indent align
 #+BABEL: :cache yes
 #+OPTIONS: ^:nil
-#+PROPERTY: header-args :comments link :tangle init.el
+#+PROPERTY: header-args :comments link
 
 # Badge
 [[http://www.gnu.org/licenses/gpl-3.0.txt][https://img.shields.io/badge/license-GPL_3-green.svg?dummy]]
