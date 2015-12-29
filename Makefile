@@ -20,14 +20,17 @@ clean:
 	$(RM) *.elc
 	$(RM) */*.elc
 
-# cask exec emacs -Q -batch -l "ob-tangle" -eval "(org-babel-tangle-file \"init.org\")"
+# Use emacs to generate init.el from init.org
+# we first tangle the org-mode file to init.el~ the rename it.
+# this can make use use async task to create another init.el after save.
 init.el:
-	$(RM) init.el
 	${EMACS} -Q -batch \
 		--eval "(require 'org)" \
 		--eval '(setq org-confirm-babel-evaluate nil)' \
 		--eval '(setq org-confirm-execute-src-block nil)' \
-		--eval '(org-babel-tangle-file "init.org")'
+		--eval '(delete-file "init.el~" nil)' \
+		--eval '(org-babel-tangle-file "init.org" "init.el~")' \
+		--eval '(rename-file "init.el~" "init.el" t)'
 
 compile: init.el
 	${CASK} exec ${EMACS} -Q -batch \
