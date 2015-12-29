@@ -1762,6 +1762,26 @@ GitHub: https://github.com/redguardtoo/cpputils-cmake
                     (cppcm-reload-all))))))
 #+END_SRC
 
+*** Emacs extension allowing quick switch between header and source file in C/C++
+
+This extension allows to quickly switch between header and a source file with
+the same name located in the directory tree or repository. It is an alternatife
+to =ff-find-other-file=.
+
+GitHub: https://github.com/fourier/cff
+
+#+BEGIN_SRC emacs-lisp
+  (req-package cff
+    :config
+    (progn
+      (add-hook 'c++-mode-hook
+                '(lambda ()
+                   (define-key c-mode-base-map (kbd "M-o") 'cff-find-other-file)))
+      (add-hook 'c-mode-hook
+                '(lambda ()
+                   (define-key c-mode-base-map (kbd "M-o") 'cff-find-other-file)))))
+#+END_SRC
+
 *** C language coding style
 
 I always use =linux coding style= for c language by default.
