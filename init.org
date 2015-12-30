@@ -137,6 +137,16 @@ Setup the cache directory to store some cache content.
 
 * Package Management
 
+Before we start this section, we need to initialize =package.el= first.
+
+#+BEGIN_SRC emacs-lisp
+  ;; This must come before configurations of installed packages.
+  ;; Don't delete this line. If you don't want it, just comment it out by adding a
+  ;; semicolon to the start of the line. You may delete these explanatory
+  ;; comments.
+  (package-initialize)
+#+END_SRC
+
 The main package magement in my emacs is [[https://github.com/cask/cask][Cask]], which is a really nice package
 like npm, cargo ...etc.
 
