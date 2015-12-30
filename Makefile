@@ -28,7 +28,7 @@ init.el:
 		--eval "(require 'org)" \
 		--eval '(setq org-confirm-babel-evaluate nil)' \
 		--eval '(setq org-confirm-execute-src-block nil)' \
-		--eval '(delete-file "init.el~" nil)' \
+		--eval '(if (file-exists-p "init.el~") (delete-file "init.el~" nil))' \
 		--eval '(org-babel-tangle-file "init.org" "init.el~")' \
 		--eval '(rename-file "init.el~" "init.el" t)'
 
