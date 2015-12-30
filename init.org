@@ -199,7 +199,7 @@ looks like this:
   (depends-on "pallet")
   (depends-on "async")
   (depends-on "req-package")
-  (depends-on "projectile")
+  (depends-on "quelpa")
 #+END_SRC
 
 Then run the following command in your =.emacs.d= directory to set up
@@ -232,6 +232,22 @@ to initialize pallet.
 #+BEGIN_SRC emacs-lisp
   (require 'pallet)
   (pallet-mode t)
+#+END_SRC
+
+** quelpa
+
+[[https://github.com/quelpa/quelpa][quelpa]] is another package manager which can help you builds an ELPA compatible
+package and installs that locally.
+
+GitHub: https://github.com/quelpa/quelpa
+
+#+BEGIN_SRC emacs-lisp
+  (unless (require 'quelpa nil t)
+    (with-temp-buffer
+      (url-insert-file-contents "https://raw.github.com/quelpa/quelpa/master/bootstrap.el")
+      (eval-buffer)))
+  ;; save quelpa builds and packages in .cache/quelpa
+  (setq quelpa-dir (expand-file-name "quelpa" user-cache-directory))
 #+END_SRC
 
 ** req-package
